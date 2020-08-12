@@ -1,0 +1,794 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 52;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C811E77C24E01B1F0050F6CD /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E77B24E01B1F0050F6CD /* Tests_iOS.swift */; };
+		C811E78724E01B1F0050F6CD /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E78624E01B1F0050F6CD /* Tests_macOS.swift */; };
+		C811E78924E01B1F0050F6CD /* WoWWidgetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E76024E01B1E0050F6CD /* WoWWidgetApp.swift */; };
+		C811E78A24E01B1F0050F6CD /* WoWWidgetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E76024E01B1E0050F6CD /* WoWWidgetApp.swift */; };
+		C811E78B24E01B1F0050F6CD /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E76124E01B1E0050F6CD /* MainScreen.swift */; };
+		C811E78C24E01B1F0050F6CD /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E76124E01B1E0050F6CD /* MainScreen.swift */; };
+		C811E78D24E01B1F0050F6CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C811E76224E01B1F0050F6CD /* Assets.xcassets */; };
+		C811E78E24E01B1F0050F6CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C811E76224E01B1F0050F6CD /* Assets.xcassets */; };
+		C811E79F24E01B7B0050F6CD /* OAuth2 in Frameworks */ = {isa = PBXBuildFile; productRef = C811E79E24E01B7B0050F6CD /* OAuth2 */; };
+		C811E7A224E01C850050F6CD /* OAuth2 in Frameworks */ = {isa = PBXBuildFile; productRef = C811E7A124E01C850050F6CD /* OAuth2 */; };
+		C811E7A424E01DC30050F6CD /* APIAccessInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E7A324E01DC30050F6CD /* APIAccessInfo.swift */; };
+		C811E7A524E01DC30050F6CD /* APIAccessInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E7A324E01DC30050F6CD /* APIAccessInfo.swift */; };
+		C811E7A724E05FBE0050F6CD /* AuthInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E7A624E05FBE0050F6CD /* AuthInfo.swift */; };
+		C811E7A824E05FBE0050F6CD /* AuthInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E7A624E05FBE0050F6CD /* AuthInfo.swift */; };
+		C811E7AB24E0A3690050F6CD /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E7AA24E0A3690050F6CD /* Authentication.swift */; };
+		C811E7AC24E0A3690050F6CD /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E7AA24E0A3690050F6CD /* Authentication.swift */; };
+		C887120F24E4A01200C0A0ED /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C887120E24E4A01200C0A0ED /* LoginScreen.swift */; };
+		C887121024E4A01200C0A0ED /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C887120E24E4A01200C0A0ED /* LoginScreen.swift */; };
+		C887121224E4B6EA00C0A0ED /* secretOAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = C887121124E4B6EA00C0A0ED /* secretOAuth.swift */; };
+		C887121324E4B6EA00C0A0ED /* secretOAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = C887121124E4B6EA00C0A0ED /* secretOAuth.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C811E77824E01B1F0050F6CD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C811E75B24E01B1E0050F6CD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C811E76624E01B1F0050F6CD;
+			remoteInfo = "WoWWidget (iOS)";
+		};
+		C811E78324E01B1F0050F6CD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C811E75B24E01B1E0050F6CD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C811E76E24E01B1F0050F6CD;
+			remoteInfo = "WoWWidget (macOS)";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		C811E76024E01B1E0050F6CD /* WoWWidgetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WoWWidgetApp.swift; sourceTree = "<group>"; };
+		C811E76124E01B1E0050F6CD /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
+		C811E76224E01B1F0050F6CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C811E76724E01B1F0050F6CD /* WoWWidget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WoWWidget.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C811E76A24E01B1F0050F6CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C811E76F24E01B1F0050F6CD /* WoWWidget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WoWWidget.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C811E77124E01B1F0050F6CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C811E77224E01B1F0050F6CD /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		C811E77724E01B1F0050F6CD /* Tests iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C811E77B24E01B1F0050F6CD /* Tests_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_iOS.swift; sourceTree = "<group>"; };
+		C811E77D24E01B1F0050F6CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C811E78224E01B1F0050F6CD /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C811E78624E01B1F0050F6CD /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
+		C811E78824E01B1F0050F6CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C811E7A324E01DC30050F6CD /* APIAccessInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIAccessInfo.swift; sourceTree = "<group>"; };
+		C811E7A624E05FBE0050F6CD /* AuthInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInfo.swift; sourceTree = "<group>"; };
+		C811E7AA24E0A3690050F6CD /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
+		C887120E24E4A01200C0A0ED /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
+		C887121124E4B6EA00C0A0ED /* secretOAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = secretOAuth.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C811E76424E01B1F0050F6CD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C811E79F24E01B7B0050F6CD /* OAuth2 in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C811E76C24E01B1F0050F6CD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C811E7A224E01C850050F6CD /* OAuth2 in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C811E77424E01B1F0050F6CD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C811E77F24E01B1F0050F6CD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C811E75A24E01B1E0050F6CD = {
+			isa = PBXGroup;
+			children = (
+				C811E75F24E01B1E0050F6CD /* Shared */,
+				C811E76924E01B1F0050F6CD /* iOS */,
+				C811E77024E01B1F0050F6CD /* macOS */,
+				C811E77A24E01B1F0050F6CD /* Tests iOS */,
+				C811E78524E01B1F0050F6CD /* Tests macOS */,
+				C811E76824E01B1F0050F6CD /* Products */,
+				C811E7A024E01C850050F6CD /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		C811E75F24E01B1E0050F6CD /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				C887121424E4B75700C0A0ED /* Authorization */,
+				C811E7A924E0A3340050F6CD /* DataModels */,
+				C811E76024E01B1E0050F6CD /* WoWWidgetApp.swift */,
+				C811E76124E01B1E0050F6CD /* MainScreen.swift */,
+				C811E76224E01B1F0050F6CD /* Assets.xcassets */,
+				C887120E24E4A01200C0A0ED /* LoginScreen.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		C811E76824E01B1F0050F6CD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C811E76724E01B1F0050F6CD /* WoWWidget.app */,
+				C811E76F24E01B1F0050F6CD /* WoWWidget.app */,
+				C811E77724E01B1F0050F6CD /* Tests iOS.xctest */,
+				C811E78224E01B1F0050F6CD /* Tests macOS.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C811E76924E01B1F0050F6CD /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				C811E76A24E01B1F0050F6CD /* Info.plist */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		C811E77024E01B1F0050F6CD /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				C811E77124E01B1F0050F6CD /* Info.plist */,
+				C811E77224E01B1F0050F6CD /* macOS.entitlements */,
+			);
+			path = macOS;
+			sourceTree = "<group>";
+		};
+		C811E77A24E01B1F0050F6CD /* Tests iOS */ = {
+			isa = PBXGroup;
+			children = (
+				C811E77B24E01B1F0050F6CD /* Tests_iOS.swift */,
+				C811E77D24E01B1F0050F6CD /* Info.plist */,
+			);
+			path = "Tests iOS";
+			sourceTree = "<group>";
+		};
+		C811E78524E01B1F0050F6CD /* Tests macOS */ = {
+			isa = PBXGroup;
+			children = (
+				C811E78624E01B1F0050F6CD /* Tests_macOS.swift */,
+				C811E78824E01B1F0050F6CD /* Info.plist */,
+			);
+			path = "Tests macOS";
+			sourceTree = "<group>";
+		};
+		C811E7A024E01C850050F6CD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C811E7A924E0A3340050F6CD /* DataModels */ = {
+			isa = PBXGroup;
+			children = (
+				C811E7A324E01DC30050F6CD /* APIAccessInfo.swift */,
+			);
+			path = DataModels;
+			sourceTree = "<group>";
+		};
+		C887121424E4B75700C0A0ED /* Authorization */ = {
+			isa = PBXGroup;
+			children = (
+				C887121124E4B6EA00C0A0ED /* secretOAuth.swift */,
+				C811E7A624E05FBE0050F6CD /* AuthInfo.swift */,
+				C811E7AA24E0A3690050F6CD /* Authentication.swift */,
+			);
+			path = Authorization;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C811E76624E01B1F0050F6CD /* WoWWidget (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C811E79124E01B1F0050F6CD /* Build configuration list for PBXNativeTarget "WoWWidget (iOS)" */;
+			buildPhases = (
+				C811E76324E01B1F0050F6CD /* Sources */,
+				C811E76424E01B1F0050F6CD /* Frameworks */,
+				C811E76524E01B1F0050F6CD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "WoWWidget (iOS)";
+			packageProductDependencies = (
+				C811E79E24E01B7B0050F6CD /* OAuth2 */,
+			);
+			productName = "WoWWidget (iOS)";
+			productReference = C811E76724E01B1F0050F6CD /* WoWWidget.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C811E76E24E01B1F0050F6CD /* WoWWidget (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C811E79424E01B1F0050F6CD /* Build configuration list for PBXNativeTarget "WoWWidget (macOS)" */;
+			buildPhases = (
+				C811E76B24E01B1F0050F6CD /* Sources */,
+				C811E76C24E01B1F0050F6CD /* Frameworks */,
+				C811E76D24E01B1F0050F6CD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "WoWWidget (macOS)";
+			packageProductDependencies = (
+				C811E7A124E01C850050F6CD /* OAuth2 */,
+			);
+			productName = "WoWWidget (macOS)";
+			productReference = C811E76F24E01B1F0050F6CD /* WoWWidget.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C811E77624E01B1F0050F6CD /* Tests iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C811E79724E01B1F0050F6CD /* Build configuration list for PBXNativeTarget "Tests iOS" */;
+			buildPhases = (
+				C811E77324E01B1F0050F6CD /* Sources */,
+				C811E77424E01B1F0050F6CD /* Frameworks */,
+				C811E77524E01B1F0050F6CD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C811E77924E01B1F0050F6CD /* PBXTargetDependency */,
+			);
+			name = "Tests iOS";
+			productName = "Tests iOS";
+			productReference = C811E77724E01B1F0050F6CD /* Tests iOS.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		C811E78124E01B1F0050F6CD /* Tests macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C811E79A24E01B1F0050F6CD /* Build configuration list for PBXNativeTarget "Tests macOS" */;
+			buildPhases = (
+				C811E77E24E01B1F0050F6CD /* Sources */,
+				C811E77F24E01B1F0050F6CD /* Frameworks */,
+				C811E78024E01B1F0050F6CD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C811E78424E01B1F0050F6CD /* PBXTargetDependency */,
+			);
+			name = "Tests macOS";
+			productName = "Tests macOS";
+			productReference = C811E78224E01B1F0050F6CD /* Tests macOS.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C811E75B24E01B1E0050F6CD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1200;
+				LastUpgradeCheck = 1200;
+				TargetAttributes = {
+					C811E76624E01B1F0050F6CD = {
+						CreatedOnToolsVersion = 12.0;
+					};
+					C811E76E24E01B1F0050F6CD = {
+						CreatedOnToolsVersion = 12.0;
+					};
+					C811E77624E01B1F0050F6CD = {
+						CreatedOnToolsVersion = 12.0;
+						TestTargetID = C811E76624E01B1F0050F6CD;
+					};
+					C811E78124E01B1F0050F6CD = {
+						CreatedOnToolsVersion = 12.0;
+						TestTargetID = C811E76E24E01B1F0050F6CD;
+					};
+				};
+			};
+			buildConfigurationList = C811E75E24E01B1E0050F6CD /* Build configuration list for PBXProject "WoWWidget" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C811E75A24E01B1E0050F6CD;
+			packageReferences = (
+				C811E79D24E01B7B0050F6CD /* XCRemoteSwiftPackageReference "OAuth2" */,
+			);
+			productRefGroup = C811E76824E01B1F0050F6CD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C811E76624E01B1F0050F6CD /* WoWWidget (iOS) */,
+				C811E76E24E01B1F0050F6CD /* WoWWidget (macOS) */,
+				C811E77624E01B1F0050F6CD /* Tests iOS */,
+				C811E78124E01B1F0050F6CD /* Tests macOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C811E76524E01B1F0050F6CD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C811E78D24E01B1F0050F6CD /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C811E76D24E01B1F0050F6CD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C811E78E24E01B1F0050F6CD /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C811E77524E01B1F0050F6CD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C811E78024E01B1F0050F6CD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C811E76324E01B1F0050F6CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C811E7A724E05FBE0050F6CD /* AuthInfo.swift in Sources */,
+				C811E7A424E01DC30050F6CD /* APIAccessInfo.swift in Sources */,
+				C811E78B24E01B1F0050F6CD /* MainScreen.swift in Sources */,
+				C887121224E4B6EA00C0A0ED /* secretOAuth.swift in Sources */,
+				C811E78924E01B1F0050F6CD /* WoWWidgetApp.swift in Sources */,
+				C811E7AB24E0A3690050F6CD /* Authentication.swift in Sources */,
+				C887120F24E4A01200C0A0ED /* LoginScreen.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C811E76B24E01B1F0050F6CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C811E7A824E05FBE0050F6CD /* AuthInfo.swift in Sources */,
+				C811E7A524E01DC30050F6CD /* APIAccessInfo.swift in Sources */,
+				C811E78C24E01B1F0050F6CD /* MainScreen.swift in Sources */,
+				C887121324E4B6EA00C0A0ED /* secretOAuth.swift in Sources */,
+				C811E78A24E01B1F0050F6CD /* WoWWidgetApp.swift in Sources */,
+				C811E7AC24E0A3690050F6CD /* Authentication.swift in Sources */,
+				C887121024E4A01200C0A0ED /* LoginScreen.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C811E77324E01B1F0050F6CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C811E77C24E01B1F0050F6CD /* Tests_iOS.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C811E77E24E01B1F0050F6CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C811E78724E01B1F0050F6CD /* Tests_macOS.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C811E77924E01B1F0050F6CD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C811E76624E01B1F0050F6CD /* WoWWidget (iOS) */;
+			targetProxy = C811E77824E01B1F0050F6CD /* PBXContainerItemProxy */;
+		};
+		C811E78424E01B1F0050F6CD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C811E76E24E01B1F0050F6CD /* WoWWidget (macOS) */;
+			targetProxy = C811E78324E01B1F0050F6CD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		C811E78F24E01B1F0050F6CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		C811E79024E01B1F0050F6CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		C811E79224E01B1F0050F6CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8TYF5VAX58;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = iOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mlukasik.WoWWidget;
+				PRODUCT_NAME = WoWWidget;
+				SDKROOT = iphoneos;
+				SWIFT_SUPPRESS_WARNINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C811E79324E01B1F0050F6CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8TYF5VAX58;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = iOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mlukasik.WoWWidget;
+				PRODUCT_NAME = WoWWidget;
+				SDKROOT = iphoneos;
+				SWIFT_SUPPRESS_WARNINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C811E79524E01B1F0050F6CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 8TYF5VAX58;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mlukasik.WoWWidget;
+				PRODUCT_NAME = WoWWidget;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		C811E79624E01B1F0050F6CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 8TYF5VAX58;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mlukasik.WoWWidget;
+				PRODUCT_NAME = WoWWidget;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		C811E79824E01B1F0050F6CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8TYF5VAX58;
+				INFOPLIST_FILE = "Tests iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mlukasik.Tests-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "WoWWidget (iOS)";
+			};
+			name = Debug;
+		};
+		C811E79924E01B1F0050F6CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8TYF5VAX58;
+				INFOPLIST_FILE = "Tests iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mlukasik.Tests-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "WoWWidget (iOS)";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C811E79B24E01B1F0050F6CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 8TYF5VAX58;
+				INFOPLIST_FILE = "Tests macOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mlukasik.Tests-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "WoWWidget (macOS)";
+			};
+			name = Debug;
+		};
+		C811E79C24E01B1F0050F6CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 8TYF5VAX58;
+				INFOPLIST_FILE = "Tests macOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mlukasik.Tests-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "WoWWidget (macOS)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C811E75E24E01B1E0050F6CD /* Build configuration list for PBXProject "WoWWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C811E78F24E01B1F0050F6CD /* Debug */,
+				C811E79024E01B1F0050F6CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C811E79124E01B1F0050F6CD /* Build configuration list for PBXNativeTarget "WoWWidget (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C811E79224E01B1F0050F6CD /* Debug */,
+				C811E79324E01B1F0050F6CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C811E79424E01B1F0050F6CD /* Build configuration list for PBXNativeTarget "WoWWidget (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C811E79524E01B1F0050F6CD /* Debug */,
+				C811E79624E01B1F0050F6CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C811E79724E01B1F0050F6CD /* Build configuration list for PBXNativeTarget "Tests iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C811E79824E01B1F0050F6CD /* Debug */,
+				C811E79924E01B1F0050F6CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C811E79A24E01B1F0050F6CD /* Build configuration list for PBXNativeTarget "Tests macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C811E79B24E01B1F0050F6CD /* Debug */,
+				C811E79C24E01B1F0050F6CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C811E79D24E01B7B0050F6CD /* XCRemoteSwiftPackageReference "OAuth2" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/p2/OAuth2.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C811E79E24E01B7B0050F6CD /* OAuth2 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C811E79D24E01B7B0050F6CD /* XCRemoteSwiftPackageReference "OAuth2" */;
+			productName = OAuth2;
+		};
+		C811E7A124E01C850050F6CD /* OAuth2 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C811E79D24E01B7B0050F6CD /* XCRemoteSwiftPackageReference "OAuth2" */;
+			productName = OAuth2;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = C811E75B24E01B1E0050F6CD /* Project object */;
+}
