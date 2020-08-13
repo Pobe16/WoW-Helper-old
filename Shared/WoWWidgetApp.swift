@@ -15,7 +15,7 @@ struct WoWWidgetApp: App {
     
     var body: some Scene {
         WindowGroup {
-            MainScreen()
+            AuthScreen()
                 .environmentObject(auth)
                 .onAppear(perform: {
                     authInit()
