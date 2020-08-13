@@ -9,7 +9,7 @@ import OAuth2
 import SwiftUI
 
 
-struct MainScreen: View {
+struct AuthScreen: View {
     
     @EnvironmentObject var authorization: Authentication
     @State var loggedIn = false
@@ -72,7 +72,7 @@ struct MainScreen: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        MainScreen()
+        AuthScreen()
             
     }
 }

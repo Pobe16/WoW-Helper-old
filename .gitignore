@@ -91,3 +91,7 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+
+# MacOS Folder Stuff
+.DS_Store
+
