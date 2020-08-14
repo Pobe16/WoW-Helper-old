@@ -17,11 +17,15 @@ struct BattleNetAuthorizationHostList {
 }
 
 struct APIRegionHostList {
-    static let NorthAmerica             = "https://us.api.blizzard.com/"
-    static let Europe                   = "https://eu.api.blizzard.com/"
-    static let Korea                    = "https://kr.api.blizzard.com/"
-    static let Taiwan                   = "https://tw.api.blizzard.com/"
-    static let China                    = "https://gateway.battlenet.com.cn/"
+    static let NorthAmerica             = "https://us.api.blizzard.com"
+    static let Europe                   = "https://eu.api.blizzard.com"
+    static let Korea                    = "https://kr.api.blizzard.com"
+    static let Taiwan                   = "https://tw.api.blizzard.com"
+    static let China                    = "https://gateway.battlenet.com.cn"
+}
+
+struct APIRegionShort {
+    static let Code                     = ["us", "eu", "kr", "tw", "cn"]
 }
 
 struct AmericanLocales {

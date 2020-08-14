@@ -170,7 +170,7 @@ struct LoginScreen: View {
             print(accessToken)
             return
         }
-//        Authentication.oauth2.logger = OAuth2DebugLogger(.trace)
+//        authorization.oauth2?.logger = OAuth2DebugLogger(.trace)
         setLocaleForAuthorization()
         updateAuthInfo()
         updateAuthSettings()

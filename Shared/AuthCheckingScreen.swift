@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  AuthCheckingScreen.swift
 //  Shared
 //
 //  Created by Mikolaj Lukasik on 09/08/2020.
@@ -9,7 +9,7 @@ import OAuth2
 import SwiftUI
 
 
-struct AuthScreen: View {
+struct AuthCheckingScreen: View {
     
     @EnvironmentObject var authorization: Authentication
     @State var loggedIn = false
@@ -18,11 +18,13 @@ struct AuthScreen: View {
         Group {
             
             if loggedIn {
-                Button(action: {
-                    self.logOut()
-                }, label: {
-                    Text("Log me out!")
-                })
+                MainScreen()
+                
+//                Button(action: {
+//                    self.logOut()
+//                }, label: {
+//                    Text("Log me out!")
+//                })
             } else {
                 LoginScreen(loggedIn: loggedIn)
                 
@@ -72,7 +74,7 @@ struct AuthScreen: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        AuthScreen()
+        AuthCheckingScreen()
             
     }
 }

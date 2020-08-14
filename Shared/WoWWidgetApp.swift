@@ -15,7 +15,7 @@ struct WoWWidgetApp: App {
     
     var body: some Scene {
         WindowGroup {
-            AuthScreen()
+            AuthCheckingScreen()
                 .environmentObject(auth)
                 .onAppear(perform: {
                     authInit()
@@ -25,6 +25,8 @@ struct WoWWidgetApp: App {
     
     fileprivate func authInit(){
         auth.oauth2 = OAuth2CodeGrant.init(settings: auth.settings)
+        
+//        auth.oauth2?.logger = OAuth2DebugLogger(.trace)
     }
     
 }

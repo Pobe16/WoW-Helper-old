@@ -11,8 +11,8 @@
 		C811E78724E01B1F0050F6CD /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E78624E01B1F0050F6CD /* Tests_macOS.swift */; };
 		C811E78924E01B1F0050F6CD /* WoWWidgetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E76024E01B1E0050F6CD /* WoWWidgetApp.swift */; };
 		C811E78A24E01B1F0050F6CD /* WoWWidgetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E76024E01B1E0050F6CD /* WoWWidgetApp.swift */; };
-		C811E78B24E01B1F0050F6CD /* AuthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E76124E01B1E0050F6CD /* AuthScreen.swift */; };
-		C811E78C24E01B1F0050F6CD /* AuthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E76124E01B1E0050F6CD /* AuthScreen.swift */; };
+		C811E78B24E01B1F0050F6CD /* AuthCheckingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E76124E01B1E0050F6CD /* AuthCheckingScreen.swift */; };
+		C811E78C24E01B1F0050F6CD /* AuthCheckingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E76124E01B1E0050F6CD /* AuthCheckingScreen.swift */; };
 		C811E78D24E01B1F0050F6CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C811E76224E01B1F0050F6CD /* Assets.xcassets */; };
 		C811E78E24E01B1F0050F6CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C811E76224E01B1F0050F6CD /* Assets.xcassets */; };
 		C811E79F24E01B7B0050F6CD /* OAuth2 in Frameworks */ = {isa = PBXBuildFile; productRef = C811E79E24E01B7B0050F6CD /* OAuth2 */; };
@@ -23,6 +23,10 @@
 		C811E7A824E05FBE0050F6CD /* AuthInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E7A624E05FBE0050F6CD /* AuthInfo.swift */; };
 		C811E7AB24E0A3690050F6CD /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E7AA24E0A3690050F6CD /* Authentication.swift */; };
 		C811E7AC24E0A3690050F6CD /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E7AA24E0A3690050F6CD /* Authentication.swift */; };
+		C84B82F724E5FD65006E84FA /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84B82F624E5FD65006E84FA /* MainScreen.swift */; };
+		C84B82F824E5FD65006E84FA /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84B82F624E5FD65006E84FA /* MainScreen.swift */; };
+		C84B82FA24E5FF56006E84FA /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84B82F924E5FF56006E84FA /* UserProfile.swift */; };
+		C84B82FB24E5FF56006E84FA /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84B82F924E5FF56006E84FA /* UserProfile.swift */; };
 		C887120F24E4A01200C0A0ED /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C887120E24E4A01200C0A0ED /* LoginScreen.swift */; };
 		C887121024E4A01200C0A0ED /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C887120E24E4A01200C0A0ED /* LoginScreen.swift */; };
 		C887121224E4B6EA00C0A0ED /* secretOAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = C887121124E4B6EA00C0A0ED /* secretOAuth.swift */; };
@@ -48,7 +52,7 @@
 
 /* Begin PBXFileReference section */
 		C811E76024E01B1E0050F6CD /* WoWWidgetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WoWWidgetApp.swift; sourceTree = "<group>"; };
-		C811E76124E01B1E0050F6CD /* AuthScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthScreen.swift; sourceTree = "<group>"; };
+		C811E76124E01B1E0050F6CD /* AuthCheckingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCheckingScreen.swift; sourceTree = "<group>"; };
 		C811E76224E01B1F0050F6CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C811E76724E01B1F0050F6CD /* WoWWidget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WoWWidget.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C811E76A24E01B1F0050F6CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -64,6 +68,8 @@
 		C811E7A324E01DC30050F6CD /* APIAccessInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIAccessInfo.swift; sourceTree = "<group>"; };
 		C811E7A624E05FBE0050F6CD /* AuthInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInfo.swift; sourceTree = "<group>"; };
 		C811E7AA24E0A3690050F6CD /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
+		C84B82F624E5FD65006E84FA /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
+		C84B82F924E5FF56006E84FA /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		C887120E24E4A01200C0A0ED /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		C887121124E4B6EA00C0A0ED /* secretOAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = secretOAuth.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -121,9 +127,10 @@
 				C887121424E4B75700C0A0ED /* Authorization */,
 				C811E7A924E0A3340050F6CD /* DataModels */,
 				C811E76024E01B1E0050F6CD /* WoWWidgetApp.swift */,
-				C811E76124E01B1E0050F6CD /* AuthScreen.swift */,
+				C811E76124E01B1E0050F6CD /* AuthCheckingScreen.swift */,
 				C811E76224E01B1F0050F6CD /* Assets.xcassets */,
 				C887120E24E4A01200C0A0ED /* LoginScreen.swift */,
+				C84B82F624E5FD65006E84FA /* MainScreen.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -185,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				C811E7A324E01DC30050F6CD /* APIAccessInfo.swift */,
+				C84B82F924E5FF56006E84FA /* UserProfile.swift */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -365,12 +373,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C84B82F724E5FD65006E84FA /* MainScreen.swift in Sources */,
 				C811E7A724E05FBE0050F6CD /* AuthInfo.swift in Sources */,
 				C811E7A424E01DC30050F6CD /* APIAccessInfo.swift in Sources */,
-				C811E78B24E01B1F0050F6CD /* AuthScreen.swift in Sources */,
+				C811E78B24E01B1F0050F6CD /* AuthCheckingScreen.swift in Sources */,
 				C887121224E4B6EA00C0A0ED /* secretOAuth.swift in Sources */,
 				C811E78924E01B1F0050F6CD /* WoWWidgetApp.swift in Sources */,
 				C811E7AB24E0A3690050F6CD /* Authentication.swift in Sources */,
+				C84B82FA24E5FF56006E84FA /* UserProfile.swift in Sources */,
 				C887120F24E4A01200C0A0ED /* LoginScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -379,12 +389,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C84B82F824E5FD65006E84FA /* MainScreen.swift in Sources */,
 				C811E7A824E05FBE0050F6CD /* AuthInfo.swift in Sources */,
 				C811E7A524E01DC30050F6CD /* APIAccessInfo.swift in Sources */,
-				C811E78C24E01B1F0050F6CD /* AuthScreen.swift in Sources */,
+				C811E78C24E01B1F0050F6CD /* AuthCheckingScreen.swift in Sources */,
 				C887121324E4B6EA00C0A0ED /* secretOAuth.swift in Sources */,
 				C811E78A24E01B1F0050F6CD /* WoWWidgetApp.swift in Sources */,
 				C811E7AC24E0A3690050F6CD /* Authentication.swift in Sources */,
+				C84B82FB24E5FF56006E84FA /* UserProfile.swift in Sources */,
 				C887121024E4A01200C0A0ED /* LoginScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
