@@ -12,7 +12,7 @@ struct LoginScreen: View {
     @EnvironmentObject var authorization: Authentication
     @State private var region = 1
     @State private var locale = 0
-    @State var loggedIn: Bool
+    @Binding var loggedIn: Bool
     
     var body: some View {
         VStack{
@@ -198,6 +198,6 @@ struct LoginScreen: View {
 
 struct LoginScreen_Previews: PreviewProvider {
     static var previews: some View {
-        LoginScreen(loggedIn: false)
+        LoginScreen(loggedIn: .constant(false))
     }
 }

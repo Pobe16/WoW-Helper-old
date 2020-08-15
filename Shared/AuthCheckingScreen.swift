@@ -18,7 +18,7 @@ struct AuthCheckingScreen: View {
         Group {
             
             if loggedIn {
-                MainScreen()
+                MainScreen(loggedIn: $loggedIn)
                 
 //                Button(action: {
 //                    self.logOut()
@@ -26,7 +26,7 @@ struct AuthCheckingScreen: View {
 //                    Text("Log me out!")
 //                })
             } else {
-                LoginScreen(loggedIn: loggedIn)
+                LoginScreen(loggedIn: $loggedIn)
                 
             }
         }
