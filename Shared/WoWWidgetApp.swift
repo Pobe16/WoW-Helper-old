@@ -24,6 +24,7 @@ struct WoWWidgetApp: App {
     }
     
     fileprivate func authInit(){
+//        UserDefaults.resetStandardUserDefaults()
         auth.oauth2 = OAuth2CodeGrant.init(settings: auth.settings)
         
 //        auth.oauth2?.logger = OAuth2DebugLogger(.trace)

@@ -8,22 +8,34 @@
 import SwiftUI
 
 struct MainScreen: View {
+    @Binding var loggedIn: Bool
     @EnvironmentObject var authorization: Authentication
     @State var characters: [CharacterInProfile] = []
     
     var body: some View {
         NavigationView {
             List {
-                Section(header: Text("Characters") ) {
-                    ForEach(characters) { character in
-                        Text("\(character.name) lvl: \(character.level)")
-                    }
+                ForEach(characters) { character in
+                    CharacterListItem(character: character)
                 }
-            }
+                
+                Button(action: {
+                    self.logOut()
+                }, label: {
+                    Text("Log me out!")
+                })
+            }.navigationBarTitle("WoWWidget", displayMode: .large)
         }.onAppear {
             self.loadCharacters()
         }
         
+    }
+    
+    fileprivate func logOut() {
+        
+        print(authorization.oauth2?.accessToken as Any)
+        authorization.oauth2?.forgetTokens()
+        loggedIn = false
     }
     
     func loadCharacters() {
@@ -31,7 +43,7 @@ struct MainScreen: View {
         let requestUrlAPIFragment = "/profile/user/wow"
         let regionShortCode = APIRegionShort.Code[UserDefaults.standard.integer(forKey: "loginRegion")]
         let requestAPINamespace = "profile-\(regionShortCode)"
-        let requestLocale = UserDefaults.standard.object(forKey: "localeCode") as? String ?? APIRegionHostList.Europe
+        let requestLocale = UserDefaults.standard.object(forKey: "localeCode") as? String ?? EuropeanLocales.BritishEnglish
         
         let fullRequestURL = URL(string:
                                     requestUrlAPIHost +
@@ -53,9 +65,12 @@ struct MainScreen: View {
                 
                 do {
                     let dataResponse = try decoder.decode(UserProfile.self, from: data)
+                    
                     for account in dataResponse.wowAccounts {
                         for userCharacter in account.characters {
-                            self.characters.append(userCharacter)
+                            DispatchQueue.main.async {
+                                self.characters.append(userCharacter)
+                            }
                         }
                     }
                     
@@ -77,6 +92,6 @@ struct MainScreen: View {
 
 struct MainScreen_Previews: PreviewProvider {
     static var previews: some View {
-        MainScreen()
+        MainScreen(loggedIn: .constant(true))
     }
 }
