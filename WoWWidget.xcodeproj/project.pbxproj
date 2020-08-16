@@ -29,6 +29,10 @@
 		C831CC4524E7307100C25F67 /* StoredCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C831CC4324E7307100C25F67 /* StoredCache.swift */; };
 		C831CC4724E7355500C25F67 /* CharacterMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = C831CC4624E7355500C25F67 /* CharacterMedia.swift */; };
 		C831CC4824E7355500C25F67 /* CharacterMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = C831CC4624E7355500C25F67 /* CharacterMedia.swift */; };
+		C831CC4F24E8974100C25F67 /* MyData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C831CC4D24E8974100C25F67 /* MyData.xcdatamodeld */; };
+		C831CC5024E8974100C25F67 /* MyData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C831CC4D24E8974100C25F67 /* MyData.xcdatamodeld */; };
+		C831CC5324E89A0200C25F67 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C831CC5224E89A0200C25F67 /* CoreDataManager.swift */; };
+		C831CC5424E89A0200C25F67 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C831CC5224E89A0200C25F67 /* CoreDataManager.swift */; };
 		C84B82F724E5FD65006E84FA /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84B82F624E5FD65006E84FA /* MainScreen.swift */; };
 		C84B82F824E5FD65006E84FA /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84B82F624E5FD65006E84FA /* MainScreen.swift */; };
 		C84B82FA24E5FF56006E84FA /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84B82F924E5FF56006E84FA /* UserProfile.swift */; };
@@ -77,6 +81,8 @@
 		C831CC3924E7296A00C25F67 /* CharacterListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListItem.swift; sourceTree = "<group>"; };
 		C831CC4324E7307100C25F67 /* StoredCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredCache.swift; sourceTree = "<group>"; };
 		C831CC4624E7355500C25F67 /* CharacterMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterMedia.swift; sourceTree = "<group>"; };
+		C831CC4E24E8974100C25F67 /* MyData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyData.xcdatamodel; sourceTree = "<group>"; };
+		C831CC5224E89A0200C25F67 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		C84B82F624E5FD65006E84FA /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		C84B82F924E5FF56006E84FA /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		C887120E24E4A01200C0A0ED /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
@@ -133,6 +139,7 @@
 		C811E75F24E01B1E0050F6CD /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				C831CC5124E8994200C25F67 /* CoreData */,
 				C831CC3C24E72F0A00C25F67 /* Caching */,
 				C887121424E4B75700C0A0ED /* Authorization */,
 				C811E7A924E0A3340050F6CD /* DataModels */,
@@ -215,6 +222,15 @@
 				C831CC4324E7307100C25F67 /* StoredCache.swift */,
 			);
 			path = Caching;
+			sourceTree = "<group>";
+		};
+		C831CC5124E8994200C25F67 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				C831CC4D24E8974100C25F67 /* MyData.xcdatamodeld */,
+				C831CC5224E89A0200C25F67 /* CoreDataManager.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		C887121424E4B75700C0A0ED /* Authorization */ = {
@@ -404,6 +420,8 @@
 				C831CC3A24E7296A00C25F67 /* CharacterListItem.swift in Sources */,
 				C811E7AB24E0A3690050F6CD /* Authentication.swift in Sources */,
 				C84B82FA24E5FF56006E84FA /* UserProfile.swift in Sources */,
+				C831CC4F24E8974100C25F67 /* MyData.xcdatamodeld in Sources */,
+				C831CC5324E89A0200C25F67 /* CoreDataManager.swift in Sources */,
 				C887120F24E4A01200C0A0ED /* LoginScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -423,6 +441,8 @@
 				C831CC3B24E7296A00C25F67 /* CharacterListItem.swift in Sources */,
 				C811E7AC24E0A3690050F6CD /* Authentication.swift in Sources */,
 				C84B82FB24E5FF56006E84FA /* UserProfile.swift in Sources */,
+				C831CC5024E8974100C25F67 /* MyData.xcdatamodeld in Sources */,
+				C831CC5424E89A0200C25F67 /* CoreDataManager.swift in Sources */,
 				C887121024E4A01200C0A0ED /* LoginScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -827,6 +847,19 @@
 			productName = OAuth2;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		C831CC4D24E8974100C25F67 /* MyData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C831CC4E24E8974100C25F67 /* MyData.xcdatamodel */,
+			);
+			currentVersion = C831CC4E24E8974100C25F67 /* MyData.xcdatamodel */;
+			path = MyData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = C811E75B24E01B1E0050F6CD /* Project object */;
 }

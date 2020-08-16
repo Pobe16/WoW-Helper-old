@@ -11,11 +11,14 @@ struct CharacterListItem: View {
     @EnvironmentObject var authorization: Authentication
     @State var characterMedia: CharacterMedia?
     let character: CharacterInProfile
-    @State var characterImage = UIImage()
+    @State var characterImage = UIImage(systemName: "arrow.counterclockwise.circle")!
     
     var body: some View {
         HStack{
             Image(uiImage: characterImage)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 84, height: 84)
             Text("\(character.name) lvl: \(character.level)")
             
         }.onAppear(perform: {
@@ -60,7 +63,7 @@ struct CharacterListItem: View {
                                         "&access_token=\(authorization.oauth2?.accessToken ?? "")"
             )!
             guard let req = authorization.oauth2?.request(forURL: fullRequestURL) else { return }
-            print(fullRequestURL)
+//            print(fullRequestURL)
             let task = authorization.oauth2?.session.dataTask(with: req) { data, response, error in
                 guard error == nil,
                       let response = response as? HTTPURLResponse,
@@ -106,11 +109,11 @@ struct CharacterListItem: View {
         guard let avatarURL = URL(string: characterMedia.avatarUrl + "?alt=/shadow/avatar/\(character.playableRace.id)-\(character.gender.type == "MALE" ? 0 : 1)") else {
             return
         }
-        let cacheURL = NSString(string: characterMedia.avatarUrl)
         
-        if let cachedImage = StoredCache.Images.object(forKey: cacheURL) {
-            characterImage = cachedImage
-        } else {
+        guard let storedImage = CoreDataManager.shared.fetchPicture(withName: characterMedia.avatarUrl, maximumAgeInDays: 10),
+              let data = storedImage.data,
+              let image = UIImage(data: data) else {
+            
             let dataTask = URLSession.shared.dataTask(with: avatarURL) { data, response, error in
                 guard error == nil,
                       let response = response as? HTTPURLResponse,
@@ -120,11 +123,15 @@ struct CharacterListItem: View {
                     return
                     
                 }
-                StoredCache.Images.setObject(image, forKey: cacheURL)
+                
+                CoreDataManager.shared.updatePicture(name: characterMedia.avatarUrl, data: data)
                 characterImage = image
             }
             dataTask.resume()
+            return
         }
+        
+        characterImage = image
     }
 }
 
