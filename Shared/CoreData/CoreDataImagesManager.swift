@@ -24,10 +24,10 @@ struct CoreDataImagesManager {
     }()
     
     @discardableResult
-    func createPicture(name: String, data: Data) -> CDPicture? {
+    func createImage(name: String, data: Data) -> CDImage? {
         let context = persistentContainer.viewContext
         
-        let picture = NSEntityDescription.insertNewObject(forEntityName: "CDPicture", into: context) as! CDPicture
+        let picture = NSEntityDescription.insertNewObject(forEntityName: "CDImage", into: context) as! CDImage
         
         picture.name = name
         picture.data = data
@@ -43,10 +43,10 @@ struct CoreDataImagesManager {
         return nil
     }
     
-    func fetchPictures() -> [CDPicture]? {
+    func fetchImages() -> [CDImage]? {
         let context = persistentContainer.viewContext
         
-        let fetchRequest = NSFetchRequest<CDPicture>(entityName: "CDPicture")
+        let fetchRequest = NSFetchRequest<CDImage>(entityName: "CDImage")
         
         do {
             let allPictures = try context.fetch(fetchRequest)
@@ -58,10 +58,10 @@ struct CoreDataImagesManager {
         return nil
     }
     
-    func fetchPicture(withName name: String, maximumAgeInDays age: Int = 7) -> CDPicture? {
+    func fetchImage(withName name: String, maximumAgeInDays age: Int = 7) -> CDImage? {
         let context = persistentContainer.viewContext
         
-        let fetchRequest = NSFetchRequest<CDPicture>(entityName: "CDPicture")
+        let fetchRequest = NSFetchRequest<CDImage>(entityName: "CDImage")
         fetchRequest.fetchLimit = 1
         fetchRequest.predicate = NSPredicate(format: "name == %@", name)
         
@@ -85,15 +85,15 @@ struct CoreDataImagesManager {
         return nil
     }
     
-    func updatePicture(name: String, data: Data) {
+    func updateImage(name: String, data: Data) {
         let context = persistentContainer.viewContext
-        print("trying to update")
-        if let current = fetchPicture(withName: name, maximumAgeInDays: 100000) {
+//        print("trying to update")
+        if let current = fetchImage(withName: name, maximumAgeInDays: 10000) {
             current.data = data
             current.creationDate = Date()
             
             do {
-                print("updating")
+//                print("updating")
                 try context.save()
                 
             } catch let updateError {
@@ -101,21 +101,21 @@ struct CoreDataImagesManager {
             }
             
         } else {
-            createPicture(name: name, data: data)
+            createImage(name: name, data: data)
         }
         
     }
     
-    func deletePicture(picture: CDPicture) {
+    func deleteImage(image: CDImage) {
         
         let context = persistentContainer.viewContext
-        context.delete(picture)
+        context.delete(image)
         
         do {
             try context.save()
             
         } catch let deleteError {
-            print("Failed to delete picture \(String(describing: picture.name)): \(deleteError)")
+            print("Failed to delete picture \(String(describing: image.name)): \(deleteError)")
         }
         
     }

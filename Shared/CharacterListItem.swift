@@ -18,7 +18,8 @@ struct CharacterListItem: View {
             Image(uiImage: characterImage)
                 .resizable()
                 .scaledToFit()
-                .frame(width: 84, height: 84)
+                .frame(width: 63, height: 63)
+                .cornerRadius(15, antialiased: true)
             Text("\(character.name) lvl: \(character.level)")
             
         }.onAppear(perform: {
@@ -110,7 +111,7 @@ struct CharacterListItem: View {
             return
         }
         
-        guard let storedImage = CoreDataManager.shared.fetchPicture(withName: characterMedia.avatarUrl, maximumAgeInDays: 10),
+        guard let storedImage = CoreDataImagesManager.shared.fetchImage(withName: characterMedia.avatarUrl, maximumAgeInDays: 10),
               let data = storedImage.data,
               let image = UIImage(data: data) else {
             
@@ -124,7 +125,7 @@ struct CharacterListItem: View {
                     
                 }
                 
-                CoreDataManager.shared.updatePicture(name: characterMedia.avatarUrl, data: data)
+                CoreDataImagesManager.shared.updateImage(name: characterMedia.avatarUrl, data: data)
                 characterImage = image
             }
             dataTask.resume()
