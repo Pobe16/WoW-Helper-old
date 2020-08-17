@@ -1,15 +1,15 @@
 //
-//  CoreDataManager.swift
+//  JSONCoreDataManager.swift
 //  WoWWidget
 //
-//  Created by Mikolaj Lukasik on 15/08/2020.
+//  Created by Mikolaj Lukasik on 16/08/2020.
 //
 
 import CoreData
 
-struct CoreDataImagesManager {
+struct JSONCoreDataManager {
     
-    static let shared = CoreDataImagesManager()
+    static let shared = JSONCoreDataManager()
     
     let persistentContainer: NSPersistentContainer = {
         
@@ -24,18 +24,18 @@ struct CoreDataImagesManager {
     }()
     
     @discardableResult
-    func createPicture(name: String, data: Data) -> CDPicture? {
+    func createJSONData(name: String, data: Data) -> JSONData? {
         let context = persistentContainer.viewContext
         
-        let picture = NSEntityDescription.insertNewObject(forEntityName: "CDPicture", into: context) as! CDPicture
+        let newData = NSEntityDescription.insertNewObject(forEntityName: "JSONData", into: context) as! JSONData
         
-        picture.name = name
-        picture.data = data
-        picture.creationDate = Date()
+        newData.name = name
+        newData.data = data
+        newData.creationDate = Date()
         
         do {
             try context.save()
-            return picture
+            return newData
         } catch let createError {
             print("Failed to create: \(createError)")
         }
@@ -43,14 +43,14 @@ struct CoreDataImagesManager {
         return nil
     }
     
-    func fetchPictures() -> [CDPicture]? {
+    func fetchAllJSONData() -> [JSONData]? {
         let context = persistentContainer.viewContext
         
-        let fetchRequest = NSFetchRequest<CDPicture>(entityName: "CDPicture")
+        let fetchRequest = NSFetchRequest<JSONData>(entityName: "JSONData")
         
         do {
-            let allPictures = try context.fetch(fetchRequest)
-            return allPictures
+            let allData = try context.fetch(fetchRequest)
+            return allData
         } catch let fetchError {
             print("Failed to fetch all: \(fetchError)")
         }
@@ -58,24 +58,25 @@ struct CoreDataImagesManager {
         return nil
     }
     
-    func fetchPicture(withName name: String, maximumAgeInDays age: Int = 7) -> CDPicture? {
+    func fetchJSONData(withName name: String, maximumAgeInDays age: Int = 30) -> JSONData? {
         let context = persistentContainer.viewContext
         
-        let fetchRequest = NSFetchRequest<CDPicture>(entityName: "CDPicture")
+        let fetchRequest = NSFetchRequest<JSONData>(entityName: "JSONData")
         fetchRequest.fetchLimit = 1
         fetchRequest.predicate = NSPredicate(format: "name == %@", name)
         
         do {
-            let pic = try context.fetch(fetchRequest)
-            let picture = pic.first
+            let dataArray = try context.fetch(fetchRequest)
+            let data = dataArray.first
             let interval = Double(age * 24 * 60 * 60 * -1)
-            guard let finalPicture = picture,
-                  let creationDate = finalPicture.creationDate else { return nil }
+            
+            guard let finalData = data,
+                  let creationDate = finalData.creationDate else { return nil }
             
             if creationDate.timeIntervalSinceNow < interval {
                 return nil
             } else {
-                return picture
+                return data
             }
             
         } catch let fetchError {
@@ -85,15 +86,15 @@ struct CoreDataImagesManager {
         return nil
     }
     
-    func updatePicture(name: String, data: Data) {
+    func updateJSONData(name: String, data: Data) {
         let context = persistentContainer.viewContext
-        print("trying to update")
-        if let current = fetchPicture(withName: name, maximumAgeInDays: 100000) {
+//        print("trying to update")
+        if let current = fetchJSONData(withName: name, maximumAgeInDays: 10000) {
             current.data = data
             current.creationDate = Date()
             
             do {
-                print("updating")
+//                print("updating")
                 try context.save()
                 
             } catch let updateError {
@@ -101,21 +102,21 @@ struct CoreDataImagesManager {
             }
             
         } else {
-            createPicture(name: name, data: data)
+            createJSONData(name: name, data: data)
         }
         
     }
     
-    func deletePicture(picture: CDPicture) {
+    func deleteJSONData(data: JSONData) {
         
         let context = persistentContainer.viewContext
-        context.delete(picture)
+        context.delete(data)
         
         do {
             try context.save()
             
         } catch let deleteError {
-            print("Failed to delete picture \(String(describing: picture.name)): \(deleteError)")
+            print("Failed to delete picture \(String(describing: data.name)): \(deleteError)")
         }
         
     }

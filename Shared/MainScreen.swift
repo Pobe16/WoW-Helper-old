@@ -15,16 +15,56 @@ struct MainScreen: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(characters) { character in
-                    CharacterListItem(character: character)
+//            VStack(alignment: HorizontalAlignment.leading) {
+                
+                Section(header: Text("Characters")){
+                    if characters.count > 0 {
+                        ForEach(characters) { character in
+                            NavigationLink(destination: EmptyView()) {
+                                CharacterListItem(character: character)
+                            }
+                        }
+                    } else {
+                        CharacterLoading()
+                    }
+                }
+                Section(header: Text("Settings")){
+                    NavigationLink(destination: Text("Data")) {
+                        HStack{
+                            Image(systemName: "chart.bar.doc.horizontal")
+                                .resizable()
+                                .foregroundColor(.gray)
+                                .frame(width: 63, height: 63)
+                                .cornerRadius(15, antialiased: true)
+                            Text("Data Health")
+                            
+                        }
+                    }
+                    NavigationLink(destination: EmptyView()) {
+                        Button(action: {
+                            self.logOut()
+                        }, label: {
+                            HStack{
+                                Image("logout")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 63, height: 63)
+                                    .cornerRadius(15, antialiased: true)
+                                Text("Log me out!")
+                            }
+                            .onTapGesture {
+                                self.logOut()
+                            }
+                        })
+                    }
+                    
                 }
                 
-                Button(action: {
-                    self.logOut()
-                }, label: {
-                    Text("Log me out!")
-                })
-            }.navigationBarTitle("WoWWidget", displayMode: .large)
+            }
+            .listStyle(InsetGroupedListStyle())
+            .navigationBarTitle("WoWWidget", displayMode: .large)
+            
+            Text("Hello World!")
         }.onAppear {
             self.loadCharacters()
         }
@@ -52,13 +92,13 @@ struct MainScreen: View {
                                     "&locale=\(requestLocale)" +
                                     "&access_token=\(authorization.oauth2?.accessToken ?? "")"
         )!
-        print(fullRequestURL)
+//        print(fullRequestURL)
         
         guard let req = authorization.oauth2?.request(forURL: fullRequestURL) else { return }
         
         let task = authorization.oauth2?.session.dataTask(with: req) { data, response, error in
             if let data = data {
-                print(data)
+//                print(data)
                 
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -67,10 +107,8 @@ struct MainScreen: View {
                     let dataResponse = try decoder.decode(UserProfile.self, from: data)
                     
                     for account in dataResponse.wowAccounts {
-                        for userCharacter in account.characters {
-                            DispatchQueue.main.async {
-                                self.characters.append(userCharacter)
-                            }
+                        withAnimation {
+                            self.characters.append(contentsOf: account.characters)
                         }
                     }
                     
@@ -93,5 +131,6 @@ struct MainScreen: View {
 struct MainScreen_Previews: PreviewProvider {
     static var previews: some View {
         MainScreen(loggedIn: .constant(true))
+            .previewLayout(.fixed(width: 2732, height: 2048))
     }
 }

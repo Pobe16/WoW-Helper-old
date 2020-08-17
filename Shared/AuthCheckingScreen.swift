@@ -34,7 +34,7 @@ struct AuthCheckingScreen: View {
             determineLoginState()
         })
         .onReceive(authorization.$oauth2, perform: { _ in
-            print("authorization.$oauth2 update debug")
+//            print("authorization.$oauth2 update debug")
             determineLoginState()
         })
         .onOpenURL(perform: { url in

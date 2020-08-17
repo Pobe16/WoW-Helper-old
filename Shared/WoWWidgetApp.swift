@@ -25,7 +25,11 @@ struct WoWWidgetApp: App {
     
     fileprivate func authInit(){
 //        UserDefaults.resetStandardUserDefaults()
+        
         auth.oauth2 = OAuth2CodeGrant.init(settings: auth.settings)
+        
+//        let imagesInCoreData = CoreDataImagesManager.shared.fetchImages()
+//        print(imagesInCoreData?[0].creationDate)
         
 //        auth.oauth2?.logger = OAuth2DebugLogger(.trace)
     }
