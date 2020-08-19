@@ -24,7 +24,6 @@
 		C811E7AB24E0A3690050F6CD /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E7AA24E0A3690050F6CD /* Authentication.swift */; };
 		C811E7AC24E0A3690050F6CD /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E7AA24E0A3690050F6CD /* Authentication.swift */; };
 		C831CC3A24E7296A00C25F67 /* CharacterListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C831CC3924E7296A00C25F67 /* CharacterListItem.swift */; };
-		C831CC3B24E7296A00C25F67 /* CharacterListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C831CC3924E7296A00C25F67 /* CharacterListItem.swift */; };
 		C831CC4424E7307100C25F67 /* StoredCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C831CC4324E7307100C25F67 /* StoredCache.swift */; };
 		C831CC4524E7307100C25F67 /* StoredCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C831CC4324E7307100C25F67 /* StoredCache.swift */; };
 		C831CC4724E7355500C25F67 /* CharacterMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = C831CC4624E7355500C25F67 /* CharacterMedia.swift */; };
@@ -43,8 +42,12 @@
 		C887121324E4B6EA00C0A0ED /* secretOAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = C887121124E4B6EA00C0A0ED /* secretOAuth.swift */; };
 		C88EEA9D24E9E2B800155CBC /* JSONCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EEA9C24E9E2B800155CBC /* JSONCoreDataManager.swift */; };
 		C88EEA9E24E9E2B800155CBC /* JSONCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EEA9C24E9E2B800155CBC /* JSONCoreDataManager.swift */; };
-		C88EEAA024E9EFDB00155CBC /* CharacterLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EEA9F24E9EFDB00155CBC /* CharacterLoading.swift */; };
-		C88EEAA124E9EFDB00155CBC /* CharacterLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EEA9F24E9EFDB00155CBC /* CharacterLoading.swift */; };
+		C88EEAA024E9EFDB00155CBC /* CharacterLoadingListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EEA9F24E9EFDB00155CBC /* CharacterLoadingListItem.swift */; };
+		C8F942D924EDAC1600B6222C /* LogOutListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F942D824EDAC1600B6222C /* LogOutListItem.swift */; };
+		C8F942DB24EDB54000B6222C /* LogOutDebugScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F942DA24EDB54000B6222C /* LogOutDebugScreen.swift */; };
+		C8F942DD24EDB65C00B6222C /* DataHealthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F942DC24EDB65C00B6222C /* DataHealthScreen.swift */; };
+		C8F942DF24EDB8DB00B6222C /* ExpansionIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F942DE24EDB8DB00B6222C /* ExpansionIndex.swift */; };
+		C8F942E124EDC02900B6222C /* ExpansionJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F942E024EDC02900B6222C /* ExpansionJournal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,7 +95,12 @@
 		C887120E24E4A01200C0A0ED /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		C887121124E4B6EA00C0A0ED /* secretOAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = secretOAuth.swift; sourceTree = "<group>"; };
 		C88EEA9C24E9E2B800155CBC /* JSONCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONCoreDataManager.swift; sourceTree = "<group>"; };
-		C88EEA9F24E9EFDB00155CBC /* CharacterLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterLoading.swift; sourceTree = "<group>"; };
+		C88EEA9F24E9EFDB00155CBC /* CharacterLoadingListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterLoadingListItem.swift; sourceTree = "<group>"; };
+		C8F942D824EDAC1600B6222C /* LogOutListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutListItem.swift; sourceTree = "<group>"; };
+		C8F942DA24EDB54000B6222C /* LogOutDebugScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutDebugScreen.swift; sourceTree = "<group>"; };
+		C8F942DC24EDB65C00B6222C /* DataHealthScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHealthScreen.swift; sourceTree = "<group>"; };
+		C8F942DE24EDB8DB00B6222C /* ExpansionIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpansionIndex.swift; sourceTree = "<group>"; };
+		C8F942E024EDC02900B6222C /* ExpansionJournal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpansionJournal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,17 +153,15 @@
 		C811E75F24E01B1E0050F6CD /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				C811E76024E01B1E0050F6CD /* WoWWidgetApp.swift */,
 				C831CC5124E8994200C25F67 /* CoreData */,
 				C831CC3C24E72F0A00C25F67 /* Caching */,
 				C887121424E4B75700C0A0ED /* Authorization */,
 				C811E7A924E0A3340050F6CD /* DataModels */,
-				C811E76024E01B1E0050F6CD /* WoWWidgetApp.swift */,
-				C811E76124E01B1E0050F6CD /* AuthCheckingScreen.swift */,
+				C8F942D724EDABFC00B6222C /* NavigationView */,
 				C811E76224E01B1F0050F6CD /* Assets.xcassets */,
-				C887120E24E4A01200C0A0ED /* LoginScreen.swift */,
 				C84B82F624E5FD65006E84FA /* MainScreen.swift */,
-				C831CC3924E7296A00C25F67 /* CharacterListItem.swift */,
-				C88EEA9F24E9EFDB00155CBC /* CharacterLoading.swift */,
+				C8F942DC24EDB65C00B6222C /* DataHealthScreen.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -219,6 +225,8 @@
 				C811E7A324E01DC30050F6CD /* APIAccessInfo.swift */,
 				C84B82F924E5FF56006E84FA /* UserProfile.swift */,
 				C831CC4624E7355500C25F67 /* CharacterMedia.swift */,
+				C8F942DE24EDB8DB00B6222C /* ExpansionIndex.swift */,
+				C8F942E024EDC02900B6222C /* ExpansionJournal.swift */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -244,11 +252,24 @@
 		C887121424E4B75700C0A0ED /* Authorization */ = {
 			isa = PBXGroup;
 			children = (
-				C887121124E4B6EA00C0A0ED /* secretOAuth.swift */,
 				C811E7A624E05FBE0050F6CD /* AuthInfo.swift */,
 				C811E7AA24E0A3690050F6CD /* Authentication.swift */,
+				C811E76124E01B1E0050F6CD /* AuthCheckingScreen.swift */,
+				C887120E24E4A01200C0A0ED /* LoginScreen.swift */,
+				C887121124E4B6EA00C0A0ED /* secretOAuth.swift */,
 			);
 			path = Authorization;
+			sourceTree = "<group>";
+		};
+		C8F942D724EDABFC00B6222C /* NavigationView */ = {
+			isa = PBXGroup;
+			children = (
+				C831CC3924E7296A00C25F67 /* CharacterListItem.swift */,
+				C88EEA9F24E9EFDB00155CBC /* CharacterLoadingListItem.swift */,
+				C8F942D824EDAC1600B6222C /* LogOutListItem.swift */,
+				C8F942DA24EDB54000B6222C /* LogOutDebugScreen.swift */,
+			);
+			path = NavigationView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -417,19 +438,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8F942DF24EDB8DB00B6222C /* ExpansionIndex.swift in Sources */,
 				C831CC4724E7355500C25F67 /* CharacterMedia.swift in Sources */,
 				C84B82F724E5FD65006E84FA /* MainScreen.swift in Sources */,
 				C831CC4424E7307100C25F67 /* StoredCache.swift in Sources */,
 				C811E7A724E05FBE0050F6CD /* AuthInfo.swift in Sources */,
 				C811E7A424E01DC30050F6CD /* APIAccessInfo.swift in Sources */,
+				C8F942DD24EDB65C00B6222C /* DataHealthScreen.swift in Sources */,
 				C811E78B24E01B1F0050F6CD /* AuthCheckingScreen.swift in Sources */,
+				C8F942D924EDAC1600B6222C /* LogOutListItem.swift in Sources */,
 				C887121224E4B6EA00C0A0ED /* secretOAuth.swift in Sources */,
+				C8F942E124EDC02900B6222C /* ExpansionJournal.swift in Sources */,
 				C811E78924E01B1F0050F6CD /* WoWWidgetApp.swift in Sources */,
 				C831CC3A24E7296A00C25F67 /* CharacterListItem.swift in Sources */,
 				C811E7AB24E0A3690050F6CD /* Authentication.swift in Sources */,
 				C84B82FA24E5FF56006E84FA /* UserProfile.swift in Sources */,
 				C831CC4F24E8974100C25F67 /* MyData.xcdatamodeld in Sources */,
-				C88EEAA024E9EFDB00155CBC /* CharacterLoading.swift in Sources */,
+				C8F942DB24EDB54000B6222C /* LogOutDebugScreen.swift in Sources */,
+				C88EEAA024E9EFDB00155CBC /* CharacterLoadingListItem.swift in Sources */,
 				C831CC5324E89A0200C25F67 /* CoreDataImagesManager.swift in Sources */,
 				C88EEA9D24E9E2B800155CBC /* JSONCoreDataManager.swift in Sources */,
 				C887120F24E4A01200C0A0ED /* LoginScreen.swift in Sources */,
@@ -448,11 +474,9 @@
 				C811E78C24E01B1F0050F6CD /* AuthCheckingScreen.swift in Sources */,
 				C887121324E4B6EA00C0A0ED /* secretOAuth.swift in Sources */,
 				C811E78A24E01B1F0050F6CD /* WoWWidgetApp.swift in Sources */,
-				C831CC3B24E7296A00C25F67 /* CharacterListItem.swift in Sources */,
 				C811E7AC24E0A3690050F6CD /* Authentication.swift in Sources */,
 				C84B82FB24E5FF56006E84FA /* UserProfile.swift in Sources */,
 				C831CC5024E8974100C25F67 /* MyData.xcdatamodeld in Sources */,
-				C88EEAA124E9EFDB00155CBC /* CharacterLoading.swift in Sources */,
 				C831CC5424E89A0200C25F67 /* CoreDataImagesManager.swift in Sources */,
 				C88EEA9E24E9E2B800155CBC /* JSONCoreDataManager.swift in Sources */,
 				C887121024E4A01200C0A0ED /* LoginScreen.swift in Sources */,

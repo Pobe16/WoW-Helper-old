@@ -53,7 +53,7 @@ struct AuthCheckingScreen: View {
     
     fileprivate func logOut() {
         
-        print(authorization.oauth2?.accessToken as Any)
+//        print(authorization.oauth2?.accessToken as Any)
         authorization.oauth2?.forgetTokens()
         loggedIn = false
     }
