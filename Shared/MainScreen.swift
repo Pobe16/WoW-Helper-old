@@ -11,25 +11,25 @@ struct MainScreen: View {
     @Binding var loggedIn: Bool
     @EnvironmentObject var authorization: Authentication
     @State var characters: [CharacterInProfile] = []
+    @State var selection: String? = ""
     
     var body: some View {
         NavigationView {
-            List {
-//            VStack(alignment: HorizontalAlignment.leading) {
+            List() {
                 
                 Section(header: Text("Characters")){
                     if characters.count > 0 {
                         ForEach(characters) { character in
-                            NavigationLink(destination: EmptyView()) {
+                            NavigationLink(destination: Text("\(character.name) \(character.realm.name)"), tag: "\(character.name)-\(character.realm.slug)", selection: self.$selection) {
                                 CharacterListItem(character: character)
                             }
                         }
                     } else {
-                        CharacterLoading()
+                        CharacterLoadingListItem()
                     }
                 }
                 Section(header: Text("Settings")){
-                    NavigationLink(destination: Text("Data")) {
+                    NavigationLink(destination: DataHealthScreen(), tag: "data-health", selection: $selection) {
                         HStack{
                             Image(systemName: "chart.bar.doc.horizontal")
                                 .resizable()
@@ -40,22 +40,9 @@ struct MainScreen: View {
                             
                         }
                     }
-                    NavigationLink(destination: EmptyView()) {
-                        Button(action: {
-                            self.logOut()
-                        }, label: {
-                            HStack{
-                                Image("logout")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 63, height: 63)
-                                    .cornerRadius(15, antialiased: true)
-                                Text("Log me out!")
-                            }
-                            .onTapGesture {
-                                self.logOut()
-                            }
-                        })
+                    
+                    NavigationLink(destination: LogOutDebugScreen(loggedIn: $loggedIn), tag: "log-out", selection: $selection) {
+                        LogOutListItem(loggedIn: $loggedIn)
                     }
                     
                 }
@@ -69,13 +56,6 @@ struct MainScreen: View {
             self.loadCharacters()
         }
         
-    }
-    
-    fileprivate func logOut() {
-        
-        print(authorization.oauth2?.accessToken as Any)
-        authorization.oauth2?.forgetTokens()
-        loggedIn = false
     }
     
     func loadCharacters() {
@@ -134,3 +114,7 @@ struct MainScreen_Previews: PreviewProvider {
             .previewLayout(.fixed(width: 2732, height: 2048))
     }
 }
+
+
+
+

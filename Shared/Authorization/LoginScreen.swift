@@ -64,7 +64,8 @@ struct LoginScreen: View {
                 .pickerStyle(SegmentedPickerStyle())
             }
             
-            
+            Spacer()
+                .frame(height: 30)
             
             Button(action: {
                 self.authenticate()
@@ -76,6 +77,7 @@ struct LoginScreen: View {
             })
             
             Spacer()
+                
         }
         .onAppear(perform: {
             determineLocaleState()
@@ -180,7 +182,7 @@ struct LoginScreen: View {
         authorization.oauth2?.authConfig.authorizeContext = UIApplication.shared.windows[0].rootViewController
         #endif
         
-        print(authorization.settings)
+//        print(authorization.settings)
         
 //        let params = OAuth2StringDict()
 //        Authentication.oauth2.authorize(params: params) { authParameters, error in
