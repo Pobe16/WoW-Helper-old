@@ -76,6 +76,7 @@ struct JSONCoreDataManager {
             if creationDate.timeIntervalSinceNow < interval {
                 return nil
             } else {
+                print("fetching \(name)")
                 return data
             }
             
@@ -119,6 +120,12 @@ struct JSONCoreDataManager {
             print("Failed to delete picture \(String(describing: data.name)): \(deleteError)")
         }
         
+    }
+    
+    func saveJSON(_ data: Data, withURL url: URL) {
+        let stringFromURL = url.absoluteString.split(separator: "?")[0]
+        print("saving data for " + String(stringFromURL))
+        self.updateJSONData(name: String(stringFromURL), data: data)
     }
     
 }

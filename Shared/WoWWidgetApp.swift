@@ -11,12 +11,14 @@ import SwiftUI
 @main
 struct WoWWidgetApp: App {
     
-    @ObservedObject var auth = Authentication.init()
+    @ObservedObject var auth        = Authentication.init()
+    @ObservedObject var gameData    = GameData.init()
     
     var body: some Scene {
         WindowGroup {
             AuthCheckingScreen()
                 .environmentObject(auth)
+                .environmentObject(gameData)
                 .onAppear(perform: {
                     authInit()
                 })

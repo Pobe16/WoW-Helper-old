@@ -38,8 +38,6 @@
 		C84B82FB24E5FF56006E84FA /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84B82F924E5FF56006E84FA /* UserProfile.swift */; };
 		C887120F24E4A01200C0A0ED /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C887120E24E4A01200C0A0ED /* LoginScreen.swift */; };
 		C887121024E4A01200C0A0ED /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C887120E24E4A01200C0A0ED /* LoginScreen.swift */; };
-		C887121224E4B6EA00C0A0ED /* secretOAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = C887121124E4B6EA00C0A0ED /* secretOAuth.swift */; };
-		C887121324E4B6EA00C0A0ED /* secretOAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = C887121124E4B6EA00C0A0ED /* secretOAuth.swift */; };
 		C88EEA9D24E9E2B800155CBC /* JSONCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EEA9C24E9E2B800155CBC /* JSONCoreDataManager.swift */; };
 		C88EEA9E24E9E2B800155CBC /* JSONCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EEA9C24E9E2B800155CBC /* JSONCoreDataManager.swift */; };
 		C88EEAA024E9EFDB00155CBC /* CharacterLoadingListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EEA9F24E9EFDB00155CBC /* CharacterLoadingListItem.swift */; };
@@ -48,6 +46,17 @@
 		C8F942DD24EDB65C00B6222C /* DataHealthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F942DC24EDB65C00B6222C /* DataHealthScreen.swift */; };
 		C8F942DF24EDB8DB00B6222C /* ExpansionIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F942DE24EDB8DB00B6222C /* ExpansionIndex.swift */; };
 		C8F942E124EDC02900B6222C /* ExpansionJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F942E024EDC02900B6222C /* ExpansionJournal.swift */; };
+		C8F942E324EF024600B6222C /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F942E224EF024600B6222C /* GameData.swift */; };
+		C8F942E424EF025600B6222C /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F942E224EF024600B6222C /* GameData.swift */; };
+		C8F942E524EF025600B6222C /* ExpansionJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F942E024EDC02900B6222C /* ExpansionJournal.swift */; };
+		C8F942E624EF025600B6222C /* ExpansionIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F942DE24EDB8DB00B6222C /* ExpansionIndex.swift */; };
+		C8F942E724EF027300B6222C /* CharacterListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C831CC3924E7296A00C25F67 /* CharacterListItem.swift */; };
+		C8F942E824EF027700B6222C /* CharacterLoadingListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EEA9F24E9EFDB00155CBC /* CharacterLoadingListItem.swift */; };
+		C8F942E924EF027900B6222C /* LogOutListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F942D824EDAC1600B6222C /* LogOutListItem.swift */; };
+		C8F942EA24EF027C00B6222C /* LogOutDebugScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F942DA24EDB54000B6222C /* LogOutDebugScreen.swift */; };
+		C8F942EB24EF028100B6222C /* DataHealthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F942DC24EDB65C00B6222C /* DataHealthScreen.swift */; };
+		C8F942F424EF1D2500B6222C /* SecretOAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F942F324EF1D2500B6222C /* SecretOAuth.swift */; };
+		C8F942F524EF1D2500B6222C /* SecretOAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F942F324EF1D2500B6222C /* SecretOAuth.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,7 +102,6 @@
 		C84B82F624E5FD65006E84FA /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		C84B82F924E5FF56006E84FA /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		C887120E24E4A01200C0A0ED /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
-		C887121124E4B6EA00C0A0ED /* secretOAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = secretOAuth.swift; sourceTree = "<group>"; };
 		C88EEA9C24E9E2B800155CBC /* JSONCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONCoreDataManager.swift; sourceTree = "<group>"; };
 		C88EEA9F24E9EFDB00155CBC /* CharacterLoadingListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterLoadingListItem.swift; sourceTree = "<group>"; };
 		C8F942D824EDAC1600B6222C /* LogOutListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutListItem.swift; sourceTree = "<group>"; };
@@ -101,6 +109,8 @@
 		C8F942DC24EDB65C00B6222C /* DataHealthScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHealthScreen.swift; sourceTree = "<group>"; };
 		C8F942DE24EDB8DB00B6222C /* ExpansionIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpansionIndex.swift; sourceTree = "<group>"; };
 		C8F942E024EDC02900B6222C /* ExpansionJournal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpansionJournal.swift; sourceTree = "<group>"; };
+		C8F942E224EF024600B6222C /* GameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
+		C8F942F324EF1D2500B6222C /* SecretOAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretOAuth.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,6 +237,7 @@
 				C831CC4624E7355500C25F67 /* CharacterMedia.swift */,
 				C8F942DE24EDB8DB00B6222C /* ExpansionIndex.swift */,
 				C8F942E024EDC02900B6222C /* ExpansionJournal.swift */,
+				C8F942E224EF024600B6222C /* GameData.swift */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -256,7 +267,7 @@
 				C811E7AA24E0A3690050F6CD /* Authentication.swift */,
 				C811E76124E01B1E0050F6CD /* AuthCheckingScreen.swift */,
 				C887120E24E4A01200C0A0ED /* LoginScreen.swift */,
-				C887121124E4B6EA00C0A0ED /* secretOAuth.swift */,
+				C8F942F324EF1D2500B6222C /* SecretOAuth.swift */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";
@@ -445,14 +456,15 @@
 				C811E7A724E05FBE0050F6CD /* AuthInfo.swift in Sources */,
 				C811E7A424E01DC30050F6CD /* APIAccessInfo.swift in Sources */,
 				C8F942DD24EDB65C00B6222C /* DataHealthScreen.swift in Sources */,
+				C8F942F424EF1D2500B6222C /* SecretOAuth.swift in Sources */,
 				C811E78B24E01B1F0050F6CD /* AuthCheckingScreen.swift in Sources */,
 				C8F942D924EDAC1600B6222C /* LogOutListItem.swift in Sources */,
-				C887121224E4B6EA00C0A0ED /* secretOAuth.swift in Sources */,
 				C8F942E124EDC02900B6222C /* ExpansionJournal.swift in Sources */,
 				C811E78924E01B1F0050F6CD /* WoWWidgetApp.swift in Sources */,
 				C831CC3A24E7296A00C25F67 /* CharacterListItem.swift in Sources */,
 				C811E7AB24E0A3690050F6CD /* Authentication.swift in Sources */,
 				C84B82FA24E5FF56006E84FA /* UserProfile.swift in Sources */,
+				C8F942E324EF024600B6222C /* GameData.swift in Sources */,
 				C831CC4F24E8974100C25F67 /* MyData.xcdatamodeld in Sources */,
 				C8F942DB24EDB54000B6222C /* LogOutDebugScreen.swift in Sources */,
 				C88EEAA024E9EFDB00155CBC /* CharacterLoadingListItem.swift in Sources */,
@@ -467,16 +479,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				C831CC4824E7355500C25F67 /* CharacterMedia.swift in Sources */,
+				C8F942E524EF025600B6222C /* ExpansionJournal.swift in Sources */,
+				C8F942E424EF025600B6222C /* GameData.swift in Sources */,
+				C8F942EB24EF028100B6222C /* DataHealthScreen.swift in Sources */,
 				C84B82F824E5FD65006E84FA /* MainScreen.swift in Sources */,
+				C8F942E924EF027900B6222C /* LogOutListItem.swift in Sources */,
 				C831CC4524E7307100C25F67 /* StoredCache.swift in Sources */,
+				C8F942F524EF1D2500B6222C /* SecretOAuth.swift in Sources */,
 				C811E7A824E05FBE0050F6CD /* AuthInfo.swift in Sources */,
+				C8F942EA24EF027C00B6222C /* LogOutDebugScreen.swift in Sources */,
+				C8F942E624EF025600B6222C /* ExpansionIndex.swift in Sources */,
 				C811E7A524E01DC30050F6CD /* APIAccessInfo.swift in Sources */,
 				C811E78C24E01B1F0050F6CD /* AuthCheckingScreen.swift in Sources */,
-				C887121324E4B6EA00C0A0ED /* secretOAuth.swift in Sources */,
+				C8F942E824EF027700B6222C /* CharacterLoadingListItem.swift in Sources */,
 				C811E78A24E01B1F0050F6CD /* WoWWidgetApp.swift in Sources */,
 				C811E7AC24E0A3690050F6CD /* Authentication.swift in Sources */,
 				C84B82FB24E5FF56006E84FA /* UserProfile.swift in Sources */,
 				C831CC5024E8974100C25F67 /* MyData.xcdatamodeld in Sources */,
+				C8F942E724EF027300B6222C /* CharacterListItem.swift in Sources */,
 				C831CC5424E89A0200C25F67 /* CoreDataImagesManager.swift in Sources */,
 				C88EEA9E24E9E2B800155CBC /* JSONCoreDataManager.swift in Sources */,
 				C887121024E4A01200C0A0ED /* LoginScreen.swift in Sources */,

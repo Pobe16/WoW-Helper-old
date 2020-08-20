@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct ExpansionJournal: Decodable, Hashable, Identifiable {
+struct ExpansionJournal: Decodable, Hashable, Identifiable, Comparable {
+    static func < (lhs: ExpansionJournal, rhs: ExpansionJournal) -> Bool {
+        return lhs.id < rhs.id
+    }
+    
     let id: Int
     let name: String
     let dungeons: [InstanceIndex]?
