@@ -95,4 +95,3 @@ iOSInjectionProject/
 # MacOS Folder Stuff
 .DS_Store
 
-Shared/Authorization/SecretOAuth.swift
