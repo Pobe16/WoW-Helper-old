@@ -30,15 +30,7 @@ struct MainScreen: View {
                 }
                 Section(header: Text("Settings")){
                     NavigationLink(destination: DataHealthScreen(), tag: "data-health", selection: $selection) {
-                        HStack{
-                            Image(systemName: "chart.bar.doc.horizontal")
-                                .resizable()
-                                .foregroundColor(.gray)
-                                .frame(width: 63, height: 63)
-                                .cornerRadius(15, antialiased: true)
-                            Text("Data Health")
-                            
-                        }
+                        GameDataLoader()
                     }
                     
                     NavigationLink(destination: LogOutDebugScreen(loggedIn: $loggedIn), tag: "log-out", selection: $selection) {

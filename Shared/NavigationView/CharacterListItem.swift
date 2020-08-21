@@ -11,8 +11,11 @@ struct CharacterListItem: View {
     @EnvironmentObject var authorization: Authentication
     @State var characterMedia: CharacterMedia?
     let character: CharacterInProfile
+    #if os(iOS)
     @State var characterImage = UIImage(systemName: "arrow.counterclockwise.circle")!
-    
+    #else
+    @State var characterImage = NSImage("arrow.counterclockwise.circle")!
+    #endif
     var body: some View {
         HStack{
             Image(uiImage: characterImage)

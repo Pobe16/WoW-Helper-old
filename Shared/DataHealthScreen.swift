@@ -10,12 +10,12 @@ import SwiftUI
 struct DataHealthScreen: View {
     @EnvironmentObject var authorization: Authentication
     @EnvironmentObject var gameData: GameData
-    @State var expansionsStubs: [ExpansionIndex] = []
+    @State var gameDataCreationDate: String = ""
 //    @State var expansionInfo: [String:ExpansionJournal] = [:]
     
     var body: some View {
         VStack {
-            Text("Expansion:")
+            Text("Expansions:")
                 
             VStack{
                 if gameData.expansions.count > 0 {
@@ -38,55 +38,81 @@ struct DataHealthScreen: View {
                 } else {
                     EmptyView()
                 }
+                
+                Spacer()
+                
+                Text("Last refreshed:")
+                Text(gameDataCreationDate)
+                Button {
+                    self.loadExpansionIndex()
+                } label: {
+                    Text("Refresh now!")
+                }
+
             }
             
         }
         .onAppear(perform: {
-            self.loadExpansionIndex()
+            self.checkDataCreationDate()
         })
-//        .onChange(of: gameData.expansions, perform: { value in
-//            if value.count > 0 && value.count == expansionsStubs.count {
-//                gameData.expansions.sort()
-//            }
-//        })
         
     }
     
-    func loadExpansionIndex() {
-        if gameData.expansions.count == 0 {
-            let requestUrlAPIHost = UserDefaults.standard.object(forKey: "APIRegionHost") as? String ?? APIRegionHostList.Europe
-            let requestUrlAPIFragment = "/data/wow/journal-expansion/index"
-            let regionShortCode = APIRegionShort.Code[UserDefaults.standard.integer(forKey: "loginRegion")]
-            let requestAPINamespace = "static-\(regionShortCode)"
-            let requestLocale = UserDefaults.standard.object(forKey: "localeCode") as? String ?? EuropeanLocales.BritishEnglish
-            
-            let fullRequestURL = URL(string:
-                                        requestUrlAPIHost +
-                                        requestUrlAPIFragment +
-                                        "?namespace=\(requestAPINamespace)" +
-                                        "&locale=\(requestLocale)" +
-                                        "&access_token=\(authorization.oauth2?.accessToken ?? "")"
-            )!
-            
-            if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: requestUrlAPIHost + requestUrlAPIFragment, maximumAgeInDays: 90) {
-                self.decodeExpansionIndexData(savedData.data!)
-                return
-            }
-            
-            guard let req = authorization.oauth2?.request(forURL: fullRequestURL) else { return }
-            
-            let task = authorization.oauth2?.session.dataTask(with: req) { data, response, error in
-                if let data = data {
-                    self.decodeExpansionIndexData(data, fromURL: fullRequestURL)
-                }
-                if let error = error {
-                    // something went wrong, check the error
-                    print("error")
-                    print(error.localizedDescription)
-                }
-            }
-            task?.resume()
+    func checkDataCreationDate(){
+        let requestUrlAPIHost = UserDefaults.standard.object(forKey: "APIRegionHost") as? String ?? APIRegionHostList.Europe
+        let requestUrlAPIFragment = "/data/wow/journal-expansion/index"
+        
+        if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: requestUrlAPIHost + requestUrlAPIFragment, maximumAgeInDays: 90) {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+            let dateString = dateFormatter.string(from: savedData.creationDate!)
+            self.gameDataCreationDate = dateString
+        } else {
+            self.gameDataCreationDate = "Nothing saved"
         }
+    }
+    
+    func deleteDataBeforeUpdating() {
+        DispatchQueue.main.async {
+            withAnimation {
+                self.gameData.expansions    = []
+                self.gameData.raids         = []
+                self.gameData.dungeons      = []
+                self.gameData.encounters    = []
+            }
+            
+        }
+    }
+    
+    func loadExpansionIndex() {
+        deleteDataBeforeUpdating()
+        let requestUrlAPIHost = UserDefaults.standard.object(forKey: "APIRegionHost") as? String ?? APIRegionHostList.Europe
+        let requestUrlAPIFragment = "/data/wow/journal-expansion/index"
+        let regionShortCode = APIRegionShort.Code[UserDefaults.standard.integer(forKey: "loginRegion")]
+        let requestAPINamespace = "static-\(regionShortCode)"
+        let requestLocale = UserDefaults.standard.object(forKey: "localeCode") as? String ?? EuropeanLocales.BritishEnglish
+        
+        let fullRequestURL = URL(string:
+                                    requestUrlAPIHost +
+                                    requestUrlAPIFragment +
+                                    "?namespace=\(requestAPINamespace)" +
+                                    "&locale=\(requestLocale)" +
+                                    "&access_token=\(authorization.oauth2?.accessToken ?? "")"
+        )!
+        
+        guard let req = authorization.oauth2?.request(forURL: fullRequestURL) else { return }
+        
+        let task = authorization.oauth2?.session.dataTask(with: req) { data, response, error in
+            if let data = data {
+                self.decodeExpansionIndexData(data, fromURL: fullRequestURL)
+            }
+            if let error = error {
+                // something went wrong, check the error
+                print("error")
+                print(error.localizedDescription)
+            }
+        }
+        task?.resume()
     }
     
     func decodeExpansionIndexData(_ data: Data, fromURL url: URL? = nil) {
@@ -95,14 +121,18 @@ struct DataHealthScreen: View {
         
         do {
             let dataResponse = try decoder.decode(ExpansionTop.self, from: data)
-            self.expansionsStubs = dataResponse.tiers
+            DispatchQueue.main.async {
+                withAnimation {
+                    self.gameData.expansionsStubs = dataResponse.tiers
+                }
+                self.gameData.expansionsStubs.forEach { expansion in
+                    loadExpansionJournal(for: expansion)
+                }
+            }
             
             if let url = url {
                 JSONCoreDataManager.shared.saveJSON(data, withURL: url)
-            }
-            
-            self.expansionsStubs.forEach { expansion in
-                loadExpansionJournal(for: expansion)
+                self.checkDataCreationDate()
             }
         } catch {
             print(error)
@@ -119,12 +149,6 @@ struct DataHealthScreen: View {
                                     "&locale=\(requestLocale)" +
                                     "&access_token=\(authorization.oauth2?.accessToken ?? "")"
         )!
-        
-        let strippedAPIUrl = String(requestUrlAPIHost.split(separator: "?")[0])
-        if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: strippedAPIUrl, maximumAgeInDays: 90) {
-            self.decodeExpansionJournalData(savedData.data!)
-            return
-        }
         
         guard let req = authorization.oauth2?.request(forURL: fullRequestURL) else { return }
         
@@ -155,12 +179,10 @@ struct DataHealthScreen: View {
             }
                 
             DispatchQueue.main.async {
-                
                 withAnimation {
                     self.gameData.expansions.append(dataResponse)
                     self.gameData.expansions.sort()
                 }
-                
             }
             
         } catch {
