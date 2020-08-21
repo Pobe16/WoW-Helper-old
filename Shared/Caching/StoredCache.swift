@@ -4,8 +4,11 @@
 //
 //  Created by Mikolaj Lukasik on 14/08/2020.
 //
-
-import UIKit
+//#if os(iOS)
+//import UIKit
+//#else
+import Foundation
+//#endif
 
 struct StoredCache {
 //    static var Images = NSCache<NSString, UIImage>()
