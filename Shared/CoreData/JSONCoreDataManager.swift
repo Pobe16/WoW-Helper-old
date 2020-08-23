@@ -76,7 +76,7 @@ struct JSONCoreDataManager {
             if creationDate.timeIntervalSinceNow < interval {
                 return nil
             } else {
-                print("fetching \(name)")
+//                print("fetching \(name)")
                 return data
             }
             
@@ -95,7 +95,7 @@ struct JSONCoreDataManager {
             current.creationDate = Date()
             
             do {
-                print("updating")
+//                print("updating")
                 try context.save()
                 
             } catch let updateError {
@@ -124,7 +124,7 @@ struct JSONCoreDataManager {
     
     func saveJSON(_ data: Data, withURL url: URL) {
         let stringFromURL = url.absoluteString.split(separator: "?")[0]
-        print("saving data for " + String(stringFromURL))
+//        print("saving data for " + String(stringFromURL))
         self.updateJSONData(name: String(stringFromURL), data: data)
     }
     
