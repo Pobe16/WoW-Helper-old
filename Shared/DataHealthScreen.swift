@@ -10,11 +10,11 @@ import SwiftUI
 struct DataHealthScreen: View {
     @EnvironmentObject var authorization: Authentication
     @EnvironmentObject var gameData: GameData
-    @State var gameDataCreationDate: String = ""
+    @State var gameDataCreationDate: String = "Loading"
 //    @State var expansionInfo: [String:ExpansionJournal] = [:]
     
     var body: some View {
-        VStack {
+        ScrollView(Axis.Set.vertical, showsIndicators: true) {
             Text("Expansions:")
                 
             VStack{
@@ -42,19 +42,21 @@ struct DataHealthScreen: View {
                 Spacer()
                 
                 Text("Last refreshed:")
+                    .onAppear(perform: {
+                        self.checkDataCreationDate()
+                    })
                 Text(gameDataCreationDate)
+                    
                 Button {
                     self.loadExpansionIndex()
                 } label: {
                     Text("Refresh now!")
                 }
+                Spacer()
 
             }
             
         }
-        .onAppear(perform: {
-            self.checkDataCreationDate()
-        })
         
     }
     

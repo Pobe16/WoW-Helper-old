@@ -95,11 +95,11 @@ struct JSONCoreDataManager {
             current.creationDate = Date()
             
             do {
-//                print("updating")
+                print("updating")
                 try context.save()
                 
             } catch let updateError {
-                print("Failed to update picture \(String(describing: name)): \(updateError)")
+                print("Failed to update \(String(describing: name)): \(updateError)")
             }
             
         } else {

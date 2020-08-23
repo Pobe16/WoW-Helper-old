@@ -38,6 +38,8 @@
 		C84B82FB24E5FF56006E84FA /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84B82F924E5FF56006E84FA /* UserProfile.swift */; };
 		C8665E6524F066DF0043A23C /* GameDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8665E6424F066DF0043A23C /* GameDataLoader.swift */; };
 		C8665E6624F066DF0043A23C /* GameDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8665E6424F066DF0043A23C /* GameDataLoader.swift */; };
+		C8665E6824F1DF980043A23C /* InstanceJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8665E6724F1DF980043A23C /* InstanceJournal.swift */; };
+		C8665E6924F1DF980043A23C /* InstanceJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8665E6724F1DF980043A23C /* InstanceJournal.swift */; };
 		C887120F24E4A01200C0A0ED /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C887120E24E4A01200C0A0ED /* LoginScreen.swift */; };
 		C887121024E4A01200C0A0ED /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C887120E24E4A01200C0A0ED /* LoginScreen.swift */; };
 		C88EEA9D24E9E2B800155CBC /* JSONCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EEA9C24E9E2B800155CBC /* JSONCoreDataManager.swift */; };
@@ -104,6 +106,7 @@
 		C84B82F624E5FD65006E84FA /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		C84B82F924E5FF56006E84FA /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		C8665E6424F066DF0043A23C /* GameDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDataLoader.swift; sourceTree = "<group>"; };
+		C8665E6724F1DF980043A23C /* InstanceJournal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceJournal.swift; sourceTree = "<group>"; };
 		C887120E24E4A01200C0A0ED /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		C88EEA9C24E9E2B800155CBC /* JSONCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONCoreDataManager.swift; sourceTree = "<group>"; };
 		C88EEA9F24E9EFDB00155CBC /* CharacterLoadingListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterLoadingListItem.swift; sourceTree = "<group>"; };
@@ -242,6 +245,7 @@
 				C8F942DE24EDB8DB00B6222C /* ExpansionIndex.swift */,
 				C8F942E024EDC02900B6222C /* ExpansionJournal.swift */,
 				C8F942E224EF024600B6222C /* GameData.swift */,
+				C8665E6724F1DF980043A23C /* InstanceJournal.swift */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -460,6 +464,7 @@
 				C811E7A724E05FBE0050F6CD /* AuthInfo.swift in Sources */,
 				C811E7A424E01DC30050F6CD /* APIAccessInfo.swift in Sources */,
 				C8F942DD24EDB65C00B6222C /* DataHealthScreen.swift in Sources */,
+				C8665E6824F1DF980043A23C /* InstanceJournal.swift in Sources */,
 				C8F942F424EF1D2500B6222C /* SecretOAuth.swift in Sources */,
 				C811E78B24E01B1F0050F6CD /* AuthCheckingScreen.swift in Sources */,
 				C8F942D924EDAC1600B6222C /* LogOutListItem.swift in Sources */,
@@ -490,6 +495,7 @@
 				C84B82F824E5FD65006E84FA /* MainScreen.swift in Sources */,
 				C8F942E924EF027900B6222C /* LogOutListItem.swift in Sources */,
 				C831CC4524E7307100C25F67 /* StoredCache.swift in Sources */,
+				C8665E6924F1DF980043A23C /* InstanceJournal.swift in Sources */,
 				C8F942F524EF1D2500B6222C /* SecretOAuth.swift in Sources */,
 				C811E7A824E05FBE0050F6CD /* AuthInfo.swift in Sources */,
 				C8F942EA24EF027C00B6222C /* LogOutDebugScreen.swift in Sources */,
