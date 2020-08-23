@@ -40,11 +40,17 @@
 		C8665E6624F066DF0043A23C /* GameDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8665E6424F066DF0043A23C /* GameDataLoader.swift */; };
 		C8665E6824F1DF980043A23C /* InstanceJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8665E6724F1DF980043A23C /* InstanceJournal.swift */; };
 		C8665E6924F1DF980043A23C /* InstanceJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8665E6724F1DF980043A23C /* InstanceJournal.swift */; };
+		C874D5CE24F2926A0006B210 /* ExpansionGameDataPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C874D5CD24F2926A0006B210 /* ExpansionGameDataPreview.swift */; };
+		C874D5CF24F2926A0006B210 /* ExpansionGameDataPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C874D5CD24F2926A0006B210 /* ExpansionGameDataPreview.swift */; };
 		C887120F24E4A01200C0A0ED /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C887120E24E4A01200C0A0ED /* LoginScreen.swift */; };
 		C887121024E4A01200C0A0ED /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C887120E24E4A01200C0A0ED /* LoginScreen.swift */; };
 		C88EEA9D24E9E2B800155CBC /* JSONCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EEA9C24E9E2B800155CBC /* JSONCoreDataManager.swift */; };
 		C88EEA9E24E9E2B800155CBC /* JSONCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EEA9C24E9E2B800155CBC /* JSONCoreDataManager.swift */; };
 		C88EEAA024E9EFDB00155CBC /* CharacterLoadingListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EEA9F24E9EFDB00155CBC /* CharacterLoadingListItem.swift */; };
+		C8E4D71924F2A5A500EDAC85 /* InstanceTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E4D71824F2A5A500EDAC85 /* InstanceTile.swift */; };
+		C8E4D71A24F2A5A500EDAC85 /* InstanceTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E4D71824F2A5A500EDAC85 /* InstanceTile.swift */; };
+		C8E4D71C24F2BDD200EDAC85 /* InstanceMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E4D71B24F2BDD200EDAC85 /* InstanceMedia.swift */; };
+		C8E4D71D24F2BDD200EDAC85 /* InstanceMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E4D71B24F2BDD200EDAC85 /* InstanceMedia.swift */; };
 		C8F942D924EDAC1600B6222C /* LogOutListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F942D824EDAC1600B6222C /* LogOutListItem.swift */; };
 		C8F942DB24EDB54000B6222C /* LogOutDebugScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F942DA24EDB54000B6222C /* LogOutDebugScreen.swift */; };
 		C8F942DD24EDB65C00B6222C /* DataHealthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F942DC24EDB65C00B6222C /* DataHealthScreen.swift */; };
@@ -107,9 +113,12 @@
 		C84B82F924E5FF56006E84FA /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		C8665E6424F066DF0043A23C /* GameDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDataLoader.swift; sourceTree = "<group>"; };
 		C8665E6724F1DF980043A23C /* InstanceJournal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceJournal.swift; sourceTree = "<group>"; };
+		C874D5CD24F2926A0006B210 /* ExpansionGameDataPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpansionGameDataPreview.swift; sourceTree = "<group>"; };
 		C887120E24E4A01200C0A0ED /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		C88EEA9C24E9E2B800155CBC /* JSONCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONCoreDataManager.swift; sourceTree = "<group>"; };
 		C88EEA9F24E9EFDB00155CBC /* CharacterLoadingListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterLoadingListItem.swift; sourceTree = "<group>"; };
+		C8E4D71824F2A5A500EDAC85 /* InstanceTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceTile.swift; sourceTree = "<group>"; };
+		C8E4D71B24F2BDD200EDAC85 /* InstanceMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceMedia.swift; sourceTree = "<group>"; };
 		C8F942D824EDAC1600B6222C /* LogOutListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutListItem.swift; sourceTree = "<group>"; };
 		C8F942DA24EDB54000B6222C /* LogOutDebugScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutDebugScreen.swift; sourceTree = "<group>"; };
 		C8F942DC24EDB65C00B6222C /* DataHealthScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHealthScreen.swift; sourceTree = "<group>"; };
@@ -178,6 +187,8 @@
 				C811E76224E01B1F0050F6CD /* Assets.xcassets */,
 				C84B82F624E5FD65006E84FA /* MainScreen.swift */,
 				C8F942DC24EDB65C00B6222C /* DataHealthScreen.swift */,
+				C874D5CD24F2926A0006B210 /* ExpansionGameDataPreview.swift */,
+				C8E4D71824F2A5A500EDAC85 /* InstanceTile.swift */,
 				C8665E6424F066DF0043A23C /* GameDataLoader.swift */,
 			);
 			path = Shared;
@@ -246,6 +257,7 @@
 				C8F942E024EDC02900B6222C /* ExpansionJournal.swift */,
 				C8F942E224EF024600B6222C /* GameData.swift */,
 				C8665E6724F1DF980043A23C /* InstanceJournal.swift */,
+				C8E4D71B24F2BDD200EDAC85 /* InstanceMedia.swift */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -458,6 +470,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C8F942DF24EDB8DB00B6222C /* ExpansionIndex.swift in Sources */,
+				C874D5CE24F2926A0006B210 /* ExpansionGameDataPreview.swift in Sources */,
 				C831CC4724E7355500C25F67 /* CharacterMedia.swift in Sources */,
 				C84B82F724E5FD65006E84FA /* MainScreen.swift in Sources */,
 				C831CC4424E7307100C25F67 /* StoredCache.swift in Sources */,
@@ -468,6 +481,7 @@
 				C8F942F424EF1D2500B6222C /* SecretOAuth.swift in Sources */,
 				C811E78B24E01B1F0050F6CD /* AuthCheckingScreen.swift in Sources */,
 				C8F942D924EDAC1600B6222C /* LogOutListItem.swift in Sources */,
+				C8E4D71924F2A5A500EDAC85 /* InstanceTile.swift in Sources */,
 				C8F942E124EDC02900B6222C /* ExpansionJournal.swift in Sources */,
 				C811E78924E01B1F0050F6CD /* WoWWidgetApp.swift in Sources */,
 				C831CC3A24E7296A00C25F67 /* CharacterListItem.swift in Sources */,
@@ -478,6 +492,7 @@
 				C8665E6524F066DF0043A23C /* GameDataLoader.swift in Sources */,
 				C8F942DB24EDB54000B6222C /* LogOutDebugScreen.swift in Sources */,
 				C88EEAA024E9EFDB00155CBC /* CharacterLoadingListItem.swift in Sources */,
+				C8E4D71C24F2BDD200EDAC85 /* InstanceMedia.swift in Sources */,
 				C831CC5324E89A0200C25F67 /* CoreDataImagesManager.swift in Sources */,
 				C88EEA9D24E9E2B800155CBC /* JSONCoreDataManager.swift in Sources */,
 				C887120F24E4A01200C0A0ED /* LoginScreen.swift in Sources */,
@@ -489,6 +504,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C831CC4824E7355500C25F67 /* CharacterMedia.swift in Sources */,
+				C874D5CF24F2926A0006B210 /* ExpansionGameDataPreview.swift in Sources */,
 				C8F942E524EF025600B6222C /* ExpansionJournal.swift in Sources */,
 				C8F942E424EF025600B6222C /* GameData.swift in Sources */,
 				C8F942EB24EF028100B6222C /* DataHealthScreen.swift in Sources */,
@@ -499,6 +515,7 @@
 				C8F942F524EF1D2500B6222C /* SecretOAuth.swift in Sources */,
 				C811E7A824E05FBE0050F6CD /* AuthInfo.swift in Sources */,
 				C8F942EA24EF027C00B6222C /* LogOutDebugScreen.swift in Sources */,
+				C8E4D71A24F2A5A500EDAC85 /* InstanceTile.swift in Sources */,
 				C8F942E624EF025600B6222C /* ExpansionIndex.swift in Sources */,
 				C811E7A524E01DC30050F6CD /* APIAccessInfo.swift in Sources */,
 				C811E78C24E01B1F0050F6CD /* AuthCheckingScreen.swift in Sources */,
@@ -509,6 +526,7 @@
 				C8665E6624F066DF0043A23C /* GameDataLoader.swift in Sources */,
 				C831CC5024E8974100C25F67 /* MyData.xcdatamodeld in Sources */,
 				C8F942E724EF027300B6222C /* CharacterListItem.swift in Sources */,
+				C8E4D71D24F2BDD200EDAC85 /* InstanceMedia.swift in Sources */,
 				C831CC5424E89A0200C25F67 /* CoreDataImagesManager.swift in Sources */,
 				C88EEA9E24E9E2B800155CBC /* JSONCoreDataManager.swift in Sources */,
 				C887121024E4A01200C0A0ED /* LoginScreen.swift in Sources */,
