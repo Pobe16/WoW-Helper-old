@@ -10,11 +10,18 @@ import SwiftUI
 
 class GameData: ObservableObject {
     
-    @Published var expansionsStubs: [ExpansionIndex]         = []
+    @Published var expansionsStubs: [ExpansionIndex]        = []
     @Published var expansions: [ExpansionJournal]           = []
-    @Published var raids: [Any]                             = []
-    @Published var dungeons: [Any]                          = []
+    
+    @Published var raidsStubs: [InstanceIndex]              = []
+    @Published var raids: [InstanceJournal]                 = []
+    
+    @Published var dungeonsStubs: [InstanceIndex]           = []
+    @Published var dungeons: [InstanceJournal]              = []
+    
+    @Published var encountersStubs: [EncounterIndex]        = []
     @Published var encounters: [Any]                        = []
+    
     
     @Published var numberOfExpansions: Int                  = 0
     @Published var loadedExpansions: Int                    = 0
