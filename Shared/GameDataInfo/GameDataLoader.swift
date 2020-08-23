@@ -21,11 +21,21 @@ struct GameDataLoader: View {
                 .frame(width: 63, height: 63)
                 .cornerRadius(15, antialiased: true)
             Text("Data Health")
-                .onAppear {
+            if !gameData.loadingAllowed{
+                Spacer()
+                ProgressView(
+                    value:  Double(gameData.downloadedItems),
+                    total: Double(max(gameData.estimatedItemsToDownload, gameData.actualItemsToDownload))
+                )
+//                .progressViewStyle(DefaultProgressViewStyle())
+//                .progressViewStyle(CircularProgressViewStyle())
+            }
+            
+        }
+        .onAppear {
 //                    debug
 //                    deleteAllJSONData()
                     loadExpansionIndex()
-                }
         }
     }
     
@@ -39,7 +49,9 @@ struct GameDataLoader: View {
     func loadExpansionIndex() {
         
         if self.gameData.expansions.count == 0 && self.gameData.loadingAllowed {
-            self.gameData.loadingAllowed = false
+            withAnimation {
+                self.gameData.loadingAllowed = false
+            }
             let requestUrlAPIHost = UserDefaults.standard.object(forKey: "APIRegionHost") as? String ?? APIRegionHostList.Europe
             let requestUrlAPIFragment = "/data/wow/journal-expansion/index"
             
@@ -90,7 +102,9 @@ struct GameDataLoader: View {
             }
             DispatchQueue.main.async {
                 self.gameData.expansionsStubs = dataResponse.tiers
+                self.gameData.actualItemsToDownload += dataResponse.tiers.count
                 self.loadExpansionJournal()
+                
             }
             
         } catch {
@@ -112,6 +126,8 @@ struct GameDataLoader: View {
                 DispatchQueue.main.async {
                     withAnimation {
                         self.gameData.expansions.sort()
+                        self.gameData.actualItemsToDownload += self.gameData.raidsStubs.count
+                        self.gameData.actualItemsToDownload += self.gameData.dungeonsStubs.count
                     }
                 }
                 
@@ -185,11 +201,12 @@ struct GameDataLoader: View {
                 
                 withAnimation {
                     self.gameData.expansions.append(dataResponse)
+                    self.gameData.downloadedItems += 1
                 }
                 
                 self.gameData.raidsStubs.append(contentsOf: dataResponse.raids ?? [])
                 self.gameData.dungeonsStubs.append(contentsOf: dataResponse.dungeons ?? [])
-                self.gameData.encountersStubs.append(contentsOf: dataResponse.worldBosses ?? [])
+//                self.gameData.encountersStubs.append(contentsOf: dataResponse.worldBosses ?? [])
                 
                 if self.gameData.expansionsStubs.count > 0 {
                     self.gameData.expansionsStubs.removeFirst()
@@ -298,6 +315,7 @@ struct GameDataLoader: View {
             DispatchQueue.main.async {
                 withAnimation {
                     self.gameData.raids.append(dataResponse)
+                    self.gameData.downloadedItems += 1
                 }
             }
             
@@ -329,9 +347,9 @@ struct GameDataLoader: View {
                 DispatchQueue.main.async {
                     withAnimation {
                         self.gameData.dungeons = noDuplicates.sorted()
+                        self.gameData.loadingAllowed = true
                     }
                 }
-                self.gameData.loadingAllowed = true
                 print("loaded \(self.gameData.dungeons.count) dungeons")
                 return
             }
@@ -399,6 +417,7 @@ struct GameDataLoader: View {
                 
                 withAnimation {
                     self.gameData.dungeons.append(dataResponse)
+                    self.gameData.downloadedItems += 1
                 }
                 
             }

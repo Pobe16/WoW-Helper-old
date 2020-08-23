@@ -38,12 +38,22 @@ struct DataHealthScreen: View {
         })
         .navigationBarItems(
             trailing:
-                Button {
-                    self.deleteDataBeforeUpdating()
-                } label: {
-                    Text(self.gameData.loadingAllowed ? "Refresh!" : "Loading…")
+                HStack{
+                    if gameData.loadingAllowed {
+                        Button {
+                            self.deleteDataBeforeUpdating()
+                        } label: {
+                            Text("Refresh!")
+                        }
+                    } else {
+                        ProgressView(
+                            value: Double(gameData.downloadedItems),
+                            total: Double(max(gameData.estimatedItemsToDownload, gameData.actualItemsToDownload))
+                            
+                        )
+                        .frame(width: 100)
+                    }
                 }
-                .disabled(!self.gameData.loadingAllowed)
         )
         
     }
@@ -68,13 +78,15 @@ struct DataHealthScreen: View {
             self.gameData.expansionsStubs.removeAll()
             self.gameData.raidsStubs.removeAll()
             self.gameData.dungeonsStubs.removeAll()
-            self.gameData.encountersStubs.removeAll()
+            self.gameData.downloadedItems = 1
+            self.gameData.actualItemsToDownload = 0
+//            self.gameData.encountersStubs.removeAll()
             
             withAnimation {
                 self.gameData.expansions.removeAll()
                 self.gameData.raids.removeAll()
                 self.gameData.dungeons.removeAll()
-                self.gameData.encounters.removeAll()
+//                self.gameData.encounters.removeAll()
                 
             }
             loadExpansionIndex()
@@ -83,7 +95,9 @@ struct DataHealthScreen: View {
     
     func loadExpansionIndex() {
         if self.gameData.expansions.count == 0 && self.gameData.loadingAllowed {
-            self.gameData.loadingAllowed = false
+            withAnimation {
+                self.gameData.loadingAllowed = false
+            }
             let requestUrlAPIHost = UserDefaults.standard.object(forKey: "APIRegionHost") as? String ?? APIRegionHostList.Europe
             let requestUrlAPIFragment = "/data/wow/journal-expansion/index"
             
@@ -122,13 +136,16 @@ struct DataHealthScreen: View {
         
         do {
             let dataResponse = try decoder.decode(ExpansionTop.self, from: data)
+            print(dataResponse.tiers.count)
             
             if let url = url {
                 JSONCoreDataManager.shared.saveJSON(data, withURL: url)
             }
             DispatchQueue.main.async {
                 self.gameData.expansionsStubs = dataResponse.tiers
+                self.gameData.actualItemsToDownload += dataResponse.tiers.count
                 self.loadExpansionJournal()
+                
             }
             
         } catch {
@@ -150,6 +167,8 @@ struct DataHealthScreen: View {
                 DispatchQueue.main.async {
                     withAnimation {
                         self.gameData.expansions.sort()
+                        self.gameData.actualItemsToDownload += self.gameData.raidsStubs.count
+                        self.gameData.actualItemsToDownload += self.gameData.dungeonsStubs.count
                     }
                 }
                 
@@ -216,11 +235,12 @@ struct DataHealthScreen: View {
                 
                 withAnimation {
                     self.gameData.expansions.append(dataResponse)
+                    self.gameData.downloadedItems += 1
                 }
                 
                 self.gameData.raidsStubs.append(contentsOf: dataResponse.raids ?? [])
                 self.gameData.dungeonsStubs.append(contentsOf: dataResponse.dungeons ?? [])
-                self.gameData.encountersStubs.append(contentsOf: dataResponse.worldBosses ?? [])
+//                self.gameData.encountersStubs.append(contentsOf: dataResponse.worldBosses ?? [])
                 
                 if self.gameData.expansionsStubs.count > 0 {
                     self.gameData.expansionsStubs.removeFirst()
@@ -322,6 +342,7 @@ struct DataHealthScreen: View {
             DispatchQueue.main.async {
                 withAnimation {
                     self.gameData.raids.append(dataResponse)
+                    self.gameData.downloadedItems += 1
                 }
             }
             
@@ -353,11 +374,10 @@ struct DataHealthScreen: View {
                 DispatchQueue.main.async {
                     withAnimation {
                         self.gameData.dungeons = noDuplicates.sorted()
+                        self.gameData.loadingAllowed = true
                     }
                 }
-                self.gameData.loadingAllowed = true
                 print("loaded \(self.gameData.dungeons.count) dungeons")
-                self.checkDataCreationDate()
                 return
             }
             timeRetries += 1
@@ -417,6 +437,7 @@ struct DataHealthScreen: View {
                 
                 withAnimation {
                     self.gameData.dungeons.append(dataResponse)
+                    self.gameData.downloadedItems += 1
                 }
                 
             }
@@ -434,4 +455,3 @@ struct DataHealthScreen: View {
     }
     
 }
-

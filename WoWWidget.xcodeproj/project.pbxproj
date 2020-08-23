@@ -184,12 +184,9 @@
 				C887121424E4B75700C0A0ED /* Authorization */,
 				C811E7A924E0A3340050F6CD /* DataModels */,
 				C8F942D724EDABFC00B6222C /* NavigationView */,
+				C8E4D71E24F31DFA00EDAC85 /* GameDataInfo */,
 				C811E76224E01B1F0050F6CD /* Assets.xcassets */,
 				C84B82F624E5FD65006E84FA /* MainScreen.swift */,
-				C8F942DC24EDB65C00B6222C /* DataHealthScreen.swift */,
-				C874D5CD24F2926A0006B210 /* ExpansionGameDataPreview.swift */,
-				C8E4D71824F2A5A500EDAC85 /* InstanceTile.swift */,
-				C8665E6424F066DF0043A23C /* GameDataLoader.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -290,6 +287,17 @@
 				C8F942F324EF1D2500B6222C /* SecretOAuth.swift */,
 			);
 			path = Authorization;
+			sourceTree = "<group>";
+		};
+		C8E4D71E24F31DFA00EDAC85 /* GameDataInfo */ = {
+			isa = PBXGroup;
+			children = (
+				C8665E6424F066DF0043A23C /* GameDataLoader.swift */,
+				C8E4D71824F2A5A500EDAC85 /* InstanceTile.swift */,
+				C874D5CD24F2926A0006B210 /* ExpansionGameDataPreview.swift */,
+				C8F942DC24EDB65C00B6222C /* DataHealthScreen.swift */,
+			);
+			path = GameDataInfo;
 			sourceTree = "<group>";
 		};
 		C8F942D724EDABFC00B6222C /* NavigationView */ = {

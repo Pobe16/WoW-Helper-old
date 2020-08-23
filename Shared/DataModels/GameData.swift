@@ -20,16 +20,11 @@ class GameData: ObservableObject {
     @Published var dungeonsStubs: [InstanceIndex]           = []
     @Published var dungeons: [InstanceJournal]              = []
     
-    @Published var encountersStubs: [EncounterIndex]        = []
-    @Published var encounters: [Any]                        = []
+//    @Published var encountersStubs: [EncounterIndex]        = []
+//    @Published var encounters: [Any]                        = []
     
+    let estimatedItemsToDownload: Int                       = 150
+    @Published var actualItemsToDownload: Int               = 0
     
-//    @Published var numberOfExpansions: Int                  = 0
-//    @Published var loadedExpansions: Int                    = 0
-//    @Published var numberOfRaids: Int                       = 0
-//    @Published var loadedRaids: Int                         = 0
-//    @Published var numberOfDungeons: Int                    = 0
-//    @Published var loadedDungeons: Int                      = 0
-//    @Published var numberOfEncounters: Int                  = 0
-//    @Published var loadedEncounters: Int                    = 0
+    @Published var downloadedItems: Int                     = 1
 }
