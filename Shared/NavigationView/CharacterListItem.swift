@@ -11,18 +11,30 @@ struct CharacterListItem: View {
     @EnvironmentObject var authorization: Authentication
     @State var characterMedia: CharacterMedia?
     let character: CharacterInProfile
-    #if os(iOS)
-    @State var characterImage = UIImage(systemName: "arrow.counterclockwise.circle")!
-    #else
-    @State var characterImage = NSImage("arrow.counterclockwise.circle")!
-    #endif
+    @State var characterImageData: Data? = nil
     var body: some View {
         HStack{
-            Image(uiImage: characterImage)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 63, height: 63)
-                .cornerRadius(15, antialiased: true)
+            if characterImageData == nil {
+                Image(systemName: "arrow.counterclockwise.circle")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 63, height: 63)
+                    .cornerRadius(15, antialiased: true)
+            } else {
+                #if os(iOS)
+                Image(uiImage: UIImage(data: characterImageData!)!)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 63, height: 63)
+                    .cornerRadius(15, antialiased: true)
+                #else
+                Image(nsImage: NSImage(data: characterImageData!)!)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 63, height: 63)
+                    .cornerRadius(15, antialiased: true)
+                #endif
+            }
             Text("\(character.name) lvl: \(character.level)")
             
         }.onAppear(perform: {
@@ -114,28 +126,25 @@ struct CharacterListItem: View {
             return
         }
         
-        guard let storedImage = CoreDataImagesManager.shared.fetchImage(withName: characterMedia.avatarUrl, maximumAgeInDays: 10),
-              let data = storedImage.data,
-              let image = UIImage(data: data) else {
+        guard let storedImage = CoreDataImagesManager.shared.fetchImage(withName: characterMedia.avatarUrl, maximumAgeInDays: 10) else {
             
             let dataTask = URLSession.shared.dataTask(with: avatarURL) { data, response, error in
                 guard error == nil,
                       let response = response as? HTTPURLResponse,
                       response.statusCode == 200,
-                      let data = data,
-                      let image = UIImage(data: data) else {
+                      let data = data else {
                     return
                     
                 }
                 
                 CoreDataImagesManager.shared.updateImage(name: characterMedia.avatarUrl, data: data)
-                characterImage = image
+                characterImageData = data
             }
             dataTask.resume()
             return
         }
         
-        characterImage = image
+        characterImageData = storedImage.data
     }
 }
 

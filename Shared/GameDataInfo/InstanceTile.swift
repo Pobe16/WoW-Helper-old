@@ -26,10 +26,17 @@ struct InstanceTile: View {
                     .frame(width: 200, height: 150)
                     .cornerRadius(15, antialiased: true)
             } else {
+                #if os(iOS)
                 Image(uiImage: UIImage(data: imageData!)!)
                     .resizable()
                     .scaledToFill()
                     .frame(width: 300, height: 150)
+                #elseif os(macOS)
+                Image(nsImage: NSImage(data: imageData!)!)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 300, height: 150)
+                #endif
             }
             VStack(alignment: .leading){
                 Spacer()
@@ -37,7 +44,7 @@ struct InstanceTile: View {
                 HStack{
                     Spacer()
                     Text("Bosses: \(instance?.encounters.count ?? 0)")
-                    .padding(4)
+                        .padding(.vertical, 4)
                     Spacer()
                 }
                 .background(Color.gray.opacity(colorScheme == .dark ? 0.4 : 0.8))
@@ -46,8 +53,9 @@ struct InstanceTile: View {
                 HStack{
                     Spacer()
                     Text(instance?.name ?? "Loading…")
+                        .minimumScaleFactor(0.5)
                         .lineLimit(1)
-                        .padding(4)
+                        .padding(.vertical, 4)
                     Spacer()
                 }
                 .background(Color.gray.opacity(colorScheme == .dark ? 0.4 : 0.8))
@@ -55,6 +63,7 @@ struct InstanceTile: View {
                     
                 
             }
+            .frame(width: imageData == nil ? 200 : 300, height: 150)
         }
         .cornerRadius(15, antialiased: true)
         .onAppear(perform: {
@@ -176,7 +185,7 @@ struct InstanceTile: View {
 struct InstanceTile_Previews: PreviewProvider {
     static var previews: some View {
         InstanceTile(category: "dungeon")
-            .previewLayout(.fixed(width: 220, height: 180))
+            .previewLayout(.fixed(width: 250, height: 200))
             .padding()
             .previewDisplayName("One Tile")
     }

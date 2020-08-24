@@ -9,20 +9,28 @@ import SwiftUI
 
 struct MainScreen: View {
     @Binding var loggedIn: Bool
+    @EnvironmentObject var gameData: GameData
     @EnvironmentObject var authorization: Authentication
     @State var characters: [CharacterInProfile] = []
     @State var selection: String? = ""
+    
+    #if os(iOS)
+    var listStyle = InsetGroupedListStyle()
+    #elseif os(macOS)
+    var listStyle =  DefaultListStyle()
+    #endif
     
     var body: some View {
         NavigationView {
             List() {
                 
-                Section(header: Text("Characters")){
+                Section(header: Text(gameData.loadingAllowed ? "Characters" : "Loading game data")){
                     if characters.count > 0 {
                         ForEach(characters) { character in
                             NavigationLink(destination: Text("\(character.name) \(character.realm.name)"), tag: "\(character.name)-\(character.realm.slug)", selection: self.$selection) {
                                 CharacterListItem(character: character)
                             }
+                            .disabled(!gameData.loadingAllowed)
                         }
                     } else {
                         CharacterLoadingListItem()
@@ -40,8 +48,14 @@ struct MainScreen: View {
                 }
                 
             }
-            .listStyle(InsetGroupedListStyle())
-            .navigationBarTitle("WoWWidget", displayMode: .large)
+            .listStyle(listStyle)
+            .toolbar(content: {
+                ToolbarItem(placement: .principal){
+                    Text("WoWWidget")
+                    
+                }
+            })
+//            .navigationBarTitle("WoWWidget", displayMode: .large)
             
             Text("Hello World!")
         }.onAppear {

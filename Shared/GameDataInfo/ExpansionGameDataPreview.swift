@@ -21,7 +21,7 @@ struct ExpansionGameDataPreview: View {
                 .font(.title)
                 .padding([.leading, .top])
             ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack{
+                HStack{
                     if self.gameData.raids.filter{$0.expansion.id == expansion.id }.count > 0 {
                         ForEach(self.gameData.raids.filter{ $0.expansion.id == expansion.id }){ raid in
                             InstanceTile(instance: raid, category: "raid")
@@ -37,7 +37,7 @@ struct ExpansionGameDataPreview: View {
                 .font(.title)
                 .padding(.leading)
             ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack{
+                HStack{
                     if self.gameData.dungeons.filter{$0.expansion.id == expansion.id }.count > 0 {
                         ForEach(self.gameData.dungeons.filter{ $0.expansion.id == expansion.id }){ dungeon in
                             InstanceTile(instance: dungeon, category: "dungeon")

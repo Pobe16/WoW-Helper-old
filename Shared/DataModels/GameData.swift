@@ -9,6 +9,8 @@ import Foundation
 import SwiftUI
 
 class GameData: ObservableObject {
+    @EnvironmentObject var authorization: Authentication
+    
     @Published var loadingAllowed: Bool                     = true
     
     @Published var expansionsStubs: [ExpansionIndex]        = []
