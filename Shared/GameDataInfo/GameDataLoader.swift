@@ -104,8 +104,8 @@ struct GameDataLoader: View {
                 self.gameData.expansionsStubs = dataResponse.tiers
                 self.gameData.actualItemsToDownload += dataResponse.tiers.count
                 self.loadExpansionJournal()
-                
             }
+            
             
         } catch {
             print(error)
@@ -206,7 +206,6 @@ struct GameDataLoader: View {
                 
                 self.gameData.raidsStubs.append(contentsOf: dataResponse.raids ?? [])
                 self.gameData.dungeonsStubs.append(contentsOf: dataResponse.dungeons ?? [])
-//                self.gameData.encountersStubs.append(contentsOf: dataResponse.worldBosses ?? [])
                 
                 if self.gameData.expansionsStubs.count > 0 {
                     self.gameData.expansionsStubs.removeFirst()
@@ -235,9 +234,8 @@ struct GameDataLoader: View {
                     withAnimation {
                         self.gameData.raids.sort()
                     }
+                    loadDungeonsInfo()
                 }
-                
-                loadDungeonsInfo()
                 return
             }
             timeRetries += 1
@@ -272,8 +270,9 @@ struct GameDataLoader: View {
             if let data = data {
                 timeRetries = 0
                 connectionRetries = 0
-                
-                self.decodeRaidData(data, fromURL: fullRequestURL)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    self.decodeRaidData(data, fromURL: fullRequestURL)
+                }
                 
             }
             if let error = error {
@@ -299,12 +298,10 @@ struct GameDataLoader: View {
 //          For some reason Blizz have put a Greater Legion Invasion here as a raid…
 //          I'm not allowing it.
             if dataResponse.category.type == "EVENT" {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    if self.gameData.raidsStubs.count > 0{
-                        self.gameData.raidsStubs.removeFirst()
-                    }
-                    loadRaidsInfo()
+                if self.gameData.raidsStubs.count > 0{
+                    self.gameData.raidsStubs.removeFirst()
                 }
+                loadRaidsInfo()
                 return
             }
             
@@ -317,10 +314,7 @@ struct GameDataLoader: View {
                     self.gameData.raids.append(dataResponse)
                     self.gameData.downloadedItems += 1
                 }
-            }
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                if self.gameData.raidsStubs.count > 0{
+                if self.gameData.raidsStubs.count > 0 {
                     self.gameData.raidsStubs.removeFirst()
                 }
                 loadRaidsInfo()
@@ -365,6 +359,7 @@ struct GameDataLoader: View {
         let strippedAPIUrl = String(requestUrlAPIHost.split(separator: "?")[0])
         
         if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: strippedAPIUrl, maximumAgeInDays: 90) {
+                
             self.decodeDungeonData(savedData.data!)
             return
         }
@@ -386,7 +381,9 @@ struct GameDataLoader: View {
                 timeRetries = 0
                 connectionRetries = 0
                 
-                self.decodeDungeonData(data, fromURL: fullRequestURL)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    self.decodeDungeonData(data, fromURL: fullRequestURL)
+                }
                 
             }
             if let error = error {
@@ -420,9 +417,6 @@ struct GameDataLoader: View {
                     self.gameData.downloadedItems += 1
                 }
                 
-            }
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 if self.gameData.dungeonsStubs.count > 0 {
                     self.gameData.dungeonsStubs.removeFirst()
                 }

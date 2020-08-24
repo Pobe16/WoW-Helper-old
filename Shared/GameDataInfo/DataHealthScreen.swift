@@ -30,31 +30,30 @@ struct DataHealthScreen: View {
             }
             
         }
-        
-            
-        .navigationTitle("Expansions")
         .onAppear(perform: {
             self.checkDataCreationDate()
         })
-        .navigationBarItems(
-            trailing:
-                HStack{
-                    if gameData.loadingAllowed {
-                        Button {
-                            self.deleteDataBeforeUpdating()
-                        } label: {
-                            Text("Refresh!")
-                        }
-                    } else {
-                        ProgressView(
-                            value: Double(gameData.downloadedItems),
-                            total: Double(max(gameData.estimatedItemsToDownload, gameData.actualItemsToDownload))
-                            
-                        )
-                        .frame(width: 100)
+        .toolbar{
+            ToolbarItem(placement: .principal) {
+                Text("Expansions")
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                if gameData.loadingAllowed {
+                    Button {
+                        self.deleteDataBeforeUpdating()
+                    } label: {
+                        Text("Refresh!")
                     }
+                } else {
+                    ProgressView(
+                        value: Double(gameData.downloadedItems),
+                        total: Double(max(gameData.estimatedItemsToDownload, gameData.actualItemsToDownload))
+                        
+                    )
+                    .frame(width: 80)
                 }
-        )
+            }
+        }
         
     }
     
@@ -80,13 +79,11 @@ struct DataHealthScreen: View {
             self.gameData.dungeonsStubs.removeAll()
             self.gameData.downloadedItems = 1
             self.gameData.actualItemsToDownload = 0
-//            self.gameData.encountersStubs.removeAll()
             
             withAnimation {
                 self.gameData.expansions.removeAll()
                 self.gameData.raids.removeAll()
                 self.gameData.dungeons.removeAll()
-//                self.gameData.encounters.removeAll()
                 
             }
             loadExpansionIndex()
@@ -94,6 +91,7 @@ struct DataHealthScreen: View {
     }
     
     func loadExpansionIndex() {
+        
         if self.gameData.expansions.count == 0 && self.gameData.loadingAllowed {
             withAnimation {
                 self.gameData.loadingAllowed = false
@@ -145,8 +143,8 @@ struct DataHealthScreen: View {
                 self.gameData.expansionsStubs = dataResponse.tiers
                 self.gameData.actualItemsToDownload += dataResponse.tiers.count
                 self.loadExpansionJournal()
-                
             }
+            
             
         } catch {
             print(error)
@@ -240,7 +238,6 @@ struct DataHealthScreen: View {
                 
                 self.gameData.raidsStubs.append(contentsOf: dataResponse.raids ?? [])
                 self.gameData.dungeonsStubs.append(contentsOf: dataResponse.dungeons ?? [])
-//                self.gameData.encountersStubs.append(contentsOf: dataResponse.worldBosses ?? [])
                 
                 if self.gameData.expansionsStubs.count > 0 {
                     self.gameData.expansionsStubs.removeFirst()
@@ -269,9 +266,8 @@ struct DataHealthScreen: View {
                     withAnimation {
                         self.gameData.raids.sort()
                     }
+                    loadDungeonsInfo()
                 }
-                
-                loadDungeonsInfo()
                 return
             }
             timeRetries += 1
@@ -299,8 +295,9 @@ struct DataHealthScreen: View {
             if let data = data {
                 timeRetries = 0
                 connectionRetries = 0
-                
-                self.decodeRaidData(data, fromURL: fullRequestURL)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    self.decodeRaidData(data, fromURL: fullRequestURL)
+                }
                 
             }
             if let error = error {
@@ -326,12 +323,10 @@ struct DataHealthScreen: View {
 //          For some reason Blizz have put a Greater Legion Invasion here as a raid…
 //          I'm not allowing it.
             if dataResponse.category.type == "EVENT" {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    if self.gameData.raidsStubs.count > 0{
-                        self.gameData.raidsStubs.removeFirst()
-                    }
-                    loadRaidsInfo()
+                if self.gameData.raidsStubs.count > 0{
+                    self.gameData.raidsStubs.removeFirst()
                 }
+                loadRaidsInfo()
                 return
             }
             
@@ -344,10 +339,7 @@ struct DataHealthScreen: View {
                     self.gameData.raids.append(dataResponse)
                     self.gameData.downloadedItems += 1
                 }
-            }
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                if self.gameData.raidsStubs.count > 0{
+                if self.gameData.raidsStubs.count > 0 {
                     self.gameData.raidsStubs.removeFirst()
                 }
                 loadRaidsInfo()
@@ -389,6 +381,8 @@ struct DataHealthScreen: View {
         
         let requestUrlAPIHost = "\(currentDungeonToLoad.key.href)"
         
+        let strippedAPIUrl = String(requestUrlAPIHost.split(separator: "?")[0])
+        
         let requestLocale = UserDefaults.standard.object(forKey: "localeCode") as? String ?? EuropeanLocales.BritishEnglish
         let accessToken = authorization.oauth2?.accessToken ?? ""
         
@@ -406,7 +400,9 @@ struct DataHealthScreen: View {
                 timeRetries = 0
                 connectionRetries = 0
                 
-                self.decodeDungeonData(data, fromURL: fullRequestURL)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    self.decodeDungeonData(data, fromURL: fullRequestURL)
+                }
                 
             }
             if let error = error {
@@ -440,9 +436,6 @@ struct DataHealthScreen: View {
                     self.gameData.downloadedItems += 1
                 }
                 
-            }
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 if self.gameData.dungeonsStubs.count > 0 {
                     self.gameData.dungeonsStubs.removeFirst()
                 }
