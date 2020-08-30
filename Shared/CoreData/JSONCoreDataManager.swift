@@ -58,7 +58,7 @@ struct JSONCoreDataManager {
         return nil
     }
     
-    func fetchJSONData(withName name: String, maximumAgeInDays age: Int = 30) -> JSONData? {
+    func fetchJSONData(withName name: String, maximumAgeInDays age: Double = 30) -> JSONData? {
         let context = persistentContainer.viewContext
         
         let fetchRequest = NSFetchRequest<JSONData>(entityName: "JSONData")

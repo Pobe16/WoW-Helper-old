@@ -63,8 +63,9 @@ struct DataHealthScreen: View {
         
         if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: requestUrlAPIHost + requestUrlAPIFragment, maximumAgeInDays: 90) {
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
-//            dateFormatter.dateFormat = "yyyy-MM-dd"
+            dateFormatter.dateStyle = .short
+            dateFormatter.timeStyle = .none
+            dateFormatter.locale = Locale.current
             let dateString = dateFormatter.string(from: savedData.creationDate!)
             gameDataCreationDate = dateString
         } else {
