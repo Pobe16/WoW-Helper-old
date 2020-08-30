@@ -55,7 +55,6 @@ struct MainScreen: View {
                     
                 }
             })
-//            .navigationBarTitle("WoWWidget", displayMode: .large)
             
             Text("Hello World!")
         }.onAppear {
