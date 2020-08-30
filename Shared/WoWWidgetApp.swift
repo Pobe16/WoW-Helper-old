@@ -32,7 +32,6 @@ struct WoWWidgetApp: App {
         
 //        let imagesInCoreData = CoreDataImagesManager.shared.fetchImages()
 //        print(imagesInCoreData?[0].creationDate)
-        
 //        auth.oauth2?.logger = OAuth2DebugLogger(.trace)
     }
     

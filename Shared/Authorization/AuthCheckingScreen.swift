@@ -61,11 +61,21 @@ struct AuthCheckingScreen: View {
             loggedIn = false
             return
         }
+        
         guard authObject.accessToken != nil else {
-            loggedIn = false
+            #if os(iOS)
+            authorization.oauth2?.authConfig.authorizeEmbedded = true
+            authorization.oauth2?.authConfig.authorizeContext = UIApplication.shared.windows[0].rootViewController
+            #endif
+            authorization.oauth2?.authorize() { authParameters, error in
+                if authParameters != nil {
+                    loggedIn = true
+                } else {
+                    print("Authorization was canceled or went wrong: \(String(describing: error))")   // error will not be nil
+                }
+            }
             return
         }
-        loggedIn = true
     }
     
 }

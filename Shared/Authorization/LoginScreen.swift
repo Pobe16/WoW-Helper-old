@@ -158,24 +158,14 @@ struct LoginScreen: View {
         
     }
     
-    func updateAuthInfo() {
-        AuthInfo.AuthorizeUri = (UserDefaults.standard.object(forKey: "authHost") as? String ?? BattleNetAuthorizationHostList.Europe) + "/authorize"
-        AuthInfo.TokenUri = (UserDefaults.standard.object(forKey: "authHost") as? String ?? BattleNetAuthorizationHostList.Europe) + "/token"
-    }
-    
-    func updateAuthSettings(){
-        authorization.refreshSettings()
-    }
-    
     func authenticate() {
         if let accessToken = authorization.oauth2?.accessToken {
             print(accessToken)
-            return
         }
 //        authorization.oauth2?.logger = OAuth2DebugLogger(.trace)
         setLocaleForAuthorization()
-        updateAuthInfo()
-        updateAuthSettings()
+        
+        authorization.refreshSettings()
         
         #if os(iOS)
         authorization.oauth2?.authConfig.authorizeEmbedded = true

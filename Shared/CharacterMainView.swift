@@ -12,7 +12,7 @@ struct CharacterMainView: View {
     @State var viewSelection: Int = 0
     var body: some View {
         
-        ScrollView {
+        Group {
             switch viewSelection {
             case 0:
                 RaidFarmingCollection(character: character)
@@ -20,6 +20,12 @@ struct CharacterMainView: View {
                 Text("\(character.name) - \(character.realm.name) character info")
             case 2:
                 Text("Coming soon")
+                    .toolbar{
+                        ToolbarItemGroup(placement: .bottomBar) {
+                            Spacer()
+                            Text("0/0")
+                        }
+                    }
                 
             default:
                 Text("#debug")

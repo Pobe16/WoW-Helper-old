@@ -12,56 +12,54 @@ struct RaidFarmingCollection: View {
     let data = (1...10).map { CGFloat($0) }
 
     let columns = [
-        GridItem(.adaptive(minimum: 200), spacing: 20)
+        GridItem(.adaptive(minimum: 180), spacing: 30)
     ]
     
     var body: some View {
-        LazyVGrid(columns: columns, spacing: 20, pinnedViews: [.sectionHeaders]) {
-            
-            Section(header: Text("Section 1").font(.title)) {
-                ForEach(data, id: \.self) { _ in
-                    Color(
-                        UIColor(
-                            red: CGFloat.random(in: 0...1),
-                            green: CGFloat.random(in: 0...1),
-                            blue: CGFloat.random(in: 0...1),
-                            alpha: 1.0)
-                    )
-                    .frame(height: 200)
-                    .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
+        ScrollView {
+            LazyVGrid(columns: columns, spacing: 30, pinnedViews: [.sectionHeaders]) {
+                
+                Section(header:
+                            HStack{
+                                Spacer()
+                                Text("Section 1")
+                                    .font(.title)
+                                Spacer()
+                            }
+                            .padding(.vertical)
+                            .padding(.horizontal, 0)
+                            .background(Color.gray.opacity(0.7))
+                ) {
+                    ForEach(data, id: \.self) { _ in
+                        Color(
+                            UIColor(
+                                red: CGFloat.random(in: 0...1),
+                                green: CGFloat.random(in: 0...1),
+                                blue: CGFloat.random(in: 0...1),
+                                alpha: 1.0)
+                        )
+                        .frame(height: 180)
+                        .cornerRadius(30)
+                    }
                 }
             }
-            
-            Section(header: Text("Section 2").font(.title)) {
-                ForEach(11...20, id: \.self) { _ in
-                    Color(
-                        UIColor(
-                            red: CGFloat.random(in: 0...1),
-                            green: CGFloat.random(in: 0...1),
-                            blue: CGFloat.random(in: 0...1),
-                            alpha: 1.0)
-                    )
-                    .frame(height: 200)
-                    .cornerRadius(/*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/)
-                }
-            }
+            .padding()
         }
-        .padding(.horizontal)
     }
 }
 
+#if DEBUG
 struct RaidFarmingCollection_Previews: PreviewProvider {
     static var previews: some View {
-        Group{
-            ScrollView(){
-                RaidFarmingCollection(character: placeholders.characterInProfile)
-            }
-            
-            ScrollView(){
-                RaidFarmingCollection(character: placeholders.characterInProfile)
-            }
-            .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
-            .previewDisplayName("iPhone 8")
-        }
+        RaidFarmingCollection(character: placeholders.characterInProfile)
+        
+        RaidFarmingCollection(character: placeholders.characterInProfile)
+        .previewLayout(.fixed(width: 320, height: 568))
+        .previewDisplayName("iPhone SE 1st gen")
+                    
+        RaidFarmingCollection(character: placeholders.characterInProfile)
+        .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
+        .previewDisplayName("iPhone 8")
     }
 }
+#endif
