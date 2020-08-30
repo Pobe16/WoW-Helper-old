@@ -19,12 +19,6 @@ struct AuthCheckingScreen: View {
             
             if loggedIn {
                 MainScreen(loggedIn: $loggedIn)
-                
-//                Button(action: {
-//                    self.logOut()
-//                }, label: {
-//                    Text("Log me out!")
-//                })
             } else {
                 LoginScreen(loggedIn: $loggedIn)
                 
@@ -63,6 +57,7 @@ struct AuthCheckingScreen: View {
         }
         
         guard authObject.accessToken != nil else {
+            loggedIn = false
             #if os(iOS)
             authorization.oauth2?.authConfig.authorizeEmbedded = true
             authorization.oauth2?.authConfig.authorizeContext = UIApplication.shared.windows[0].rootViewController
@@ -76,6 +71,9 @@ struct AuthCheckingScreen: View {
             }
             return
         }
+        
+        loggedIn = true
+        
     }
     
 }

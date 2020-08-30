@@ -22,8 +22,8 @@ struct ExpansionGameDataPreview: View {
                 .padding([.leading, .top])
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack{
-                    if self.gameData.raids.filter{$0.expansion.id == expansion.id }.count > 0 {
-                        ForEach(self.gameData.raids.filter{ $0.expansion.id == expansion.id }){ raid in
+                    if gameData.raids.filter{$0.expansion.id == expansion.id }.count > 0 {
+                        ForEach(gameData.raids.filter{ $0.expansion.id == expansion.id }){ raid in
                             InstanceTile(instance: raid, category: "raid")
                                 .padding()
                         }
@@ -38,8 +38,8 @@ struct ExpansionGameDataPreview: View {
                 .padding(.leading)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack{
-                    if self.gameData.dungeons.filter{$0.expansion.id == expansion.id }.count > 0 {
-                        ForEach(self.gameData.dungeons.filter{ $0.expansion.id == expansion.id }){ dungeon in
+                    if gameData.dungeons.filter{$0.expansion.id == expansion.id }.count > 0 {
+                        ForEach(gameData.dungeons.filter{ $0.expansion.id == expansion.id }){ dungeon in
                             InstanceTile(instance: dungeon, category: "dungeon")
                                 .padding()
                         }

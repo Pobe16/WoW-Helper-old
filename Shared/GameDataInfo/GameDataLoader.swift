@@ -48,15 +48,15 @@ struct GameDataLoader: View {
     
     func loadExpansionIndex() {
         
-        if self.gameData.expansions.count == 0 && self.gameData.loadingAllowed {
+        if gameData.expansions.count == 0 && gameData.loadingAllowed {
             withAnimation {
-                self.gameData.loadingAllowed = false
+                gameData.loadingAllowed = false
             }
             let requestUrlAPIHost = UserDefaults.standard.object(forKey: "APIRegionHost") as? String ?? APIRegionHostList.Europe
             let requestUrlAPIFragment = "/data/wow/journal-expansion/index"
             
             if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: requestUrlAPIHost + requestUrlAPIFragment, maximumAgeInDays: 90) {
-                self.decodeExpansionIndexData(savedData.data!)
+                decodeExpansionIndexData(savedData.data!)
                 return
             }
             
@@ -77,7 +77,7 @@ struct GameDataLoader: View {
             
             let task = authorization.oauth2?.session.dataTask(with: req) { data, response, error in
                 if let data = data {
-                    self.decodeExpansionIndexData(data, fromURL: fullRequestURL)
+                    decodeExpansionIndexData(data, fromURL: fullRequestURL)
                 }
                 if let error = error {
                     // something went wrong, check the error
@@ -101,9 +101,9 @@ struct GameDataLoader: View {
                 JSONCoreDataManager.shared.saveJSON(data, withURL: url)
             }
             DispatchQueue.main.async {
-                self.gameData.expansionsStubs = dataResponse.tiers
-                self.gameData.actualItemsToDownload += dataResponse.tiers.count
-                self.loadExpansionJournal()
+                gameData.expansionsStubs = dataResponse.tiers
+                gameData.actualItemsToDownload += dataResponse.tiers.count
+                loadExpansionJournal()
             }
             
             
@@ -119,15 +119,15 @@ struct GameDataLoader: View {
             return
         }
         
-        guard let stub = self.gameData.expansionsStubs.first else {
-            if self.gameData.expansions.count > 0 {
+        guard let stub = gameData.expansionsStubs.first else {
+            if gameData.expansions.count > 0 {
                 print("finished loading expansions")
-                print("loaded \(self.gameData.expansions.count) expansions")
+                print("loaded \(gameData.expansions.count) expansions")
                 DispatchQueue.main.async {
                     withAnimation {
-                        self.gameData.expansions.sort()
-                        self.gameData.actualItemsToDownload += self.gameData.raidsStubs.count
-                        self.gameData.actualItemsToDownload += self.gameData.dungeonsStubs.count
+                        gameData.expansions.sort()
+                        gameData.actualItemsToDownload += gameData.raidsStubs.count
+                        gameData.actualItemsToDownload += gameData.dungeonsStubs.count
                     }
                 }
                 
@@ -150,7 +150,7 @@ struct GameDataLoader: View {
         let strippedAPIUrl = String(requestUrlAPIHost.split(separator: "?")[0])
         
         if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: strippedAPIUrl, maximumAgeInDays: 90) {
-            self.decodeExpansionJournalData(savedData.data!)
+            decodeExpansionJournalData(savedData.data!)
             return
         }
         
@@ -168,7 +168,7 @@ struct GameDataLoader: View {
                 timeRetries = 0
                 connectionRetries = 0
                 
-                self.decodeExpansionJournalData(data, fromURL: fullRequestURL)
+                decodeExpansionJournalData(data, fromURL: fullRequestURL)
                 
             }
             if let error = error {
@@ -200,15 +200,15 @@ struct GameDataLoader: View {
             DispatchQueue.main.async {
                 
                 withAnimation {
-                    self.gameData.expansions.append(dataResponse)
-                    self.gameData.downloadedItems += 1
+                    gameData.expansions.append(dataResponse)
+                    gameData.downloadedItems += 1
                 }
                 
-                self.gameData.raidsStubs.append(contentsOf: dataResponse.raids ?? [])
-                self.gameData.dungeonsStubs.append(contentsOf: dataResponse.dungeons ?? [])
+                gameData.raidsStubs.append(contentsOf: dataResponse.raids ?? [])
+                gameData.dungeonsStubs.append(contentsOf: dataResponse.dungeons ?? [])
                 
-                if self.gameData.expansionsStubs.count > 0 {
-                    self.gameData.expansionsStubs.removeFirst()
+                if gameData.expansionsStubs.count > 0 {
+                    gameData.expansionsStubs.removeFirst()
                 }
                 
                 loadExpansionJournal()
@@ -225,14 +225,14 @@ struct GameDataLoader: View {
             print("Failed after \(timeRetries) timer retries, and or \(connectionRetries) connection errors")
             return
         }
-        guard let currentRaidToLoad = self.gameData.raidsStubs.first else {
-            if self.gameData.raids.count > 0 {
+        guard let currentRaidToLoad = gameData.raidsStubs.first else {
+            if gameData.raids.count > 0 {
                 print("finished loading raids")
-                print("loaded \(self.gameData.raids.count) raids")
+                print("loaded \(gameData.raids.count) raids")
                 
                 DispatchQueue.main.async {
                     withAnimation {
-                        self.gameData.raids.sort()
+                        gameData.raids.sort()
                     }
                     loadDungeonsInfo()
                 }
@@ -250,7 +250,7 @@ struct GameDataLoader: View {
         let strippedAPIUrl = String(requestUrlAPIHost.split(separator: "?")[0])
         
         if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: strippedAPIUrl, maximumAgeInDays: 90) {
-            self.decodeRaidData(savedData.data!)
+            decodeRaidData(savedData.data!)
             return
         }
         
@@ -271,7 +271,7 @@ struct GameDataLoader: View {
                 timeRetries = 0
                 connectionRetries = 0
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    self.decodeRaidData(data, fromURL: fullRequestURL)
+                    decodeRaidData(data, fromURL: fullRequestURL)
                 }
                 
             }
@@ -298,8 +298,8 @@ struct GameDataLoader: View {
 //          For some reason Blizz have put a Greater Legion Invasion here as a raid…
 //          I'm not allowing it.
             if dataResponse.category.type == "EVENT" {
-                if self.gameData.raidsStubs.count > 0{
-                    self.gameData.raidsStubs.removeFirst()
+                if gameData.raidsStubs.count > 0{
+                    gameData.raidsStubs.removeFirst()
                 }
                 loadRaidsInfo()
                 return
@@ -311,11 +311,11 @@ struct GameDataLoader: View {
                 
             DispatchQueue.main.async {
                 withAnimation {
-                    self.gameData.raids.append(dataResponse)
-                    self.gameData.downloadedItems += 1
+                    gameData.raids.append(dataResponse)
+                    gameData.downloadedItems += 1
                 }
-                if self.gameData.raidsStubs.count > 0 {
-                    self.gameData.raidsStubs.removeFirst()
+                if gameData.raidsStubs.count > 0 {
+                    gameData.raidsStubs.removeFirst()
                 }
                 loadRaidsInfo()
             }
@@ -330,21 +330,21 @@ struct GameDataLoader: View {
             print("Failed after \(timeRetries) timer retries, and or \(connectionRetries) connection errors")
             return
         }
-        guard let currentDungeonToLoad = self.gameData.dungeonsStubs.first else {
-            if self.gameData.dungeons.count > 0 {
+        guard let currentDungeonToLoad = gameData.dungeonsStubs.first else {
+            if gameData.dungeons.count > 0 {
                 print("finished loading dungeons")
                 // some dungeons are doubled, as they were "refreshed" in newer expansions,
                 // but it does not reflect in their "expansion id", just in the expansion journal
                 // here I am removing duplicates, and sorting it
-                let noDuplicates = Array(Set(self.gameData.dungeons))
+                let noDuplicates = Array(Set(gameData.dungeons))
 
                 DispatchQueue.main.async {
                     withAnimation {
-                        self.gameData.dungeons = noDuplicates.sorted()
-                        self.gameData.loadingAllowed = true
+                        gameData.dungeons = noDuplicates.sorted()
+                        gameData.loadingAllowed = true
                     }
                 }
-                print("loaded \(self.gameData.dungeons.count) dungeons")
+                print("loaded \(gameData.dungeons.count) dungeons")
                 return
             }
             timeRetries += 1
@@ -360,7 +360,7 @@ struct GameDataLoader: View {
         
         if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: strippedAPIUrl, maximumAgeInDays: 90) {
                 
-            self.decodeDungeonData(savedData.data!)
+            decodeDungeonData(savedData.data!)
             return
         }
         
@@ -382,7 +382,7 @@ struct GameDataLoader: View {
                 connectionRetries = 0
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    self.decodeDungeonData(data, fromURL: fullRequestURL)
+                    decodeDungeonData(data, fromURL: fullRequestURL)
                 }
                 
             }
@@ -413,12 +413,12 @@ struct GameDataLoader: View {
             DispatchQueue.main.async {
                 
                 withAnimation {
-                    self.gameData.dungeons.append(dataResponse)
-                    self.gameData.downloadedItems += 1
+                    gameData.dungeons.append(dataResponse)
+                    gameData.downloadedItems += 1
                 }
                 
-                if self.gameData.dungeonsStubs.count > 0 {
-                    self.gameData.dungeonsStubs.removeFirst()
+                if gameData.dungeonsStubs.count > 0 {
+                    gameData.dungeonsStubs.removeFirst()
                 }
                 loadDungeonsInfo()
             }

@@ -25,7 +25,7 @@ class Authentication: ObservableObject {
     @Published var oauth2 : OAuth2CodeGrant?
     
     public func refreshSettings() {
-//        self.settings = [
+//        settings = [
 //            "client_id":                    AuthInfo.ClientID,
 //            "client_secret":                AuthInfo.ClientSecret,
 //            "authorize_uri":                AuthInfo.AuthorizeUri,
