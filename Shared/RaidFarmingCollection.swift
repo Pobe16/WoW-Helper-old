@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct RaidFarmingCollection: View {
+    @EnvironmentObject var authorization: Authentication
+    @EnvironmentObject var gameData: GameData
+    
+    @State var characterEncounters: [Any] = []
+    
     let character: CharacterInProfile
     let data = (1...10).map { CGFloat($0) }
 
@@ -45,6 +50,13 @@ struct RaidFarmingCollection: View {
             }
             .padding()
         }
+        .onAppear {
+            downloadRaidEncounters()
+        }
+    }
+    
+    func downloadRaidEncounters() {
+        
     }
 }
 

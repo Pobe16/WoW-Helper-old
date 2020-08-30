@@ -26,7 +26,7 @@ struct LoginScreen: View {
             }/*@END_MENU_TOKEN@*/)
             .pickerStyle(SegmentedPickerStyle())
             .onChange(of: region, perform: { value in
-                self.locale = 0
+                locale = 0
             })
             if region == 0 {
                 Picker(selection: $locale, label: Text("Language"), content: /*@START_MENU_TOKEN@*/{
@@ -68,7 +68,7 @@ struct LoginScreen: View {
                 .frame(height: 30)
             
             Button(action: {
-                self.authenticate()
+                authenticate()
             }, label: {
                 Text("Authorize me")
             })
@@ -97,11 +97,11 @@ struct LoginScreen: View {
         
 //        print("Region: \(region), locale: \(locale)")
         
-        switch self.region {
+        switch region {
         case 0:
             authHost = BattleNetAuthorizationHostList.NorthAmerica
             APIRegionHost = APIRegionHostList.NorthAmerica
-            switch self.locale {
+            switch locale {
             case 0:
                 localeCode = AmericanLocales.USEnglish
             case 1:
@@ -114,7 +114,7 @@ struct LoginScreen: View {
         case 1:
             authHost = BattleNetAuthorizationHostList.Europe
             APIRegionHost = APIRegionHostList.Europe
-            switch self.locale {
+            switch locale {
             case 0, -1:
                 localeCode = EuropeanLocales.BritishEnglish
             case 1:

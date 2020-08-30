@@ -13,7 +13,7 @@ struct LogOutDebugScreen: View {
     var body: some View {
         Text("You should be logged out shortly")
             .onAppear(perform: {
-                self.logOut()
+                logOut()
             })
     }
     

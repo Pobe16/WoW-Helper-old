@@ -12,7 +12,7 @@ struct LogOutListItem: View {
     @EnvironmentObject var authorization: Authentication
     var body: some View {
         Button(action: {
-            self.logOut()
+            logOut()
         }, label: {
             HStack{
                 Image("logout")
@@ -23,7 +23,7 @@ struct LogOutListItem: View {
                 Text("Log me out!")
             }
             .onTapGesture {
-                self.logOut()
+                logOut()
             }
         })
     }

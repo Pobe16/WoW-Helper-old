@@ -27,7 +27,7 @@ struct MainScreen: View {
                 Section(header: Text(gameData.loadingAllowed ? "Characters" : "Loading game data")){
                     if characters.count > 0 {
                         ForEach(characters) { character in
-                            NavigationLink(destination: CharacterMainView(character: character), tag: "\(character.name)-\(character.realm.slug)", selection: self.$selection) {
+                            NavigationLink(destination: CharacterMainView(character: character), tag: "\(character.name)-\(character.realm.slug)", selection: $selection) {
                                 CharacterListItem(character: character)
                             }
                             .disabled(!gameData.loadingAllowed)
@@ -58,7 +58,7 @@ struct MainScreen: View {
             
             Text("Hello World!")
         }.onAppear {
-            self.loadCharacters()
+            loadCharacters()
         }
         
     }
@@ -93,7 +93,7 @@ struct MainScreen: View {
                     
                     for account in dataResponse.wowAccounts {
                         withAnimation {
-                            self.characters.append(contentsOf: account.characters)
+                            characters.append(contentsOf: account.characters)
                         }
                     }
                     
