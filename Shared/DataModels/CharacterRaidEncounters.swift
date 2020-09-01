@@ -31,7 +31,7 @@ struct RaidInstancesInCharacterEncounters: Decodable, Hashable {
 }
 
 struct RaidEncountersForCharacter: Decodable, Hashable {
-    let difficulty: InstanceModesNames
+    let difficulty: InstanceModeName
     let status: InstanceStatus
     let progress: InstanceProgress
 }
@@ -50,7 +50,7 @@ struct InstanceProgress: Decodable, Hashable {
 struct EncounterPerBossPerCharacter: Decodable, Hashable {
     let completedCount: Int
     let encounter: EncounterIndex
-    let lastKillTimestamp: Date
+    let lastKillTimestamp: Date?
     
 }
 

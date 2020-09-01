@@ -13,9 +13,11 @@ struct RaidFarmingCollection: View {
     
     @State var errorDescription: String?
     
-    @State var dataCreationDate: String = "Loading"
+    @State var dataCreationDate: String = "N/A"
     
     @State var characterEncounters: CharacterRaidEncounters?
+    
+    @State var combinedRaidsWithEncountersInfo: [CombinedRaidWithEncounters] = []
     
     let character: CharacterInProfile
     let data = (1...10).map { CGFloat($0) }
@@ -40,32 +42,34 @@ struct RaidFarmingCollection: View {
                             .background(Color.gray.opacity(0.7))
                             .cornerRadius(30)
                 ) {
-                    ForEach(data, id: \.self) { _ in
-                        Color(
-                            UIColor(
-                                red: CGFloat.random(in: 0...1),
-                                green: CGFloat.random(in: 0...1),
-                                blue: CGFloat.random(in: 0...1),
-                                alpha: 1.0)
-                        )
+                    ForEach(combinedRaidsWithEncountersInfo, id: \.self) { raid in
+                        ZStack {
+                            Color(
+                                UIColor(
+                                    red: CGFloat.random(in: 0...1),
+                                    green: CGFloat.random(in: 0...1),
+                                    blue: CGFloat.random(in: 0...1),
+                                    alpha: 1.0)
+                            )
+                            Text("\(raid.raidName)")
+                                .padding()
+                        }
                         .frame(height: 180)
                         .cornerRadius(30)
                     }
                 }
             }
             .padding()
+            HStack {
+                Spacer()
+                Text("Last refreshed: \(dataCreationDate)")
+                Spacer()
+            }.padding(.bottom)
         }
         .onAppear {
             downloadRaidEncounters()
         }
-        .toolbar {
-            ToolbarItem(placement: .status) {
-                HStack{
-                    Spacer()
-                    Text("Last refreshed: \(dataCreationDate)")
-                }
-            }
-        }
+                
     }
     
     func setDataCreationDate(to date: Date) {
@@ -150,12 +154,152 @@ struct RaidFarmingCollection: View {
             }
             
             characterEncounters = dataResponse
-                
-            
-            
+            fillTheGapsInEncounters()
+
         } catch {
             print(error)
         }
+    }
+    
+    func fillTheGapsInEncounters(){
+        guard gameData.raids.count > 0,
+              let downloadedCharacterEncounters = characterEncounters else {
+            return
+        }
+        var strippedRaids: [RaidInstancesInCharacterEncounters] = []
+        downloadedCharacterEncounters.expansions?.forEach({ (expansion) in
+                strippedRaids.append(contentsOf: expansion.instances)
+        })
+        
+        gameData.raids.forEach { GDRaid in
+            var currentRaid: CombinedRaidWithEncounters
+            
+            if let playerRaid = strippedRaids.first(where: { (playerInstance) -> Bool in
+                return playerInstance.instance.id == GDRaid.id
+            }) {
+                var allRaidModes: [RaidEncountersForCharacter] = []
+                GDRaid.modes.forEach { (mode) in
+                    
+                    if let playerRaidMode = playerRaid.modes.first(where: { (encounter) -> Bool in
+                        encounter.difficulty == mode.mode
+                    }) {
+                        var instanceEncounters: [EncounterPerBossPerCharacter] = []
+                        
+                        GDRaid.encounters.forEach { (GDEncounter) in
+                            
+                            var encounterToAdd: EncounterPerBossPerCharacter
+                            
+                            if let playerEncounter = playerRaidMode.progress.encounters.first(where: { (boss) -> Bool in
+                                boss.encounter.id == GDEncounter.id
+                            }) {
+                                encounterToAdd = playerEncounter
+                            } else {
+                                encounterToAdd = createEmptyBoss(for: GDEncounter)
+                            }
+                            
+                            instanceEncounters.append(encounterToAdd)
+                                                        
+                        }
+                        
+                        let currentRaidMode =
+                            RaidEncountersForCharacter(
+                                difficulty: mode.mode,
+                                status: playerRaidMode.status,
+                                progress:
+                                    InstanceProgress(
+                                        completedCount: playerRaidMode.progress.completedCount,
+                                        totalCount: playerRaidMode.progress.totalCount,
+                                        encounters: instanceEncounters
+                                    )
+                            )
+                        
+                        allRaidModes.append(currentRaidMode)
+                            
+                    } else {
+                        let currentRaidMode = createEmptyInstanceMode(for: GDRaid, withMode: mode.mode)
+                        allRaidModes.append(currentRaidMode)
+                    }
+                    
+                }
+                currentRaid =
+                    CombinedRaidWithEncounters(
+                        raidId: GDRaid.id,
+                        raidName: GDRaid.name,
+                        description: GDRaid.description,
+                        minimumLevel: GDRaid.minimumLevel,
+                        expansion: GDRaid.expansion,
+                        media: GDRaid.media,
+                        modes: GDRaid.modes,
+                        records: allRaidModes
+                    )
+            } else {
+                currentRaid = createNewEmptyRaid(for: GDRaid)
+            }
+            DispatchQueue.main.async {
+                withAnimation {
+                    combinedRaidsWithEncountersInfo.append(currentRaid)
+                }
+            }
+        }
+    }
+    
+    func createEmptyBoss(for encounter: EncounterIndex) -> EncounterPerBossPerCharacter {
+        let emptyEncounter =
+            EncounterPerBossPerCharacter(
+                completedCount: 0,
+                encounter:
+                    EncounterIndex(
+                        key: encounter.key,
+                        id: encounter.id,
+                        name: encounter.name
+                    ),
+                lastKillTimestamp: nil
+            )
+        return emptyEncounter
+    }
+    
+    func createEmptyInstanceMode(for instance: InstanceJournal, withMode mode: InstanceModeName) -> RaidEncountersForCharacter {
+        var encounters: [EncounterPerBossPerCharacter] = []
+        instance.encounters.forEach { (GDEncounter) in
+            encounters.append(createEmptyBoss(for: GDEncounter))
+        }
+        
+        let emptyInstance =
+            RaidEncountersForCharacter(
+                difficulty: mode,
+                status:
+                    InstanceStatus(
+                        type: "NEW",
+                        name: "New"
+                    ),
+                progress:
+                    InstanceProgress(
+                        completedCount: 0,
+                        totalCount: 0,
+                        encounters: encounters
+                    )
+            )
+        return emptyInstance
+    }
+    
+    func createNewEmptyRaid(for instance: InstanceJournal) -> CombinedRaidWithEncounters {
+        var allRaids: [RaidEncountersForCharacter] = []
+        instance.modes.forEach { (mode) in
+            let emptyInstanceMode = createEmptyInstanceMode(for: instance, withMode: mode.mode)
+            allRaids.append(emptyInstanceMode)
+        }
+        let currentRaid =
+            CombinedRaidWithEncounters(
+                raidId: instance.id,
+                raidName: instance.name,
+                description: instance.description,
+                minimumLevel: instance.minimumLevel,
+                expansion: instance.expansion,
+                media: instance.media,
+                modes: instance.modes,
+                records: allRaids
+            )
+        return currentRaid
     }
 }
 
