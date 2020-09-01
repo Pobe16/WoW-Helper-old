@@ -30,7 +30,7 @@ struct InstanceJournal: Decodable, Hashable, Identifiable, Comparable, Equatable
     let encounters: [EncounterIndex]
     let expansion: ExpansionIndex
     let location: LocationIndex?
-    let modes: [InstanceModes]
+    let modes: [InstanceMode]
     let media: InstanceMediaStub
     let minimumLevel: Int
     let category: InstanceCategory
@@ -46,13 +46,13 @@ struct LocationIndex: Decodable, Hashable, Identifiable {
     let id: Int
 }
 
-struct InstanceModes: Decodable, Hashable {
-    let mode: InstanceModesNames
+struct InstanceMode: Decodable, Hashable {
+    let mode: InstanceModeName
     let players: Int
     let isTracked: Bool
 }
 
-struct InstanceModesNames: Decodable, Hashable {
+struct InstanceModeName: Decodable, Hashable {
     let type: String
     let name: String
 }
