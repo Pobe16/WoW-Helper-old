@@ -7,7 +7,10 @@
 
 import Foundation
 
-struct CombinedRaidWithEncounters: Hashable {
+struct CombinedRaidWithEncounters: Hashable, Identifiable {
+    var id: Int {
+        return raidId
+    }
     let raidId: Int
     let raidName: String
     let description: String?

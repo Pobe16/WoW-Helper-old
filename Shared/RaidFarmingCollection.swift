@@ -7,19 +7,27 @@
 
 import SwiftUI
 
+enum RaidFarmingOptions: Hashable {
+    case highest
+    case all
+    case noLfr
+}
+
 struct RaidFarmingCollection: View {
     @EnvironmentObject var authorization: Authentication
     @EnvironmentObject var gameData: GameData
     
-    @State var errorDescription: String?
-    
     @State var dataCreationDate: String = "N/A"
+    
+    @State var errorText: String?
     
     @State var characterEncounters: CharacterRaidEncounters?
     
-    @State var combinedRaidsWithEncountersInfo: [CombinedRaidWithEncounters] = []
-    
     @State var raidDataFilledAndSorted: RaidDataFilledAndSorted? = nil
+    
+    @Binding var raidFarmingOptions: Int
+    
+    @State var showOptionsSheet: Bool = false
     
     let character: CharacterInProfile
     let data = (1...10).map { CGFloat($0) }
@@ -32,66 +40,38 @@ struct RaidFarmingCollection: View {
         ScrollView {
             if raidDataFilledAndSorted != nil {
                 LazyVGrid(columns: columns, spacing: 30, pinnedViews: [.sectionHeaders]) {
-                    if raidDataFilledAndSorted!.currentContent.count > 0 {
-                        Section(header: raidFarmHeader(headerText: "Current Content") ) {
-                            ForEach(raidDataFilledAndSorted!.currentContent, id: \.self) { raid in
-                                Text("\(raid.raidName)")
-                                    .padding()
-                                    .frame(height: 180)
-                                    .background(Color.gray)
-                                    .cornerRadius(30)
-                            }
+                    
+                    ForEach(raidDataFilledAndSorted!.raidsCollection){ collection in
+                        if collection.raids.count > 0 {
+                            RaidFarmSection(collection: collection)
                         }
                     }
-                    if raidDataFilledAndSorted!.hardFarm.count > 0 {
-                        Section(header: raidFarmHeader(headerText: "Hard farm") ) {
-                            ForEach(raidDataFilledAndSorted!.hardFarm, id: \.self) { raid in
-                                Text("\(raid.raidName)")
-                                    .padding()
-                                    .frame(height: 180)
-                                    .background(Color.gray)
-                                    .cornerRadius(30)
-                            }
-                        }
-                    }
-                    if raidDataFilledAndSorted!.comfortFarm.count > 0 {
-                        Section(header: raidFarmHeader(headerText: "Easy farm") ) {
-                            ForEach(raidDataFilledAndSorted!.comfortFarm, id: \.self) { raid in
-                                Text("\(raid.raidName)")
-                                    .padding()
-                                    .frame(height: 180)
-                                    .background(Color.gray)
-                                    .cornerRadius(30)
-                            }
-                        }
-                    }
-                    if raidDataFilledAndSorted!.completed.count > 0 {
-                        Section(header: raidFarmHeader(headerText: "Completed") ) {
-                            ForEach(raidDataFilledAndSorted!.completed, id: \.self) { raid in
-                                Text("\(raid.raidName)")
-                                    .padding()
-                                    .frame(height: 180)
-                                    .background(Color.gray)
-                                    .cornerRadius(30)
-                            }
-                        }
-                    }
+                    
                         
                     
                 }
-                .padding()
+//                .padding()
+                HStack {
+                    Spacer()
+                    Text("Last refreshed: \(dataCreationDate)")
+                    Spacer()
+                }.padding(.bottom)
+            } else if errorText != nil {
+                Text("\(errorText ?? "Unknown Error")")
             } else {
-                Text("Level not high enough for raids.")
+                ProgressView{}
+                    .progressViewStyle(CircularProgressViewStyle())
             }
-            HStack {
-                Spacer()
-                Text("Last refreshed: \(dataCreationDate)")
-                Spacer()
-            }.padding(.bottom)
         }
         .onAppear {
             downloadRaidEncounters()
         }
+        .onChange(of: raidFarmingOptions) { (value) in
+            downloadRaidEncounters()
+        }
+        
+        
+        
                 
     }
     
@@ -105,6 +85,11 @@ struct RaidFarmingCollection: View {
     }
     
     func downloadRaidEncounters() {
+        let levelRequiredForRaiding = gameData.expansions.count == 8 ? 60 : 30
+        guard character.level >= levelRequiredForRaiding else {
+            errorText = "Character level too low. You need at least level \(levelRequiredForRaiding) to try and conquer the raids."
+            return
+        }
         let requestUrlAPIHost = UserDefaults.standard.object(forKey: "APIRegionHost") as? String ?? APIRegionHostList.Europe
         let requestUrlAPIFragment =
             "/profile/wow/character"    + "/" +
@@ -184,9 +169,21 @@ struct RaidFarmingCollection: View {
     }
     
     func combineCharacterEncountersWithData() {
+        var options: RaidFarmingOptions
+        switch raidFarmingOptions {
+        case 1:
+            options = .highest
+        case 2:
+            options = .all
+        case 3:
+            options = .noLfr
+        default:
+            options = .highest
+        }
+        
         guard gameData.raids.count > 0 else { return }
         let raidDataManipulator = RaidDataHelper()
-        let combinedRaidInfo = raidDataManipulator.createFullRaidData(using: characterEncounters, with: gameData)        
+        let combinedRaidInfo = raidDataManipulator.createFullRaidData(using: characterEncounters, with: gameData, filter: options)
         
         DispatchQueue.main.async {
             withAnimation {
@@ -198,29 +195,14 @@ struct RaidFarmingCollection: View {
     }
 }
 
-struct raidFarmHeader: View {
-    
-    let headerText: String
-    
-    var body: some View {
-        HStack{
-            Text(headerText)
-                .font(.title)
-                .padding()
-                .padding(.leading, 15)
-            Spacer()
-        }
-        .background(Color.gray.opacity(0.7))
-        .cornerRadius(30)
-    }
-}
+
 
 #if DEBUG
 struct RaidFarmingCollection_Previews: PreviewProvider {
     static var previews: some View {
-        RaidFarmingCollection(character: placeholders.characterInProfile)
+        RaidFarmingCollection(raidFarmingOptions: .constant(1), character: placeholders.characterInProfile)
         
-        RaidFarmingCollection(character: placeholders.characterInProfile)
+        RaidFarmingCollection(raidFarmingOptions: .constant(1), character: placeholders.characterInProfile)
         .previewLayout(.fixed(width: 320, height: 568))
         .previewDisplayName("iPhone SE 1st gen")
 //
