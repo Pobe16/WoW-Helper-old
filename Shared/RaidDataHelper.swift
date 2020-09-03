@@ -8,7 +8,7 @@
 import Foundation
 
 struct RaidDataHelper {
-    public func createFullRaidData(using characterEncounters: CharacterRaidEncounters?, with gameData: GameData) -> [CombinedRaidWithEncounters] {
+    public func createFullRaidData(using characterEncounters: CharacterRaidEncounters?, with gameData: GameData, filter options: RaidFarmingOptions) -> [CombinedRaidWithEncounters] {
         
         var strippedRaids: [RaidInstancesInCharacterEncounters] = []
         if characterEncounters != nil {
@@ -26,7 +26,10 @@ struct RaidDataHelper {
                 return playerInstance.instance.id == GDRaid.id
             }) {
                 var allRaidModes: [RaidEncountersForCharacter] = []
-                GDRaid.modes.forEach { (mode) in
+                
+                let filteredModes: [InstanceMode] = filterRaidModes(forModes: GDRaid.modes, by: options)
+                
+                filteredModes.forEach { (mode) in
                     
                     if let playerRaidMode = playerRaid.modes.first(where: { (encounter) -> Bool in
                         encounter.difficulty == mode.mode
@@ -77,17 +80,93 @@ struct RaidDataHelper {
                         minimumLevel: GDRaid.minimumLevel,
                         expansion: GDRaid.expansion,
                         media: GDRaid.media,
-                        modes: GDRaid.modes,
+                        modes: filteredModes,
                         records: allRaidModes
                     )
             } else {
-                currentRaid = createNewEmptyRaid(for: GDRaid)
+                currentRaid = createNewEmptyRaid(for: GDRaid, filteredBy: options)
             }
             
             allFilledRaids.append(currentRaid)
                 
         }
         return allFilledRaids
+    }
+    
+    private func filterRaidModes(forModes modes: [InstanceMode], by options: RaidFarmingOptions) -> [InstanceMode] {
+        guard modes.count > 1 else {
+            return modes
+        }
+        
+        switch options {
+        case .all:
+            return modes
+        case .noLfr:
+            return modes.filter { (mode) -> Bool in
+                return mode.mode.type != "LFR"
+            }
+        case .highest:
+            var highestMode: [InstanceMode] = []
+            
+            highestMode.append(contentsOf: modes.filter { (mode) -> Bool in
+                return mode.mode.type == "MYTHIC"
+            } )
+            
+            guard highestMode.count == 0 else {
+                return highestMode
+            }
+            
+            highestMode.append(contentsOf: modes.filter { (mode) -> Bool in
+                return mode.mode.type == "LEGACY_25_MAN_HEROIC"
+            } )
+            
+            guard highestMode.count == 0 else {
+                return highestMode
+            }
+            
+            highestMode.append(contentsOf: modes.filter { (mode) -> Bool in
+                return mode.mode.type == "LEGACY_10_MAN_HEROIC"
+            } )
+            
+            guard highestMode.count == 0 else {
+                return highestMode
+            }
+            
+            highestMode.append(contentsOf: modes.filter { (mode) -> Bool in
+                return mode.mode.type == "LEGACY_25_MAN"
+            } )
+            
+            guard highestMode.count == 0 else {
+                return highestMode
+            }
+            
+            highestMode.append(contentsOf: modes.filter { (mode) -> Bool in
+                return mode.mode.type == "LEGACY_10_MAN"
+            } )
+            
+            guard highestMode.count == 0 else {
+                return highestMode
+            }
+            
+            highestMode.append(contentsOf: modes.filter { (mode) -> Bool in
+                return mode.mode.type == "HEROIC"
+            } )
+            
+            guard highestMode.count == 0 else {
+                return highestMode
+            }
+            
+            highestMode.append(contentsOf: modes.filter { (mode) -> Bool in
+                return mode.mode.type == "NORMAL"
+            } )
+            
+            guard highestMode.count == 0 else {
+                return highestMode
+            }
+            
+            return [modes.last!]
+        }
+        
     }
     
     private func createEmptyBoss(for encounter: EncounterIndex) -> EncounterPerBossPerCharacter {
@@ -129,7 +208,7 @@ struct RaidDataHelper {
         return emptyInstance
     }
     
-    private func createNewEmptyRaid(for instance: InstanceJournal) -> CombinedRaidWithEncounters {
+    private func createNewEmptyRaid(for instance: InstanceJournal, filteredBy options: RaidFarmingOptions) -> CombinedRaidWithEncounters {
         var allRaids: [RaidEncountersForCharacter] = []
         instance.modes.forEach { (mode) in
             let emptyInstanceMode = createEmptyInstanceMode(for: instance, withMode: mode.mode)
@@ -143,7 +222,7 @@ struct RaidDataHelper {
                 minimumLevel: instance.minimumLevel,
                 expansion: instance.expansion,
                 media: instance.media,
-                modes: instance.modes,
+                modes: filterRaidModes(forModes: instance.modes, by: options),
                 records: allRaids
             )
         return currentRaid

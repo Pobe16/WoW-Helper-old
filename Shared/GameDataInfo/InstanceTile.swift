@@ -46,6 +46,7 @@ struct InstanceTile: View {
                     Text("Bosses: \(instance?.encounters.count ?? 0)")
                         .padding(.vertical, 4)
                     Spacer()
+                    
                 }
                 .background(Color.gray.opacity(colorScheme == .dark ? 0.4 : 0.8))
 //                    .cornerRadius(15)
@@ -59,6 +60,9 @@ struct InstanceTile: View {
                     Spacer()
                 }
                 .background(Color.gray.opacity(colorScheme == .dark ? 0.4 : 0.8))
+//                ForEach(instance!.modes, id: \.self){ mode in
+//                    Text(mode.mode.type)
+//                }
                     
                     
                 

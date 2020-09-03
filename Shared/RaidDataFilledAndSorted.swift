@@ -7,17 +7,30 @@
 
 import Foundation
 
+struct NamedRaidCollection: Comparable, Identifiable {
+    static func < (lhs: NamedRaidCollection, rhs: NamedRaidCollection) -> Bool {
+        lhs.id < rhs.id
+    }
+    
+    public let id: Int
+    public let name: String
+    public let raids: [CombinedRaidWithEncounters]
+}
+
 struct RaidDataFilledAndSorted {
-    public let currentContent: [CombinedRaidWithEncounters]
-    public let hardFarm: [CombinedRaidWithEncounters]
-    public let comfortFarm: [CombinedRaidWithEncounters]
-    public let completed: [CombinedRaidWithEncounters]
-    public let ignored: [CombinedRaidWithEncounters]
+    private let currentContent: [CombinedRaidWithEncounters]
+    private let hardFarm: [CombinedRaidWithEncounters]
+    private let comfortFarm: [CombinedRaidWithEncounters]
+    private let completed: [CombinedRaidWithEncounters]
+    private let ignored: [CombinedRaidWithEncounters]
+    public let raidsCollection: [NamedRaidCollection]
     
     init(basedOn characterEncounters: [CombinedRaidWithEncounters], for character: CharacterInProfile) {
         let helper = RaidDataHelper()
         let currentLevel = character.level
         var allRaids = characterEncounters
+        
+        var raidsToSave: [NamedRaidCollection] = []
         
         var raidsToBeIgnored: [CombinedRaidWithEncounters] = []
         
@@ -33,6 +46,14 @@ struct RaidDataFilledAndSorted {
             guard let index = raidIndex else { return }
             allRaids.remove(at: index)
         }
+        
+        raidsToSave.append(
+            NamedRaidCollection(
+                id: 3,
+                name: "Completed",
+                raids: completed
+            )
+        )
           
         currentContent = allRaids.filter({ (raid) -> Bool in
             raid.minimumLevel == currentLevel
@@ -47,6 +68,15 @@ struct RaidDataFilledAndSorted {
             allRaids.remove(at: index)
         }
         
+        raidsToSave.append(
+            NamedRaidCollection(
+                id: 0,
+                name: "Current content",
+                raids: currentContent
+            )
+        )
+        
+        
         hardFarm = allRaids.filter({ (raid) -> Bool in
             currentLevel > raid.minimumLevel && currentLevel - raid.minimumLevel < 11
         }).sorted(by: { (lhs, rhs) -> Bool in
@@ -59,6 +89,14 @@ struct RaidDataFilledAndSorted {
             guard let index = raidIndex else { return }
             allRaids.remove(at: index)
         }
+        
+        raidsToSave.append(
+            NamedRaidCollection(
+                id: 1,
+                name: "Hard farm",
+                raids: hardFarm
+            )
+        )
         
         comfortFarm = allRaids.filter({ (raid) -> Bool in
             currentLevel > raid.minimumLevel
@@ -73,8 +111,26 @@ struct RaidDataFilledAndSorted {
             allRaids.remove(at: index)
         }
         
+        raidsToSave.append(
+            NamedRaidCollection(
+                id: 2,
+                name: "Easy farm",
+                raids: comfortFarm
+            )
+        )
+        
         raidsToBeIgnored.append(contentsOf: allRaids)
         
         ignored = raidsToBeIgnored
+        
+        raidsToSave.append(
+            NamedRaidCollection(
+                id: 100,
+                name: "Ignored",
+                raids: ignored
+            )
+        )
+        
+        raidsCollection = raidsToSave
     }
 }
