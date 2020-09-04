@@ -13,12 +13,11 @@ struct RaidTileBackground: View {
     @State var timeRetries = 0
     @State var connectionRetries = 0
     
+    @State var imageData: Data? = nil
+    
     let name: String
     let id: Int
     let mediaUrl: String
-    
-    
-    @State var imageData: Data? = nil
     
     var body: some View {
         if imageData == nil {

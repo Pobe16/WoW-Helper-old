@@ -70,10 +70,16 @@ struct RaidFarmingCollection: View {
         .onChange(of: raidFarmingOptions) { (value) in
             downloadRaidEncounters()
         }
-        
-        
-        
-                
+        .toolbar {
+            ToolbarItem(placement: .destructiveAction) {
+                    Button {
+                        downloadRaidEncounters(refresh: true)
+                    } label: {
+                        Label("Refresh", systemImage: "arrow.triangle.2.circlepath")
+                            .font(.title3)
+                }
+            }
+        }
     }
     
     func setDataCreationDate(to date: Date) {
@@ -85,7 +91,7 @@ struct RaidFarmingCollection: View {
         dataCreationDate = dateString
     }
     
-    func downloadRaidEncounters() {
+    func downloadRaidEncounters(refresh: Bool = false) {
         let levelRequiredForRaiding = gameData.expansions.count == 8 ? 60 : 30
         guard character.level >= levelRequiredForRaiding else {
             errorText = "Character level too low. You need at least level \(levelRequiredForRaiding) to try and conquer the raids."
@@ -100,7 +106,9 @@ struct RaidFarmingCollection: View {
             
         let strippedAPIUrl = requestUrlAPIHost + requestUrlAPIFragment
         
-        if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: strippedAPIUrl, maximumAgeInDays: 0.0416) {
+        let daysNeededForRefresh: Double = refresh ? 0.0 : 0.0416
+        
+        if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: strippedAPIUrl, maximumAgeInDays: daysNeededForRefresh) {
             
             setDataCreationDate(to: savedData.creationDate!)
             

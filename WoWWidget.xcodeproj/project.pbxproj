@@ -27,8 +27,6 @@
 		C806FA532501A7B2006DEF78 /* CharacterRaidTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C806FA512501A7B2006DEF78 /* CharacterRaidTile.swift */; };
 		C806FA552501AAE1006DEF78 /* RaidTileBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = C806FA542501AAE1006DEF78 /* RaidTileBackground.swift */; };
 		C806FA562501AAE1006DEF78 /* RaidTileBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = C806FA542501AAE1006DEF78 /* RaidTileBackground.swift */; };
-		C806FA582501BE40006DEF78 /* InstanceProgressBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = C806FA572501BE40006DEF78 /* InstanceProgressBackground.swift */; };
-		C806FA592501BE40006DEF78 /* InstanceProgressBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = C806FA572501BE40006DEF78 /* InstanceProgressBackground.swift */; };
 		C811E77C24E01B1F0050F6CD /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E77B24E01B1F0050F6CD /* Tests_iOS.swift */; };
 		C811E78724E01B1F0050F6CD /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E78624E01B1F0050F6CD /* Tests_macOS.swift */; };
 		C811E78924E01B1F0050F6CD /* WoWWidgetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E76024E01B1E0050F6CD /* WoWWidgetApp.swift */; };
@@ -54,6 +52,8 @@
 		C831CC5024E8974100C25F67 /* MyData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C831CC4D24E8974100C25F67 /* MyData.xcdatamodeld */; };
 		C831CC5324E89A0200C25F67 /* CoreDataImagesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C831CC5224E89A0200C25F67 /* CoreDataImagesManager.swift */; };
 		C831CC5424E89A0200C25F67 /* CoreDataImagesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C831CC5224E89A0200C25F67 /* CoreDataImagesManager.swift */; };
+		C835226F2502379900A5D90D /* BackgroundBlurs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C835226E2502379900A5D90D /* BackgroundBlurs.swift */; };
+		C83522702502379900A5D90D /* BackgroundBlurs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C835226E2502379900A5D90D /* BackgroundBlurs.swift */; };
 		C84B82F724E5FD65006E84FA /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84B82F624E5FD65006E84FA /* MainScreen.swift */; };
 		C84B82F824E5FD65006E84FA /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84B82F624E5FD65006E84FA /* MainScreen.swift */; };
 		C84B82FA24E5FF56006E84FA /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84B82F924E5FF56006E84FA /* UserProfile.swift */; };
@@ -122,7 +122,6 @@
 		C803C5E425007CC600A8D2DE /* RaidFarmSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidFarmSection.swift; sourceTree = "<group>"; };
 		C806FA512501A7B2006DEF78 /* CharacterRaidTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterRaidTile.swift; sourceTree = "<group>"; };
 		C806FA542501AAE1006DEF78 /* RaidTileBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidTileBackground.swift; sourceTree = "<group>"; };
-		C806FA572501BE40006DEF78 /* InstanceProgressBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceProgressBackground.swift; sourceTree = "<group>"; };
 		C811E76024E01B1E0050F6CD /* WoWWidgetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WoWWidgetApp.swift; sourceTree = "<group>"; };
 		C811E76124E01B1E0050F6CD /* AuthCheckingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCheckingScreen.swift; sourceTree = "<group>"; };
 		C811E76224E01B1F0050F6CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -145,6 +144,7 @@
 		C831CC4624E7355500C25F67 /* CharacterMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterMedia.swift; sourceTree = "<group>"; };
 		C831CC4E24E8974100C25F67 /* MyData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyData.xcdatamodel; sourceTree = "<group>"; };
 		C831CC5224E89A0200C25F67 /* CoreDataImagesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataImagesManager.swift; sourceTree = "<group>"; };
+		C835226E2502379900A5D90D /* BackgroundBlurs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundBlurs.swift; sourceTree = "<group>"; };
 		C84B82F624E5FD65006E84FA /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		C84B82F924E5FF56006E84FA /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		C8665E6424F066DF0043A23C /* GameDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDataLoader.swift; sourceTree = "<group>"; };
@@ -236,7 +236,7 @@
 				C803C5D824FEF18C00A8D2DE /* RaidDataHelper.swift */,
 				C806FA512501A7B2006DEF78 /* CharacterRaidTile.swift */,
 				C806FA542501AAE1006DEF78 /* RaidTileBackground.swift */,
-				C806FA572501BE40006DEF78 /* InstanceProgressBackground.swift */,
+				C835226E2502379900A5D90D /* BackgroundBlurs.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -543,6 +543,7 @@
 				C811E7A724E05FBE0050F6CD /* AuthInfo.swift in Sources */,
 				C811E7A424E01DC30050F6CD /* APIAccessInfo.swift in Sources */,
 				C803C5D324FC57B800A8D2DE /* CharacterRaidEncounters.swift in Sources */,
+				C835226F2502379900A5D90D /* BackgroundBlurs.swift in Sources */,
 				C803C5DC24FEF1D700A8D2DE /* RaidDataFilledAndSorted.swift in Sources */,
 				C89914C124F8743700DADAB1 /* CharacterMainView.swift in Sources */,
 				C8F942DD24EDB65C00B6222C /* DataHealthScreen.swift in Sources */,
@@ -558,7 +559,6 @@
 				C831CC3A24E7296A00C25F67 /* CharacterListItem.swift in Sources */,
 				C811E7AB24E0A3690050F6CD /* Authentication.swift in Sources */,
 				C84B82FA24E5FF56006E84FA /* UserProfile.swift in Sources */,
-				C806FA582501BE40006DEF78 /* InstanceProgressBackground.swift in Sources */,
 				C8F942E324EF024600B6222C /* GameData.swift in Sources */,
 				C831CC4F24E8974100C25F67 /* MyData.xcdatamodeld in Sources */,
 				C8665E6524F066DF0043A23C /* GameDataLoader.swift in Sources */,
@@ -589,6 +589,7 @@
 				C84B82F824E5FD65006E84FA /* MainScreen.swift in Sources */,
 				C8F942E924EF027900B6222C /* LogOutListItem.swift in Sources */,
 				C803C5D424FC57B800A8D2DE /* CharacterRaidEncounters.swift in Sources */,
+				C83522702502379900A5D90D /* BackgroundBlurs.swift in Sources */,
 				C803C5DD24FEF1D700A8D2DE /* RaidDataFilledAndSorted.swift in Sources */,
 				C89914C224F8743700DADAB1 /* CharacterMainView.swift in Sources */,
 				C831CC4524E7307100C25F67 /* StoredCache.swift in Sources */,
@@ -604,7 +605,6 @@
 				C811E78C24E01B1F0050F6CD /* AuthCheckingScreen.swift in Sources */,
 				C8F942E824EF027700B6222C /* CharacterLoadingListItem.swift in Sources */,
 				C811E78A24E01B1F0050F6CD /* WoWWidgetApp.swift in Sources */,
-				C806FA592501BE40006DEF78 /* InstanceProgressBackground.swift in Sources */,
 				C811E7AC24E0A3690050F6CD /* Authentication.swift in Sources */,
 				C84B82FB24E5FF56006E84FA /* UserProfile.swift in Sources */,
 				C8665E6624F066DF0043A23C /* GameDataLoader.swift in Sources */,

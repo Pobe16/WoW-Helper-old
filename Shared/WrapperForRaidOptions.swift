@@ -16,7 +16,7 @@ struct WrapperForRaidOptions: View {
         RaidFarmingCollection(raidFarmingOptions: $raidFarmingOptions, character: character)
         .onAppear( perform: { loadOptionsSelection() } )
         .toolbar {
-            ToolbarItem(placement: .primaryAction) {
+            ToolbarItem(placement: .confirmationAction) {
                 Menu {
                     Picker(selection: $raidFarmingOptions, label: Text("Raid options")) {
                         Text("Just Mythic").tag(1)
@@ -26,6 +26,7 @@ struct WrapperForRaidOptions: View {
                 }
                 label: {
                     Label("Raid Settings", systemImage: "gear")
+                        .font(.title3)
                 }
             }
 //            ToolbarItem(placement: .primaryAction) {

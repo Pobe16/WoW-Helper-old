@@ -37,7 +37,7 @@ struct DataHealthScreen: View {
             ToolbarItem(placement: .principal) {
                 Text("Expansions")
             }
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .primaryAction) {
                 if gameData.loadingAllowed {
                     Button {
                         deleteDataBeforeUpdating()
