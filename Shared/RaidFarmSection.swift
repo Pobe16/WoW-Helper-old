@@ -9,20 +9,12 @@ import SwiftUI
 
 struct RaidFarmSection: View {
     let collection: NamedRaidCollection
+    let faction: Faction
     
     var body: some View {
-        Section(header: RaidFarmHeader(headerText: collection.name) ) {
+        Section(header: RaidFarmHeader(headerText: collection.name, faction: faction) ) {
             ForEach(collection.raids) { raid in
-                VStack{
-                    Text("\(raid.raidName)")
-                    ForEach(raid.modes, id: \.self){ mode in
-                        Text("\(mode.mode.name)")
-                    }
-                }
-                .padding()
-                .frame(height: 180)
-                .background(Color.gray)
-                .cornerRadius(30)
+                CharacterRaidTile(raid: raid, faction: faction)
             }
         }
     }

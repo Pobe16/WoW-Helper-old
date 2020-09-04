@@ -7,9 +7,10 @@
 
 import SwiftUI
 
-struct WrapperForRaidFarming: View {
+struct WrapperForRaidOptions: View {
     let character: CharacterInProfile
     @State var raidFarmingOptions: Int = 1
+//    @State var popOverVisible = false
     
     var body: some View {
         RaidFarmingCollection(raidFarmingOptions: $raidFarmingOptions, character: character)
@@ -22,15 +23,32 @@ struct WrapperForRaidFarming: View {
                         Text("All modes").tag(2)
                         Text("No LFR").tag(3)
                     }
-                    .onChange(of: raidFarmingOptions) { (value) in
-                        saveOptionsSelection(value)
-                    }
-                    
                 }
                 label: {
                     Label("Raid Settings", systemImage: "gear")
                 }
             }
+//            ToolbarItem(placement: .primaryAction) {
+//                Button(action: {
+//                    popOverVisible.toggle()
+//                }, label: {
+//                    Image(systemName: "gear")
+//                })
+//                .popover(
+//                    isPresented: $popOverVisible,
+//                    content: {
+//                        Picker(selection: $raidFarmingOptions, label: Text("Raid options")) {
+//                            Text("Just Mythic").tag(1)
+//                            Text("All modes").tag(2)
+//                            Text("No LFR").tag(3)
+//                        }
+//
+//                    }
+//                )
+//            }
+        }
+        .onChange(of: raidFarmingOptions) { (value) in
+            saveOptionsSelection(value)
         }
     }
     

@@ -6,26 +6,42 @@
 //
 
 import SwiftUI
+import VisualEffects
 
 struct RaidFarmHeader: View {
     
     let headerText: String
+    let faction: Faction
     
     var body: some View {
         HStack{
             Text(headerText)
-                .font(.subheadline)
+                .font(.title)
                 .padding()
                 .padding(.leading, 10)
             Spacer()
         }
-        .background(Color.gray.opacity(0.8))
-        .cornerRadius(20)
+        .background(
+            ZStack{
+                VisualEffectBlur(blurStyle: .systemUltraThinMaterial)
+                switch faction.type {
+                case "ALLIANCE":
+                    Color.blue.opacity(0.45)
+                case "HORDE":
+                    Color.red.opacity(0.45)
+                default:
+                    Color.white.opacity(0.45)
+                }
+            }
+        )
     }
 }
 
 struct RaidFarmHeader_Previews: PreviewProvider {
     static var previews: some View {
-        RaidFarmHeader(headerText: "Completed raids.")
+        ZStack {
+            Color.green
+            RaidFarmHeader(headerText: "Completed raids.", faction: Faction(type: "ALLIANCE", name: "Alliance"))
+        }
     }
 }
