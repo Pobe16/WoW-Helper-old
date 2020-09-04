@@ -33,17 +33,18 @@ struct RaidFarmingCollection: View {
     let data = (1...10).map { CGFloat($0) }
 
     let columns = [
-        GridItem(.adaptive(minimum: 180), spacing: 30)
+        GridItem(.adaptive(minimum: 240), spacing: 0)
     ]
     
     var body: some View {
         ScrollView {
             if raidDataFilledAndSorted != nil {
-                LazyVGrid(columns: columns, spacing: 30, pinnedViews: [.sectionHeaders]) {
+//                LazyVGrid(columns: columns, spacing: 30, pinnedViews: [.sectionHeaders]) {
+                LazyVGrid(columns: columns, spacing: 30) {
                     
                     ForEach(raidDataFilledAndSorted!.raidsCollection){ collection in
                         if collection.raids.count > 0 {
-                            RaidFarmSection(collection: collection)
+                            RaidFarmSection(collection: collection, faction: character.faction)
                         }
                     }
                     

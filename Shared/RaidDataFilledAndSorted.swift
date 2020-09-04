@@ -49,7 +49,7 @@ struct RaidDataFilledAndSorted {
         
         raidsToSave.append(
             NamedRaidCollection(
-                id: 3,
+                id: 4,
                 name: "Completed",
                 raids: completed
             )
@@ -70,7 +70,7 @@ struct RaidDataFilledAndSorted {
         
         raidsToSave.append(
             NamedRaidCollection(
-                id: 0,
+                id: 3,
                 name: "Current content",
                 raids: currentContent
             )
@@ -131,6 +131,6 @@ struct RaidDataFilledAndSorted {
             )
         )
         
-        raidsCollection = raidsToSave
+        raidsCollection = raidsToSave.sorted()
     }
 }

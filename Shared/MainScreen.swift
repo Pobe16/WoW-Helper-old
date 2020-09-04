@@ -27,7 +27,11 @@ struct MainScreen: View {
                 Section(header: Text(gameData.loadingAllowed ? "Characters" : "Loading game data")){
                     if characters.count > 0 {
                         ForEach(characters) { character in
-                            NavigationLink(destination: CharacterMainView(character: character), tag: "\(character.name)-\(character.realm.slug)", selection: $selection) {
+                            NavigationLink(
+                                destination:
+                                    CharacterMainView(character: character),
+                                tag: "\(character.name)-\(character.realm.slug)",
+                                selection: $selection) {
                                 CharacterListItem(character: character)
                             }
                             .disabled(!gameData.loadingAllowed)

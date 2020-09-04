@@ -15,7 +15,7 @@ struct CharacterMainView: View {
         Group {
             switch viewSelection {
             case 0:
-                WrapperForRaidFarming(character: character)
+                WrapperForRaidOptions(character: character)
             case 1:
                 Text("\(character.name) - \(character.realm.name) character info")
             case 2:

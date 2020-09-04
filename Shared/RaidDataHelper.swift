@@ -275,6 +275,18 @@ struct RaidDataHelper {
         return true
     }
     
+    public func getNumberOfKilledBosses(for raidMode: RaidEncountersForCharacter) -> Int {
+        let lastReset = dateOfLastWeeklyReset()
+        var killedBosses = 0
+        
+        for encounter in raidMode.progress.encounters {
+            if encounter.lastKillTimestamp != nil && encounter.lastKillTimestamp! > lastReset {
+                killedBosses += 1
+            }
+        }
+        return killedBosses
+    }
+    
     public func isWholeRaidCleared(_ raid: CombinedRaidWithEncounters) -> Bool {
         
         // the first two expansions (id 68 and 70) only have last boss in the player encounter, that's why we need a special legacy mode checker

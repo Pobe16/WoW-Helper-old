@@ -15,12 +15,20 @@
 		C803C5DA24FEF18C00A8D2DE /* RaidDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C803C5D824FEF18C00A8D2DE /* RaidDataHelper.swift */; };
 		C803C5DC24FEF1D700A8D2DE /* RaidDataFilledAndSorted.swift in Sources */ = {isa = PBXBuildFile; fileRef = C803C5DB24FEF1D700A8D2DE /* RaidDataFilledAndSorted.swift */; };
 		C803C5DD24FEF1D700A8D2DE /* RaidDataFilledAndSorted.swift in Sources */ = {isa = PBXBuildFile; fileRef = C803C5DB24FEF1D700A8D2DE /* RaidDataFilledAndSorted.swift */; };
-		C803C5DF250070C300A8D2DE /* WrapperForRaidFarming.swift in Sources */ = {isa = PBXBuildFile; fileRef = C803C5DE250070C300A8D2DE /* WrapperForRaidFarming.swift */; };
-		C803C5E0250070C300A8D2DE /* WrapperForRaidFarming.swift in Sources */ = {isa = PBXBuildFile; fileRef = C803C5DE250070C300A8D2DE /* WrapperForRaidFarming.swift */; };
+		C803C5DF250070C300A8D2DE /* WrapperForRaidOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C803C5DE250070C300A8D2DE /* WrapperForRaidOptions.swift */; };
+		C803C5E0250070C300A8D2DE /* WrapperForRaidOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C803C5DE250070C300A8D2DE /* WrapperForRaidOptions.swift */; };
 		C803C5E225007B8800A8D2DE /* RaidFarmHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C803C5E125007B8800A8D2DE /* RaidFarmHeader.swift */; };
 		C803C5E325007B8800A8D2DE /* RaidFarmHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C803C5E125007B8800A8D2DE /* RaidFarmHeader.swift */; };
 		C803C5E525007CC600A8D2DE /* RaidFarmSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C803C5E425007CC600A8D2DE /* RaidFarmSection.swift */; };
 		C803C5E625007CC600A8D2DE /* RaidFarmSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C803C5E425007CC600A8D2DE /* RaidFarmSection.swift */; };
+		C803C5E92501962800A8D2DE /* VisualEffects in Frameworks */ = {isa = PBXBuildFile; productRef = C803C5E82501962800A8D2DE /* VisualEffects */; };
+		C803C5EB2501964700A8D2DE /* VisualEffects in Frameworks */ = {isa = PBXBuildFile; productRef = C803C5EA2501964700A8D2DE /* VisualEffects */; };
+		C806FA522501A7B2006DEF78 /* CharacterRaidTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C806FA512501A7B2006DEF78 /* CharacterRaidTile.swift */; };
+		C806FA532501A7B2006DEF78 /* CharacterRaidTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C806FA512501A7B2006DEF78 /* CharacterRaidTile.swift */; };
+		C806FA552501AAE1006DEF78 /* RaidTileBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = C806FA542501AAE1006DEF78 /* RaidTileBackground.swift */; };
+		C806FA562501AAE1006DEF78 /* RaidTileBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = C806FA542501AAE1006DEF78 /* RaidTileBackground.swift */; };
+		C806FA582501BE40006DEF78 /* InstanceProgressBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = C806FA572501BE40006DEF78 /* InstanceProgressBackground.swift */; };
+		C806FA592501BE40006DEF78 /* InstanceProgressBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = C806FA572501BE40006DEF78 /* InstanceProgressBackground.swift */; };
 		C811E77C24E01B1F0050F6CD /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E77B24E01B1F0050F6CD /* Tests_iOS.swift */; };
 		C811E78724E01B1F0050F6CD /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E78624E01B1F0050F6CD /* Tests_macOS.swift */; };
 		C811E78924E01B1F0050F6CD /* WoWWidgetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E76024E01B1E0050F6CD /* WoWWidgetApp.swift */; };
@@ -109,9 +117,12 @@
 		C803C5D524FD81ED00A8D2DE /* CombinedRaidWithEncounters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedRaidWithEncounters.swift; sourceTree = "<group>"; };
 		C803C5D824FEF18C00A8D2DE /* RaidDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidDataHelper.swift; sourceTree = "<group>"; };
 		C803C5DB24FEF1D700A8D2DE /* RaidDataFilledAndSorted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidDataFilledAndSorted.swift; sourceTree = "<group>"; };
-		C803C5DE250070C300A8D2DE /* WrapperForRaidFarming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapperForRaidFarming.swift; sourceTree = "<group>"; };
+		C803C5DE250070C300A8D2DE /* WrapperForRaidOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapperForRaidOptions.swift; sourceTree = "<group>"; };
 		C803C5E125007B8800A8D2DE /* RaidFarmHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidFarmHeader.swift; sourceTree = "<group>"; };
 		C803C5E425007CC600A8D2DE /* RaidFarmSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidFarmSection.swift; sourceTree = "<group>"; };
+		C806FA512501A7B2006DEF78 /* CharacterRaidTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterRaidTile.swift; sourceTree = "<group>"; };
+		C806FA542501AAE1006DEF78 /* RaidTileBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidTileBackground.swift; sourceTree = "<group>"; };
+		C806FA572501BE40006DEF78 /* InstanceProgressBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceProgressBackground.swift; sourceTree = "<group>"; };
 		C811E76024E01B1E0050F6CD /* WoWWidgetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WoWWidgetApp.swift; sourceTree = "<group>"; };
 		C811E76124E01B1E0050F6CD /* AuthCheckingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCheckingScreen.swift; sourceTree = "<group>"; };
 		C811E76224E01B1F0050F6CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -161,6 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C811E79F24E01B7B0050F6CD /* OAuth2 in Frameworks */,
+				C803C5E92501962800A8D2DE /* VisualEffects in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,6 +181,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C811E7A224E01C850050F6CD /* OAuth2 in Frameworks */,
+				C803C5EB2501964700A8D2DE /* VisualEffects in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,9 +231,12 @@
 				C89914C324F992B200DADAB1 /* RaidFarmingCollection.swift */,
 				C803C5E425007CC600A8D2DE /* RaidFarmSection.swift */,
 				C803C5E125007B8800A8D2DE /* RaidFarmHeader.swift */,
-				C803C5DE250070C300A8D2DE /* WrapperForRaidFarming.swift */,
+				C803C5DE250070C300A8D2DE /* WrapperForRaidOptions.swift */,
 				C803C5DB24FEF1D700A8D2DE /* RaidDataFilledAndSorted.swift */,
 				C803C5D824FEF18C00A8D2DE /* RaidDataHelper.swift */,
+				C806FA512501A7B2006DEF78 /* CharacterRaidTile.swift */,
+				C806FA542501AAE1006DEF78 /* RaidTileBackground.swift */,
+				C806FA572501BE40006DEF78 /* InstanceProgressBackground.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -365,6 +381,7 @@
 			name = "WoWWidget (iOS)";
 			packageProductDependencies = (
 				C811E79E24E01B7B0050F6CD /* OAuth2 */,
+				C803C5E82501962800A8D2DE /* VisualEffects */,
 			);
 			productName = "WoWWidget (iOS)";
 			productReference = C811E76724E01B1F0050F6CD /* WoWWidget.app */;
@@ -385,6 +402,7 @@
 			name = "WoWWidget (macOS)";
 			packageProductDependencies = (
 				C811E7A124E01C850050F6CD /* OAuth2 */,
+				C803C5EA2501964700A8D2DE /* VisualEffects */,
 			);
 			productName = "WoWWidget (macOS)";
 			productReference = C811E76F24E01B1F0050F6CD /* WoWWidget.app */;
@@ -462,6 +480,7 @@
 			mainGroup = C811E75A24E01B1E0050F6CD;
 			packageReferences = (
 				C811E79D24E01B7B0050F6CD /* XCRemoteSwiftPackageReference "OAuth2" */,
+				C803C5E72501962800A8D2DE /* XCRemoteSwiftPackageReference "VisualEffects" */,
 			);
 			productRefGroup = C811E76824E01B1F0050F6CD /* Products */;
 			projectDirPath = "";
@@ -518,6 +537,7 @@
 				C874D5CE24F2926A0006B210 /* ExpansionGameDataPreview.swift in Sources */,
 				C803C5E525007CC600A8D2DE /* RaidFarmSection.swift in Sources */,
 				C831CC4724E7355500C25F67 /* CharacterMedia.swift in Sources */,
+				C806FA552501AAE1006DEF78 /* RaidTileBackground.swift in Sources */,
 				C84B82F724E5FD65006E84FA /* MainScreen.swift in Sources */,
 				C831CC4424E7307100C25F67 /* StoredCache.swift in Sources */,
 				C811E7A724E05FBE0050F6CD /* AuthInfo.swift in Sources */,
@@ -538,16 +558,18 @@
 				C831CC3A24E7296A00C25F67 /* CharacterListItem.swift in Sources */,
 				C811E7AB24E0A3690050F6CD /* Authentication.swift in Sources */,
 				C84B82FA24E5FF56006E84FA /* UserProfile.swift in Sources */,
+				C806FA582501BE40006DEF78 /* InstanceProgressBackground.swift in Sources */,
 				C8F942E324EF024600B6222C /* GameData.swift in Sources */,
 				C831CC4F24E8974100C25F67 /* MyData.xcdatamodeld in Sources */,
 				C8665E6524F066DF0043A23C /* GameDataLoader.swift in Sources */,
-				C803C5DF250070C300A8D2DE /* WrapperForRaidFarming.swift in Sources */,
+				C803C5DF250070C300A8D2DE /* WrapperForRaidOptions.swift in Sources */,
 				C8F942DB24EDB54000B6222C /* LogOutDebugScreen.swift in Sources */,
 				C803C5D924FEF18C00A8D2DE /* RaidDataHelper.swift in Sources */,
 				C88EEAA024E9EFDB00155CBC /* CharacterLoadingListItem.swift in Sources */,
 				C8E4D71C24F2BDD200EDAC85 /* InstanceMedia.swift in Sources */,
 				C831CC5324E89A0200C25F67 /* CoreDataImagesManager.swift in Sources */,
 				C88EEA9D24E9E2B800155CBC /* JSONCoreDataManager.swift in Sources */,
+				C806FA522501A7B2006DEF78 /* CharacterRaidTile.swift in Sources */,
 				C887120F24E4A01200C0A0ED /* LoginScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -561,6 +583,7 @@
 				C874D5CF24F2926A0006B210 /* ExpansionGameDataPreview.swift in Sources */,
 				C803C5E625007CC600A8D2DE /* RaidFarmSection.swift in Sources */,
 				C8F942E524EF025600B6222C /* ExpansionJournal.swift in Sources */,
+				C806FA562501AAE1006DEF78 /* RaidTileBackground.swift in Sources */,
 				C8F942E424EF025600B6222C /* GameData.swift in Sources */,
 				C8F942EB24EF028100B6222C /* DataHealthScreen.swift in Sources */,
 				C84B82F824E5FD65006E84FA /* MainScreen.swift in Sources */,
@@ -581,16 +604,18 @@
 				C811E78C24E01B1F0050F6CD /* AuthCheckingScreen.swift in Sources */,
 				C8F942E824EF027700B6222C /* CharacterLoadingListItem.swift in Sources */,
 				C811E78A24E01B1F0050F6CD /* WoWWidgetApp.swift in Sources */,
+				C806FA592501BE40006DEF78 /* InstanceProgressBackground.swift in Sources */,
 				C811E7AC24E0A3690050F6CD /* Authentication.swift in Sources */,
 				C84B82FB24E5FF56006E84FA /* UserProfile.swift in Sources */,
 				C8665E6624F066DF0043A23C /* GameDataLoader.swift in Sources */,
-				C803C5E0250070C300A8D2DE /* WrapperForRaidFarming.swift in Sources */,
+				C803C5E0250070C300A8D2DE /* WrapperForRaidOptions.swift in Sources */,
 				C831CC5024E8974100C25F67 /* MyData.xcdatamodeld in Sources */,
 				C803C5DA24FEF18C00A8D2DE /* RaidDataHelper.swift in Sources */,
 				C8F942E724EF027300B6222C /* CharacterListItem.swift in Sources */,
 				C8E4D71D24F2BDD200EDAC85 /* InstanceMedia.swift in Sources */,
 				C831CC5424E89A0200C25F67 /* CoreDataImagesManager.swift in Sources */,
 				C88EEA9E24E9E2B800155CBC /* JSONCoreDataManager.swift in Sources */,
+				C806FA532501A7B2006DEF78 /* CharacterRaidTile.swift in Sources */,
 				C887121024E4A01200C0A0ED /* LoginScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -973,6 +998,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		C803C5E72501962800A8D2DE /* XCRemoteSwiftPackageReference "VisualEffects" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/VisualEffects";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.3;
+			};
+		};
 		C811E79D24E01B7B0050F6CD /* XCRemoteSwiftPackageReference "OAuth2" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/p2/OAuth2.git";
@@ -984,6 +1017,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C803C5E82501962800A8D2DE /* VisualEffects */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C803C5E72501962800A8D2DE /* XCRemoteSwiftPackageReference "VisualEffects" */;
+			productName = VisualEffects;
+		};
+		C803C5EA2501964700A8D2DE /* VisualEffects */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C803C5E72501962800A8D2DE /* XCRemoteSwiftPackageReference "VisualEffects" */;
+			productName = VisualEffects;
+		};
 		C811E79E24E01B7B0050F6CD /* OAuth2 */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C811E79D24E01B7B0050F6CD /* XCRemoteSwiftPackageReference "OAuth2" */;
