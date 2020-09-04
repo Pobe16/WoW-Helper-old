@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import VisualEffects
 
 struct CharacterRaidTile: View {
     let raid: CombinedRaidWithEncounters
@@ -25,17 +24,19 @@ struct CharacterRaidTile: View {
                 Spacer()
             }
             .padding(.vertical, 5)
-            .background(VisualEffectBlur(blurStyle: .systemChromeMaterial))
+            .background(
+                RaidTitleBackgroundBlur()
+            )
             
             Spacer()
-            VStack {
+            VStack() {
                 ForEach(raid.records, id: \.self){ record in
                     HStack {
                         Text("\(record.difficulty.name)")
                         Spacer()
                         Text(getSumUp(for: record))
                     }
-                    .padding(.bottom, 0)
+                    .padding(.vertical, 1)
                     .padding(.horizontal, 10)
                     .background(
                         InstanceProgressBackground(
@@ -46,14 +47,16 @@ struct CharacterRaidTile: View {
                     )
                 }
             }
-            .background(VisualEffectBlur(blurStyle: .systemUltraThinMaterial).opacity(0.75))
+            .background(
+                InstanceProgressFullWidthBackgroundBlur()
+            )
             
                 
         }
         .background(
             RaidTileBackground(name: raid.raidName, id: raid.raidId, mediaUrl: raid.media.key.href)
         )
-        .frame(height: 220)
+        .frame(height: 240)
         .cornerRadius(15, antialiased: true)
         .padding(.horizontal, 15)
     }

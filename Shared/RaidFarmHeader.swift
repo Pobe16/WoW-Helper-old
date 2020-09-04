@@ -23,7 +23,7 @@ struct RaidFarmHeader: View {
         }
         .background(
             ZStack{
-                VisualEffectBlur(blurStyle: .systemUltraThinMaterial)
+//                VisualEffectBlur(blurStyle: .systemUltraThinMaterial)
                 switch faction.type {
                 case "ALLIANCE":
                     Color.blue.opacity(0.45)

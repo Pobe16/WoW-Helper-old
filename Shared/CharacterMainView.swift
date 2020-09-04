@@ -21,7 +21,7 @@ struct CharacterMainView: View {
             case 2:
                 Text("Coming soon")
                     .toolbar{
-                        ToolbarItemGroup(placement: .bottomBar) {
+                        ToolbarItemGroup(placement: .status) {
                             Spacer()
                             Text("0/0")
                         }
