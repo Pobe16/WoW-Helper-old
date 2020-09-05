@@ -9,9 +9,11 @@ import Foundation
 import SwiftUI
 
 class GameData: ObservableObject {
-    @EnvironmentObject var authorization: Authentication
-    
-    @Published var loadingAllowed: Bool                     = true
+    var authorization: Authentication                       = Authentication()
+    var timeRetries                                         = 0
+    var connectionRetries                                   = 0
+    var reloadFromCDAllowed                                 = true
+    var loadDungeonsToo                                     = false
     
     @Published var expansionsStubs: [ExpansionIndex]        = []
     @Published var expansions: [ExpansionJournal]           = []
@@ -22,11 +24,454 @@ class GameData: ObservableObject {
     @Published var dungeonsStubs: [InstanceIndex]           = []
     @Published var dungeons: [InstanceJournal]              = []
     
-//    @Published var encountersStubs: [EncounterIndex]        = []
-//    @Published var encounters: [Any]                        = []
-    
-    let estimatedItemsToDownload: Int                       = 150
+    let estimatedItemsToDownload: Int                       = 50
     @Published var actualItemsToDownload: Int               = 0
-    
     @Published var downloadedItems: Int                     = 1
+    
+    @Published var loadingAllowed: Bool                     = true
+    
+    func deleteAllJSONData() {
+        let allData = JSONCoreDataManager.shared.fetchAllJSONData()
+        allData?.forEach({ item in
+            JSONCoreDataManager.shared.deleteJSONData(data: item)
+        })
+    }
+    
+    func continueLoadingDungeons(authorizedBy auth: Authentication) {
+        loadDungeonsToo = true
+        guard loadingAllowed else { return }
+        actualItemsToDownload += dungeonsStubs.count
+        loadingAllowed = false
+        loadDungeonsInfo()
+    }
+    
+    func hardReloadGameData(authorizedBy auth: Authentication) {
+        guard loadingAllowed else { return }
+        reloadFromCDAllowed = false
+        authorization = auth
+        deleteDataBeforeUpdating()
+    }
+    
+    private func deleteDataBeforeUpdating() {
+        DispatchQueue.main.async {
+            self.expansionsStubs.removeAll()
+            self.raidsStubs.removeAll()
+            self.dungeonsStubs.removeAll()
+            self.downloadedItems = 1
+            self.actualItemsToDownload = 0
+            
+            withAnimation {
+                self.expansions.removeAll()
+                self.raids.removeAll()
+                self.dungeons.removeAll()
+                
+            }
+            self.loadExpansionIndex()
+        }
+    }
+    
+    func loadGameData(authorizedBy auth: Authentication) {
+        guard expansions.count == 0 && loadingAllowed else { return }
+        reloadFromCDAllowed = true
+        authorization = auth
+        
+        if downloadedItems > 1 { downloadedItems = 1 }
+        if actualItemsToDownload > 0 { actualItemsToDownload = 0}
+        
+        loadExpansionIndex()
+    }
+    
+    private func loadExpansionIndex() {
+        withAnimation {
+            loadingAllowed = false
+        }
+        let requestUrlAPIHost = UserDefaults.standard.object(forKey: "APIRegionHost") as? String ?? APIRegionHostList.Europe
+        let requestUrlAPIFragment = "/data/wow/journal-expansion/index"
+        
+        if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: requestUrlAPIHost + requestUrlAPIFragment, maximumAgeInDays: 90) {
+            decodeExpansionIndexData(savedData.data!)
+            return
+        }
+        
+        let regionShortCode = APIRegionShort.Code[UserDefaults.standard.integer(forKey: "loginRegion")]
+        let requestAPINamespace = "static-\(regionShortCode)"
+        let requestLocale = UserDefaults.standard.object(forKey: "localeCode") as? String ?? EuropeanLocales.BritishEnglish
+        
+        let fullRequestURL = URL(string:
+                                    requestUrlAPIHost +
+                                    requestUrlAPIFragment +
+                                    "?namespace=\(requestAPINamespace)" +
+                                    "&locale=\(requestLocale)" +
+                                    "&access_token=\(authorization.oauth2?.accessToken ?? "")"
+        )!
+        
+        
+        guard let req = authorization.oauth2?.request(forURL: fullRequestURL) else { return }
+        
+        let task = authorization.oauth2?.session.dataTask(with: req) { data, response, error in
+            if let data = data {
+                self.decodeExpansionIndexData(data, fromURL: fullRequestURL)
+            }
+            if let error = error {
+                // something went wrong, check the error
+                print("error")
+                print(error.localizedDescription)
+            }
+        }
+        task?.resume()
+    }
+    
+    private func decodeExpansionIndexData(_ data: Data, fromURL url: URL? = nil) {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        do {
+            let dataResponse = try decoder.decode(ExpansionTop.self, from: data)
+            print(dataResponse.tiers.count)
+            
+            if let url = url {
+                JSONCoreDataManager.shared.saveJSON(data, withURL: url)
+            }
+            DispatchQueue.main.async {
+                self.expansionsStubs = dataResponse.tiers
+                self.actualItemsToDownload += dataResponse.tiers.count
+                self.loadExpansionJournal()
+            }
+            
+            
+        } catch {
+            print(error)
+        }
+    }
+    
+    private func loadExpansionJournal() {
+        
+        if timeRetries > 5 || connectionRetries > 5 {
+            print("Failed after \(timeRetries) timer retries, and or \(connectionRetries) connection errors")
+            return
+        }
+        
+        guard let stub = expansionsStubs.first else {
+            if expansions.count > 0 {
+                print("finished loading expansions")
+                print("loaded \(expansions.count) expansions")
+                DispatchQueue.main.async {
+                    withAnimation {
+                        self.expansions.sort()
+                        self.actualItemsToDownload += self.raidsStubs.count
+                        if self.loadDungeonsToo {
+                            self.actualItemsToDownload += self.dungeonsStubs.count
+                        }
+                    }
+                }
+                
+                loadRaidsInfo()
+                return
+            }
+            timeRetries += 1
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                print("data saving problem - retrying in 1s")
+                self.loadExpansionJournal()
+            }
+            return
+        }
+        
+        let requestLocale = UserDefaults.standard.object(forKey: "localeCode") as? String ?? EuropeanLocales.BritishEnglish
+        let accessToken = authorization.oauth2?.accessToken ?? ""
+        
+        let requestUrlAPIHost = "\(stub.key.href)"
+        
+        if reloadFromCDAllowed {
+            let strippedAPIUrl = String(requestUrlAPIHost.split(separator: "?")[0])
+        
+            if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: strippedAPIUrl, maximumAgeInDays: 90) {
+                decodeExpansionJournalData(savedData.data!)
+                return
+            }
+        }
+        
+        let fullRequestURL = URL(string:
+                                    requestUrlAPIHost +
+                                    "&locale=\(requestLocale)" +
+                                    "&access_token=\(accessToken)"
+        )!
+        
+        
+        guard let req = authorization.oauth2?.request(forURL: fullRequestURL) else { return }
+        
+        let task = authorization.oauth2?.session.dataTask(with: req) { data, response, error in
+            if let data = data {
+                self.timeRetries = 0
+                self.connectionRetries = 0
+                
+                self.decodeExpansionJournalData(data, fromURL: fullRequestURL)
+                
+            }
+            if let error = error {
+                // something went wrong, check the error
+                print("error")
+                print(error.localizedDescription)
+                self.connectionRetries += 1
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.loadExpansionJournal()
+                }
+            }
+        }
+        task?.resume()
+        
+        
+    }
+    
+    private func decodeExpansionJournalData(_ data: Data, fromURL url: URL? = nil) {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        do {
+            let dataResponse = try decoder.decode(ExpansionJournal.self, from: data)
+            
+            if let url = url {
+                JSONCoreDataManager.shared.saveJSON(data, withURL: url)
+            }
+                
+            DispatchQueue.main.async {
+                
+                withAnimation {
+                    self.expansions.append(dataResponse)
+                    self.downloadedItems += 1
+                }
+                
+                self.raidsStubs.append(contentsOf: dataResponse.raids ?? [])
+                self.dungeonsStubs.append(contentsOf: dataResponse.dungeons ?? [])
+                
+                if self.expansionsStubs.count > 0 {
+                    self.expansionsStubs.removeFirst()
+                }
+                
+                self.loadExpansionJournal()
+            }
+            
+            
+        } catch {
+            print(error)
+        }
+    }
+    
+    private func loadRaidsInfo(){
+        if timeRetries > 5 || connectionRetries > 5 {
+            print("Failed after \(timeRetries) timer retries, and or \(connectionRetries) connection errors")
+            return
+        }
+        guard let currentRaidToLoad = raidsStubs.first else {
+            if raids.count > 0 {
+                print("finished loading raids")
+                print("loaded \(raids.count) raids")
+                
+                DispatchQueue.main.async {
+                    withAnimation {
+                        self.raids.sort()
+                    }
+                    if self.loadDungeonsToo {
+                        self.loadDungeonsInfo()
+                    } else {
+                        self.loadingAllowed = true
+                        self.reloadFromCDAllowed = true
+                        print("loading dungeons postponed")
+                    }
+                }
+                return
+            }
+            timeRetries += 1
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.loadRaidsInfo()
+            }
+            return
+        }
+        
+        let requestUrlAPIHost = "\(currentRaidToLoad.key.href)"
+        
+        if reloadFromCDAllowed {
+            let strippedAPIUrl = String(requestUrlAPIHost.split(separator: "?")[0])
+            
+            if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: strippedAPIUrl, maximumAgeInDays: 90) {
+                decodeRaidData(savedData.data!)
+                return
+            }
+        }
+        
+        let requestLocale = UserDefaults.standard.object(forKey: "localeCode") as? String ?? EuropeanLocales.BritishEnglish
+        let accessToken = authorization.oauth2?.accessToken ?? ""
+        
+        let fullRequestURL = URL(string:
+                                    requestUrlAPIHost +
+                                    "&locale=\(requestLocale)" +
+                                    "&access_token=\(accessToken)"
+        )!
+        
+        
+        guard let req = authorization.oauth2?.request(forURL: fullRequestURL) else { return }
+        
+        let task = authorization.oauth2?.session.dataTask(with: req) { data, response, error in
+            if let data = data {
+                self.timeRetries = 0
+                self.connectionRetries = 0
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    self.decodeRaidData(data, fromURL: fullRequestURL)
+                }
+                
+            }
+            if let error = error {
+                // something went wrong, check the error
+                print("error, retrying in 1 second")
+                print(error.localizedDescription)
+                self.connectionRetries += 1
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.loadRaidsInfo()
+                }
+            }
+        }
+        task?.resume()
+        
+    }
+    private func decodeRaidData(_ data: Data, fromURL url: URL? = nil) {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        do {
+            let dataResponse = try decoder.decode(InstanceJournal.self, from: data)
+            
+//          For some reason Blizz have put a Greater Legion Invasion here as a raid…
+//          I'm not allowing it.
+            if dataResponse.category.type == "EVENT" {
+                if raidsStubs.count > 0{
+                    raidsStubs.removeFirst()
+                }
+                loadRaidsInfo()
+                return
+            }
+            
+            if let url = url {
+                JSONCoreDataManager.shared.saveJSON(data, withURL: url)
+            }
+                
+            DispatchQueue.main.async {
+                withAnimation {
+                    self.raids.append(dataResponse)
+                    self.downloadedItems += 1
+                }
+                if self.raidsStubs.count > 0 {
+                    self.raidsStubs.removeFirst()
+                }
+                self.loadRaidsInfo()
+            }
+            
+        } catch {
+            print(error)
+        }
+    }
+    
+    private func loadDungeonsInfo(){
+        if timeRetries > 5 || connectionRetries > 5 {
+            print("Failed after \(timeRetries) timer retries, and or \(connectionRetries) connection errors")
+            return
+        }
+        guard let currentDungeonToLoad = dungeonsStubs.first else {
+            if dungeons.count > 0 {
+                print("finished loading dungeons")
+                // some dungeons are doubled, as they were "refreshed" in newer expansions,
+                // but it does not reflect in their "expansion id", just in the expansion journal
+                // here I am removing duplicates, and sorting it
+                let noDuplicates = Array(Set(dungeons))
+
+                DispatchQueue.main.async {
+                    withAnimation {
+                        self.dungeons = noDuplicates.sorted()
+                        self.loadingAllowed = true
+                        self.reloadFromCDAllowed = true
+                    }
+                }
+                print("loaded \(dungeons.count) dungeons")
+                return
+            }
+            timeRetries += 1
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.loadRaidsInfo()
+            }
+            return
+        }
+        
+        let requestUrlAPIHost = "\(currentDungeonToLoad.key.href)"
+        if reloadFromCDAllowed {
+            let strippedAPIUrl = String(requestUrlAPIHost.split(separator: "?")[0])
+            
+            if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: strippedAPIUrl, maximumAgeInDays: 90) {
+                    
+                decodeDungeonData(savedData.data!)
+                return
+            }
+        }
+        
+        let requestLocale = UserDefaults.standard.object(forKey: "localeCode") as? String ?? EuropeanLocales.BritishEnglish
+        let accessToken = authorization.oauth2?.accessToken ?? ""
+        
+        let fullRequestURL = URL(string:
+                                    requestUrlAPIHost +
+                                    "&locale=\(requestLocale)" +
+                                    "&access_token=\(accessToken)"
+        )!
+        
+        
+        guard let req = authorization.oauth2?.request(forURL: fullRequestURL) else { return }
+        
+        let task = authorization.oauth2?.session.dataTask(with: req) { data, response, error in
+            if let data = data {
+                self.timeRetries = 0
+                self.connectionRetries = 0
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    self.decodeDungeonData(data, fromURL: fullRequestURL)
+                }
+                
+            }
+            if let error = error {
+                // something went wrong, check the error
+                print("error, retrying in 1 second")
+                print(error.localizedDescription)
+                self.connectionRetries += 1
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.loadRaidsInfo()
+                }
+            }
+        }
+        task?.resume()
+        
+    }
+    private func decodeDungeonData(_ data: Data, fromURL url: URL? = nil) {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        do {
+            let dataResponse = try decoder.decode(InstanceJournal.self, from: data)
+            
+            if let url = url {
+                JSONCoreDataManager.shared.saveJSON(data, withURL: url)
+            }
+                
+            DispatchQueue.main.async {
+                
+                withAnimation {
+                    self.dungeons.append(dataResponse)
+                    self.downloadedItems += 1
+                }
+                
+                if self.dungeonsStubs.count > 0 {
+                    self.dungeonsStubs.removeFirst()
+                }
+                self.loadDungeonsInfo()
+            }
+            
+        } catch {
+            print(error)
+        }
+    }
+    
 }

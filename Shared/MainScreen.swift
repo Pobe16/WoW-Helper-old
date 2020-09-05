@@ -45,6 +45,10 @@ struct MainScreen: View {
                         GameDataLoader()
                     }
                     
+                    NavigationLink(destination: RaidOptions(), tag: "raid-settings", selection: $selection) {
+                        RaidOptionsListItem()
+                    }
+                    
                     NavigationLink(destination: LogOutDebugScreen(loggedIn: $loggedIn), tag: "log-out", selection: $selection) {
                         LogOutListItem(loggedIn: $loggedIn)
                     }
@@ -53,15 +57,21 @@ struct MainScreen: View {
                 
             }
             .listStyle(listStyle)
-            .toolbar(content: {
+            .toolbar{
                 ToolbarItem(placement: .principal){
                     Text("WoWWidget")
-                    
                 }
-            })
-            
-            Text("Hello World!")
-        }.onAppear {
+                
+                ToolbarItem(placement: .primaryAction) {
+                    if !gameData.loadingAllowed {
+                        ProgressView().progressViewStyle(CircularProgressViewStyle())
+                    }
+                }
+                    
+            }
+        }
+        .navigationViewStyle(DefaultNavigationViewStyle())
+        .onAppear {
             loadCharacters()
         }
         
