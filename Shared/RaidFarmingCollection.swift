@@ -14,6 +14,7 @@ enum RaidFarmingOptions: Hashable {
 }
 
 struct RaidFarmingCollection: View {
+    @EnvironmentObject var farmOrder: FarmCollectionsOrder
     @EnvironmentObject var authorization: Authentication
     @EnvironmentObject var gameData: GameData
     
@@ -54,7 +55,14 @@ struct RaidFarmingCollection: View {
 //                .padding()
                 HStack {
                     Spacer()
-                    Text("Last refreshed: \(dataCreationDate)")
+                    VStack {
+                        Text("Last refreshed: \(dataCreationDate)")
+                        Button {
+                            downloadRaidEncounters(refresh: true)
+                        } label: {
+                            Label("Refresh", systemImage: "arrow.counterclockwise")
+                        }
+                    }
                     Spacer()
                 }.padding(.bottom)
             } else if errorText != nil {
@@ -69,16 +77,6 @@ struct RaidFarmingCollection: View {
         }
         .onChange(of: raidFarmingOptions) { (value) in
             downloadRaidEncounters()
-        }
-        .toolbar {
-            ToolbarItem(placement: .destructiveAction) {
-                    Button {
-                        downloadRaidEncounters(refresh: true)
-                    } label: {
-                        Label("Refresh", systemImage: "arrow.triangle.2.circlepath")
-                            .font(.title3)
-                }
-            }
         }
     }
     
@@ -196,7 +194,7 @@ struct RaidFarmingCollection: View {
         
         DispatchQueue.main.async {
             withAnimation {
-                raidDataFilledAndSorted = RaidDataFilledAndSorted(basedOn: combinedRaidInfo, for: character)
+                raidDataFilledAndSorted = RaidDataFilledAndSorted(basedOn: combinedRaidInfo, for: character, farmingOptions: farmOrder)
             }
         }
         

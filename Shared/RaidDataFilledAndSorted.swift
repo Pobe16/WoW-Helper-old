@@ -25,7 +25,7 @@ struct RaidDataFilledAndSorted {
     private let ignored: [CombinedRaidWithEncounters]
     public let raidsCollection: [NamedRaidCollection]
     
-    init(basedOn characterEncounters: [CombinedRaidWithEncounters], for character: CharacterInProfile) {
+    init(basedOn characterEncounters: [CombinedRaidWithEncounters], for character: CharacterInProfile, farmingOptions: FarmCollectionsOrder) {
         let helper = RaidDataHelper()
         let currentLevel = character.level
         var allRaids = characterEncounters
@@ -47,9 +47,13 @@ struct RaidDataFilledAndSorted {
             allRaids.remove(at: index)
         }
         
+        let completedOrder = farmingOptions.options.first { type -> Bool in
+            type.name == "Completed"
+        }?.order
+        
         raidsToSave.append(
             NamedRaidCollection(
-                id: 4,
+                id: completedOrder ?? 4,
                 name: "Completed",
                 raids: completed
             )
@@ -68,9 +72,13 @@ struct RaidDataFilledAndSorted {
             allRaids.remove(at: index)
         }
         
+        let currentOrder = farmingOptions.options.first { type -> Bool in
+            type.name == "Current content"
+        }?.order
+        
         raidsToSave.append(
             NamedRaidCollection(
-                id: 3,
+                id: currentOrder ?? 3,
                 name: "Current content",
                 raids: currentContent
             )
@@ -90,9 +98,13 @@ struct RaidDataFilledAndSorted {
             allRaids.remove(at: index)
         }
         
+        let hardOrder = farmingOptions.options.first { type -> Bool in
+            type.name == "Hard farm"
+        }?.order
+        
         raidsToSave.append(
             NamedRaidCollection(
-                id: 1,
+                id: hardOrder ?? 1,
                 name: "Hard farm",
                 raids: hardFarm
             )
@@ -111,9 +123,13 @@ struct RaidDataFilledAndSorted {
             allRaids.remove(at: index)
         }
         
+        let easyOrder = farmingOptions.options.first { type -> Bool in
+            type.name == "Easy farm"
+        }?.order
+        
         raidsToSave.append(
             NamedRaidCollection(
-                id: 2,
+                id: easyOrder ?? 2,
                 name: "Easy farm",
                 raids: comfortFarm
             )
@@ -123,9 +139,13 @@ struct RaidDataFilledAndSorted {
         
         ignored = raidsToBeIgnored
         
+        let ignoredOrder = farmingOptions.options.first { type -> Bool in
+            type.name == "Ignored"
+        }?.order
+        
         raidsToSave.append(
             NamedRaidCollection(
-                id: 100,
+                id: ignoredOrder ?? 100,
                 name: "Ignored",
                 raids: ignored
             )

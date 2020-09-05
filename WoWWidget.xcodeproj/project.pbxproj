@@ -73,6 +73,12 @@
 		C89914C224F8743700DADAB1 /* CharacterMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89914C024F8743600DADAB1 /* CharacterMainView.swift */; };
 		C89914C424F992B200DADAB1 /* RaidFarmingCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89914C324F992B200DADAB1 /* RaidFarmingCollection.swift */; };
 		C89914C524F992B200DADAB1 /* RaidFarmingCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89914C324F992B200DADAB1 /* RaidFarmingCollection.swift */; };
+		C8BB333425030DC8003E105F /* RaidOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BB333325030DC8003E105F /* RaidOptions.swift */; };
+		C8BB333525030DC8003E105F /* RaidOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BB333325030DC8003E105F /* RaidOptions.swift */; };
+		C8BB333725030E07003E105F /* RaidOptionsListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BB333625030E07003E105F /* RaidOptionsListItem.swift */; };
+		C8BB333825030E07003E105F /* RaidOptionsListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BB333625030E07003E105F /* RaidOptionsListItem.swift */; };
+		C8BB333A25031D08003E105F /* FarmCollectionsOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BB333925031D08003E105F /* FarmCollectionsOrder.swift */; };
+		C8BB333B25031D08003E105F /* FarmCollectionsOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8BB333925031D08003E105F /* FarmCollectionsOrder.swift */; };
 		C8E4D71924F2A5A500EDAC85 /* InstanceTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E4D71824F2A5A500EDAC85 /* InstanceTile.swift */; };
 		C8E4D71A24F2A5A500EDAC85 /* InstanceTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E4D71824F2A5A500EDAC85 /* InstanceTile.swift */; };
 		C8E4D71C24F2BDD200EDAC85 /* InstanceMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E4D71B24F2BDD200EDAC85 /* InstanceMedia.swift */; };
@@ -155,6 +161,9 @@
 		C88EEA9F24E9EFDB00155CBC /* CharacterLoadingListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterLoadingListItem.swift; sourceTree = "<group>"; };
 		C89914C024F8743600DADAB1 /* CharacterMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterMainView.swift; sourceTree = "<group>"; };
 		C89914C324F992B200DADAB1 /* RaidFarmingCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidFarmingCollection.swift; sourceTree = "<group>"; };
+		C8BB333325030DC8003E105F /* RaidOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidOptions.swift; sourceTree = "<group>"; };
+		C8BB333625030E07003E105F /* RaidOptionsListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidOptionsListItem.swift; sourceTree = "<group>"; };
+		C8BB333925031D08003E105F /* FarmCollectionsOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmCollectionsOrder.swift; sourceTree = "<group>"; };
 		C8E4D71824F2A5A500EDAC85 /* InstanceTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceTile.swift; sourceTree = "<group>"; };
 		C8E4D71B24F2BDD200EDAC85 /* InstanceMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceMedia.swift; sourceTree = "<group>"; };
 		C8F942D824EDAC1600B6222C /* LogOutListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutListItem.swift; sourceTree = "<group>"; };
@@ -237,6 +246,7 @@
 				C806FA512501A7B2006DEF78 /* CharacterRaidTile.swift */,
 				C806FA542501AAE1006DEF78 /* RaidTileBackground.swift */,
 				C835226E2502379900A5D90D /* BackgroundBlurs.swift */,
+				C8BB333925031D08003E105F /* FarmCollectionsOrder.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -358,6 +368,8 @@
 				C831CC3924E7296A00C25F67 /* CharacterListItem.swift */,
 				C88EEA9F24E9EFDB00155CBC /* CharacterLoadingListItem.swift */,
 				C8F942D824EDAC1600B6222C /* LogOutListItem.swift */,
+				C8BB333325030DC8003E105F /* RaidOptions.swift */,
+				C8BB333625030E07003E105F /* RaidOptionsListItem.swift */,
 				C8F942DA24EDB54000B6222C /* LogOutDebugScreen.swift */,
 			);
 			path = NavigationView;
@@ -532,12 +544,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8BB333A25031D08003E105F /* FarmCollectionsOrder.swift in Sources */,
+				C8BB333425030DC8003E105F /* RaidOptions.swift in Sources */,
 				C803C5D624FD81ED00A8D2DE /* CombinedRaidWithEncounters.swift in Sources */,
 				C8F942DF24EDB8DB00B6222C /* ExpansionIndex.swift in Sources */,
 				C874D5CE24F2926A0006B210 /* ExpansionGameDataPreview.swift in Sources */,
 				C803C5E525007CC600A8D2DE /* RaidFarmSection.swift in Sources */,
 				C831CC4724E7355500C25F67 /* CharacterMedia.swift in Sources */,
 				C806FA552501AAE1006DEF78 /* RaidTileBackground.swift in Sources */,
+				C8BB333725030E07003E105F /* RaidOptionsListItem.swift in Sources */,
 				C84B82F724E5FD65006E84FA /* MainScreen.swift in Sources */,
 				C831CC4424E7307100C25F67 /* StoredCache.swift in Sources */,
 				C811E7A724E05FBE0050F6CD /* AuthInfo.swift in Sources */,
@@ -578,12 +593,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8BB333B25031D08003E105F /* FarmCollectionsOrder.swift in Sources */,
+				C8BB333525030DC8003E105F /* RaidOptions.swift in Sources */,
 				C803C5D724FD81ED00A8D2DE /* CombinedRaidWithEncounters.swift in Sources */,
 				C831CC4824E7355500C25F67 /* CharacterMedia.swift in Sources */,
 				C874D5CF24F2926A0006B210 /* ExpansionGameDataPreview.swift in Sources */,
 				C803C5E625007CC600A8D2DE /* RaidFarmSection.swift in Sources */,
 				C8F942E524EF025600B6222C /* ExpansionJournal.swift in Sources */,
 				C806FA562501AAE1006DEF78 /* RaidTileBackground.swift in Sources */,
+				C8BB333825030E07003E105F /* RaidOptionsListItem.swift in Sources */,
 				C8F942E424EF025600B6222C /* GameData.swift in Sources */,
 				C8F942EB24EF028100B6222C /* DataHealthScreen.swift in Sources */,
 				C84B82F824E5FD65006E84FA /* MainScreen.swift in Sources */,

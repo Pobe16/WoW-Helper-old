@@ -13,12 +13,14 @@ struct WoWWidgetApp: App {
     
     @ObservedObject var auth        = Authentication.init()
     @ObservedObject var gameData    = GameData.init()
+    @ObservedObject var order       = FarmCollectionsOrder()
     
     var body: some Scene {
         WindowGroup {
             AuthCheckingScreen()
                 .environmentObject(auth)
                 .environmentObject(gameData)
+                .environmentObject(order)
                 .onAppear(perform: {
                     authInit()
                 })
