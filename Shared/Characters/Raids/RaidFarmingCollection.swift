@@ -124,13 +124,13 @@ struct RaidFarmingCollection: View {
                                     requestUrlAPIFragment +
                                     "?namespace=\(requestAPINamespace)" +
                                     "&locale=\(requestLocale)" +
-                                    "&access_token=\(authorization.oauth2?.accessToken ?? "")"
+                                    "&access_token=\(authorization.oauth2.accessToken ?? "")"
         )!
 //        print(fullRequestURL)
         
-        guard let req = authorization.oauth2?.request(forURL: fullRequestURL) else { return }
+        let req = authorization.oauth2.request(forURL: fullRequestURL)
         
-        let task = authorization.oauth2?.session.dataTask(with: req) { data, response, error in
+        let task = authorization.oauth2.session.dataTask(with: req) { data, response, error in
             if let response = response as? HTTPURLResponse,
                response.statusCode == 200,
                let data = data {
@@ -152,7 +152,7 @@ struct RaidFarmingCollection: View {
                 }
             }
         }
-        task?.resume()
+        task.resume()
     }
     
     func decodeEncountersData(_ data: Data, fromURL url: URL? = nil) {

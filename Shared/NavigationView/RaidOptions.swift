@@ -11,26 +11,36 @@ struct RaidOptions: View {
     @EnvironmentObject var farmOrder: FarmCollectionsOrder
     @State var raidFarmingOptions: Int = 1
     
+    #if os(iOS)
+    var listStyle = InsetGroupedListStyle()
+    #elseif os(macOS)
+    var listStyle =  DefaultListStyle()
+    #endif
     
     
     var body: some View {
         
         VStack{
-            List(){
-                ForEach(farmOrder.options) { collection in
-                    Text("\(collection.order+1). \(collection.name)")
+            Section(header: Text("Farming order")) {
+                List(){
+                    ForEach(farmOrder.options) { collection in
+                        Text("\(collection.order+1). \(collection.name)")
+                    }
+                    .onMove(perform: move)
                 }
-                .onMove(perform: move)
-            }
-            .listStyle(GroupedListStyle())
-            .frame(height: 300)
-            .padding()
-            .toolbar {
-                ToolbarItem(placement: ToolbarItemPlacement.destructiveAction){
-                    EditButton()
-//                    Text("12")
+                .listStyle(listStyle)
+                .frame(height: 300)
+                .padding()
+                .toolbar {
+                    #if os(iOS)
+                    ToolbarItem(placement: .automatic){
+                        EditButton()
+                    }
+                    #endif
                 }
             }
+            .padding(.top, 0)
+            
             
             Section(header: Text("Difficulty")) {
                 Picker(selection: $raidFarmingOptions, label: Text("")) {

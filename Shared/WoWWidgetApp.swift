@@ -11,8 +11,8 @@ import SwiftUI
 @main
 struct WoWWidgetApp: App {
     
-    @ObservedObject var auth        = Authentication.init()
-    @ObservedObject var gameData    = GameData.init()
+    @ObservedObject var auth        = Authentication()
+    @ObservedObject var gameData    = GameData()
     @ObservedObject var order       = FarmCollectionsOrder()
     
     var body: some Scene {
@@ -22,19 +22,16 @@ struct WoWWidgetApp: App {
                 .environmentObject(gameData)
                 .environmentObject(order)
                 .onAppear(perform: {
-                    authInit()
+                    initDebug()
                 })
         }
     }
     
-    fileprivate func authInit(){
+    fileprivate func initDebug(){
 //        UserDefaults.resetStandardUserDefaults()
-        
-        auth.oauth2 = OAuth2CodeGrant.init(settings: auth.settings)
-        
 //        let imagesInCoreData = CoreDataImagesManager.shared.fetchImages()
 //        print(imagesInCoreData?[0].creationDate)
-//        auth.oauth2?.logger = OAuth2DebugLogger(.trace)
+//        auth.oauth2.logger = OAuth2DebugLogger(.trace)
     }
     
 }

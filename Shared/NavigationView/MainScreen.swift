@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct MainScreen: View {
-    @Binding var loggedIn: Bool
     @EnvironmentObject var gameData: GameData
     @EnvironmentObject var authorization: Authentication
     @State var characters: [CharacterInProfile] = []
@@ -49,8 +48,8 @@ struct MainScreen: View {
                         RaidOptionsListItem()
                     }
                     
-                    NavigationLink(destination: LogOutDebugScreen(loggedIn: $loggedIn), tag: "log-out", selection: $selection) {
-                        LogOutListItem(loggedIn: $loggedIn)
+                    NavigationLink(destination: LogOutDebugScreen(), tag: "log-out", selection: $selection) {
+                        LogOutListItem()
                     }
                     
                 }
@@ -89,13 +88,12 @@ struct MainScreen: View {
                                     requestUrlAPIFragment +
                                     "?namespace=\(requestAPINamespace)" +
                                     "&locale=\(requestLocale)" +
-                                    "&access_token=\(authorization.oauth2?.accessToken ?? "")"
+                                    "&access_token=\(authorization.oauth2.accessToken ?? "")"
         )!
 //        print(fullRequestURL)
+        let req = authorization.oauth2.request(forURL: fullRequestURL)
         
-        guard let req = authorization.oauth2?.request(forURL: fullRequestURL) else { return }
-        
-        let task = authorization.oauth2?.session.dataTask(with: req) { data, response, error in
+        let task = authorization.oauth2.session.dataTask(with: req) { data, response, error in
             if let data = data {
 //                print(data)
                 
@@ -123,13 +121,13 @@ struct MainScreen: View {
                 print(error.localizedDescription)
             }
         }
-        task?.resume()
+        task.resume()
     }
 }
 
 struct MainScreen_Previews: PreviewProvider {
     static var previews: some View {
-        MainScreen(loggedIn: .constant(true))
+        MainScreen()
             .previewLayout(.fixed(width: 2732, height: 2048))
     }
 }

@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct LogOutListItem: View {
-    @Binding var loggedIn: Bool
     @EnvironmentObject var authorization: Authentication
     var body: some View {
         Button(action: {
@@ -29,13 +28,15 @@ struct LogOutListItem: View {
     }
     
     fileprivate func logOut() {
-        authorization.oauth2?.forgetTokens()
-        loggedIn = false
+        authorization.oauth2.forgetTokens()
+        authorization.loggedIn = false
+        authorization.loggedBefore = false
+        UserDefaults.standard.set(false, forKey: "UserLoggedBefore")
     }
 }
 
 struct LogOutListItem_Previews: PreviewProvider {
     static var previews: some View {
-        LogOutListItem(loggedIn: .constant(true))
+        LogOutListItem()
     }
 }
