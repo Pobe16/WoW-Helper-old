@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct LogOutDebugScreen: View {
-    @Binding var loggedIn: Bool
     @EnvironmentObject var authorization: Authentication
     var body: some View {
         Text("You should be logged out shortly")
@@ -18,7 +17,9 @@ struct LogOutDebugScreen: View {
     }
     
     fileprivate func logOut() {
-        authorization.oauth2?.forgetTokens()
-        loggedIn = false
+        authorization.oauth2.forgetTokens()
+        authorization.loggedIn = false
+        authorization.loggedBefore = false
+        UserDefaults.standard.set(false, forKey: "UserLoggedBefore")
     }
 }

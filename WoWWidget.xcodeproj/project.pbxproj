@@ -235,18 +235,7 @@
 				C8F942D724EDABFC00B6222C /* NavigationView */,
 				C8E4D71E24F31DFA00EDAC85 /* GameDataInfo */,
 				C811E76224E01B1F0050F6CD /* Assets.xcassets */,
-				C84B82F624E5FD65006E84FA /* MainScreen.swift */,
-				C89914C024F8743600DADAB1 /* CharacterMainView.swift */,
-				C89914C324F992B200DADAB1 /* RaidFarmingCollection.swift */,
-				C803C5E425007CC600A8D2DE /* RaidFarmSection.swift */,
-				C803C5E125007B8800A8D2DE /* RaidFarmHeader.swift */,
-				C803C5DE250070C300A8D2DE /* WrapperForRaidOptions.swift */,
-				C803C5DB24FEF1D700A8D2DE /* RaidDataFilledAndSorted.swift */,
-				C803C5D824FEF18C00A8D2DE /* RaidDataHelper.swift */,
-				C806FA512501A7B2006DEF78 /* CharacterRaidTile.swift */,
-				C806FA542501AAE1006DEF78 /* RaidTileBackground.swift */,
-				C835226E2502379900A5D90D /* BackgroundBlurs.swift */,
-				C8BB333925031D08003E105F /* FarmCollectionsOrder.swift */,
+				C849961C25153834007D1762 /* Characters */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -339,6 +328,32 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
+		C849961C25153834007D1762 /* Characters */ = {
+			isa = PBXGroup;
+			children = (
+				C89914C024F8743600DADAB1 /* CharacterMainView.swift */,
+				C849961D25153876007D1762 /* Raids */,
+			);
+			path = Characters;
+			sourceTree = "<group>";
+		};
+		C849961D25153876007D1762 /* Raids */ = {
+			isa = PBXGroup;
+			children = (
+				C8BB333925031D08003E105F /* FarmCollectionsOrder.swift */,
+				C806FA512501A7B2006DEF78 /* CharacterRaidTile.swift */,
+				C803C5DB24FEF1D700A8D2DE /* RaidDataFilledAndSorted.swift */,
+				C803C5D824FEF18C00A8D2DE /* RaidDataHelper.swift */,
+				C803C5E125007B8800A8D2DE /* RaidFarmHeader.swift */,
+				C89914C324F992B200DADAB1 /* RaidFarmingCollection.swift */,
+				C803C5E425007CC600A8D2DE /* RaidFarmSection.swift */,
+				C806FA542501AAE1006DEF78 /* RaidTileBackground.swift */,
+				C835226E2502379900A5D90D /* BackgroundBlurs.swift */,
+				C803C5DE250070C300A8D2DE /* WrapperForRaidOptions.swift */,
+			);
+			path = Raids;
+			sourceTree = "<group>";
+		};
 		C887121424E4B75700C0A0ED /* Authorization */ = {
 			isa = PBXGroup;
 			children = (
@@ -368,6 +383,7 @@
 				C831CC3924E7296A00C25F67 /* CharacterListItem.swift */,
 				C88EEA9F24E9EFDB00155CBC /* CharacterLoadingListItem.swift */,
 				C8F942D824EDAC1600B6222C /* LogOutListItem.swift */,
+				C84B82F624E5FD65006E84FA /* MainScreen.swift */,
 				C8BB333325030DC8003E105F /* RaidOptions.swift */,
 				C8BB333625030E07003E105F /* RaidOptionsListItem.swift */,
 				C8F942DA24EDB54000B6222C /* LogOutDebugScreen.swift */,
@@ -463,7 +479,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1200;
-				LastUpgradeCheck = 1200;
+				LastUpgradeCheck = 1220;
 				TargetAttributes = {
 					C811E76624E01B1F0050F6CD = {
 						CreatedOnToolsVersion = 12.0;
@@ -721,6 +737,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -774,6 +792,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;

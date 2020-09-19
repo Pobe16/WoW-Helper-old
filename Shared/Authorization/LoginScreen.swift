@@ -12,7 +12,6 @@ struct LoginScreen: View {
     @EnvironmentObject var authorization: Authentication
     @State private var region = 1
     @State private var locale = 0
-    @Binding var loggedIn: Bool
     
     var body: some View {
         VStack{
@@ -71,9 +70,6 @@ struct LoginScreen: View {
                 authenticate()
             }, label: {
                 Text("Authorize me")
-            })
-            .onOpenURL(perform: { url in
-                print(url)
             })
             
             Spacer()
@@ -159,7 +155,7 @@ struct LoginScreen: View {
     }
     
     func authenticate() {
-        if let accessToken = authorization.oauth2?.accessToken {
+        if let accessToken = authorization.oauth2.accessToken {
             print(accessToken)
         }
 //        authorization.oauth2?.logger = OAuth2DebugLogger(.trace)
@@ -167,29 +163,34 @@ struct LoginScreen: View {
         
         authorization.refreshSettings()
         
+        
+        
         #if os(iOS)
-        authorization.oauth2?.authConfig.authorizeEmbedded = true
-        authorization.oauth2?.authConfig.authorizeContext = UIApplication.shared.windows[0].rootViewController
+        authorization.oauth2.authConfig.authorizeEmbedded = true
+        authorization.oauth2.authConfig.authorizeContext = UIApplication.shared.windows[0].rootViewController
+//        #elseif os(macOS)
+//        authorization.oauth2.authConfig.authorizeContext = NSWindow
         #endif
         
 //        print(authorization.settings)
         
-//        let params = OAuth2StringDict()
-//        Authentication.oauth2.authorize(params: params) { authParameters, error in
-        authorization.oauth2?.authorize() { authParameters, error in
+        authorization.oauth2.authorize() { authParameters, error in
             if authParameters != nil {
 //                print("Authorized! Access token is in `oauth2.accessToken`")
-                loggedIn = true
+                authorization.loggedIn = true
+                authorization.loggedBefore = true
+                UserDefaults.standard.set(true, forKey: "UserLoggedBefore")
             }
             else {
+                authorization.loggedIn = false
                 print("Authorization was canceled or went wrong: \(String(describing: error))")   // error will not be nil
             }
         }
     }
 }
 
-struct LoginScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginScreen(loggedIn: .constant(false))
-    }
-}
+//struct LoginScreen_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LoginScreen()
+//    }
+//}

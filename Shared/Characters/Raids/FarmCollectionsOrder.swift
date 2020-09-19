@@ -12,7 +12,7 @@ struct RaidCollectionsNames: Hashable, Identifiable, Comparable, Codable {
         lhs.order < rhs.order
     }
     
-    let id: UUID = UUID()
+    var id: UUID = UUID()
     var order: Int
     var name: String
 }

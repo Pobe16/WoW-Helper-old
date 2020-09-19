@@ -38,11 +38,13 @@ class GameData: ObservableObject {
     }
     
     func continueLoadingDungeons(authorizedBy auth: Authentication) {
-        loadDungeonsToo = true
-        guard loadingAllowed else { return }
-        actualItemsToDownload += dungeonsStubs.count
-        loadingAllowed = false
-        loadDungeonsInfo()
+        if !dungeonsStubs.isEmpty {
+            loadDungeonsToo = true
+            guard loadingAllowed else { return }
+            actualItemsToDownload += dungeonsStubs.count
+            loadingAllowed = false
+            loadDungeonsInfo()
+        }
     }
     
     func hardReloadGameData(authorizedBy auth: Authentication) {
@@ -102,13 +104,13 @@ class GameData: ObservableObject {
                                     requestUrlAPIFragment +
                                     "?namespace=\(requestAPINamespace)" +
                                     "&locale=\(requestLocale)" +
-                                    "&access_token=\(authorization.oauth2?.accessToken ?? "")"
+                                    "&access_token=\(authorization.oauth2.accessToken ?? "")"
         )!
         
         
-        guard let req = authorization.oauth2?.request(forURL: fullRequestURL) else { return }
+        let req = authorization.oauth2.request(forURL: fullRequestURL)
         
-        let task = authorization.oauth2?.session.dataTask(with: req) { data, response, error in
+        let task = authorization.oauth2.session.dataTask(with: req) { data, response, error in
             if let data = data {
                 self.decodeExpansionIndexData(data, fromURL: fullRequestURL)
             }
@@ -118,7 +120,7 @@ class GameData: ObservableObject {
                 print(error.localizedDescription)
             }
         }
-        task?.resume()
+        task.resume()
     }
     
     private func decodeExpansionIndexData(_ data: Data, fromURL url: URL? = nil) {
@@ -177,7 +179,7 @@ class GameData: ObservableObject {
         }
         
         let requestLocale = UserDefaults.standard.object(forKey: "localeCode") as? String ?? EuropeanLocales.BritishEnglish
-        let accessToken = authorization.oauth2?.accessToken ?? ""
+        let accessToken = authorization.oauth2.accessToken ?? ""
         
         let requestUrlAPIHost = "\(stub.key.href)"
         
@@ -197,9 +199,9 @@ class GameData: ObservableObject {
         )!
         
         
-        guard let req = authorization.oauth2?.request(forURL: fullRequestURL) else { return }
+        let req = authorization.oauth2.request(forURL: fullRequestURL)
         
-        let task = authorization.oauth2?.session.dataTask(with: req) { data, response, error in
+        let task = authorization.oauth2.session.dataTask(with: req) { data, response, error in
             if let data = data {
                 self.timeRetries = 0
                 self.connectionRetries = 0
@@ -217,7 +219,7 @@ class GameData: ObservableObject {
                 }
             }
         }
-        task?.resume()
+        task.resume()
         
         
     }
@@ -299,7 +301,7 @@ class GameData: ObservableObject {
         }
         
         let requestLocale = UserDefaults.standard.object(forKey: "localeCode") as? String ?? EuropeanLocales.BritishEnglish
-        let accessToken = authorization.oauth2?.accessToken ?? ""
+        let accessToken = authorization.oauth2.accessToken ?? ""
         
         let fullRequestURL = URL(string:
                                     requestUrlAPIHost +
@@ -308,9 +310,9 @@ class GameData: ObservableObject {
         )!
         
         
-        guard let req = authorization.oauth2?.request(forURL: fullRequestURL) else { return }
+        let req = authorization.oauth2.request(forURL: fullRequestURL)
         
-        let task = authorization.oauth2?.session.dataTask(with: req) { data, response, error in
+        let task = authorization.oauth2.session.dataTask(with: req) { data, response, error in
             if let data = data {
                 self.timeRetries = 0
                 self.connectionRetries = 0
@@ -329,7 +331,7 @@ class GameData: ObservableObject {
                 }
             }
         }
-        task?.resume()
+        task.resume()
         
     }
     private func decodeRaidData(_ data: Data, fromURL url: URL? = nil) {
@@ -411,7 +413,7 @@ class GameData: ObservableObject {
         }
         
         let requestLocale = UserDefaults.standard.object(forKey: "localeCode") as? String ?? EuropeanLocales.BritishEnglish
-        let accessToken = authorization.oauth2?.accessToken ?? ""
+        let accessToken = authorization.oauth2.accessToken ?? ""
         
         let fullRequestURL = URL(string:
                                     requestUrlAPIHost +
@@ -420,9 +422,9 @@ class GameData: ObservableObject {
         )!
         
         
-        guard let req = authorization.oauth2?.request(forURL: fullRequestURL) else { return }
+        let req = authorization.oauth2.request(forURL: fullRequestURL)
         
-        let task = authorization.oauth2?.session.dataTask(with: req) { data, response, error in
+        let task = authorization.oauth2.session.dataTask(with: req) { data, response, error in
             if let data = data {
                 self.timeRetries = 0
                 self.connectionRetries = 0
@@ -442,7 +444,7 @@ class GameData: ObservableObject {
                 }
             }
         }
-        task?.resume()
+        task.resume()
         
     }
     private func decodeDungeonData(_ data: Data, fromURL url: URL? = nil) {

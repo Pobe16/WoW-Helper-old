@@ -67,11 +67,11 @@ struct RaidTileBackground: View {
         let fullRequestURL = URL(string:
                                     requestUrlJournalMedia +
                                     "&locale=\(requestLocale)" +
-                                    "&access_token=\(authorization.oauth2?.accessToken ?? "")"
+                                    "&access_token=\(authorization.oauth2.accessToken ?? "")"
         )!
-        guard let req = authorization.oauth2?.request(forURL: fullRequestURL) else { return }
+        let req = authorization.oauth2.request(forURL: fullRequestURL)
         
-        let task = authorization.oauth2?.session.dataTask(with: req) { data, response, error in
+        let task = authorization.oauth2.session.dataTask(with: req) { data, response, error in
             guard error == nil,
                   let response = response as? HTTPURLResponse,
                   response.statusCode == 200,
@@ -92,7 +92,7 @@ struct RaidTileBackground: View {
                 print(error.localizedDescription)
             }
         }
-        task?.resume()
+        task.resume()
         
     }
     

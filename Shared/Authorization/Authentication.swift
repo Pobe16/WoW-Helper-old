@@ -10,36 +10,34 @@ import Foundation
 
 
 class Authentication: ObservableObject {
+    @Published var settings     : OAuth2JSON
+    @Published var oauth2       : OAuth2CodeGrant
+    @Published var loggedIn     : Bool
+    @Published var loginAllowed : Bool
+    @Published var loggedBefore : Bool
     
-    
-    @Published var settings: OAuth2JSON = [
-        "client_id":                    AuthInfo.ClientID,
-        "client_secret":                AuthInfo.ClientSecret,
-        "authorize_uri":                AuthInfo.AuthorizeUri,
-        "token_uri":                    AuthInfo.TokenUri,
-        "redirect_uris":                AuthInfo.RedirectUris,
-        "scope":                        AuthInfo.Scope,
-        "keychain":                     AuthInfo.Keychain
-    ]
-    
-    @Published var oauth2 : OAuth2CodeGrant?
     
     public func refreshSettings() {
-//        settings = [
-//            "client_id":                    AuthInfo.ClientID,
-//            "client_secret":                AuthInfo.ClientSecret,
-//            "authorize_uri":                AuthInfo.AuthorizeUri,
-//            "token_uri":                    AuthInfo.TokenUri,
-//            "redirect_uris":                AuthInfo.RedirectUris,
-//            "scope":                        AuthInfo.Scope,
-//            "keychain":                     AuthInfo.Keychain
-//        ] as OAuth2JSON
+        self.oauth2             = OAuth2CodeGrant(settings: self.settings)
+    }
+    
+    init() {
+        let startSettings = [
+            "client_id"         :       AuthInfo.ClientID,
+            "client_secret"     :       AuthInfo.ClientSecret,
+            "authorize_uri"     :       AuthInfo.AuthorizeUri,
+            "token_uri"         :       AuthInfo.TokenUri,
+            "redirect_uris"     :       AuthInfo.RedirectUris,
+            "scope"             :       AuthInfo.Scope,
+            "keychain"          :       AuthInfo.Keychain
+        ] as OAuth2JSON
         
-        self.oauth2 = OAuth2CodeGrant(settings: self.settings)
+        settings                = startSettings
+        oauth2                  = OAuth2CodeGrant.init(settings: startSettings)
+        loggedIn                = false
+        loginAllowed            = true
+        loggedBefore            = UserDefaults.standard.bool(forKey: "UserLoggedBefore")
+        
     }
 
-}
-
-class AuthenticationCheck: ObservableObject {
-    @Published var UserIsLoggedIn: Bool = false
 }
