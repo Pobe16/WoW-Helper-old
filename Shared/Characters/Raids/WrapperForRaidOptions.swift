@@ -42,24 +42,6 @@ struct WrapperForRaidOptions: View {
                 }
                 
             }
-//            ToolbarItem(placement: .primaryAction) {
-//                Button(action: {
-//                    popOverVisible.toggle()
-//                }, label: {
-//                    Image(systemName: "gear")
-//                })
-//                .popover(
-//                    isPresented: $popOverVisible,
-//                    content: {
-//                        Picker(selection: $raidFarmingOptions, label: Text("Raid options")) {
-//                            Text("Just Mythic").tag(1)
-//                            Text("All modes").tag(2)
-//                            Text("No LFR").tag(3)
-//                        }
-//
-//                    }
-//                )
-//            }
         }
         .onChange(of: raidFarmingOptions) { (value) in
             saveOptionsSelection(value)

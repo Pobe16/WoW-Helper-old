@@ -28,8 +28,6 @@ struct RaidFarmingCollection: View {
     
     @Binding var raidFarmingOptions: Int
     
-    @State var showOptionsSheet: Bool = false
-    
     let character: CharacterInProfile
     let data = (1...10).map { CGFloat($0) }
 
@@ -40,7 +38,6 @@ struct RaidFarmingCollection: View {
     var body: some View {
         ScrollView {
             if raidDataFilledAndSorted != nil {
-//                LazyVGrid(columns: columns, spacing: 30, pinnedViews: [.sectionHeaders]) {
                 LazyVGrid(columns: columns, spacing: 30) {
                     
                     ForEach(raidDataFilledAndSorted!.raidsCollection){ collection in
@@ -52,7 +49,6 @@ struct RaidFarmingCollection: View {
                         
                     
                 }
-//                .padding()
                 HStack {
                     Spacer()
                     VStack {
@@ -192,9 +188,12 @@ struct RaidFarmingCollection: View {
         let raidDataManipulator = RaidDataHelper()
         let combinedRaidInfo = raidDataManipulator.createFullRaidData(using: characterEncounters, with: gameData, filter: options)
         
+        let allDataCombined = RaidDataFilledAndSorted(basedOn: combinedRaidInfo, for: character, farmingOptions: farmOrder)
+        
         DispatchQueue.main.async {
             withAnimation {
-                raidDataFilledAndSorted = RaidDataFilledAndSorted(basedOn: combinedRaidInfo, for: character, farmingOptions: farmOrder)
+                raidDataFilledAndSorted = allDataCombined
+                
             }
         }
         
@@ -204,22 +203,14 @@ struct RaidFarmingCollection: View {
 
 
 
-#if DEBUG
-struct RaidFarmingCollection_Previews: PreviewProvider {
-    static var previews: some View {
-        RaidFarmingCollection(raidFarmingOptions: .constant(1), character: placeholders.characterInProfile)
-        
-        RaidFarmingCollection(raidFarmingOptions: .constant(1), character: placeholders.characterInProfile)
-        .previewLayout(.fixed(width: 320, height: 568))
-        .previewDisplayName("iPhone SE 1st gen")
+//#if DEBUG
+//struct RaidFarmingCollection_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RaidFarmingCollection(raidFarmingOptions: .constant(1), character: placeholders.characterInProfile)
 //
-//        RaidFarmingCollection(character: placeholders.characterInProfile)
-//        .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
-//        .previewDisplayName("iPhone 8")
-//
-//        RaidFarmingCollection(character: placeholders.characterInProfile)
-//        .previewDevice(PreviewDevice(rawValue: "iPhone 11 Pro Max"))
-//        .previewDisplayName("iPhone 11 Pro Max")
-    }
-}
-#endif
+//        RaidFarmingCollection(raidFarmingOptions: .constant(1), character: placeholders.characterInProfile)
+//        .previewLayout(.fixed(width: 320, height: 568))
+//        .previewDisplayName("iPhone SE 1st gen")
+//    }
+//}
+//#endif
