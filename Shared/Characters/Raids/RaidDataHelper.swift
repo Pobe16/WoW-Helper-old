@@ -210,7 +210,10 @@ struct RaidDataHelper {
     
     private func createNewEmptyRaid(for instance: InstanceJournal, filteredBy options: RaidFarmingOptions) -> CombinedRaidWithEncounters {
         var allRaids: [RaidEncountersForCharacter] = []
-        instance.modes.forEach { (mode) in
+        
+        let filteredModes: [InstanceMode] = filterRaidModes(forModes: instance.modes, by: options)
+        
+        filteredModes.forEach { (mode) in
             let emptyInstanceMode = createEmptyInstanceMode(for: instance, withMode: mode.mode)
             allRaids.append(emptyInstanceMode)
         }
@@ -222,7 +225,7 @@ struct RaidDataHelper {
                 minimumLevel: instance.minimumLevel,
                 expansion: instance.expansion,
                 media: instance.media,
-                modes: filterRaidModes(forModes: instance.modes, by: options),
+                modes: filteredModes,
                 records: allRaids
             )
         return currentRaid

@@ -37,7 +37,11 @@ struct RaidDataFilledAndSorted {
         completed = allRaids.filter({ (raid) -> Bool in
             helper.isWholeRaidCleared(raid)
         }).sorted(by: { (lhs, rhs) -> Bool in
-            lhs.raidId > rhs.raidId
+            if (lhs.expansion.id == rhs.expansion.id) {
+                return lhs.raidId > rhs.raidId
+            } else {
+                return lhs.expansion.id > rhs.expansion.id
+            }
         })
         
         completed.forEach { (raid) in
@@ -62,7 +66,11 @@ struct RaidDataFilledAndSorted {
         currentContent = allRaids.filter({ (raid) -> Bool in
             raid.minimumLevel == currentLevel
         }).sorted(by: { (lhs, rhs) -> Bool in
-            lhs.raidId > rhs.raidId
+            if (lhs.expansion.id == rhs.expansion.id) {
+                return lhs.raidId > rhs.raidId
+            } else {
+                return lhs.expansion.id > rhs.expansion.id
+            }
         })
         
         currentContent.forEach { (raid) in
@@ -88,7 +96,11 @@ struct RaidDataFilledAndSorted {
         hardFarm = allRaids.filter({ (raid) -> Bool in
             currentLevel > raid.minimumLevel && currentLevel - raid.minimumLevel < 11
         }).sorted(by: { (lhs, rhs) -> Bool in
-            lhs.raidId > rhs.raidId
+            if (lhs.expansion.id == rhs.expansion.id) {
+                return lhs.raidId > rhs.raidId
+            } else {
+                return lhs.expansion.id > rhs.expansion.id
+            }
         })
         
         hardFarm.forEach { (raid) in
@@ -113,8 +125,13 @@ struct RaidDataFilledAndSorted {
         comfortFarm = allRaids.filter({ (raid) -> Bool in
             currentLevel > raid.minimumLevel
         }).sorted(by: { (lhs, rhs) -> Bool in
-            lhs.raidId > rhs.raidId
+            if (lhs.expansion.id == rhs.expansion.id) {
+                return lhs.raidId > rhs.raidId
+            } else {
+                return lhs.expansion.id > rhs.expansion.id
+            }
         })
+        
         
         comfortFarm.forEach { (raid) in
             let raidIndex = allRaids.firstIndex(of: raid)
@@ -137,7 +154,13 @@ struct RaidDataFilledAndSorted {
         
         raidsToBeIgnored.append(contentsOf: allRaids)
         
-        ignored = raidsToBeIgnored
+        ignored = raidsToBeIgnored.sorted(by: { (lhs, rhs) -> Bool in
+            if (lhs.expansion.id == rhs.expansion.id) {
+                return lhs.raidId > rhs.raidId
+            } else {
+                return lhs.expansion.id > rhs.expansion.id
+            }
+        })
         
         let ignoredOrder = farmingOptions.options.first { type -> Bool in
             type.name == "Ignored"
