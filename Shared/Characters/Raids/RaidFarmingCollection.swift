@@ -29,7 +29,6 @@ struct RaidFarmingCollection: View {
     @Binding var raidFarmingOptions: Int
     
     let character: CharacterInProfile
-    let data = (1...10).map { CGFloat($0) }
 
     let columns = [
         GridItem(.adaptive(minimum: 240), spacing: 0)
@@ -39,15 +38,15 @@ struct RaidFarmingCollection: View {
         ScrollView {
             if raidDataFilledAndSorted != nil {
                 LazyVGrid(columns: columns, spacing: 30) {
-                    
-                    ForEach(raidDataFilledAndSorted!.raidsCollection){ collection in
+                    ForEach(raidDataFilledAndSorted!.raidsCollection, id: \.id){ collection in
                         if collection.raids.count > 0 {
-                            RaidFarmSection(collection: collection, faction: character.faction)
+                            Section(header: RaidFarmHeader(headerText: collection.name, faction: character.faction) ) {
+                                ForEach(collection.raids, id: \.raidId) { raid in
+                                    CharacterRaidTile(raid: raid, character: character)
+                                }
+                            }
                         }
                     }
-                    
-                        
-                    
                 }
                 HStack {
                     Spacer()
@@ -162,9 +161,12 @@ struct RaidFarmingCollection: View {
             if let url = url {
                 JSONCoreDataManager.shared.saveJSON(data, withURL: url)
             }
-            
-            characterEncounters = dataResponse
-            combineCharacterEncountersWithData()
+            DispatchQueue.main.async {
+                withAnimation {
+                    characterEncounters = dataResponse
+                }
+                combineCharacterEncountersWithData()
+            }
 
         } catch {
             print(error)
@@ -188,29 +190,14 @@ struct RaidFarmingCollection: View {
         let raidDataManipulator = RaidDataHelper()
         let combinedRaidInfo = raidDataManipulator.createFullRaidData(using: characterEncounters, with: gameData, filter: options)
         
-        let allDataCombined = RaidDataFilledAndSorted(basedOn: combinedRaidInfo, for: character, farmingOptions: farmOrder)
+        let allDataCombined = RaidDataFilledAndSorted(basedOn: combinedRaidInfo, for: character, farmingOrder: farmOrder)
         
         DispatchQueue.main.async {
             withAnimation {
                 raidDataFilledAndSorted = allDataCombined
-                
             }
         }
         
         
     }
 }
-
-
-
-//#if DEBUG
-//struct RaidFarmingCollection_Previews: PreviewProvider {
-//    static var previews: some View {
-//        RaidFarmingCollection(raidFarmingOptions: .constant(1), character: placeholders.characterInProfile)
-//
-//        RaidFarmingCollection(raidFarmingOptions: .constant(1), character: placeholders.characterInProfile)
-//        .previewLayout(.fixed(width: 320, height: 568))
-//        .previewDisplayName("iPhone SE 1st gen")
-//    }
-//}
-//#endif

@@ -19,8 +19,6 @@
 		C803C5E0250070C300A8D2DE /* WrapperForRaidOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C803C5DE250070C300A8D2DE /* WrapperForRaidOptions.swift */; };
 		C803C5E225007B8800A8D2DE /* RaidFarmHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C803C5E125007B8800A8D2DE /* RaidFarmHeader.swift */; };
 		C803C5E325007B8800A8D2DE /* RaidFarmHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C803C5E125007B8800A8D2DE /* RaidFarmHeader.swift */; };
-		C803C5E525007CC600A8D2DE /* RaidFarmSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C803C5E425007CC600A8D2DE /* RaidFarmSection.swift */; };
-		C803C5E625007CC600A8D2DE /* RaidFarmSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C803C5E425007CC600A8D2DE /* RaidFarmSection.swift */; };
 		C803C5E92501962800A8D2DE /* VisualEffects in Frameworks */ = {isa = PBXBuildFile; productRef = C803C5E82501962800A8D2DE /* VisualEffects */; };
 		C803C5EB2501964700A8D2DE /* VisualEffects in Frameworks */ = {isa = PBXBuildFile; productRef = C803C5EA2501964700A8D2DE /* VisualEffects */; };
 		C806FA522501A7B2006DEF78 /* CharacterRaidTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C806FA512501A7B2006DEF78 /* CharacterRaidTile.swift */; };
@@ -54,6 +52,14 @@
 		C831CC5424E89A0200C25F67 /* CoreDataImagesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C831CC5224E89A0200C25F67 /* CoreDataImagesManager.swift */; };
 		C835226F2502379900A5D90D /* BackgroundBlurs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C835226E2502379900A5D90D /* BackgroundBlurs.swift */; };
 		C83522702502379900A5D90D /* BackgroundBlurs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C835226E2502379900A5D90D /* BackgroundBlurs.swift */; };
+		C84996272517B837007D1762 /* MountItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84996262517B837007D1762 /* MountItemList.swift */; };
+		C84996282517B837007D1762 /* MountItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84996262517B837007D1762 /* MountItemList.swift */; };
+		C84996322517C691007D1762 /* PetItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84996312517C691007D1762 /* PetItemList.swift */; };
+		C84996332517C691007D1762 /* PetItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84996312517C691007D1762 /* PetItemList.swift */; };
+		C84996392517CBBA007D1762 /* RaidDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84996382517CBBA007D1762 /* RaidDetails.swift */; };
+		C849963A2517CBBA007D1762 /* RaidDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84996382517CBBA007D1762 /* RaidDetails.swift */; };
+		C849968725191ED7007D1762 /* CharacterListItemBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = C849968625191ED7007D1762 /* CharacterListItemBackground.swift */; };
+		C849968825191ED7007D1762 /* CharacterListItemBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = C849968625191ED7007D1762 /* CharacterListItemBackground.swift */; };
 		C84B82F724E5FD65006E84FA /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84B82F624E5FD65006E84FA /* MainScreen.swift */; };
 		C84B82F824E5FD65006E84FA /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84B82F624E5FD65006E84FA /* MainScreen.swift */; };
 		C84B82FA24E5FF56006E84FA /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84B82F924E5FF56006E84FA /* UserProfile.swift */; };
@@ -125,7 +131,6 @@
 		C803C5DB24FEF1D700A8D2DE /* RaidDataFilledAndSorted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidDataFilledAndSorted.swift; sourceTree = "<group>"; };
 		C803C5DE250070C300A8D2DE /* WrapperForRaidOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapperForRaidOptions.swift; sourceTree = "<group>"; };
 		C803C5E125007B8800A8D2DE /* RaidFarmHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidFarmHeader.swift; sourceTree = "<group>"; };
-		C803C5E425007CC600A8D2DE /* RaidFarmSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidFarmSection.swift; sourceTree = "<group>"; };
 		C806FA512501A7B2006DEF78 /* CharacterRaidTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterRaidTile.swift; sourceTree = "<group>"; };
 		C806FA542501AAE1006DEF78 /* RaidTileBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidTileBackground.swift; sourceTree = "<group>"; };
 		C811E76024E01B1E0050F6CD /* WoWWidgetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WoWWidgetApp.swift; sourceTree = "<group>"; };
@@ -151,6 +156,10 @@
 		C831CC4E24E8974100C25F67 /* MyData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyData.xcdatamodel; sourceTree = "<group>"; };
 		C831CC5224E89A0200C25F67 /* CoreDataImagesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataImagesManager.swift; sourceTree = "<group>"; };
 		C835226E2502379900A5D90D /* BackgroundBlurs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundBlurs.swift; sourceTree = "<group>"; };
+		C84996262517B837007D1762 /* MountItemList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MountItemList.swift; sourceTree = "<group>"; };
+		C84996312517C691007D1762 /* PetItemList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetItemList.swift; sourceTree = "<group>"; };
+		C84996382517CBBA007D1762 /* RaidDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidDetails.swift; sourceTree = "<group>"; };
+		C849968625191ED7007D1762 /* CharacterListItemBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListItemBackground.swift; sourceTree = "<group>"; };
 		C84B82F624E5FD65006E84FA /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		C84B82F924E5FF56006E84FA /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		C8665E6424F066DF0043A23C /* GameDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDataLoader.swift; sourceTree = "<group>"; };
@@ -306,6 +315,8 @@
 				C8E4D71B24F2BDD200EDAC85 /* InstanceMedia.swift */,
 				C84B82F924E5FF56006E84FA /* UserProfile.swift */,
 				C803C5D524FD81ED00A8D2DE /* CombinedRaidWithEncounters.swift */,
+				C84996262517B837007D1762 /* MountItemList.swift */,
+				C84996312517C691007D1762 /* PetItemList.swift */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -342,11 +353,11 @@
 			children = (
 				C8BB333925031D08003E105F /* FarmCollectionsOrder.swift */,
 				C806FA512501A7B2006DEF78 /* CharacterRaidTile.swift */,
+				C84996382517CBBA007D1762 /* RaidDetails.swift */,
 				C803C5DB24FEF1D700A8D2DE /* RaidDataFilledAndSorted.swift */,
 				C803C5D824FEF18C00A8D2DE /* RaidDataHelper.swift */,
 				C803C5E125007B8800A8D2DE /* RaidFarmHeader.swift */,
 				C89914C324F992B200DADAB1 /* RaidFarmingCollection.swift */,
-				C803C5E425007CC600A8D2DE /* RaidFarmSection.swift */,
 				C806FA542501AAE1006DEF78 /* RaidTileBackground.swift */,
 				C835226E2502379900A5D90D /* BackgroundBlurs.swift */,
 				C803C5DE250070C300A8D2DE /* WrapperForRaidOptions.swift */,
@@ -381,6 +392,7 @@
 			isa = PBXGroup;
 			children = (
 				C831CC3924E7296A00C25F67 /* CharacterListItem.swift */,
+				C849968625191ED7007D1762 /* CharacterListItemBackground.swift */,
 				C88EEA9F24E9EFDB00155CBC /* CharacterLoadingListItem.swift */,
 				C8F942D824EDAC1600B6222C /* LogOutListItem.swift */,
 				C84B82F624E5FD65006E84FA /* MainScreen.swift */,
@@ -562,10 +574,12 @@
 			files = (
 				C8BB333A25031D08003E105F /* FarmCollectionsOrder.swift in Sources */,
 				C8BB333425030DC8003E105F /* RaidOptions.swift in Sources */,
+				C84996392517CBBA007D1762 /* RaidDetails.swift in Sources */,
 				C803C5D624FD81ED00A8D2DE /* CombinedRaidWithEncounters.swift in Sources */,
 				C8F942DF24EDB8DB00B6222C /* ExpansionIndex.swift in Sources */,
+				C849968725191ED7007D1762 /* CharacterListItemBackground.swift in Sources */,
+				C84996322517C691007D1762 /* PetItemList.swift in Sources */,
 				C874D5CE24F2926A0006B210 /* ExpansionGameDataPreview.swift in Sources */,
-				C803C5E525007CC600A8D2DE /* RaidFarmSection.swift in Sources */,
 				C831CC4724E7355500C25F67 /* CharacterMedia.swift in Sources */,
 				C806FA552501AAE1006DEF78 /* RaidTileBackground.swift in Sources */,
 				C8BB333725030E07003E105F /* RaidOptionsListItem.swift in Sources */,
@@ -598,6 +612,7 @@
 				C803C5D924FEF18C00A8D2DE /* RaidDataHelper.swift in Sources */,
 				C88EEAA024E9EFDB00155CBC /* CharacterLoadingListItem.swift in Sources */,
 				C8E4D71C24F2BDD200EDAC85 /* InstanceMedia.swift in Sources */,
+				C84996272517B837007D1762 /* MountItemList.swift in Sources */,
 				C831CC5324E89A0200C25F67 /* CoreDataImagesManager.swift in Sources */,
 				C88EEA9D24E9E2B800155CBC /* JSONCoreDataManager.swift in Sources */,
 				C806FA522501A7B2006DEF78 /* CharacterRaidTile.swift in Sources */,
@@ -611,10 +626,12 @@
 			files = (
 				C8BB333B25031D08003E105F /* FarmCollectionsOrder.swift in Sources */,
 				C8BB333525030DC8003E105F /* RaidOptions.swift in Sources */,
+				C849963A2517CBBA007D1762 /* RaidDetails.swift in Sources */,
 				C803C5D724FD81ED00A8D2DE /* CombinedRaidWithEncounters.swift in Sources */,
 				C831CC4824E7355500C25F67 /* CharacterMedia.swift in Sources */,
+				C849968825191ED7007D1762 /* CharacterListItemBackground.swift in Sources */,
+				C84996332517C691007D1762 /* PetItemList.swift in Sources */,
 				C874D5CF24F2926A0006B210 /* ExpansionGameDataPreview.swift in Sources */,
-				C803C5E625007CC600A8D2DE /* RaidFarmSection.swift in Sources */,
 				C8F942E524EF025600B6222C /* ExpansionJournal.swift in Sources */,
 				C806FA562501AAE1006DEF78 /* RaidTileBackground.swift in Sources */,
 				C8BB333825030E07003E105F /* RaidOptionsListItem.swift in Sources */,
@@ -647,6 +664,7 @@
 				C803C5DA24FEF18C00A8D2DE /* RaidDataHelper.swift in Sources */,
 				C8F942E724EF027300B6222C /* CharacterListItem.swift in Sources */,
 				C8E4D71D24F2BDD200EDAC85 /* InstanceMedia.swift in Sources */,
+				C84996282517B837007D1762 /* MountItemList.swift in Sources */,
 				C831CC5424E89A0200C25F67 /* CoreDataImagesManager.swift in Sources */,
 				C88EEA9E24E9E2B800155CBC /* JSONCoreDataManager.swift in Sources */,
 				C806FA532501A7B2006DEF78 /* CharacterRaidTile.swift in Sources */,

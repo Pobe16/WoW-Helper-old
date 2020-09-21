@@ -8,57 +8,62 @@
 import SwiftUI
 
 struct CharacterRaidTile: View {
+    @Namespace var tile    
+    
     let raid: CombinedRaidWithEncounters
-    let faction: Faction
+    let character: CharacterInProfile
     
     var body: some View {
         
         
-        VStack{
-            HStack() {
-                Spacer()
-                Text("\(raid.raidName)")
-                    .font(.title2)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.5)
-                Spacer()
-            }
-            .padding(.vertical, 5)
-            .background(
-                RaidTitleBackgroundBlur()
-            )
-            
-            Spacer()
-            VStack() {
-                ForEach(raid.records, id: \.self){ record in
-                    HStack {
-                        Text("\(record.difficulty.name)")
-                        Spacer()
-                        Text(getSumUp(for: record))
-                    }
-                    .padding(.vertical, 1)
-                    .padding(.horizontal, 10)
-                    .background(
-                        InstanceProgressBackground(
-                            killedBosses: getNumberOfKilledBosses(for: record),
-                            allBosses: getNumberOfEncounters(for: record),
-                            faction: faction
-                        )
-                    )
+        NavigationLink( destination: RaidDetails(raid: raid, character: character) ) {
+            VStack{
+                HStack() {
+                    Spacer()
+                    Text("\(raid.raidName)")
+                        .font(.title2)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
+                    Spacer()
                 }
+                .padding(.vertical, 5)
+                .background(
+                    RaidTitleBackgroundBlur()
+                )
+                
+                Spacer()
+                VStack() {
+                    ForEach(raid.records, id: \.difficulty.name){ record in
+                        HStack {
+                            Text("\(record.difficulty.name)")
+                            Spacer()
+                            Text(getSumUp(for: record))
+                        }
+                        .padding(.vertical, 1)
+                        .padding(.horizontal, 10)
+                        .background(
+                            InstanceProgressBackground(
+                                killedBosses: getNumberOfKilledBosses(for: record),
+                                allBosses: getNumberOfEncounters(for: record),
+                                faction: character.faction
+                            )
+                        )
+                    }
+                }
+                .background(
+                    InstanceProgressFullWidthBackgroundBlur()
+                )
+                
+                    
             }
             .background(
-                InstanceProgressFullWidthBackgroundBlur()
+                RaidTileBackground(name: raid.raidName, id: raid.raidId, mediaUrl: raid.media.key.href)
             )
-            
-                
+            .frame(height: 240)
+            .cornerRadius(15, antialiased: true)
+            .padding(.horizontal, 15)
+            .foregroundColor(.primary)
         }
-        .background(
-            RaidTileBackground(name: raid.raidName, id: raid.raidId, mediaUrl: raid.media.key.href)
-        )
-        .frame(height: 240)
-        .cornerRadius(15, antialiased: true)
-        .padding(.horizontal, 15)
     }
     
     func getSumUp(for mode: RaidEncountersForCharacter) -> String {

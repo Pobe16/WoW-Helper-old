@@ -8,6 +8,14 @@
 import Foundation
 
 struct RaidDataHelper {
+    public let raidSort = { (lhs: CombinedRaidWithEncounters, rhs: CombinedRaidWithEncounters) -> Bool in
+        if (lhs.expansion.id == rhs.expansion.id) {
+            return lhs.raidId > rhs.raidId
+        } else {
+            return lhs.expansion.id > rhs.expansion.id
+        }
+    }
+    
     public func createFullRaidData(using characterEncounters: CharacterRaidEncounters?, with gameData: GameData, filter options: RaidFarmingOptions) -> [CombinedRaidWithEncounters] {
         
         var strippedRaids: [RaidInstancesInCharacterEncounters] = []

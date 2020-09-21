@@ -14,6 +14,8 @@ class GameData: ObservableObject {
     var connectionRetries                                   = 0
     var reloadFromCDAllowed                                 = true
     var loadDungeonsToo                                     = false
+    var mountItemsList: [MountItem]                         = []
+    var petItemsList: [PetItem]                             = []
     
     @Published var expansionsStubs: [ExpansionIndex]        = []
     @Published var expansions: [ExpansionJournal]           = []
@@ -35,6 +37,14 @@ class GameData: ObservableObject {
         allData?.forEach({ item in
             JSONCoreDataManager.shared.deleteJSONData(data: item)
         })
+    }
+    
+    func loadCollectableData(){
+        
+        guard mountItemsList.count == 0, petItemsList.count == 0 else { return }
+        
+        mountItemsList  = createMountsList()
+        petItemsList    = createPetsList()
     }
     
     func continueLoadingDungeons(authorizedBy auth: Authentication) {
