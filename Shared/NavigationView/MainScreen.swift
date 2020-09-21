@@ -21,7 +21,7 @@ struct MainScreen: View {
     
     var body: some View {
         NavigationView {
-            List() {
+            List {
                 
                 Section(header: Text(gameData.loadingAllowed ? "Characters" : "Loading game data")){
                     if characters.count > 0 {
@@ -34,6 +34,8 @@ struct MainScreen: View {
                                 CharacterListItem(character: character)
                             }
                             .disabled(!gameData.loadingAllowed)
+                            .listRowBackground(CharacterListItemBackground(charClass: character.playableClass, faction: character.faction))
+                            
                         }
                     } else {
                         CharacterLoadingListItem()

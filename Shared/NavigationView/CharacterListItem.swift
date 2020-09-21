@@ -27,6 +27,10 @@ struct CharacterListItem: View {
                     .scaledToFit()
                     .frame(width: 63, height: 63)
                     .cornerRadius(15, antialiased: true)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 15)
+                            .stroke(Color("faction\(character.faction.name)"), lineWidth: 2)
+                    )
                 #else
                 Image(nsImage: NSImage(data: characterImageData!)!)
                     .resizable()
@@ -37,7 +41,9 @@ struct CharacterListItem: View {
             }
             Text("\(character.name) lvl: \(character.level)")
             
-        }.onAppear(perform: {
+        }
+        .listRowBackground(Color.red)
+        .onAppear(perform: {
             loadMediaData()
         })
     }
