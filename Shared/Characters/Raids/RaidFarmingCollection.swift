@@ -57,9 +57,10 @@ struct RaidFarmingCollection: View {
                         } label: {
                             Label("Refresh", systemImage: "arrow.counterclockwise")
                         }
+                        .padding(.top)
                     }
                     Spacer()
-                }.padding(.bottom)
+                }.padding(.vertical)
             } else if errorText != nil {
                 Text("\(errorText ?? "Unknown Error")")
             } else {

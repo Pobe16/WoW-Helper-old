@@ -7,9 +7,27 @@
 
 import SwiftUI
 
+struct WoWCharacterButtonStyle: ButtonStyle {
+
+    let charClass: ClassInProfile
+    let faction: Faction
+    
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .background(
+                CharacterListItemBackground(
+                    charClass: charClass,
+                    faction: faction,
+                    selected: configuration.isPressed
+                )
+            )
+    }
+}
+
 struct CharacterListItemBackground: View {
     let charClass: ClassInProfile
     let faction: Faction
+    let selected: Bool
     
     #if os(iOS)
     let backgroundColor = UIColor.secondarySystemBackground
@@ -24,14 +42,29 @@ struct CharacterListItemBackground: View {
                 LinearGradient(
                     gradient: Gradient(
                         stops: [
-                            .init(color: Color("faction\(faction.name)"), location: 0),
-                            .init(color: Color("faction\(faction.name)"), location: 0.15),
-                            .init(color: Color("class\(removeSpaces(charClass.name))"), location: 0.85),
-                            .init(color: Color("class\(removeSpaces(charClass.name))"), location: 1),
+                            .init(
+                                color: Color("faction\(faction.type)")
+                                    .opacity(selected ? 0.75 : 0.5),
+                                location: 0
+                            ),
+                            .init(
+                                color: Color("faction\(faction.type)")
+                                    .opacity(selected ? 0.85 : 0.45),
+                                location: 0.20
+                            ),
+                            .init(
+                                color: Color("class\(charClass.id)")
+                                    .opacity(selected ? 0.8 : 0.4),
+                                location: 0.50
+                            ),
+                            .init(
+                                color: Color("class\(charClass.id)")
+                                    .opacity(selected ? 0.75 : 0.35),
+                                location: 1
+                            )
                         ]),
                     startPoint: .leading,
                     endPoint: .trailing)
-                    .opacity(0.5)
             }
         }
         
@@ -44,6 +77,6 @@ struct CharacterListItemBackground: View {
 
 struct CharacterListItemBackground_Previews: PreviewProvider {
     static var previews: some View {
-        CharacterListItemBackground(charClass: placeholders.characterInProfile.playableClass, faction: placeholders.characterInProfile.faction)
+        CharacterListItemBackground(charClass: placeholders.characterInProfile.playableClass, faction: placeholders.characterInProfile.faction, selected: false)
     }
 }

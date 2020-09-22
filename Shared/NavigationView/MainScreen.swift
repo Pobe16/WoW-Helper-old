@@ -19,8 +19,14 @@ struct MainScreen: View {
     var listStyle =  DefaultListStyle()
     #endif
     
+    init() {
+        UITableViewCell.appearance().selectionStyle = .none
+        
+    }
+    
     var body: some View {
         NavigationView {
+            
             List {
                 
                 Section(header: Text(gameData.loadingAllowed ? "Characters" : "Loading game data")){
@@ -34,8 +40,13 @@ struct MainScreen: View {
                                 CharacterListItem(character: character)
                             }
                             .disabled(!gameData.loadingAllowed)
-                            .listRowBackground(CharacterListItemBackground(charClass: character.playableClass, faction: character.faction))
-                            
+                            .listRowBackground(
+                                CharacterListItemBackground(
+                                    charClass: character.playableClass,
+                                    faction: character.faction,
+                                    selected: selection == "\(character.name)-\(character.realm.slug)"
+                                )
+                            )
                         }
                     } else {
                         CharacterLoadingListItem()
