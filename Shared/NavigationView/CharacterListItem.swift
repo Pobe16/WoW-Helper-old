@@ -29,7 +29,7 @@ struct CharacterListItem: View {
                     .cornerRadius(15, antialiased: true)
                     .overlay(
                         RoundedRectangle(cornerRadius: 15)
-                            .stroke(Color("faction\(character.faction.name)"), lineWidth: 2)
+                            .stroke(Color("faction\(character.faction.type)"), lineWidth: 2)
                     )
                 #else
                 Image(nsImage: NSImage(data: characterImageData!)!)

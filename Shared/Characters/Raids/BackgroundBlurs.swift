@@ -13,7 +13,11 @@ struct RaidTitleBackgroundBlur: View {
         #if os(iOS)
         VisualEffectBlur(blurStyle: .systemChromeMaterial)
         #elseif os(macOS)
-        VisualEffectBlur(material: .headerView, blendingMode: .withinWindow, state: .followsWindowActiveState)
+        VisualEffectBlur(
+            material: .headerView,
+            blendingMode: .withinWindow,
+            state: .followsWindowActiveState
+        )
         #endif
     }
 }
@@ -23,7 +27,11 @@ struct InstanceProgressFullWidthBackgroundBlur: View {
         #if os(iOS)
         VisualEffectBlur(blurStyle: .systemUltraThinMaterial).opacity(0.75)
         #elseif os(macOS)
-        VisualEffectBlur(material: .contentBackground, blendingMode: .withinWindow, state: .followsWindowActiveState).opacity(0.75)
+        VisualEffectBlur(
+            material: .contentBackground,
+            blendingMode: .withinWindow,
+            state: .followsWindowActiveState
+        ).opacity(0.75)
         #endif
     }
 }
@@ -35,27 +43,15 @@ struct InstanceProgressBackground: View {
     
     var body: some View {
         GeometryReader { geometry in
-            
-            switch faction.type {
-            case "ALLIANCE":
-                HStack {
-                    Color.blue.opacity(0.6)
-                        .frame( width: geometry.size.width / CGFloat(allBosses) * CGFloat(killedBosses) )
-                    Spacer()
-                }
-            case "HORDE":
-                HStack {
-                    Color.red.opacity(0.6)
-                        .frame( width: geometry.size.width / CGFloat(allBosses) * CGFloat(killedBosses) )
-                    Spacer()
-                }
-            default:
-                HStack {
-                    Color.white.opacity(0.3)
-                        .frame( width: geometry.size.width / CGFloat(allBosses) * CGFloat(killedBosses) )
-                    Spacer()
-                }
-            }
+
+            Color("faction\(faction.type)")
+                .frame(
+                    width:
+                        geometry.size.width /
+                        CGFloat(allBosses) *
+                        CGFloat(killedBosses)
+                )
+            Spacer()
         }
     }
 }

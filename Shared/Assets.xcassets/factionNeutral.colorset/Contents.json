@@ -3,7 +3,7 @@
     {
       "color" : {
         "platform" : "ios",
-        "reference" : "systemPurpleColor"
+        "reference" : "tertiaryLabelColor"
       },
       "idiom" : "universal"
     }
