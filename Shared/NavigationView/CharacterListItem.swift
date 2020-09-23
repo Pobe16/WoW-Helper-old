@@ -8,10 +8,14 @@
 import SwiftUI
 
 struct CharacterListItem: View {
+    @Environment (\.colorScheme) var colorScheme: ColorScheme
+    
     @EnvironmentObject var authorization: Authentication
     @State var characterMedia: CharacterMedia?
     let character: CharacterInProfile
     @State var characterImageData: Data? = nil
+    
+    
     var body: some View {
         HStack{
             if characterImageData == nil {
@@ -39,10 +43,16 @@ struct CharacterListItem: View {
                     .cornerRadius(15, antialiased: true)
                 #endif
             }
-            Text("\(character.name) lvl: \(character.level)")
+            
+            // only show text shadow in dark mode
+            if colorScheme == .light {
+                Text("\(character.name) lvl: \(character.level)")
+            } else {
+                Text("\(character.name) lvl: \(character.level)")
+                    .shadow(color: .black, radius: 1, x: 1, y: 1)
+            }
             
         }
-        .listRowBackground(Color.red)
         .onAppear(perform: {
             loadMediaData()
         })

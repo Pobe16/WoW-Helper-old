@@ -15,14 +15,16 @@ struct MainScreen: View {
     
     #if os(iOS)
     var listStyle = InsetGroupedListStyle()
+    
+    
+    init() {
+        UITableViewCell.appearance().selectionStyle = .none
+    }
     #elseif os(macOS)
     var listStyle =  DefaultListStyle()
     #endif
     
-    init() {
-        UITableViewCell.appearance().selectionStyle = .none
-        
-    }
+    
     
     var body: some View {
         NavigationView {
