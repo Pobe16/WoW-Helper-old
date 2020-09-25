@@ -7,23 +7,6 @@
 
 import SwiftUI
 
-struct WoWCharacterButtonStyle: ButtonStyle {
-
-    let charClass: ClassInProfile
-    let faction: Faction
-    
-    func makeBody(configuration: Self.Configuration) -> some View {
-        configuration.label
-            .background(
-                CharacterListItemBackground(
-                    charClass: charClass,
-                    faction: faction,
-                    selected: configuration.isPressed
-                )
-            )
-    }
-}
-
 struct CharacterListItemBackground: View {
     @Environment (\.colorScheme) var colorScheme: ColorScheme
     let charClass: ClassInProfile
@@ -66,6 +49,8 @@ struct CharacterListItemBackground: View {
                         ]),
                     startPoint: .leading,
                     endPoint: .trailing)
+                Image("Wood_Damage_Overlay_B_01")
+                    .resizable(resizingMode: .tile)
             }
         }
         

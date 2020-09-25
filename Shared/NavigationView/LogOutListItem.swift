@@ -19,7 +19,8 @@ struct LogOutListItem: View {
                     .scaledToFit()
                     .frame(width: 63, height: 63)
                     .cornerRadius(15, antialiased: true)
-                Text("Log me out!")
+                Text("Log out!".uppercased())
+                    .fontWeight(.bold)
             }
             .onTapGesture {
                 logOut()
