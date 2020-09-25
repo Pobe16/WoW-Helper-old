@@ -15,10 +15,12 @@ struct MainScreen: View {
     
     #if os(iOS)
     var listStyle = InsetGroupedListStyle()
+//    var listStyle = PlainListStyle()
     
     
     init() {
         UITableViewCell.appearance().selectionStyle = .none
+        UITableView.appearance().backgroundColor = .clear
     }
     #elseif os(macOS)
     var listStyle =  DefaultListStyle()
@@ -28,10 +30,11 @@ struct MainScreen: View {
     
     var body: some View {
         NavigationView {
-            
             List {
                 
-                Section(header: Text(gameData.loadingAllowed ? "Characters" : "Loading game data")){
+                Section(header:
+                            NavListSectionHeader(text: gameData.loadingAllowed ? "Characters" : "Loading game data")
+                ){
                     if characters.count > 0 {
                         ForEach(characters) { character in
                             NavigationLink(
@@ -54,26 +57,50 @@ struct MainScreen: View {
                         CharacterLoadingListItem()
                     }
                 }
-                Section(header: Text("Settings")){
+                Section(header:
+                    NavListSectionHeader(text: "Settings")
+                ){
                     NavigationLink(destination: DataHealthScreen(), tag: "data-health", selection: $selection) {
                         GameDataLoader()
                     }
+                    .listRowBackground(
+                        DefaultListItemBackground(
+                            color: Color.blue,
+                            selected: selection == "data-health"
+                        )
+                    )
                     
                     NavigationLink(destination: RaidOptions(), tag: "raid-settings", selection: $selection) {
                         RaidOptionsListItem()
                     }
+                    .listRowBackground(
+                        DefaultListItemBackground(
+                            color: Color.green,
+                            selected: selection == "raid-settings"
+                        )
+                    )
                     
                     NavigationLink(destination: LogOutDebugScreen(), tag: "log-out", selection: $selection) {
                         LogOutListItem()
                     }
+                    .listRowBackground(
+                        DefaultListItemBackground(
+                            color: Color.black,
+                            selected: selection == "log-out"
+                        )
+                    )
                     
                 }
                 
             }
             .listStyle(listStyle)
+            .background(ListBackground())
+            .edgesIgnoringSafeArea(.vertical)
             .toolbar{
                 ToolbarItem(placement: .principal){
                     Text("WoWWidget")
+                        .fontWeight(.black)
+                        .shadow(color: .white, radius: 1, x: 0, y: 0)
                 }
                 
                 ToolbarItem(placement: .primaryAction) {
