@@ -189,7 +189,7 @@ struct RaidFarmingCollection: View {
         
         guard gameData.raids.count > 0 else { return }
         let raidDataManipulator = RaidDataHelper()
-        let combinedRaidInfo = raidDataManipulator.createFullRaidData(using: characterEncounters, with: gameData, filter: options)
+        let combinedRaidInfo = raidDataManipulator.createFullRaidData(using: characterEncounters, with: gameData, filter: options, filterForFaction: character.faction)
         
         let allDataCombined = RaidDataFilledAndSorted(basedOn: combinedRaidInfo, for: character, farmingOrder: farmOrder)
         

@@ -20,7 +20,9 @@ struct CharacterListItemBackground: View {
     #endif
     
     var body: some View {
-        GeometryReader{ geometry in
+        VStack(spacing: 0) {
+            Color.clear
+                .frame(height: 0.5)
             ZStack{
                 Color(backgroundColor)
                 LinearGradient(
@@ -52,6 +54,8 @@ struct CharacterListItemBackground: View {
                 Image("Wood_Damage_Overlay_B_01")
                     .resizable(resizingMode: .tile)
             }
+            Color.clear
+                .frame(height: 0.5)
         }
         
     }

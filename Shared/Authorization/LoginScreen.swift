@@ -180,17 +180,10 @@ struct LoginScreen: View {
                 authorization.loggedIn = true
                 authorization.loggedBefore = true
                 UserDefaults.standard.set(true, forKey: "UserLoggedBefore")
-            }
-            else {
+            } else {
                 authorization.loggedIn = false
                 print("Authorization was canceled or went wrong: \(String(describing: error))")   // error will not be nil
             }
         }
     }
 }
-
-//struct LoginScreen_Previews: PreviewProvider {
-//    static var previews: some View {
-//        LoginScreen()
-//    }
-//}
