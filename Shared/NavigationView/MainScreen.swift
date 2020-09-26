@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MainScreen: View {
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass: UserInterfaceSizeClass?
     @EnvironmentObject var gameData: GameData
     @EnvironmentObject var authorization: Authentication
     @State var characters: [CharacterInProfile] = []
@@ -25,6 +26,8 @@ struct MainScreen: View {
     #elseif os(macOS)
     var listStyle =  DefaultListStyle()
     #endif
+    
+    
     
     
     
@@ -111,7 +114,8 @@ struct MainScreen: View {
                     
             }
         }
-        .navigationViewStyle(DefaultNavigationViewStyle())
+        .navigationViewStyle(DoubleColumnNavigationViewStyle())
+        
         .onAppear {
             loadCharacters()
         }
