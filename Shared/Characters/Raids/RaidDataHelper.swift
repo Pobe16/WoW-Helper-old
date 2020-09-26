@@ -16,7 +16,7 @@ struct RaidDataHelper {
         }
     }
     
-    public func createFullRaidData(using characterEncounters: CharacterRaidEncounters?, with gameData: GameData, filter options: RaidFarmingOptions) -> [CombinedRaidWithEncounters] {
+    public func createFullRaidData(using characterEncounters: CharacterRaidEncounters?, with gameData: GameData, filter options: RaidFarmingOptions, filterForFaction faction: Faction) -> [CombinedRaidWithEncounters] {
         
         var strippedRaids: [RaidInstancesInCharacterEncounters] = []
         if characterEncounters != nil {
@@ -44,7 +44,9 @@ struct RaidDataHelper {
                     }) {
                         var instanceEncounters: [EncounterPerBossPerCharacter] = []
                         
-                        GDRaid.encounters.forEach { (GDEncounter) in
+                        let raidEncountersFilteredByFaction = filterEncounters(from: GDRaid.encounters, in: GDRaid.id, by: faction)
+                        
+                        raidEncountersFilteredByFaction.forEach { (GDEncounter) in
                             
                             var encounterToAdd: EncounterPerBossPerCharacter
                             
@@ -75,7 +77,7 @@ struct RaidDataHelper {
                         allRaidModes.append(currentRaidMode)
                             
                     } else {
-                        let currentRaidMode = createEmptyInstanceMode(for: GDRaid, withMode: mode.mode)
+                        let currentRaidMode = createEmptyInstanceMode(for: GDRaid, withMode: mode.mode, faction: faction)
                         allRaidModes.append(currentRaidMode)
                     }
                     
@@ -92,13 +94,74 @@ struct RaidDataHelper {
                         records: allRaidModes
                     )
             } else {
-                currentRaid = createNewEmptyRaid(for: GDRaid, filteredBy: options)
+                currentRaid = createNewEmptyRaid(for: GDRaid, filteredBy: options, faction: faction)
             }
             
             allFilledRaids.append(currentRaid)
                 
         }
         return allFilledRaids
+    }
+    
+    private func filterEncounters(from encounters: [EncounterIndex], in raidID: Int, by faction: Faction) -> [EncounterIndex] {
+        switch raidID {
+        // Icecrown Citadel
+        case 758:
+            switch faction.type {
+            case "ALLIANCE":
+                let encounterToRemove = [1627]
+                let filtered = removeEncounters(list: encounterToRemove, fromRaid: encounters)
+                return filtered
+            case "HORDE":
+                let encounterToRemove = [1626]
+                let filtered = removeEncounters(list: encounterToRemove, fromRaid: encounters)
+                return filtered
+            default:
+                return encounters
+            }
+            
+        //Siege of Orgrimmar
+        case 369:
+            switch faction.type {
+            case "ALLIANCE":
+                let encounterToRemove = [868]
+                let filtered = removeEncounters(list: encounterToRemove, fromRaid: encounters)
+                return filtered
+            case "HORDE":
+                let encounterToRemove = [881]
+                let filtered = removeEncounters(list: encounterToRemove, fromRaid: encounters)
+                return filtered
+            default:
+                return encounters
+            }
+            
+        // Battle of Dazar'alor
+        case 1176:
+            switch faction.type {
+            case "ALLIANCE":
+                let encounterToRemove = [2333, 2325, 2323]
+                let filtered = removeEncounters(list: encounterToRemove, fromRaid: encounters)
+                return filtered
+            case "HORDE":
+                let encounterToRemove = [2344, 2340, 2341]
+                let filtered = removeEncounters(list: encounterToRemove, fromRaid: encounters)
+                return filtered
+            default:
+                return encounters
+            }
+        default:
+            return encounters
+        }
+    }
+    
+    private func removeEncounters(list: [Int], fromRaid: [EncounterIndex]) -> [EncounterIndex] {
+        var workingEncounters = fromRaid
+        list.forEach { (IDtoDelete) in
+            workingEncounters.removeAll { (encounter) -> Bool in
+                encounter.id == IDtoDelete
+            }
+        }
+        return workingEncounters
     }
     
     private func filterRaidModes(forModes modes: [InstanceMode], by options: RaidFarmingOptions) -> [InstanceMode] {
@@ -192,9 +255,12 @@ struct RaidDataHelper {
         return emptyEncounter
     }
     
-    private func createEmptyInstanceMode(for instance: InstanceJournal, withMode mode: InstanceModeName) -> RaidEncountersForCharacter {
+    private func createEmptyInstanceMode(for instance: InstanceJournal, withMode mode: InstanceModeName, faction: Faction) -> RaidEncountersForCharacter {
         var encounters: [EncounterPerBossPerCharacter] = []
-        instance.encounters.forEach { (GDEncounter) in
+        
+        let raidEncountersFilteredByFaction = filterEncounters(from: instance.encounters, in: instance.id, by: faction)
+        
+        raidEncountersFilteredByFaction.forEach { (GDEncounter) in
             encounters.append(createEmptyBoss(for: GDEncounter))
         }
         
@@ -216,13 +282,13 @@ struct RaidDataHelper {
         return emptyInstance
     }
     
-    private func createNewEmptyRaid(for instance: InstanceJournal, filteredBy options: RaidFarmingOptions) -> CombinedRaidWithEncounters {
+    private func createNewEmptyRaid(for instance: InstanceJournal, filteredBy options: RaidFarmingOptions, faction: Faction) -> CombinedRaidWithEncounters {
         var allRaids: [RaidEncountersForCharacter] = []
         
         let filteredModes: [InstanceMode] = filterRaidModes(forModes: instance.modes, by: options)
         
         filteredModes.forEach { (mode) in
-            let emptyInstanceMode = createEmptyInstanceMode(for: instance, withMode: mode.mode)
+            let emptyInstanceMode = createEmptyInstanceMode(for: instance, withMode: mode.mode, faction: faction)
             allRaids.append(emptyInstanceMode)
         }
         let currentRaid =
