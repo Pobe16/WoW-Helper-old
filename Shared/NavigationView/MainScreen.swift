@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct MainScreen: View {
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass: UserInterfaceSizeClass?
     @EnvironmentObject var gameData: GameData
     @EnvironmentObject var authorization: Authentication
     @State var characters: [CharacterInProfile] = []
@@ -16,8 +15,6 @@ struct MainScreen: View {
     
     #if os(iOS)
     var listStyle = InsetGroupedListStyle()
-//    var listStyle = PlainListStyle()
-    
     
     init() {
         UITableViewCell.appearance().selectionStyle = .none
@@ -26,10 +23,6 @@ struct MainScreen: View {
     #elseif os(macOS)
     var listStyle =  DefaultListStyle()
     #endif
-    
-    
-    
-    
     
     var body: some View {
         NavigationView {
@@ -58,6 +51,12 @@ struct MainScreen: View {
                         }
                     } else {
                         CharacterLoadingListItem()
+                            .listRowBackground(
+                            DefaultListItemBackground(
+                                color: Color.black,
+                                selected: false
+                            )
+                        )
                     }
                 }
                 Section(header:
