@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct ExpansionTop: Decodable, Hashable {
+struct ExpansionTop: Codable, Hashable {
     let tiers: [ExpansionIndex]
 //    let _links: JustSelfLink
 }
 
-struct ExpansionIndex: Decodable, Hashable, Identifiable {
+struct ExpansionIndex: Codable, Hashable, Identifiable {
     let id: Int
     let key: LinkStub
     let name: String

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct InstanceJournal: Decodable, Hashable, Identifiable, Comparable, Equatable {
+struct InstanceJournal: Codable, Hashable, Identifiable, Comparable, Equatable {
     static func < (lhs: InstanceJournal, rhs: InstanceJournal) -> Bool {
         if lhs.expansion.id == rhs.expansion.id {
             return lhs.id < rhs.id
@@ -36,32 +36,32 @@ struct InstanceJournal: Decodable, Hashable, Identifiable, Comparable, Equatable
     let category: InstanceCategory
 }
 
-struct InstanceMapIndex: Decodable, Hashable, Identifiable {
+struct InstanceMapIndex: Codable, Hashable, Identifiable {
     let name: String
     let id: Int
 }
 
-struct LocationIndex: Decodable, Hashable, Identifiable {
+struct LocationIndex: Codable, Hashable, Identifiable {
     let name: String
     let id: Int
 }
 
-struct InstanceMode: Decodable, Hashable {
+struct InstanceMode: Codable, Hashable {
     let mode: InstanceModeName
     let players: Int
     let isTracked: Bool
 }
 
-struct InstanceModeName: Decodable, Hashable {
+struct InstanceModeName: Codable, Hashable {
     let type: String
     let name: String
 }
 
-struct InstanceMediaStub: Decodable, Hashable, Identifiable {
+struct InstanceMediaStub: Codable, Hashable, Identifiable {
     let key: LinkStub
     let id: Int
 }
 
-struct InstanceCategory: Decodable, Hashable {
+struct InstanceCategory: Codable, Hashable {
     let type: String
 }

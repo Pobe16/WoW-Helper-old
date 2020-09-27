@@ -7,47 +7,47 @@
 
 import Foundation
 
-struct CharacterRaidEncounters: Decodable, Hashable {
+struct CharacterRaidEncounters: Codable, Hashable {
     let _links: JustSelfLink?
     let character: CharacterStubInEncounters
     let expansions: [EncounterInExpansion]?
 }
 
-struct CharacterStubInEncounters: Decodable, Hashable {
+struct CharacterStubInEncounters: Codable, Hashable {
     let key: LinkStub
     let name: String
     let id: Int
     let realm: RealmInProfile
 }
 
-struct EncounterInExpansion: Decodable, Hashable {
+struct EncounterInExpansion: Codable, Hashable {
     let expansion: ExpansionIndex
     let instances: [RaidInstancesInCharacterEncounters]
 }
 
-struct RaidInstancesInCharacterEncounters: Decodable, Hashable {
+struct RaidInstancesInCharacterEncounters: Codable, Hashable {
     let instance: InstanceIndex
     let modes: [RaidEncountersForCharacter]
 }
 
-struct RaidEncountersForCharacter: Decodable, Hashable {
+struct RaidEncountersForCharacter: Codable, Hashable {
     let difficulty: InstanceModeName
     let status: InstanceStatus
     let progress: InstanceProgress
 }
 
-struct InstanceStatus: Decodable, Hashable {
+struct InstanceStatus: Codable, Hashable {
     let type: String
     let name: String
 }
 
-struct InstanceProgress: Decodable, Hashable {
+struct InstanceProgress: Codable, Hashable {
     let completedCount: Int
     let totalCount: Int
     let encounters: [EncounterPerBossPerCharacter]
 }
 
-struct EncounterPerBossPerCharacter: Decodable, Hashable {
+struct EncounterPerBossPerCharacter: Codable, Hashable {
     let completedCount: Int
     let encounter: EncounterIndex
     let lastKillTimestamp: Date?

@@ -41,6 +41,12 @@
 		C811E7A824E05FBE0050F6CD /* AuthInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E7A624E05FBE0050F6CD /* AuthInfo.swift */; };
 		C811E7AB24E0A3690050F6CD /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E7AA24E0A3690050F6CD /* Authentication.swift */; };
 		C811E7AC24E0A3690050F6CD /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E7AA24E0A3690050F6CD /* Authentication.swift */; };
+		C818B1CE2520D9B000ED06B7 /* LocalizedName.swift in Sources */ = {isa = PBXBuildFile; fileRef = C818B1CD2520D9B000ED06B7 /* LocalizedName.swift */; };
+		C818B1CF2520D9B000ED06B7 /* LocalizedName.swift in Sources */ = {isa = PBXBuildFile; fileRef = C818B1CD2520D9B000ED06B7 /* LocalizedName.swift */; };
+		C818B1D52520EE6800ED06B7 /* JournalEncounterSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = C818B1D42520EE6800ED06B7 /* JournalEncounterSearch.swift */; };
+		C818B1D62520EE6800ED06B7 /* JournalEncounterSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = C818B1D42520EE6800ED06B7 /* JournalEncounterSearch.swift */; };
+		C818B1DC2521060D00ED06B7 /* NotableItemsInRaid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C818B1DB2521060D00ED06B7 /* NotableItemsInRaid.swift */; };
+		C818B1DD2521060D00ED06B7 /* NotableItemsInRaid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C818B1DB2521060D00ED06B7 /* NotableItemsInRaid.swift */; };
 		C831CC3A24E7296A00C25F67 /* CharacterListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C831CC3924E7296A00C25F67 /* CharacterListItem.swift */; };
 		C831CC4724E7355500C25F67 /* CharacterMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = C831CC4624E7355500C25F67 /* CharacterMedia.swift */; };
 		C831CC4824E7355500C25F67 /* CharacterMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = C831CC4624E7355500C25F67 /* CharacterMedia.swift */; };
@@ -156,6 +162,9 @@
 		C811E7A324E01DC30050F6CD /* APIAccessInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIAccessInfo.swift; sourceTree = "<group>"; };
 		C811E7A624E05FBE0050F6CD /* AuthInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInfo.swift; sourceTree = "<group>"; };
 		C811E7AA24E0A3690050F6CD /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
+		C818B1CD2520D9B000ED06B7 /* LocalizedName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedName.swift; sourceTree = "<group>"; };
+		C818B1D42520EE6800ED06B7 /* JournalEncounterSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEncounterSearch.swift; sourceTree = "<group>"; };
+		C818B1DB2521060D00ED06B7 /* NotableItemsInRaid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotableItemsInRaid.swift; sourceTree = "<group>"; };
 		C831CC3924E7296A00C25F67 /* CharacterListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListItem.swift; sourceTree = "<group>"; };
 		C831CC4624E7355500C25F67 /* CharacterMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterMedia.swift; sourceTree = "<group>"; };
 		C831CC4E24E8974100C25F67 /* MyData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyData.xcdatamodel; sourceTree = "<group>"; };
@@ -326,6 +335,8 @@
 				C803C5D524FD81ED00A8D2DE /* CombinedRaidWithEncounters.swift */,
 				C84996262517B837007D1762 /* MountItemList.swift */,
 				C84996312517C691007D1762 /* PetItemList.swift */,
+				C818B1CD2520D9B000ED06B7 /* LocalizedName.swift */,
+				C818B1D42520EE6800ED06B7 /* JournalEncounterSearch.swift */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -382,6 +393,7 @@
 			isa = PBXGroup;
 			children = (
 				C84996382517CBBA007D1762 /* RaidDetails.swift */,
+				C818B1DB2521060D00ED06B7 /* NotableItemsInRaid.swift */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -620,11 +632,14 @@
 				C831CC3A24E7296A00C25F67 /* CharacterListItem.swift in Sources */,
 				C811E7AB24E0A3690050F6CD /* Authentication.swift in Sources */,
 				C84B82FA24E5FF56006E84FA /* UserProfile.swift in Sources */,
+				C818B1D52520EE6800ED06B7 /* JournalEncounterSearch.swift in Sources */,
 				C8F942E324EF024600B6222C /* GameData.swift in Sources */,
 				C831CC4F24E8974100C25F67 /* MyData.xcdatamodeld in Sources */,
 				C8665E6524F066DF0043A23C /* GameDataLoader.swift in Sources */,
 				C803C5DF250070C300A8D2DE /* WrapperForRaidOptions.swift in Sources */,
+				C818B1CE2520D9B000ED06B7 /* LocalizedName.swift in Sources */,
 				C8F942DB24EDB54000B6222C /* LogOutDebugScreen.swift in Sources */,
+				C818B1DC2521060D00ED06B7 /* NotableItemsInRaid.swift in Sources */,
 				C803C5D924FEF18C00A8D2DE /* RaidDataHelper.swift in Sources */,
 				C88EEAA024E9EFDB00155CBC /* CharacterLoadingListItem.swift in Sources */,
 				C8E4D71C24F2BDD200EDAC85 /* InstanceMedia.swift in Sources */,
@@ -674,11 +689,14 @@
 				C811E78C24E01B1F0050F6CD /* AuthCheckingScreen.swift in Sources */,
 				C8F942E824EF027700B6222C /* CharacterLoadingListItem.swift in Sources */,
 				C811E78A24E01B1F0050F6CD /* WoWWidgetApp.swift in Sources */,
+				C818B1D62520EE6800ED06B7 /* JournalEncounterSearch.swift in Sources */,
 				C811E7AC24E0A3690050F6CD /* Authentication.swift in Sources */,
 				C84B82FB24E5FF56006E84FA /* UserProfile.swift in Sources */,
 				C8665E6624F066DF0043A23C /* GameDataLoader.swift in Sources */,
 				C803C5E0250070C300A8D2DE /* WrapperForRaidOptions.swift in Sources */,
+				C818B1CF2520D9B000ED06B7 /* LocalizedName.swift in Sources */,
 				C831CC5024E8974100C25F67 /* MyData.xcdatamodeld in Sources */,
+				C818B1DD2521060D00ED06B7 /* NotableItemsInRaid.swift in Sources */,
 				C803C5DA24FEF18C00A8D2DE /* RaidDataHelper.swift in Sources */,
 				C8F942E724EF027300B6222C /* CharacterListItem.swift in Sources */,
 				C8E4D71D24F2BDD200EDAC85 /* InstanceMedia.swift in Sources */,
