@@ -20,6 +20,8 @@ struct RaidDetails: View {
     let raid: CombinedRaidWithEncounters
     let character: CharacterInProfile
     
+    
+    
     var body: some View {
         GeometryReader { geometry in
             
@@ -59,7 +61,7 @@ struct RaidDetails: View {
                                     Text("\(encounter.encounter.name)")
                                     Text("Times killed: \(encounter.completedCount)")
                                     if encounter.lastKillTimestamp != nil {
-                                    Text("Last killed: \(encounter.lastKillTimestamp!)")
+                                        Text("Last killed: \(encounter.lastKillTimestamp!)")
                                     }
                                 }
                                 .padding()

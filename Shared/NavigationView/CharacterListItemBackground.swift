@@ -29,12 +29,12 @@ struct CharacterListItemBackground: View {
                     gradient: Gradient(
                         stops: [
                             .init(
-                                color: Color("faction\(faction.type)")
+                                color: Color("faction\(faction.type.rawValue)")
                                     .opacity(selected ? 1 : 0.65),
                                 location: 0
                             ),
                             .init(
-                                color: Color("faction\(faction.type)")
+                                color: Color("faction\(faction.type.rawValue)")
                                     .opacity(selected ? 0.8 : 0.5),
                                 location: 0.20
                             ),
@@ -75,11 +75,11 @@ struct CharacterListItemBackground_Previews: PreviewProvider {
         CharacterListItemBackground(charClass: placeholders.characterInProfile.playableClass, faction: placeholders.characterInProfile.faction, selected: true)
             .previewLayout(.fixed(width: 300, height: 80))
         
-        CharacterListItemBackground(charClass: placeholders.characterInProfile.playableClass, faction: Faction(type: "HORDE", name: "Horde"), selected: false)
+        CharacterListItemBackground(charClass: placeholders.characterInProfile.playableClass, faction: Faction(type: .horde, name: "Horde"), selected: false)
             .previewLayout(.fixed(width: 300, height: 80))
             .environment(\.colorScheme, .dark)
         
-        CharacterListItemBackground(charClass: placeholders.characterInProfile.playableClass, faction: Faction(type: "HORDE", name: "Horde"), selected: true)
+        CharacterListItemBackground(charClass: placeholders.characterInProfile.playableClass, faction: Faction(type: .horde, name: "Horde"), selected: true)
             .previewLayout(.fixed(width: 300, height: 80))
             .environment(\.colorScheme, .dark)
     }

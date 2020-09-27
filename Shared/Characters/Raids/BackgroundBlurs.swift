@@ -25,13 +25,13 @@ struct RaidTitleBackgroundBlur: View {
 struct InstanceProgressFullWidthBackgroundBlur: View {
     var body: some View {
         #if os(iOS)
-        VisualEffectBlur(blurStyle: .systemUltraThinMaterial).opacity(0.75)
+        VisualEffectBlur(blurStyle: .systemUltraThinMaterial).opacity(0.85)
         #elseif os(macOS)
         VisualEffectBlur(
             material: .contentBackground,
             blendingMode: .withinWindow,
             state: .followsWindowActiveState
-        ).opacity(0.75)
+        ).opacity(0.85)
         #endif
     }
 }
@@ -44,13 +44,14 @@ struct InstanceProgressBackground: View {
     var body: some View {
         GeometryReader { geometry in
 
-            Color("faction\(faction.type)")
+            Color("faction\(faction.type.rawValue)")
                 .frame(
                     width:
                         geometry.size.width /
                         CGFloat(allBosses) *
                         CGFloat(killedBosses)
                 )
+                .opacity(0.5)
             Spacer()
         }
     }
@@ -64,7 +65,7 @@ struct BackgroundBlurs_Previews: PreviewProvider {
             .previewLayout(.fixed(width: 300, height: 100))
         InstanceProgressFullWidthBackgroundBlur()
             .previewLayout(.fixed(width: 300, height: 100))
-        InstanceProgressBackground(killedBosses: 3, allBosses: 5, faction: Faction(type: "ALLIANCE", name: "Alliance"))
+        InstanceProgressBackground(killedBosses: 3, allBosses: 5, faction: Faction(type: .alliance, name: "Alliance"))
             .previewLayout(.fixed(width: 300, height: 100))
     }
 }
