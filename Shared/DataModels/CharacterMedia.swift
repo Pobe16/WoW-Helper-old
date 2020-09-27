@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CharacterMedia: Decodable {
+class CharacterMedia: Codable {
 //    let _links: JustSelfLink
 //    let character: CharacterInfoInCharacterMedia
     let avatarUrl: String
@@ -16,11 +16,11 @@ class CharacterMedia: Decodable {
     
 }
 
-struct JustSelfLink: Decodable, Hashable {
+struct JustSelfLink: Codable, Hashable {
     let `self`: LinkStub
 }
 
-//struct CharacterInfoInCharacterMedia: Decodable {
+//struct CharacterInfoInCharacterMedia: Codable {
 //    let key: LinkStub
 //    let name: String
 //    let id: Int

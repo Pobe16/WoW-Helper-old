@@ -123,9 +123,15 @@ struct JSONCoreDataManager {
     }
     
     func saveJSON(_ data: Data, withURL url: URL) {
-        let stringFromURL = url.absoluteString.split(separator: "?")[0]
+        let stringFromURL = url.absoluteString
+        var identifiableString = ""
+        if stringFromURL.contains("search") {
+            identifiableString = String(stringFromURL.split(separator: "&")[0])
+        } else {
+            identifiableString = String(stringFromURL.split(separator: "?")[0])
+        }
 //        print("saving data for " + String(stringFromURL))
-        updateJSONData(name: String(stringFromURL), data: data)
+        updateJSONData(name: identifiableString, data: data)
     }
     
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ExpansionJournal: Decodable, Hashable, Identifiable, Comparable {
+struct ExpansionJournal: Codable, Hashable, Identifiable, Comparable {
     static func < (lhs: ExpansionJournal, rhs: ExpansionJournal) -> Bool {
         return lhs.id < rhs.id
     }
@@ -19,13 +19,13 @@ struct ExpansionJournal: Decodable, Hashable, Identifiable, Comparable {
     let worldBosses: [EncounterIndex]?
 }
 
-struct InstanceIndex: Decodable, Hashable, Identifiable {
+struct InstanceIndex: Codable, Hashable, Identifiable {
     let key: LinkStub
     let id: Int
     let name: String
 }
 
-struct EncounterIndex: Decodable, Hashable, Identifiable {
+struct EncounterIndex: Codable, Hashable, Identifiable {
     let key: LinkStub
     let id: Int
     let name: String

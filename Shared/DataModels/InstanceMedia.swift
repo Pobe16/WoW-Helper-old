@@ -8,12 +8,12 @@
 import Foundation
 
 
-struct InstanceMedia: Decodable, Hashable {
+struct InstanceMedia: Codable, Hashable {
     let _links: JustSelfLink?
     let assets: [MediaAssets]
 }
 
-struct MediaAssets: Decodable, Hashable {
+struct MediaAssets: Codable, Hashable {
     let key: String
     let value: String
 }

@@ -7,25 +7,25 @@
 
 import Foundation
 
-struct UserProfile: Decodable, Hashable {
+struct UserProfile: Codable, Hashable {
     let _links: LinksInProfile
     let id: Int
     let wowAccounts: [Account]
     let collections: LinkStub
 }
 
-struct LinksInProfile: Decodable, Hashable {
+struct LinksInProfile: Codable, Hashable {
     let `self`: LinkStub
     let user: LinkStub
     let profile: LinkStub
 }
 
-struct Account: Decodable, Hashable {
+struct Account: Codable, Hashable {
     let id: Int
     let characters: [CharacterInProfile]
 }
 
-struct CharacterInProfile: Decodable, Hashable, Identifiable {
+struct CharacterInProfile: Codable, Hashable, Identifiable {
     let character: LinkStub
     let protectedCharacter: LinkStub
     let name: String
@@ -69,31 +69,31 @@ struct placeholders{
         level: 120)
 }
 
-struct RealmInProfile: Decodable, Hashable {
+struct RealmInProfile: Codable, Hashable {
     let key: LinkStub
     let name: String
     let id: Int
     let slug: String
 }
 
-struct ClassInProfile: Decodable, Hashable {
+struct ClassInProfile: Codable, Hashable {
     let key: LinkStub
     let name: String
     let id: Int
 }
 
-struct RaceInProfile: Decodable, Hashable {
+struct RaceInProfile: Codable, Hashable {
     let key: LinkStub
     let name: String
     let id: Int
 }
 
-struct GenderInProfile: Decodable, Hashable {
+struct GenderInProfile: Codable, Hashable {
     let type: String
     let name: String
 }
 
-struct Faction: Decodable, Hashable {
+struct Faction: Codable, Hashable {
     let type: FactionType
     let name: String
 }
@@ -105,6 +105,6 @@ enum FactionType: String, Codable {
 }
 
 
-struct LinkStub: Decodable, Hashable {
+struct LinkStub: Codable, Hashable {
     let href: String
 }
