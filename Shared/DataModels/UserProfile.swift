@@ -63,7 +63,7 @@ struct placeholders{
             type: "MALE",
             name: "Male"
         ), faction: Faction(
-            type: "ALLIANCE",
+            type: .alliance,
             name: "Alliance"
         ),
         level: 120)
@@ -94,8 +94,14 @@ struct GenderInProfile: Decodable, Hashable {
 }
 
 struct Faction: Decodable, Hashable {
-    let type: String
+    let type: FactionType
     let name: String
+}
+
+enum FactionType: String, Codable {
+    case alliance   = "ALLIANCE"
+    case horde      = "HORDE"
+    case neutral    = "NEUTRAL"
 }
 
 

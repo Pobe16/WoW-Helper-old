@@ -25,9 +25,9 @@ struct RaidFarmHeader: View {
             ZStack{
 //                VisualEffectBlur(blurStyle: .systemUltraThinMaterial)
                 switch faction.type {
-                case "ALLIANCE":
+                case .alliance:
                     Color.blue.opacity(0.45)
-                case "HORDE":
+                case .horde:
                     Color.red.opacity(0.45)
                 default:
                     Color.white.opacity(0.45)
@@ -41,7 +41,7 @@ struct RaidFarmHeader_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             Color.green
-            RaidFarmHeader(headerText: "Completed raids.", faction: Faction(type: "ALLIANCE", name: "Alliance"))
+            RaidFarmHeader(headerText: "Completed raids.", faction: Faction(type: .alliance, name: "Alliance"))
         }
     }
 }

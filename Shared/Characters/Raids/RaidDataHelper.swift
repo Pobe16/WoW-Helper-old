@@ -105,14 +105,29 @@ struct RaidDataHelper {
     
     private func filterEncounters(from encounters: [EncounterIndex], in raidID: Int, by faction: Faction) -> [EncounterIndex] {
         switch raidID {
+        // Trial of the Crusader
+        case 757:
+            switch faction.type {
+            case .alliance:
+                let encounterToRemove = [1620]
+                let filtered = removeEncounters(list: encounterToRemove, fromRaid: encounters)
+                return filtered
+            case .horde:
+                let encounterToRemove = [1621]
+                let filtered = removeEncounters(list: encounterToRemove, fromRaid: encounters)
+                return filtered
+            default:
+                return encounters
+            }
+        
         // Icecrown Citadel
         case 758:
             switch faction.type {
-            case "ALLIANCE":
+            case .alliance:
                 let encounterToRemove = [1627]
                 let filtered = removeEncounters(list: encounterToRemove, fromRaid: encounters)
                 return filtered
-            case "HORDE":
+            case .horde:
                 let encounterToRemove = [1626]
                 let filtered = removeEncounters(list: encounterToRemove, fromRaid: encounters)
                 return filtered
@@ -123,11 +138,11 @@ struct RaidDataHelper {
         //Siege of Orgrimmar
         case 369:
             switch faction.type {
-            case "ALLIANCE":
+            case .alliance:
                 let encounterToRemove = [868]
                 let filtered = removeEncounters(list: encounterToRemove, fromRaid: encounters)
                 return filtered
-            case "HORDE":
+            case .horde:
                 let encounterToRemove = [881]
                 let filtered = removeEncounters(list: encounterToRemove, fromRaid: encounters)
                 return filtered
@@ -138,11 +153,11 @@ struct RaidDataHelper {
         // Battle of Dazar'alor
         case 1176:
             switch faction.type {
-            case "ALLIANCE":
+            case .alliance:
                 let encounterToRemove = [2333, 2325, 2323]
                 let filtered = removeEncounters(list: encounterToRemove, fromRaid: encounters)
                 return filtered
-            case "HORDE":
+            case .horde:
                 let encounterToRemove = [2344, 2340, 2341]
                 let filtered = removeEncounters(list: encounterToRemove, fromRaid: encounters)
                 return filtered
@@ -371,11 +386,24 @@ struct RaidDataHelper {
             for raidMode in raid.records {
                 guard isLegacyModeCleared(for: raidMode) else { return false }
             }
+            return true
         } else {
-            for raidMode in raid.records {
-                guard isModeCleared(for: raidMode) else { return false}
+            // all raids after Mists of Pandaria (expansion.id = 74), excluding Siege of Orgrimmar (id=369)
+            // were completed when it was just one mode Cleared
+            // or in other words: you could only complete one raid mode per raid per week
+            if raid.expansion.id <= 74 && raid.id != 369 {
+                for raidMode in raid.records {
+                    if isModeCleared(for: raidMode) {
+                        return true
+                    }
+                }
+                return false
+            } else {
+                for raidMode in raid.records {
+                    guard isModeCleared(for: raidMode) else { return false}
+                }
+                return true
             }
         }
-        return true
     }
 }

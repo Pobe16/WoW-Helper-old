@@ -36,10 +36,10 @@ struct CharacterMainView: View {
             ToolbarItem(placement: .principal){
                 Picker(selection: $viewSelection, label: Text("Character View Selection1"), content: {
                     Text("Raids").tag(0)
-                    Text("Character").tag(1)
-                    
-                    Text("Mythic+").tag(2)
-                        .disabled(character.level < 60)
+//                    Text("Character").tag(1)
+//                    
+//                    Text("Mythic+").tag(2)
+//                        .disabled(character.level < 60)
                 })
                 .pickerStyle(SegmentedPickerStyle())
                 .labelsHidden()

@@ -33,7 +33,7 @@ struct CharacterRaidTile: View {
                 
                 Spacer()
                 VStack() {
-                    ForEach(raid.records, id: \.difficulty.name){ record in
+                    ForEach(filterModesForLegacyCompletion(in: raid), id: \.difficulty.name){ record in
                         HStack {
                             Text("\(record.difficulty.name)")
                             Spacer()
@@ -65,6 +65,26 @@ struct CharacterRaidTile: View {
             .foregroundColor(.primary)
         }
     }
+    
+    
+    func filterModesForLegacyCompletion(in raid: CombinedRaidWithEncounters) -> [RaidEncountersForCharacter] {
+        let helper = RaidDataHelper()
+        
+        // all raids after Mists of Pandaria (expansion.id = 74), excluding Siege of Orgrimmar (id=369)
+        // were completed when it was just one mode Cleared
+        // or in other words: you could only complete one raid mode per raid per week
+        if raid.expansion.id <= 74 && raid.id != 369 {
+            for raidMode in raid.records {
+                if helper.isModeCleared(for: raidMode) {
+                    return [raidMode]
+                }
+            }
+        }
+        
+        return raid.records
+        
+    }
+    
     
     func getSumUp(for mode: RaidEncountersForCharacter) -> String {
         let killedThisWeek = getNumberOfKilledBosses(for: mode)

@@ -31,7 +31,7 @@ struct DefaultListItemBackground: View {
                     gradient: Gradient(
                         stops: [
                             .init(
-                                color: Color("factionNEUTRAL")
+                                color: Color("DefaultListItemColour")
                                     .opacity(selected ? 1 : 0.65),
                                 location: 0
                             ),
@@ -46,7 +46,7 @@ struct DefaultListItemBackground: View {
                                 location: 0.50
                             ),
                             .init(
-                                color: Color("factionNEUTRAL")
+                                color: Color("DefaultListItemColour")
                                     .opacity(selected ? 1 : colorScheme == .dark ? 0.65 : 0.25),
                                 location: 1
                             )
