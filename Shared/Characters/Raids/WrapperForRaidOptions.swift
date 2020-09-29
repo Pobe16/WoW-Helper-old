@@ -30,7 +30,7 @@ struct WrapperForRaidOptions: View {
                 Menu {
                     Section(header: Text("Raid Modes")) {
                         Picker(selection: $raidFarmingOptions, label: Text("Raid options")) {
-                            Text("Just Mythic").tag(1)
+                            Text("Highest").tag(1)
                             Text("All modes").tag(2)
                             Text("No LFR").tag(3)
                         }

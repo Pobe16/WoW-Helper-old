@@ -16,7 +16,7 @@ struct RaidOptionsListItem: View {
                 .scaledToFit()
                 .frame(width: 63, height: 63)
                 .cornerRadius(15, antialiased: true)
-            Text("Raid Settings")
+            Text("Settings")
             Spacer()
         }
     }
