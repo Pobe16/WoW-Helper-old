@@ -29,7 +29,7 @@ struct MainScreen: View {
             List {
                 
                 Section(header:
-                            NavListSectionHeader(text: gameData.loadingAllowed ? "Characters" : "Loading game data")
+                    NavListSectionHeader(text: gameData.loadingAllowed ? "Characters" : "Loading game data")
                 ){
                     if characters.count > 0 {
                         ForEach(characters) { character in
