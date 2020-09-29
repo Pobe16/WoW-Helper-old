@@ -14,17 +14,17 @@ class GameData: ObservableObject {
     var connectionRetries                                   = 0
     var reloadFromCDAllowed                                 = true
     var loadDungeonsToo                                     = false
-    var mountItemsList: [MountItem]                         = []
-    var petItemsList: [PetItem]                             = []
+    var mountItemsList: [MountItem]                         = createMountsList()
+    var petItemsList: [PetItem]                             = createPetsList()
     
     @Published var expansionsStubs: [ExpansionIndex]        = []
     @Published var expansions: [ExpansionJournal]           = []
     
     @Published var raidsStubs: [InstanceIndex]              = []
-    @Published var raids: [InstanceJournal]                 = []
+    @Published var raids: [InstanceJournal]                 = createRaidsList()
     
     @Published var dungeonsStubs: [InstanceIndex]           = []
-    @Published var dungeons: [InstanceJournal]              = []
+    @Published var dungeons: [InstanceJournal]              = createDungeonsList()
     
     let estimatedItemsToDownload: Int                       = 50
     @Published var actualItemsToDownload: Int               = 0
@@ -37,14 +37,6 @@ class GameData: ObservableObject {
         allData?.forEach({ item in
             JSONCoreDataManager.shared.deleteJSONData(data: item)
         })
-    }
-    
-    func loadCollectableData(){
-        
-        guard mountItemsList.count == 0, petItemsList.count == 0 else { return }
-        
-        mountItemsList  = createMountsList()
-        petItemsList    = createPetsList()
     }
     
     func continueLoadingDungeons(authorizedBy auth: Authentication) {
@@ -299,6 +291,16 @@ class GameData: ObservableObject {
             return
         }
         
+        guard !raids.contains(where: { (raid) -> Bool in
+            currentRaidToLoad.id == raid.id
+        }) else {
+            if raidsStubs.count > 0 {
+                raidsStubs.removeFirst()
+            }
+            loadRaidsInfo()
+            return
+        }
+        
         let requestUrlAPIHost = "\(currentRaidToLoad.key.href)"
         
         if reloadFromCDAllowed {
@@ -353,7 +355,7 @@ class GameData: ObservableObject {
             
 //          For some reason Blizz have put a Greater Legion Invasion here as a raid…
 //          I'm not allowing it.
-            if dataResponse.category.type == "EVENT" {
+            if dataResponse.category.type == .event {
                 if raidsStubs.count > 0{
                     raidsStubs.removeFirst()
                 }
@@ -367,7 +369,11 @@ class GameData: ObservableObject {
                 
             DispatchQueue.main.async {
                 withAnimation {
-                    self.raids.append(dataResponse)
+                    if !self.raids.contains(where: { (instance) -> Bool in
+                        instance.id == dataResponse.id
+                    }) {
+                        self.raids.append(dataResponse)
+                    }
                     self.downloadedItems += 1
                 }
                 if self.raidsStubs.count > 0 {
@@ -408,6 +414,16 @@ class GameData: ObservableObject {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.loadRaidsInfo()
             }
+            return
+        }
+        
+        guard !dungeons.contains(where: { (dungeon) -> Bool in
+            currentDungeonToLoad.id == dungeon.id
+        }) else {
+            if dungeonsStubs.count > 0 {
+                dungeonsStubs.removeFirst()
+            }
+            loadDungeonsInfo()
             return
         }
         

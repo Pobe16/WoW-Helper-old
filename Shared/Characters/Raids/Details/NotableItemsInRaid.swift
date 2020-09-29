@@ -35,13 +35,8 @@ struct NotableItemsInRaid: View {
                 EmptyView()
             }
         }.onAppear{
-            loadItems()
             prepareLoot()
         }
-    }
-    
-    func loadItems() {
-        gameData.loadCollectableData()
     }
     
     func prepareLoot() {
