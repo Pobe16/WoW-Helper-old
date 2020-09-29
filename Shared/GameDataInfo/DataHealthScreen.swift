@@ -38,7 +38,10 @@ struct DataHealthScreen: View {
             ToolbarItem(placement: .principal) {
                 Text("Expansions")
             }
-            ToolbarItem(placement: .primaryAction) {
+            ToolbarItemGroup(placement: .primaryAction) {
+//                Button("Print Data") {
+//                    print(gameData.dungeons)
+//                }.padding()
                 if gameData.loadingAllowed {
                     Button {
                         gameData.hardReloadGameData(authorizedBy: authorization)

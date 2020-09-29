@@ -49,6 +49,10 @@
 		C818B1DD2521060D00ED06B7 /* NotableItemsInRaid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C818B1DB2521060D00ED06B7 /* NotableItemsInRaid.swift */; };
 		C818B1E42522A41D00ED06B7 /* FarmingOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C818B1E32522A41D00ED06B7 /* FarmingOrder.swift */; };
 		C818B1E52522A41D00ED06B7 /* FarmingOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C818B1E32522A41D00ED06B7 /* FarmingOrder.swift */; };
+		C818B1EF2523ADA400ED06B7 /* RaidsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C818B1EE2523ADA400ED06B7 /* RaidsData.swift */; };
+		C818B1F02523ADA400ED06B7 /* RaidsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C818B1EE2523ADA400ED06B7 /* RaidsData.swift */; };
+		C818B1FB2523BA4400ED06B7 /* DungeonsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C818B1FA2523BA4400ED06B7 /* DungeonsData.swift */; };
+		C818B1FC2523BA4400ED06B7 /* DungeonsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C818B1FA2523BA4400ED06B7 /* DungeonsData.swift */; };
 		C831CC3A24E7296A00C25F67 /* CharacterListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C831CC3924E7296A00C25F67 /* CharacterListItem.swift */; };
 		C831CC4724E7355500C25F67 /* CharacterMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = C831CC4624E7355500C25F67 /* CharacterMedia.swift */; };
 		C831CC4824E7355500C25F67 /* CharacterMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = C831CC4624E7355500C25F67 /* CharacterMedia.swift */; };
@@ -168,6 +172,8 @@
 		C818B1D42520EE6800ED06B7 /* JournalEncounterSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEncounterSearch.swift; sourceTree = "<group>"; };
 		C818B1DB2521060D00ED06B7 /* NotableItemsInRaid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotableItemsInRaid.swift; sourceTree = "<group>"; };
 		C818B1E32522A41D00ED06B7 /* FarmingOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmingOrder.swift; sourceTree = "<group>"; };
+		C818B1EE2523ADA400ED06B7 /* RaidsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidsData.swift; sourceTree = "<group>"; };
+		C818B1FA2523BA4400ED06B7 /* DungeonsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonsData.swift; sourceTree = "<group>"; };
 		C831CC3924E7296A00C25F67 /* CharacterListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListItem.swift; sourceTree = "<group>"; };
 		C831CC4624E7355500C25F67 /* CharacterMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterMedia.swift; sourceTree = "<group>"; };
 		C831CC4E24E8974100C25F67 /* MyData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyData.xcdatamodel; sourceTree = "<group>"; };
@@ -327,6 +333,7 @@
 		C811E7A924E0A3340050F6CD /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
+				C818B1F52523AF2C00ED06B7 /* BlizzApiData */,
 				C811E7A324E01DC30050F6CD /* APIAccessInfo.swift */,
 				C831CC4624E7355500C25F67 /* CharacterMedia.swift */,
 				C803C5D224FC57B800A8D2DE /* CharacterRaidEncounters.swift */,
@@ -337,8 +344,6 @@
 				C8E4D71B24F2BDD200EDAC85 /* InstanceMedia.swift */,
 				C84B82F924E5FF56006E84FA /* UserProfile.swift */,
 				C803C5D524FD81ED00A8D2DE /* CombinedRaidWithEncounters.swift */,
-				C84996262517B837007D1762 /* MountItemList.swift */,
-				C84996312517C691007D1762 /* PetItemList.swift */,
 				C818B1CD2520D9B000ED06B7 /* LocalizedName.swift */,
 				C818B1D42520EE6800ED06B7 /* JournalEncounterSearch.swift */,
 			);
@@ -352,6 +357,17 @@
 				C818B1E32522A41D00ED06B7 /* FarmingOrder.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		C818B1F52523AF2C00ED06B7 /* BlizzApiData */ = {
+			isa = PBXGroup;
+			children = (
+				C84996262517B837007D1762 /* MountItemList.swift */,
+				C84996312517C691007D1762 /* PetItemList.swift */,
+				C818B1EE2523ADA400ED06B7 /* RaidsData.swift */,
+				C818B1FA2523BA4400ED06B7 /* DungeonsData.swift */,
+			);
+			path = BlizzApiData;
 			sourceTree = "<group>";
 		};
 		C831CC5124E8994200C25F67 /* CoreData */ = {
@@ -623,6 +639,7 @@
 				C806FA552501AAE1006DEF78 /* RaidTileBackground.swift in Sources */,
 				C8BB333725030E07003E105F /* RaidOptionsListItem.swift in Sources */,
 				C84B82F724E5FD65006E84FA /* MainScreen.swift in Sources */,
+				C818B1FB2523BA4400ED06B7 /* DungeonsData.swift in Sources */,
 				C811E7A724E05FBE0050F6CD /* AuthInfo.swift in Sources */,
 				C811E7A424E01DC30050F6CD /* APIAccessInfo.swift in Sources */,
 				C803C5D324FC57B800A8D2DE /* CharacterRaidEncounters.swift in Sources */,
@@ -653,6 +670,7 @@
 				C818B1CE2520D9B000ED06B7 /* LocalizedName.swift in Sources */,
 				C8F942DB24EDB54000B6222C /* LogOutDebugScreen.swift in Sources */,
 				C818B1DC2521060D00ED06B7 /* NotableItemsInRaid.swift in Sources */,
+				C818B1EF2523ADA400ED06B7 /* RaidsData.swift in Sources */,
 				C803C5D924FEF18C00A8D2DE /* RaidDataHelper.swift in Sources */,
 				C88EEAA024E9EFDB00155CBC /* CharacterLoadingListItem.swift in Sources */,
 				C8E4D71C24F2BDD200EDAC85 /* InstanceMedia.swift in Sources */,
@@ -681,6 +699,7 @@
 				C806FA562501AAE1006DEF78 /* RaidTileBackground.swift in Sources */,
 				C8BB333825030E07003E105F /* RaidOptionsListItem.swift in Sources */,
 				C8F942E424EF025600B6222C /* GameData.swift in Sources */,
+				C818B1FC2523BA4400ED06B7 /* DungeonsData.swift in Sources */,
 				C8F942EB24EF028100B6222C /* DataHealthScreen.swift in Sources */,
 				C84B82F824E5FD65006E84FA /* MainScreen.swift in Sources */,
 				C8F942E924EF027900B6222C /* LogOutListItem.swift in Sources */,
@@ -711,6 +730,7 @@
 				C818B1CF2520D9B000ED06B7 /* LocalizedName.swift in Sources */,
 				C831CC5024E8974100C25F67 /* MyData.xcdatamodeld in Sources */,
 				C818B1DD2521060D00ED06B7 /* NotableItemsInRaid.swift in Sources */,
+				C818B1F02523ADA400ED06B7 /* RaidsData.swift in Sources */,
 				C803C5DA24FEF18C00A8D2DE /* RaidDataHelper.swift in Sources */,
 				C8F942E724EF027300B6222C /* CharacterListItem.swift in Sources */,
 				C8E4D71D24F2BDD200EDAC85 /* InstanceMedia.swift in Sources */,

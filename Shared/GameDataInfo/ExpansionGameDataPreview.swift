@@ -24,11 +24,11 @@ struct ExpansionGameDataPreview: View {
                 HStack{
                     if gameData.raids.filter{$0.expansion.id == expansion.id }.count > 0 {
                         ForEach(gameData.raids.filter{ $0.expansion.id == expansion.id }){ raid in
-                            InstanceTile(instance: raid, category: "raid")
+                            InstanceTile(instance: raid, category: raid.category.type.rawValue.lowercased())
                                 .padding()
                         }
                     } else {
-                        InstanceTile(category: "raid")
+                        InstanceTile(category: InstanceCategoryType.raid.rawValue.lowercased())
                             .padding()
                     }
                 }
@@ -40,11 +40,11 @@ struct ExpansionGameDataPreview: View {
                 HStack{
                     if gameData.dungeons.filter{$0.expansion.id == expansion.id }.count > 0 {
                         ForEach(gameData.dungeons.filter{ $0.expansion.id == expansion.id }){ dungeon in
-                            InstanceTile(instance: dungeon, category: "dungeon")
+                            InstanceTile(instance: dungeon, category: dungeon.category.type.rawValue.lowercased())
                                 .padding()
                         }
                     } else {
-                        InstanceTile(category: "dungeon")
+                        InstanceTile(category: InstanceCategoryType.dungeon.rawValue.lowercased())
                             .padding()
                     }
                     
