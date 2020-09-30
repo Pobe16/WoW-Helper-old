@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct LocalizedName: Codable {
+struct LocalizedName: Codable, Hashable {
     let en_US: String
     let es_MX: String
     let pt_BR: String

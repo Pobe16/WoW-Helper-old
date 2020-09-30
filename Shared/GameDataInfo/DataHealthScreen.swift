@@ -40,13 +40,13 @@ struct DataHealthScreen: View {
             }
             ToolbarItemGroup(placement: .primaryAction) {
 //                Button("Print Data") {
-//                    print(gameData.dungeons)
+//                    print(gameData.raidEncounters.first)
 //                }.padding()
                 if gameData.loadingAllowed {
                     Button {
                         gameData.hardReloadGameData(authorizedBy: authorization)
                     } label: {
-                        Text("Refresh!")
+                        Label("Refresh!", systemImage: "arrow.counterclockwise")
                     }
                 } else {
                     ProgressView(

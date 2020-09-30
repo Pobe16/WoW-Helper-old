@@ -11,6 +11,7 @@ struct RaidDetails: View {
     @Namespace var tile
     
     @EnvironmentObject var authorization: Authentication
+    @EnvironmentObject var gameData: GameData
     
     let columns = [
         GridItem(.adaptive(minimum: 340), spacing: 20)
@@ -18,8 +19,6 @@ struct RaidDetails: View {
     
     let raid: CombinedRaidWithEncounters
     let character: CharacterInProfile
-    
-    @State var encounters: [JournalEncounter] = []
     
     var body: some View {
         GeometryReader { geometry in
@@ -53,9 +52,11 @@ struct RaidDetails: View {
                             ForEach(raidMode.progress.encounters, id: \.self) { encounter in
                                 VStack{
                                     Text("\(encounter.encounter.name)")
-                                    Text("Times killed: \(encounter.completedCount)")
                                     if encounter.lastKillTimestamp != nil {
+                                        Text("Times killed: \(encounter.completedCount)")
+                                            .padding()
                                         Text("Last killed: \(encounter.lastKillTimestamp!)")
+                                            .padding()
                                     }
                                     
                                     if encounterDownloaded(for: encounter.encounter.id) {
@@ -85,26 +86,35 @@ struct RaidDetails: View {
                 ToolbarItem(placement: .principal) {
                     Text("\(raid.raidName)")
                 }
-            }
-            .onAppear {
-                downloadEncountersLoot()
+                ToolbarItemGroup(placement: .primaryAction) {
+                    Button("Print Data") {
+                        print(raid)
+                    }.padding()
+                }
             }
             
         }
     }
     
     func encounterDownloaded(for id: Int) -> Bool {
-        guard let _ = encounters.first(where: { (enc) -> Bool in
+        guard let _ = gameData.raidEncounters.first(where: { (enc) -> Bool in
             enc.id == id
-        }) else { return false }
+        }) else {
+            print(id)
+            downloadEncountersLoot()
+            return false
+        }
         return true
         
     }
     
     func selectEncounter(with id: Int) -> JournalEncounter {
-        let boss = encounters.first(where: { (enc) -> Bool in
+        
+        guard let boss = gameData.raidEncounters.first(where: { (enc) -> Bool in
             enc.id == id
-        })!
+        }) else {
+            return gameData.raidEncounters.first!
+        }
         return boss
     }
     
@@ -169,7 +179,12 @@ struct RaidDetails: View {
                 JSONCoreDataManager.shared.saveJSON(data, withURL: url)
             }
             DispatchQueue.main.async {
-                self.encounters = results
+                results.forEach { (DREncounter) in
+                    if !gameData.raidEncounters.contains(DREncounter) {
+                        gameData.raidEncounters.append(DREncounter)
+                    }
+                }
+                gameData.raidEncounters.sort()
             }
             
             
