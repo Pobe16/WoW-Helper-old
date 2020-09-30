@@ -40,7 +40,7 @@ struct RaidDataHelper {
                 filteredModes.forEach { (mode) in
                     
                     if let playerRaidMode = playerRaid.modes.first(where: { (encounter) -> Bool in
-                        encounter.difficulty == mode.mode
+                        encounter.difficulty.type == mode.mode.type
                     }) {
                         var instanceEncounters: [EncounterPerBossPerCharacter] = []
                         

@@ -339,7 +339,6 @@
 				C803C5D224FC57B800A8D2DE /* CharacterRaidEncounters.swift */,
 				C8F942DE24EDB8DB00B6222C /* ExpansionIndex.swift */,
 				C8F942E024EDC02900B6222C /* ExpansionJournal.swift */,
-				C8F942E224EF024600B6222C /* GameData.swift */,
 				C8665E6724F1DF980043A23C /* InstanceJournal.swift */,
 				C8E4D71B24F2BDD200EDAC85 /* InstanceMedia.swift */,
 				C84B82F924E5FF56006E84FA /* UserProfile.swift */,
@@ -430,6 +429,7 @@
 		C8E4D71E24F31DFA00EDAC85 /* GameDataInfo */ = {
 			isa = PBXGroup;
 			children = (
+				C8F942E224EF024600B6222C /* GameData.swift */,
 				C8665E6424F066DF0043A23C /* GameDataLoader.swift */,
 				C8E4D71824F2A5A500EDAC85 /* InstanceTile.swift */,
 				C874D5CD24F2926A0006B210 /* ExpansionGameDataPreview.swift */,

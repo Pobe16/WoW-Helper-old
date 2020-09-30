@@ -21,16 +21,32 @@ class GameData: ObservableObject {
     @Published var expansions: [ExpansionJournal]           = []
     
     @Published var raidsStubs: [InstanceIndex]              = []
-    @Published var raids: [InstanceJournal]                 = createRaidsList()
+    @Published var raids: [InstanceJournal]                 = []
     
     @Published var dungeonsStubs: [InstanceIndex]           = []
-    @Published var dungeons: [InstanceJournal]              = createDungeonsList()
+    @Published var dungeons: [InstanceJournal]              = []
+    
+    @Published var raidEncountersStubs: [Int]               = []
+    @Published var raidEncounters: [JournalEncounter]       = []
     
     let estimatedItemsToDownload: Int                       = 50
     @Published var actualItemsToDownload: Int               = 0
     @Published var downloadedItems: Int                     = 1
     
     @Published var loadingAllowed: Bool                     = true
+    
+    init () {
+        
+        guard let requestLocale = UserDefaults.standard.object(forKey: "localeCode") as? String  else {
+            return
+        }
+        
+        if requestLocale == EuropeanLocales.BritishEnglish {
+            raids = createRaidsList()
+            dungeons = createDungeonsList()
+        }
+        
+    }
     
     func deleteAllJSONData() {
         let allData = JSONCoreDataManager.shared.fetchAllJSONData()
@@ -61,6 +77,8 @@ class GameData: ObservableObject {
             self.expansionsStubs.removeAll()
             self.raidsStubs.removeAll()
             self.dungeonsStubs.removeAll()
+            self.raidEncountersStubs.removeAll()
+            self.raidEncounters.removeAll()
             self.downloadedItems = 1
             self.actualItemsToDownload = 0
             
@@ -274,13 +292,9 @@ class GameData: ObservableObject {
                     withAnimation {
                         self.raids.sort()
                     }
-                    if self.loadDungeonsToo {
-                        self.loadDungeonsInfo()
-                    } else {
-                        self.loadingAllowed = true
-                        self.reloadFromCDAllowed = true
-                        print("loading dungeons postponed")
-                    }
+                    self.loadingAllowed = true
+                    self.reloadFromCDAllowed = true
+                    self.prepareRaidEncounters()
                 }
                 return
             }
@@ -404,8 +418,8 @@ class GameData: ObservableObject {
                     withAnimation {
                         self.dungeons = noDuplicates.sorted()
                         self.loadingAllowed = true
-                        self.reloadFromCDAllowed = true
                     }
+                    self.reloadFromCDAllowed = true
                 }
                 print("loaded \(dungeons.count) dungeons")
                 return
@@ -473,6 +487,7 @@ class GameData: ObservableObject {
         task.resume()
         
     }
+    
     private func decodeDungeonData(_ data: Data, fromURL url: URL? = nil) {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -495,6 +510,143 @@ class GameData: ObservableObject {
                     self.dungeonsStubs.removeFirst()
                 }
                 self.loadDungeonsInfo()
+            }
+            
+        } catch {
+            print(error)
+        }
+    }
+    
+    private func prepareRaidEncounters() {
+        raids.forEach { (instance) in
+            raidEncountersStubs.append(instance.id)
+        }
+        loadRaidEncountersInfo()
+    }
+    
+    private func loadRaidEncountersInfo(){
+        if timeRetries > 5 || connectionRetries > 5 {
+            print("Failed after \(timeRetries) timer retries, and or \(connectionRetries) connection errors")
+            return
+        }
+        guard let currentRaidEncountersToLoad = raidEncountersStubs.first else {
+            if raidEncounters.count > 0 {
+                print("finished loading raid encounters")
+
+                DispatchQueue.main.async {
+                    withAnimation {
+                        self.raidEncounters = self.raidEncounters.sorted()
+                        self.loadingAllowed = true
+                    }
+                    self.reloadFromCDAllowed = true
+                }
+                
+                print("loaded \(raidEncounters.count) raid encounters")
+                
+                if self.loadDungeonsToo {
+                    self.loadDungeonsInfo()
+                } else {
+                    print("loading dungeons postponed")
+                }
+                
+                return
+            }
+            timeRetries += 1
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.loadRaidEncountersInfo()
+            }
+            return
+        }
+        
+        guard !raidEncounters.contains(where: { (raidEncounter) -> Bool in
+            currentRaidEncountersToLoad == raidEncounter.instance.id
+        }) else {
+            if raidEncounters.count > 0 {
+                raidEncounters.removeFirst()
+            }
+            loadRaidEncountersInfo()
+            return
+        }
+        
+        let requestUrlAPIHost = UserDefaults.standard.object(forKey: "APIRegionHost") as? String ?? APIRegionHostList.Europe
+        let requestUrlAPIFragment = "/data/wow/search/journal-encounter"
+        let requestUrlSearchElement = "?instance.id=\(currentRaidEncountersToLoad)"
+        let requestUrlIdentifiablePart = requestUrlAPIHost + requestUrlAPIFragment + requestUrlSearchElement
+        let URLIdentifier = URL(string: requestUrlIdentifiablePart)!
+        
+        if reloadFromCDAllowed {
+            if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: requestUrlIdentifiablePart, maximumAgeInDays: 90) {
+                decodeRaidEncountersData(savedData.data!)
+                return
+            }
+        }
+        
+        let regionShortCode = APIRegionShort.Code[UserDefaults.standard.integer(forKey: "loginRegion")]
+        let requestAPINamespace = "static-\(regionShortCode)"
+        let requestLocale = UserDefaults.standard.object(forKey: "localeCode") as? String ?? EuropeanLocales.BritishEnglish
+        
+        let fullRequestURL = URL(string:
+                                    requestUrlIdentifiablePart +
+                                    "&namespace=\(requestAPINamespace)" +
+                                    "&locale=\(requestLocale)" +
+                                    "&access_token=\(authorization.oauth2.accessToken ?? "")"
+        )!
+        
+        
+        let req = authorization.oauth2.request(forURL: fullRequestURL)
+        
+        let task = authorization.oauth2.session.dataTask(with: req) { data, response, error in
+            if let data = data {
+                self.timeRetries = 0
+                self.connectionRetries = 0
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    self.decodeRaidEncountersData(data, fromURL: URLIdentifier)
+                }
+                
+            }
+            if let error = error {
+                // something went wrong, check the error
+                print("error, retrying in 1 second")
+                print(error.localizedDescription)
+                self.connectionRetries += 1
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.loadRaidEncountersInfo()
+                }
+            }
+        }
+        task.resume()
+        
+    }
+    
+    private func decodeRaidEncountersData(_ data: Data, fromURL url: URL? = nil) {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .useDefaultKeys
+        
+        do {
+            let dataResponse = try decoder.decode(JournalEncounterSearch.self, from: data)
+            let wrapper = dataResponse.results
+            var results: [JournalEncounter] = []
+            
+            wrapper.forEach { (wrapper) in
+                results.append(wrapper.data)
+            }
+            
+            if let url = url {
+                JSONCoreDataManager.shared.saveJSON(data, withURL: url)
+            }
+                
+            DispatchQueue.main.async {
+                
+                withAnimation {
+                    self.raidEncounters.append(contentsOf: results)
+                    self.downloadedItems += 1
+                }
+                
+                if self.raidEncountersStubs.count > 0 {
+                    self.raidEncountersStubs.removeFirst()
+                }
+                self.loadRaidEncountersInfo()
             }
             
         } catch {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct JournalEncounterSearch: Codable {
+struct JournalEncounterSearch: Codable, Hashable {
     let maxPageSize: Int
     let page: Int
     let pageCount: Int
@@ -15,12 +15,24 @@ struct JournalEncounterSearch: Codable {
     let results: [JournalEncounterSearchWrapper]
 }
 
-struct JournalEncounterSearchWrapper: Codable {
+struct JournalEncounterSearchWrapper: Codable, Hashable {
     let data: JournalEncounter
     let key: LinkStub
 }
 
-struct JournalEncounter: Codable {
+struct JournalEncounter: Codable, Hashable, Comparable {
+    static func == (lhs: JournalEncounter, rhs: JournalEncounter) -> Bool {
+        return lhs.id == lhs.id && lhs.instance.id == rhs.instance.id
+    }
+    
+    static func < (lhs: JournalEncounter, rhs: JournalEncounter) -> Bool {
+        if lhs.instance.id == rhs.instance.id {
+            return lhs.id < lhs.id
+        } else {
+            return lhs.instance.id < rhs.instance.id
+        }
+    }
+    
     let category: EncounterCategory
     let id: Int
     let instance: EncounterInstance
@@ -28,21 +40,25 @@ struct JournalEncounter: Codable {
     let name: LocalizedName
 }
 
-struct EncounterCategory: Codable {
+struct EncounterCategory: Codable, Hashable {
     let type: String
 }
 
-struct EncounterInstance: Codable {
+struct EncounterInstance: Codable, Hashable {
     let id: Int
     let name: LocalizedName
 }
 
-struct ItemWrapper: Codable {
+struct ItemWrapper: Codable, Hashable {
     let id: Int
     let item: ItemStub
 }
 
-struct ItemStub: Codable {
+struct ItemStub: Codable, Hashable {
+    static func == (lhs: ItemStub, rhs: ItemStub) -> Bool {
+        lhs.id == lhs.id
+    }
+    
     let name: LocalizedName
     let id: Int
 }
