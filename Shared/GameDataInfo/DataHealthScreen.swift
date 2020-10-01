@@ -62,7 +62,7 @@ struct DataHealthScreen: View {
     }
     
     func checkDataCreationDate(){
-        let requestUrlAPIHost = UserDefaults.standard.object(forKey: "APIRegionHost") as? String ?? APIRegionHostList.Europe
+        let requestUrlAPIHost = UserDefaults.standard.object(forKey: UserDefaultsKeys.APIRegionHost) as? String ?? APIRegionHostList.Europe
         let requestUrlAPIFragment = "/data/wow/journal-expansion/index"
         
         if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: requestUrlAPIHost + requestUrlAPIFragment, maximumAgeInDays: 90) {

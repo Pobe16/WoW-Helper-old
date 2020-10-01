@@ -123,6 +123,8 @@
 		C8F942EB24EF028100B6222C /* DataHealthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F942DC24EDB65C00B6222C /* DataHealthScreen.swift */; };
 		C8F942F424EF1D2500B6222C /* SecretOAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F942F324EF1D2500B6222C /* SecretOAuth.swift */; };
 		C8F942F524EF1D2500B6222C /* SecretOAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F942F324EF1D2500B6222C /* SecretOAuth.swift */; };
+		C8FFADAB2525533900465313 /* StaticStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FFADAA2525533900465313 /* StaticStrings.swift */; };
+		C8FFADAC2525533900465313 /* StaticStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FFADAA2525533900465313 /* StaticStrings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -209,6 +211,7 @@
 		C8F942E024EDC02900B6222C /* ExpansionJournal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpansionJournal.swift; sourceTree = "<group>"; };
 		C8F942E224EF024600B6222C /* GameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
 		C8F942F324EF1D2500B6222C /* SecretOAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretOAuth.swift; sourceTree = "<group>"; };
+		C8FFADAA2525533900465313 /* StaticStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticStrings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -264,6 +267,7 @@
 			isa = PBXGroup;
 			children = (
 				C811E76024E01B1E0050F6CD /* WoWWidgetApp.swift */,
+				C818B1F52523AF2C00ED06B7 /* BlizzApiData */,
 				C831CC5124E8994200C25F67 /* CoreData */,
 				C887121424E4B75700C0A0ED /* Authorization */,
 				C811E7A924E0A3340050F6CD /* DataModels */,
@@ -273,6 +277,7 @@
 				C811E76224E01B1F0050F6CD /* Assets.xcassets */,
 				C8B14256251D0656004F982B /* textures.xcassets */,
 				C849961C25153834007D1762 /* Characters */,
+				C8FFADAA2525533900465313 /* StaticStrings.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -333,7 +338,6 @@
 		C811E7A924E0A3340050F6CD /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
-				C818B1F52523AF2C00ED06B7 /* BlizzApiData */,
 				C811E7A324E01DC30050F6CD /* APIAccessInfo.swift */,
 				C831CC4624E7355500C25F67 /* CharacterMedia.swift */,
 				C803C5D224FC57B800A8D2DE /* CharacterRaidEncounters.swift */,
@@ -642,6 +646,7 @@
 				C818B1FB2523BA4400ED06B7 /* DungeonsData.swift in Sources */,
 				C811E7A724E05FBE0050F6CD /* AuthInfo.swift in Sources */,
 				C811E7A424E01DC30050F6CD /* APIAccessInfo.swift in Sources */,
+				C8FFADAB2525533900465313 /* StaticStrings.swift in Sources */,
 				C803C5D324FC57B800A8D2DE /* CharacterRaidEncounters.swift in Sources */,
 				C818B1E42522A41D00ED06B7 /* FarmingOrder.swift in Sources */,
 				C835226F2502379900A5D90D /* BackgroundBlurs.swift in Sources */,
@@ -702,6 +707,7 @@
 				C818B1FC2523BA4400ED06B7 /* DungeonsData.swift in Sources */,
 				C8F942EB24EF028100B6222C /* DataHealthScreen.swift in Sources */,
 				C84B82F824E5FD65006E84FA /* MainScreen.swift in Sources */,
+				C8FFADAC2525533900465313 /* StaticStrings.swift in Sources */,
 				C8F942E924EF027900B6222C /* LogOutListItem.swift in Sources */,
 				C818B1E52522A41D00ED06B7 /* FarmingOrder.swift in Sources */,
 				C803C5D424FC57B800A8D2DE /* CharacterRaidEncounters.swift in Sources */,

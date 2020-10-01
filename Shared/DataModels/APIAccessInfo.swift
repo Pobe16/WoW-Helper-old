@@ -5,7 +5,6 @@
 //  Created by Mikolaj Lukasik on 09/08/2020.
 //
 
-import OAuth2
 import Foundation
 
 struct BattleNetAuthorizationHostList {

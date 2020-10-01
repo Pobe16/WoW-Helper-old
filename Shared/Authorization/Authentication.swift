@@ -36,7 +36,7 @@ class Authentication: ObservableObject {
         oauth2                  = OAuth2CodeGrant.init(settings: startSettings)
         loggedIn                = false
         loginAllowed            = true
-        loggedBefore            = UserDefaults.standard.bool(forKey: "UserLoggedBefore")
+        loggedBefore            = UserDefaults.standard.bool(forKey: UserDefaultsKeys.UserLoggedBefore)
         
     }
 

@@ -108,7 +108,7 @@ struct InstanceTile: View {
         guard let instance = instance else { return }
         
         let requestUrlJournalMedia = instance.media.key.href
-        let requestLocale = UserDefaults.standard.object(forKey: "localeCode") as? String ?? APIRegionHostList.Europe
+        let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? APIRegionHostList.Europe
         
         let fullRequestURL = URL(string:
                                     requestUrlJournalMedia +

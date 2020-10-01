@@ -62,7 +62,7 @@ struct CharacterListItem: View {
         let shadow =
         """
         {
-            "avatarUrl": "https://render-us.worldofwarcraft.com/shadow/avatar/\(character.playableRace.id)-\(character.gender.type == "MALE" ? 0 : 1).jpg"
+            "avatarUrl": "https://render-us.worldofwarcraft.com/shadow/avatar/\(character.playableRace.id)-\(character.gender.type == .male ? 0 : 1).jpg"
         }
         """.data(using: .utf8)!
         
@@ -72,14 +72,14 @@ struct CharacterListItem: View {
     }
     
     fileprivate func loadMediaData() {
-        let requestUrlAPIHost = UserDefaults.standard.object(forKey: "APIRegionHost") as? String ?? APIRegionHostList.Europe
+        let requestUrlAPIHost = UserDefaults.standard.object(forKey: UserDefaultsKeys.APIRegionHost) as? String ?? APIRegionHostList.Europe
         let requestUrlAPIFragment = "/profile/wow/character" +
                                     "/\(character.realm.slug)" +
                                     "/\(character.name.lowercased())" +
                                     "/character-media"
-        let regionShortCode = APIRegionShort.Code[UserDefaults.standard.integer(forKey: "loginRegion")]
+        let regionShortCode = APIRegionShort.Code[UserDefaults.standard.integer(forKey: UserDefaultsKeys.loginRegion)]
         let requestAPINamespace = "profile-\(regionShortCode)"
-        let requestLocale = UserDefaults.standard.object(forKey: "localeCode") as? String ?? APIRegionHostList.Europe
+        let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? APIRegionHostList.Europe
         
         let fullRequestURL = URL(string:
                                     requestUrlAPIHost +
@@ -129,7 +129,7 @@ struct CharacterListItem: View {
         guard let characterMedia = characterMedia else {
             return
         }
-        guard let avatarURL = URL(string: characterMedia.avatarUrl + "?alt=/shadow/avatar/\(character.playableRace.id)-\(character.gender.type == "MALE" ? 0 : 1)") else {
+        guard let avatarURL = URL(string: characterMedia.avatarUrl + "?alt=/shadow/avatar/\(character.playableRace.id)-\(character.gender.type == .male ? 0 : 1)") else {
             return
         }
         

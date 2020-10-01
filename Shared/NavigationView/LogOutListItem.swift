@@ -32,7 +32,7 @@ struct LogOutListItem: View {
         authorization.oauth2.forgetTokens()
         authorization.loggedIn = false
         authorization.loggedBefore = false
-        UserDefaults.standard.set(false, forKey: "UserLoggedBefore")
+        UserDefaults.standard.set(false, forKey: UserDefaultsKeys.UserLoggedBefore)
     }
 }
 

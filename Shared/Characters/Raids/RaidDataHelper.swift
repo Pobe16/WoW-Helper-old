@@ -189,13 +189,13 @@ struct RaidDataHelper {
             return modes
         case .noLfr:
             return modes.filter { (mode) -> Bool in
-                return mode.mode.type != "LFR"
+                return mode.mode.type != .lfr
             }
         case .highest:
             var highestMode: [InstanceMode] = []
             
             highestMode.append(contentsOf: modes.filter { (mode) -> Bool in
-                return mode.mode.type == "MYTHIC"
+                return mode.mode.type == .mythic
             } )
             
             guard highestMode.count == 0 else {
@@ -203,7 +203,7 @@ struct RaidDataHelper {
             }
             
             highestMode.append(contentsOf: modes.filter { (mode) -> Bool in
-                return mode.mode.type == "LEGACY_25_MAN_HEROIC"
+                return mode.mode.type == .legacy25Hero
             } )
             
             guard highestMode.count == 0 else {
@@ -211,7 +211,7 @@ struct RaidDataHelper {
             }
             
             highestMode.append(contentsOf: modes.filter { (mode) -> Bool in
-                return mode.mode.type == "LEGACY_10_MAN_HEROIC"
+                return mode.mode.type == .legacy10Hero
             } )
             
             guard highestMode.count == 0 else {
@@ -219,7 +219,7 @@ struct RaidDataHelper {
             }
             
             highestMode.append(contentsOf: modes.filter { (mode) -> Bool in
-                return mode.mode.type == "LEGACY_25_MAN"
+                return mode.mode.type == .legacy25
             } )
             
             guard highestMode.count == 0 else {
@@ -227,7 +227,7 @@ struct RaidDataHelper {
             }
             
             highestMode.append(contentsOf: modes.filter { (mode) -> Bool in
-                return mode.mode.type == "LEGACY_10_MAN"
+                return mode.mode.type == .legacy10
             } )
             
             guard highestMode.count == 0 else {
@@ -235,7 +235,7 @@ struct RaidDataHelper {
             }
             
             highestMode.append(contentsOf: modes.filter { (mode) -> Bool in
-                return mode.mode.type == "HEROIC"
+                return mode.mode.type == .heroic
             } )
             
             guard highestMode.count == 0 else {
@@ -243,7 +243,7 @@ struct RaidDataHelper {
             }
             
             highestMode.append(contentsOf: modes.filter { (mode) -> Bool in
-                return mode.mode.type == "NORMAL"
+                return mode.mode.type == .normal
             } )
             
             guard highestMode.count == 0 else {
@@ -321,7 +321,7 @@ struct RaidDataHelper {
     }
     
     public func dateOfNextWeeklyReset() -> Date {
-        let regionShortCode = APIRegionShort.Code[UserDefaults.standard.integer(forKey: "loginRegion")]
+        let regionShortCode = APIRegionShort.Code[UserDefaults.standard.integer(forKey: UserDefaultsKeys.loginRegion)]
         
         var components = DateComponents()
         if regionShortCode == "eu" {

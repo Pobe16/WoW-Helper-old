@@ -24,7 +24,7 @@ struct LocalizedName: Codable, Hashable {
     
     var value: String {
         get {
-            let requestLocale = UserDefaults.standard.object(forKey: "localeCode") as? String ?? EuropeanLocales.BritishEnglish
+            let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? EuropeanLocales.BritishEnglish
             switch requestLocale {
             case "en_US":
                 return en_US
