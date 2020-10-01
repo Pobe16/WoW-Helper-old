@@ -82,8 +82,8 @@ struct LoginScreen: View {
     }
     
     func determineLocaleState() {
-        region = UserDefaults.standard.integer(forKey: "loginRegion")
-        locale = UserDefaults.standard.integer(forKey: "loginLocale")
+        region = UserDefaults.standard.integer(forKey: UserDefaultsKeys.loginRegion)
+        locale = UserDefaults.standard.integer(forKey: UserDefaultsKeys.loginLocale)
     }
     
     func setLocaleForAuthorization() {
@@ -145,12 +145,12 @@ struct LoginScreen: View {
             APIRegionHost = APIRegionHostList.Europe
             localeCode = EuropeanLocales.BritishEnglish
         }
-        UserDefaults.standard.setValue(authHost, forKey: "authHost")
-        UserDefaults.standard.setValue(APIRegionHost, forKey: "APIRegionHost")
-        UserDefaults.standard.setValue(localeCode, forKey: "localeCode")
+        UserDefaults.standard.setValue(authHost, forKey: UserDefaultsKeys.authHost)
+        UserDefaults.standard.setValue(APIRegionHost, forKey: UserDefaultsKeys.APIRegionHost)
+        UserDefaults.standard.setValue(localeCode, forKey: UserDefaultsKeys.localeCode)
         
-        UserDefaults.standard.setValue(region, forKey: "loginRegion")
-        UserDefaults.standard.setValue(locale, forKey: "loginLocale")
+        UserDefaults.standard.setValue(region, forKey: UserDefaultsKeys.loginRegion)
+        UserDefaults.standard.setValue(locale, forKey: UserDefaultsKeys.loginLocale)
         
     }
     
@@ -179,7 +179,7 @@ struct LoginScreen: View {
 //                print("Authorized! Access token is in `oauth2.accessToken`")
                 authorization.loggedIn = true
                 authorization.loggedBefore = true
-                UserDefaults.standard.set(true, forKey: "UserLoggedBefore")
+                UserDefaults.standard.set(true, forKey: UserDefaultsKeys.UserLoggedBefore)
             } else {
                 authorization.loggedIn = false
                 print("Authorization was canceled or went wrong: \(String(describing: error))")   // error will not be nil

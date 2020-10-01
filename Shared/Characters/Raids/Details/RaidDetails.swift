@@ -124,7 +124,7 @@ struct RaidDetails: View {
     
     func downloadEncountersLoot(){
         
-        let requestUrlAPIHost = UserDefaults.standard.object(forKey: "APIRegionHost") as? String ?? APIRegionHostList.Europe
+        let requestUrlAPIHost = UserDefaults.standard.object(forKey: UserDefaultsKeys.APIRegionHost) as? String ?? APIRegionHostList.Europe
         let requestUrlAPIFragment = "/data/wow/search/journal-encounter"
         let requestUrlSearchElement = "?instance.id=\(raid.id)"
         let requestUrlIdentifiablePart = requestUrlAPIHost + requestUrlAPIFragment + requestUrlSearchElement
@@ -135,9 +135,9 @@ struct RaidDetails: View {
             return
         }
         
-        let regionShortCode = APIRegionShort.Code[UserDefaults.standard.integer(forKey: "loginRegion")]
+        let regionShortCode = APIRegionShort.Code[UserDefaults.standard.integer(forKey: UserDefaultsKeys.loginRegion)]
         let requestAPINamespace = "static-\(regionShortCode)"
-        let requestLocale = UserDefaults.standard.object(forKey: "localeCode") as? String ?? EuropeanLocales.BritishEnglish
+        let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? EuropeanLocales.BritishEnglish
         
         let fullRequestURL = URL(string:
                                     requestUrlIdentifiablePart +

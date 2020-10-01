@@ -91,7 +91,7 @@ struct RaidFarmingCollection: View {
             errorText = "Character level too low. You need at least level \(levelRequiredForRaiding) to try and conquer the raids."
             return
         }
-        let requestUrlAPIHost = UserDefaults.standard.object(forKey: "APIRegionHost") as? String ?? APIRegionHostList.Europe
+        let requestUrlAPIHost = UserDefaults.standard.object(forKey: UserDefaultsKeys.APIRegionHost) as? String ?? APIRegionHostList.Europe
         let requestUrlAPIFragment =
             "/profile/wow/character"    + "/" +
             character.realm.slug        + "/" +
@@ -111,9 +111,9 @@ struct RaidFarmingCollection: View {
             return
         }
         
-        let regionShortCode = APIRegionShort.Code[UserDefaults.standard.integer(forKey: "loginRegion")]
+        let regionShortCode = APIRegionShort.Code[UserDefaults.standard.integer(forKey: UserDefaultsKeys.loginRegion)]
         let requestAPINamespace = "profile-\(regionShortCode)"
-        let requestLocale = UserDefaults.standard.object(forKey: "localeCode") as? String ?? EuropeanLocales.BritishEnglish
+        let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? EuropeanLocales.BritishEnglish
         
         let fullRequestURL = URL(string:
                                     requestUrlAPIHost +

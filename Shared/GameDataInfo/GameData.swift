@@ -37,7 +37,7 @@ class GameData: ObservableObject {
     
     init () {
         
-        guard let requestLocale = UserDefaults.standard.object(forKey: "localeCode") as? String  else {
+        guard let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String  else {
             return
         }
         
@@ -107,7 +107,7 @@ class GameData: ObservableObject {
         withAnimation {
             loadingAllowed = false
         }
-        let requestUrlAPIHost = UserDefaults.standard.object(forKey: "APIRegionHost") as? String ?? APIRegionHostList.Europe
+        let requestUrlAPIHost = UserDefaults.standard.object(forKey: UserDefaultsKeys.APIRegionHost) as? String ?? APIRegionHostList.Europe
         let requestUrlAPIFragment = "/data/wow/journal-expansion/index"
         
         if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: requestUrlAPIHost + requestUrlAPIFragment, maximumAgeInDays: 90) {
@@ -115,9 +115,9 @@ class GameData: ObservableObject {
             return
         }
         
-        let regionShortCode = APIRegionShort.Code[UserDefaults.standard.integer(forKey: "loginRegion")]
+        let regionShortCode = APIRegionShort.Code[UserDefaults.standard.integer(forKey: UserDefaultsKeys.loginRegion)]
         let requestAPINamespace = "static-\(regionShortCode)"
-        let requestLocale = UserDefaults.standard.object(forKey: "localeCode") as? String ?? EuropeanLocales.BritishEnglish
+        let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? EuropeanLocales.BritishEnglish
         
         let fullRequestURL = URL(string:
                                     requestUrlAPIHost +
@@ -198,7 +198,7 @@ class GameData: ObservableObject {
             return
         }
         
-        let requestLocale = UserDefaults.standard.object(forKey: "localeCode") as? String ?? EuropeanLocales.BritishEnglish
+        let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? EuropeanLocales.BritishEnglish
         let accessToken = authorization.oauth2.accessToken ?? ""
         
         let requestUrlAPIHost = "\(stub.key.href)"
@@ -326,7 +326,7 @@ class GameData: ObservableObject {
             }
         }
         
-        let requestLocale = UserDefaults.standard.object(forKey: "localeCode") as? String ?? EuropeanLocales.BritishEnglish
+        let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? EuropeanLocales.BritishEnglish
         let accessToken = authorization.oauth2.accessToken ?? ""
         
         let fullRequestURL = URL(string:
@@ -452,7 +452,7 @@ class GameData: ObservableObject {
             }
         }
         
-        let requestLocale = UserDefaults.standard.object(forKey: "localeCode") as? String ?? EuropeanLocales.BritishEnglish
+        let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? EuropeanLocales.BritishEnglish
         let accessToken = authorization.oauth2.accessToken ?? ""
         
         let fullRequestURL = URL(string:
@@ -568,7 +568,7 @@ class GameData: ObservableObject {
             return
         }
         
-        let requestUrlAPIHost = UserDefaults.standard.object(forKey: "APIRegionHost") as? String ?? APIRegionHostList.Europe
+        let requestUrlAPIHost = UserDefaults.standard.object(forKey: UserDefaultsKeys.APIRegionHost) as? String ?? APIRegionHostList.Europe
         let requestUrlAPIFragment = "/data/wow/search/journal-encounter"
         let requestUrlSearchElement = "?instance.id=\(currentRaidEncountersToLoad)"
         let requestUrlIdentifiablePart = requestUrlAPIHost + requestUrlAPIFragment + requestUrlSearchElement
@@ -581,9 +581,9 @@ class GameData: ObservableObject {
             }
         }
         
-        let regionShortCode = APIRegionShort.Code[UserDefaults.standard.integer(forKey: "loginRegion")]
+        let regionShortCode = APIRegionShort.Code[UserDefaults.standard.integer(forKey: UserDefaultsKeys.loginRegion)]
         let requestAPINamespace = "static-\(regionShortCode)"
-        let requestLocale = UserDefaults.standard.object(forKey: "localeCode") as? String ?? EuropeanLocales.BritishEnglish
+        let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? EuropeanLocales.BritishEnglish
         
         let fullRequestURL = URL(string:
                                     requestUrlIdentifiablePart +

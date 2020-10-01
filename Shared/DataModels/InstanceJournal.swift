@@ -53,8 +53,21 @@ struct InstanceMode: Codable, Hashable {
 }
 
 struct InstanceModeName: Codable, Hashable {
-    let type: String
+    let type: InstanceModeType
     let name: String
+}
+
+enum InstanceModeType: String, Codable, Hashable {
+    case lfr            = "LFR"
+    case mythic         = "MYTHIC"
+    case legacy25Hero   = "LEGACY_25_MAN_HEROIC"
+    case legacy10Hero   = "LEGACY_10_MAN_HEROIC"
+    case legacy25       = "LEGACY_25_MAN"
+    case legacy10       = "LEGACY_10_MAN"
+    case heroic         = "HEROIC"
+    case normal         = "NORMAL"
+    case mythicKeystone = "MYTHIC_KEYSTONE"
+    
 }
 
 struct InstanceMediaStub: Codable, Hashable, Identifiable {
@@ -67,8 +80,8 @@ struct InstanceCategory: Codable, Hashable {
 }
 
 enum InstanceCategoryType: String, Codable {
-    case raid       = "RAID"
-    case dungeon    = "DUNGEON"
-    case event      = "EVENT"
+    case raid           = "RAID"
+    case dungeon        = "DUNGEON"
+    case event          = "EVENT"
 }
 

@@ -46,7 +46,7 @@ struct FarmingOrder: View {
         }
         let encoder = JSONEncoder()
         if let encoded = try? encoder.encode(farmOrder.options) {
-            UserDefaults.standard.set(encoded, forKey: "RaidCollectionsOrder")
+            UserDefaults.standard.set(encoded, forKey: UserDefaultsKeys.RaidCollectionsOrder)
         }
     }
 }

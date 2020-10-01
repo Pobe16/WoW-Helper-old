@@ -62,7 +62,7 @@ struct RaidTileBackground: View {
     func loadMediaData(saveAs imageName: String) {
         
         let requestUrlJournalMedia = mediaUrl
-        let requestLocale = UserDefaults.standard.object(forKey: "localeCode") as? String ?? APIRegionHostList.Europe
+        let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? APIRegionHostList.Europe
         
         let fullRequestURL = URL(string:
                                     requestUrlJournalMedia +

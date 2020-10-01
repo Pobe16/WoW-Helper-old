@@ -60,7 +60,7 @@ struct placeholders{
             name: "Dwarf",
             id: 3
         ), gender: GenderInProfile(
-            type: "MALE",
+            type: .male,
             name: "Male"
         ), faction: Faction(
             type: .alliance,
@@ -89,8 +89,13 @@ struct RaceInProfile: Codable, Hashable {
 }
 
 struct GenderInProfile: Codable, Hashable {
-    let type: String
+    let type: GenderType
     let name: String
+}
+
+enum GenderType: String, Codable, Hashable {
+    case male       = "MALE"
+    case female     = "FEMALE"
 }
 
 struct Faction: Codable, Hashable {
