@@ -57,15 +57,15 @@ struct InstanceModeName: Codable, Hashable {
     let name: String
 }
 
-enum InstanceModeType: String, Codable, Hashable {
+enum InstanceModeType: String, Codable, Hashable {    
     case lfr            = "LFR"
-    case mythic         = "MYTHIC"
-    case legacy25Hero   = "LEGACY_25_MAN_HEROIC"
-    case legacy10Hero   = "LEGACY_10_MAN_HEROIC"
-    case legacy25       = "LEGACY_25_MAN"
     case legacy10       = "LEGACY_10_MAN"
-    case heroic         = "HEROIC"
+    case legacy25       = "LEGACY_25_MAN"
     case normal         = "NORMAL"
+    case legacy10Hero   = "LEGACY_10_MAN_HEROIC"
+    case legacy25Hero   = "LEGACY_25_MAN_HEROIC"
+    case heroic         = "HEROIC"
+    case mythic         = "MYTHIC"
     case mythicKeystone = "MYTHIC_KEYSTONE"
     
 }
