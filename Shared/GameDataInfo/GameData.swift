@@ -40,7 +40,7 @@ class GameData: ObservableObject {
         guard let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String  else {
             return
         }
-        
+        // preload the British English raids and dungeons
         if requestLocale == EuropeanLocales.BritishEnglish {
             raids = createRaidsList()
             dungeons = createDungeonsList()
