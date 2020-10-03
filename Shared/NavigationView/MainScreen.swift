@@ -10,7 +10,7 @@ import SwiftUI
 struct MainScreen: View {
     @EnvironmentObject var gameData: GameData
     @EnvironmentObject var authorization: Authentication
-    @State var characters: [CharacterInProfile] = []
+    @EnvironmentObject var characters: Characters
     @State var selection: String? = ""
     
     #if os(iOS)
@@ -31,8 +31,8 @@ struct MainScreen: View {
                 Section(header:
                     NavListSectionHeader(text: gameData.loadingAllowed ? "Characters" : "Loading game data")
                 ){
-                    if characters.count > 0 {
-                        ForEach(characters) { character in
+                    if characters.characters.count > 0 {
+                        ForEach(characters.characters) { character in
                             NavigationLink(
                                 destination:
                                     CharacterMainView(character: character),
@@ -116,57 +116,9 @@ struct MainScreen: View {
         .navigationViewStyle(DoubleColumnNavigationViewStyle())
         
         .onAppear {
-            loadCharacters()
+            characters.loadCharacters(authorizedBy: authorization)
         }
         
-    }
-    
-    func loadCharacters() {
-        let requestUrlAPIHost = UserDefaults.standard.object(forKey: UserDefaultsKeys.APIRegionHost) as? String ?? APIRegionHostList.Europe
-        let requestUrlAPIFragment = "/profile/user/wow"
-        let regionShortCode = APIRegionShort.Code[UserDefaults.standard.integer(forKey: UserDefaultsKeys.loginRegion)]
-        let requestAPINamespace = "profile-\(regionShortCode)"
-        let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? EuropeanLocales.BritishEnglish
-        
-        let fullRequestURL = URL(string:
-                                    requestUrlAPIHost +
-                                    requestUrlAPIFragment +
-                                    "?namespace=\(requestAPINamespace)" +
-                                    "&locale=\(requestLocale)" +
-                                    "&access_token=\(authorization.oauth2.accessToken ?? "")"
-        )!
-//        print(fullRequestURL)
-        let req = authorization.oauth2.request(forURL: fullRequestURL)
-        
-        let task = authorization.oauth2.session.dataTask(with: req) { data, response, error in
-            if let data = data {
-//                print(data)
-                
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                
-                do {
-                    let dataResponse = try decoder.decode(UserProfile.self, from: data)
-                    
-                    for account in dataResponse.wowAccounts {
-                        withAnimation {
-                            characters.append(contentsOf: account.characters)
-                        }
-                    }
-                    
-                } catch {
-                    print(error)
-                }
-                
-                
-            }
-            if let error = error {
-                // something went wrong, check the error
-                print("error")
-                print(error.localizedDescription)
-            }
-        }
-        task.resume()
     }
 }
 
