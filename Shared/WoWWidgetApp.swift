@@ -14,7 +14,6 @@ struct WoWWidgetApp: App {
     @ObservedObject var auth        = Authentication()
     @ObservedObject var gameData    = GameData()
     @ObservedObject var order       = FarmCollectionsOrder()
-    @ObservedObject var characters  = Characters()
     
     var body: some Scene {
         WindowGroup {
@@ -22,7 +21,6 @@ struct WoWWidgetApp: App {
                 .environmentObject(auth)
                 .environmentObject(gameData)
                 .environmentObject(order)
-                .environmentObject(characters)
                 .onAppear(perform: {
                     initDebug()
                 })

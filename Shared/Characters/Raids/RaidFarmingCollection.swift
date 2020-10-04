@@ -22,7 +22,7 @@ struct RaidFarmingCollection: View {
     
     @State var errorText: String?
     
-    @State var characterEncounters: CharacterRaidEncounters?
+    @State var characterEncounters: CharacterRaidEncounters? = nil
     
     @State var raidDataFilledAndSorted: RaidDataFilledAndSorted? = nil
     
@@ -53,7 +53,7 @@ struct RaidFarmingCollection: View {
                     VStack {
                         Text("Last refreshed: \(dataCreationDate)")
                         Button {
-                            downloadRaidEncounters(refresh: true)
+                            loadEncounters(refresh: true)
                         } label: {
                             Label("Refresh", systemImage: "arrow.counterclockwise")
                         }
@@ -69,10 +69,10 @@ struct RaidFarmingCollection: View {
             }
         }
         .onAppear {
-            downloadRaidEncounters()
+            loadEncounters()
         }
         .onChange(of: raidFarmingOptions) { (value) in
-            downloadRaidEncounters()
+            loadEncounters()
         }
     }
     
@@ -85,12 +85,30 @@ struct RaidFarmingCollection: View {
         dataCreationDate = dateString
     }
     
-    func downloadRaidEncounters(refresh: Bool = false) {
-        let levelRequiredForRaiding = gameData.expansions.count == 8 ? 60 : 30
+    func loadEncounters(refresh: Bool = false) {
+        let levelRequiredForRaiding = 30
         guard character.level >= levelRequiredForRaiding else {
             errorText = "Character level too low. You need at least level \(levelRequiredForRaiding) to try and conquer the raids."
             return
         }
+        
+        guard let GDCharacterEncounters = gameData.characterRaidEncounters.first(where: { (encounters) -> Bool in
+            encounters.character.id == character.id
+        }) else {
+            downloadRaidEncounters(refresh: refresh)
+            return
+        }
+        
+        DispatchQueue.main.async {
+            withAnimation {
+                characterEncounters = GDCharacterEncounters
+            }
+            combineCharacterEncountersWithData()
+        }
+    }
+    
+    func downloadRaidEncounters(refresh: Bool = false) {
+        
         let requestUrlAPIHost = UserDefaults.standard.object(forKey: UserDefaultsKeys.APIRegionHost) as? String ?? APIRegionHostList.Europe
         let requestUrlAPIFragment =
             "/profile/wow/character"    + "/" +
@@ -165,7 +183,15 @@ struct RaidFarmingCollection: View {
             DispatchQueue.main.async {
                 withAnimation {
                     characterEncounters = dataResponse
+                    
+                    if gameData.characterRaidEncounters.filter({ (GDEncounter) -> Bool in
+                        GDEncounter.character.id == dataResponse.character.id
+                    }).count == 0 {
+                        gameData.characterRaidEncounters.append(dataResponse)
+                    }
                 }
+                
+                
                 combineCharacterEncountersWithData()
             }
 
