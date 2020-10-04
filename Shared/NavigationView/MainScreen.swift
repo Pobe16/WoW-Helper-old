@@ -26,7 +26,6 @@ struct MainScreen: View {
     var body: some View {
         NavigationView {
             List {
-                
                 Section(header:
                     NavListSectionHeader(text: gameData.loadingAllowed ? "Characters" : "Loading game data")
                 ){
@@ -58,6 +57,25 @@ struct MainScreen: View {
                         )
                     }
                 }
+                
+                Section(header:
+                    NavListSectionHeader(text: "Summary")
+                ) {
+                    NavigationLink(
+                        destination:
+                            Text("Hello World"),
+                        tag: "summary",
+                        selection: $selection) {
+                        SummaryListItem()
+                    }
+                    .listRowBackground(
+                        DefaultListItemBackground(
+                            color: Color.green,
+                            selected: selection == "summary"
+                        )
+                    )
+                }
+                
                 Section(header:
                     NavListSectionHeader(text: "Settings")
                 ){
