@@ -10,7 +10,6 @@ import SwiftUI
 struct MainScreen: View {
     @EnvironmentObject var gameData: GameData
     @EnvironmentObject var authorization: Authentication
-    @EnvironmentObject var characters: Characters
     @State var selection: String? = ""
     
     #if os(iOS)
@@ -31,8 +30,8 @@ struct MainScreen: View {
                 Section(header:
                     NavListSectionHeader(text: gameData.loadingAllowed ? "Characters" : "Loading game data")
                 ){
-                    if characters.characters.count > 0 {
-                        ForEach(characters.characters) { character in
+                    if gameData.characters.count > 0 {
+                        ForEach(gameData.characters) { character in
                             NavigationLink(
                                 destination:
                                     CharacterMainView(character: character),
@@ -114,10 +113,6 @@ struct MainScreen: View {
             }
         }
         .navigationViewStyle(DoubleColumnNavigationViewStyle())
-        
-        .onAppear {
-            characters.loadCharacters(authorizedBy: authorization)
-        }
         
     }
 }

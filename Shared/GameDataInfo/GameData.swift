@@ -9,31 +9,36 @@ import Foundation
 import SwiftUI
 
 class GameData: ObservableObject {
-    var authorization: Authentication                       = Authentication()
-    var timeRetries                                         = 0
-    var connectionRetries                                   = 0
-    var reloadFromCDAllowed                                 = true
-    var loadDungeonsToo                                     = false
-    var mountItemsList: [MountItem]                         = createMountsList()
-    var petItemsList: [PetItem]                             = createPetsList()
+    var authorization: Authentication                                   = Authentication()
+    var timeRetries                                                     = 0
+    var connectionRetries                                               = 0
+    var reloadFromCDAllowed                                             = true
+    var loadDungeonsToo                                                 = false
+    var mountItemsList: [MountItem]                                     = createMountsList()
+    var petItemsList: [PetItem]                                         = createPetsList()
     
-    @Published var expansionsStubs: [ExpansionIndex]        = []
-    @Published var expansions: [ExpansionJournal]           = []
+    @Published var characters: [CharacterInProfile]                     = []
+                
+    var expansionsStubs: [ExpansionIndex]                               = []
+    @Published var expansions: [ExpansionJournal]                       = []
+                
+    var raidsStubs: [InstanceIndex]                                     = []
+    @Published var raids: [InstanceJournal]                             = []
+                
+    var dungeonsStubs: [InstanceIndex]                                  = []
+    @Published var dungeons: [InstanceJournal]                          = []
+                
+    var raidEncountersStubs: [Int]                                      = []
+    @Published var raidEncounters: [JournalEncounter]                   = []
+            
+    var charactersForRaidEncounters: [CharacterInProfile]               = []
+    @Published var characterRaidEncounters: [CharacterRaidEncounters]   = []
     
-    @Published var raidsStubs: [InstanceIndex]              = []
-    @Published var raids: [InstanceJournal]                 = []
-    
-    @Published var dungeonsStubs: [InstanceIndex]           = []
-    @Published var dungeons: [InstanceJournal]              = []
-    
-    @Published var raidEncountersStubs: [Int]               = []
-    @Published var raidEncounters: [JournalEncounter]       = []
-    
-    let estimatedItemsToDownload: Int                       = 50
-    @Published var actualItemsToDownload: Int               = 0
-    @Published var downloadedItems: Int                     = 1
-    
-    @Published var loadingAllowed: Bool                     = true
+    let estimatedItemsToDownload: Int                                   = 200
+    @Published var actualItemsToDownload: Int                           = 0
+    @Published var downloadedItems: Int                                 = 1
+                
+    @Published var loadingAllowed: Bool                                 = true
     
     init () {
         
@@ -79,34 +84,108 @@ class GameData: ObservableObject {
             self.dungeonsStubs.removeAll()
             self.raidEncountersStubs.removeAll()
             self.raidEncounters.removeAll()
+            self.charactersForRaidEncounters.removeAll()
+            
             self.downloadedItems = 1
             self.actualItemsToDownload = 0
             
             withAnimation {
+                self.characters.removeAll()
                 self.expansions.removeAll()
                 self.raids.removeAll()
                 self.dungeons.removeAll()
-                
+                self.characterRaidEncounters.removeAll()
             }
-            self.loadExpansionIndex()
+            self.loadCharacters()
         }
     }
     
     func loadGameData(authorizedBy auth: Authentication) {
-        guard expansions.count == 0 && loadingAllowed else { return }
+        guard characters.count == 0 && loadingAllowed else { return }
         reloadFromCDAllowed = true
         authorization = auth
         
         if downloadedItems > 1 { downloadedItems = 1 }
         if actualItemsToDownload > 0 { actualItemsToDownload = 0}
         
-        loadExpansionIndex()
+        loadCharacters()
     }
     
-    private func loadExpansionIndex() {
+    func loadCharacters() {
         withAnimation {
             loadingAllowed = false
         }
+        
+        if timeRetries > 5 || connectionRetries > 5 {
+            print("Failed after \(timeRetries) timer retries, and or \(connectionRetries) connection errors")
+            return
+        }
+        
+        let requestUrlAPIHost = UserDefaults.standard.object(forKey: UserDefaultsKeys.APIRegionHost) as? String ?? APIRegionHostList.Europe
+        let requestUrlAPIFragment = "/profile/user/wow"
+        let regionShortCode = APIRegionShort.Code[UserDefaults.standard.integer(forKey: UserDefaultsKeys.loginRegion)]
+        let requestAPINamespace = "profile-\(regionShortCode)"
+        let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? EuropeanLocales.BritishEnglish
+        
+        let fullRequestURL = URL(string:
+                                    requestUrlAPIHost +
+                                    requestUrlAPIFragment +
+                                    "?namespace=\(requestAPINamespace)" +
+                                    "&locale=\(requestLocale)" +
+                                    "&access_token=\(authorization.oauth2.accessToken ?? "")"
+        )!
+        
+        if reloadFromCDAllowed {
+            let strippedAPIUrl = String(fullRequestURL.absoluteString)
+        
+            if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: strippedAPIUrl, maximumAgeInDays: 0.04) {
+                decodeCharactersData(savedData.data!)
+                return
+            }
+        }
+        let req = authorization.oauth2.request(forURL: fullRequestURL)
+        
+        let task = authorization.oauth2.session.dataTask(with: req) { data, response, error in
+            if let data = data {
+                self.decodeCharactersData(data, fromURL: fullRequestURL)
+            }
+            if let error = error {
+                // something went wrong, check the error
+                print("error")
+                print(error.localizedDescription)
+            }
+        }
+        task.resume()
+    }
+    
+    func decodeCharactersData(_ data: Data, fromURL url: URL? = nil) {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        do {
+            let dataResponse = try decoder.decode(UserProfile.self, from: data)
+            
+            for account in dataResponse.wowAccounts {
+                DispatchQueue.main.async { [self] in
+                    withAnimation {
+                        characters.append(contentsOf: account.characters)
+                    }
+                    
+                    charactersForRaidEncounters.append(contentsOf: characters.filter({ (character) -> Bool in
+                        character.level >= 30
+                    }))
+                    actualItemsToDownload += charactersForRaidEncounters.count
+                    print("finished loading characters")
+                    print("loaded \(characters.count) characters, including \(charactersForRaidEncounters.count) in raiding level")
+                    loadExpansionIndex()
+                }
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    private func loadExpansionIndex() {
         let requestUrlAPIHost = UserDefaults.standard.object(forKey: UserDefaultsKeys.APIRegionHost) as? String ?? APIRegionHostList.Europe
         let requestUrlAPIFragment = "/data/wow/journal-expansion/index"
         
@@ -149,7 +228,6 @@ class GameData: ObservableObject {
         
         do {
             let dataResponse = try decoder.decode(ExpansionTop.self, from: data)
-            print(dataResponse.tiers.count)
             
             if let url = url {
                 JSONCoreDataManager.shared.saveJSON(data, withURL: url)
@@ -292,8 +370,6 @@ class GameData: ObservableObject {
                     withAnimation {
                         self.raids.sort()
                     }
-                    self.loadingAllowed = true
-                    self.reloadFromCDAllowed = true
                     self.prepareRaidEncounters()
                 }
                 return
@@ -521,7 +597,13 @@ class GameData: ObservableObject {
         raids.forEach { (instance) in
             raidEncountersStubs.append(instance.id)
         }
-        loadRaidEncountersInfo()
+        DispatchQueue.main.async { [self] in
+            withAnimation {
+                actualItemsToDownload += raidEncountersStubs.count
+            }
+            loadRaidEncountersInfo()
+        }
+        
     }
     
     private func loadRaidEncountersInfo(){
@@ -536,18 +618,12 @@ class GameData: ObservableObject {
                 DispatchQueue.main.async {
                     withAnimation {
                         self.raidEncounters = self.raidEncounters.sorted()
-                        self.loadingAllowed = true
                     }
-                    self.reloadFromCDAllowed = true
                 }
                 
                 print("loaded \(raidEncounters.count) raid encounters")
                 
-                if self.loadDungeonsToo {
-                    self.loadDungeonsInfo()
-                } else {
-                    print("loading dungeons postponed")
-                }
+                loadCharacterRaidEncounters()
                 
                 return
             }
@@ -654,4 +730,126 @@ class GameData: ObservableObject {
         }
     }
     
+    func loadCharacterRaidEncounters() {
+        if timeRetries > 5 || connectionRetries > 5 {
+            print("Failed after \(timeRetries) timer retries, and or \(connectionRetries) connection errors")
+            return
+        }
+        
+        guard let character = charactersForRaidEncounters.first else {
+            if characterRaidEncounters.count > 0 {
+                print("finished loading character raid encounters")
+                print("loaded \(characterRaidEncounters.count) character raid encounters")
+                
+                DispatchQueue.main.async {
+                    withAnimation {
+                        self.loadingAllowed = true
+                    }
+                    self.reloadFromCDAllowed = true
+                }
+                
+                if loadDungeonsToo {
+                    loadDungeonsInfo()
+                } else {
+                    print("loading dungeons postponed")
+                }
+                
+                return
+            }
+            timeRetries += 1
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                print("data saving problem - retrying in 1s")
+                self.loadCharacterRaidEncounters()
+            }
+            return
+        }
+        
+        let requestUrlAPIHost = UserDefaults.standard.object(forKey: UserDefaultsKeys.APIRegionHost) as? String ?? APIRegionHostList.Europe
+        
+        let requestUrlAPIFragment =
+            "/profile/wow/character"    + "/" +
+            character.realm.slug        + "/" +
+            character.name.lowercased() + "/" +
+            "encounters/raids"
+        let strippedAPIUrl = requestUrlAPIHost + requestUrlAPIFragment
+        
+        let daysNeededForRefresh: Double = reloadFromCDAllowed ? 0.01 : 0.0
+        
+        if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: strippedAPIUrl, maximumAgeInDays: daysNeededForRefresh) {
+            
+            decodeCharacterRaidEncountersData(savedData.data!)
+            
+            return
+        }
+        
+        let regionShortCode = APIRegionShort.Code[UserDefaults.standard.integer(forKey: UserDefaultsKeys.loginRegion)]
+        let requestAPINamespace = "profile-\(regionShortCode)"
+        let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? EuropeanLocales.BritishEnglish
+        
+        let fullRequestURL = URL(string:
+                                    requestUrlAPIHost +
+                                    requestUrlAPIFragment +
+                                    "?namespace=\(requestAPINamespace)" +
+                                    "&locale=\(requestLocale)" +
+                                    "&access_token=\(authorization.oauth2.accessToken ?? "")"
+        )!
+        
+        if reloadFromCDAllowed {
+            let strippedAPIUrl = String(fullRequestURL.absoluteString)
+        
+            if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: strippedAPIUrl, maximumAgeInDays: 0.01) {
+                decodeCharacterRaidEncountersData(savedData.data!)
+                return
+            }
+        }
+        let req = authorization.oauth2.request(forURL: fullRequestURL)
+        
+        let task = authorization.oauth2.session.dataTask(with: req) { data, response, error in
+            if let data = data {
+//                print(data)
+                self.decodeCharacterRaidEncountersData(data, fromURL: fullRequestURL)
+            }
+            if let error = error {
+                // something went wrong, check the error
+                print("error, retrying in 1 second")
+                print(error.localizedDescription)
+                self.connectionRetries += 1
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.loadCharacterRaidEncounters()
+                }
+            }
+        }
+        task.resume()
+    }
+        
+    
+    func decodeCharacterRaidEncountersData(_ data: Data, fromURL url: URL? = nil) {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        decoder.dateDecodingStrategy = .millisecondsSince1970
+        
+        do {
+            let dataResponse = try decoder.decode(CharacterRaidEncounters.self, from: data)
+            
+            if let url = url {
+                JSONCoreDataManager.shared.saveJSON(data, withURL: url)
+            }
+            DispatchQueue.main.async { [self] in
+                withAnimation {
+                    characterRaidEncounters.append(dataResponse)
+                    downloadedItems += 1
+                }
+            }
+            
+            if charactersForRaidEncounters.count > 0 {
+                charactersForRaidEncounters.removeFirst()
+            }
+            loadCharacterRaidEncounters()
+
+        } catch {
+            print(error)
+        }
+    }
+    
 }
+

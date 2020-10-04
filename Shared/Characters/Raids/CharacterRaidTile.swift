@@ -7,9 +7,7 @@
 
 import SwiftUI
 
-struct CharacterRaidTile: View {
-    @Namespace var tile    
-    
+struct CharacterRaidTile: View {    
     let raid: CombinedRaidWithEncounters
     let character: CharacterInProfile
     
