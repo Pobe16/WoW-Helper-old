@@ -107,6 +107,8 @@
 		C8E4D71A24F2A5A500EDAC85 /* InstanceTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E4D71824F2A5A500EDAC85 /* InstanceTile.swift */; };
 		C8E4D71C24F2BDD200EDAC85 /* InstanceMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E4D71B24F2BDD200EDAC85 /* InstanceMedia.swift */; };
 		C8E4D71D24F2BDD200EDAC85 /* InstanceMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E4D71B24F2BDD200EDAC85 /* InstanceMedia.swift */; };
+		C8E6D7E2252A8613005F0918 /* SummaryListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E6D7E1252A8613005F0918 /* SummaryListItem.swift */; };
+		C8E6D7E3252A8613005F0918 /* SummaryListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E6D7E1252A8613005F0918 /* SummaryListItem.swift */; };
 		C8F942D924EDAC1600B6222C /* LogOutListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F942D824EDAC1600B6222C /* LogOutListItem.swift */; };
 		C8F942DB24EDB54000B6222C /* LogOutDebugScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F942DA24EDB54000B6222C /* LogOutDebugScreen.swift */; };
 		C8F942DD24EDB65C00B6222C /* DataHealthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F942DC24EDB65C00B6222C /* DataHealthScreen.swift */; };
@@ -204,6 +206,7 @@
 		C8BB333925031D08003E105F /* FarmCollectionsOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmCollectionsOrder.swift; sourceTree = "<group>"; };
 		C8E4D71824F2A5A500EDAC85 /* InstanceTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceTile.swift; sourceTree = "<group>"; };
 		C8E4D71B24F2BDD200EDAC85 /* InstanceMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceMedia.swift; sourceTree = "<group>"; };
+		C8E6D7E1252A8613005F0918 /* SummaryListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryListItem.swift; sourceTree = "<group>"; };
 		C8F942D824EDAC1600B6222C /* LogOutListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutListItem.swift; sourceTree = "<group>"; };
 		C8F942DA24EDB54000B6222C /* LogOutDebugScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutDebugScreen.swift; sourceTree = "<group>"; };
 		C8F942DC24EDB65C00B6222C /* DataHealthScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHealthScreen.swift; sourceTree = "<group>"; };
@@ -455,6 +458,7 @@
 				C8BB333625030E07003E105F /* RaidOptionsListItem.swift */,
 				C8F942DA24EDB54000B6222C /* LogOutDebugScreen.swift */,
 				C8B1425D251D06BE004F982B /* ListBackground.swift */,
+				C8E6D7E1252A8613005F0918 /* SummaryListItem.swift */,
 			);
 			path = NavigationView;
 			sourceTree = "<group>";
@@ -649,6 +653,7 @@
 				C8FFADAB2525533900465313 /* StaticStrings.swift in Sources */,
 				C803C5D324FC57B800A8D2DE /* CharacterRaidEncounters.swift in Sources */,
 				C818B1E42522A41D00ED06B7 /* FarmingOrder.swift in Sources */,
+				C8E6D7E2252A8613005F0918 /* SummaryListItem.swift in Sources */,
 				C835226F2502379900A5D90D /* BackgroundBlurs.swift in Sources */,
 				C803C5DC24FEF1D700A8D2DE /* RaidDataFilledAndSorted.swift in Sources */,
 				C89914C124F8743700DADAB1 /* CharacterMainView.swift in Sources */,
@@ -710,6 +715,7 @@
 				C8FFADAC2525533900465313 /* StaticStrings.swift in Sources */,
 				C8F942E924EF027900B6222C /* LogOutListItem.swift in Sources */,
 				C818B1E52522A41D00ED06B7 /* FarmingOrder.swift in Sources */,
+				C8E6D7E3252A8613005F0918 /* SummaryListItem.swift in Sources */,
 				C803C5D424FC57B800A8D2DE /* CharacterRaidEncounters.swift in Sources */,
 				C83522702502379900A5D90D /* BackgroundBlurs.swift in Sources */,
 				C803C5DD24FEF1D700A8D2DE /* RaidDataFilledAndSorted.swift in Sources */,
