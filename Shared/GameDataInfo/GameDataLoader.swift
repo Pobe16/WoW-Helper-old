@@ -35,9 +35,6 @@ struct GameDataLoader: View {
             }
             
         }
-        .onAppear {
-            gameData.loadGameData(authorizedBy: authorization)
-        }
     }
 }
 

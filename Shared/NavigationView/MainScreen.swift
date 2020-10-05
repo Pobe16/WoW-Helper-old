@@ -47,6 +47,7 @@ struct MainScreen: View {
                                 )
                             )
                         }
+//                        .onDelete(perform: delete)
                     } else {
                         CharacterLoadingListItem()
                             .listRowBackground(
@@ -63,7 +64,7 @@ struct MainScreen: View {
                 ) {
                     NavigationLink(
                         destination:
-                            Text("Hello World"),
+                            SummaryMain(),
                         tag: "summary",
                         selection: $selection) {
                         SummaryListItem()
@@ -94,7 +95,7 @@ struct MainScreen: View {
                     }
                     .listRowBackground(
                         DefaultListItemBackground(
-                            color: Color.green,
+                            color: Color.orange,
                             selected: selection == "raid-settings"
                         )
                     )
@@ -129,10 +130,18 @@ struct MainScreen: View {
                 }
                     
             }
+            SummaryMain()
         }
         .navigationViewStyle(DoubleColumnNavigationViewStyle())
+        .onAppear {
+            gameData.loadGameData(authorizedBy: authorization)
+        }
         
     }
+    
+//    func delete(at offsets: IndexSet ) {
+//        print(offsets)
+//    }
 }
 
 struct MainScreen_Previews: PreviewProvider {

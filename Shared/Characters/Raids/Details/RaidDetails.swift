@@ -86,11 +86,11 @@ struct RaidDetails: View {
                 ToolbarItem(placement: .principal) {
                     Text("\(raid.raidName)")
                 }
-                ToolbarItemGroup(placement: .primaryAction) {
-                    Button("Print Data") {
-                        print(raid)
-                    }.padding()
-                }
+//                ToolbarItemGroup(placement: .primaryAction) {
+//                    Button("Print Data") {
+//                        print(raid)
+//                    }.padding()
+//                }
             }
             
         }
