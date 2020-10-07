@@ -11,6 +11,7 @@ struct SingleCharacterSummary: View {
     @EnvironmentObject var farmOrder: FarmCollectionsOrder
     @EnvironmentObject var gameData: GameData
     
+    let character: CharacterInProfile
     let characterEncounters: CharacterRaidEncounters
     
     @State var notableRaids: [CombinedRaidWithEncounters] = []
@@ -18,15 +19,35 @@ struct SingleCharacterSummary: View {
     @State var message: String = "Loading…"
     
     var body: some View {
-        
+        HStack {
+            VStack(alignment: .leading) {
+                Text("\(character.name) - \(character.realm.name)")
+                    .font(.title2)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.25)
+                Text("\(character.level) - \(character.playableRace.name), \(character.playableClass.name)")
+            }
+            Spacer()
+        }
+        .padding()
+        .background(
+            CharacterListItemBackground(
+                charClass: character.playableClass,
+                faction: character.faction,
+                selected: false
+            )
+        )
         if notableRaids.count > 0 {
-            Text(characterEncounters.character.name)
-            VStack{
+            
+            VStack {
+                
+                CharacterImage(character: character)
                 ForEach(notableRaids, id: \.raidId) { raid in
                     Text(raid.raidName)
                 }
             }.padding()
-        } else {
+        } else if message == "Loading…" {
+            
             Text(message)
                 .padding()
                 .onAppear(perform: {
@@ -34,23 +55,15 @@ struct SingleCharacterSummary: View {
                         combineCharacterEncountersWithData()
                     }
                 })
+        } else {
+            NoFarmingLeft(character: character)
         }
         
-    }
-    
-    func getCharacterBasedOn(encounters: CharacterRaidEncounters) -> CharacterInProfile {
-        let character = gameData.characters.first { (GDCharacter) -> Bool in
-            GDCharacter.name == encounters.character.name && GDCharacter.realm.name == encounters.character.realm.name
-        }
-        
-        
-        return character!
     }
     
     func combineCharacterEncountersWithData() {
         guard gameData.raids.count > 0 else { return }
         let raidDataManipulator = RaidDataHelper()
-        let character = getCharacterBasedOn(encounters: characterEncounters)
         let combinedRaidInfo = raidDataManipulator.createFullRaidData(using: characterEncounters, with: gameData, filter: .highest, filterForFaction: character.faction)
         
         var allDataCombined = RaidDataFilledAndSorted(basedOn: combinedRaidInfo, for: character, farmingOrder: farmOrder)
@@ -84,12 +97,15 @@ struct SingleCharacterSummary: View {
         }
     }
     
+    /// Checks if the raid is worth raiding, by looking through it's encounters, and seeing if the loot from it is a mount or pet
+    /// - Parameter raid: CombinedRaidWithEncounters <- raid info from the Player
+    /// - Returns: True or False - just for decision
     func isRaidWorthFarming(_ raid: CombinedRaidWithEncounters) -> Bool {
         let raidDataManipulator = RaidDataHelper()
         
-        var worthFarming: Bool = false
-        
         for encounter in raid.records.first!.progress.encounters {
+            if raidDataManipulator.isEncounterCleared(encounter) { break }
+            
             let loot = gameData.raidEncounters.first { (journalEncounter) -> Bool in
                 journalEncounter.id == encounter.encounter.id
             }
@@ -100,23 +116,14 @@ struct SingleCharacterSummary: View {
                 if gameData.mountItemsList.contains(where: { (mount) -> Bool in
                     mount.id == wrapper.item.id
                 }) {
-                    worthFarming = true
+                    return true
                 }
                 if gameData.petItemsList.contains(where: { (pet) -> Bool in
                     pet.id == wrapper.item.id
                 }) {
-                    worthFarming = true
+                    return true
                 }
             }
-            
-            if worthFarming && raidDataManipulator.isEncounterCleared(encounter) {
-                worthFarming = false
-            }
-            
-            if worthFarming {
-                return true
-            }
-            
         }
         
         return false
