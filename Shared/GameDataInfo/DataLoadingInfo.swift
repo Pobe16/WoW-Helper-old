@@ -21,5 +21,6 @@ struct DataLoadingInfo: View {
             Text("\(gameData.characterRaidEncounters.count) additional character data")
             
         }
+        
     }
 }
