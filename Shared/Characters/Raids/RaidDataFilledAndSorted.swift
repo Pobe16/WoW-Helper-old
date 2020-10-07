@@ -23,7 +23,7 @@ struct RaidDataFilledAndSorted {
     private let comfortFarm: [CombinedRaidWithEncounters]
     private let completed: [CombinedRaidWithEncounters]
     private let ignored: [CombinedRaidWithEncounters]
-    public let raidsCollection: [NamedRaidCollection]
+    public var raidsCollection: [NamedRaidCollection]
     
     init(basedOn characterEncounters: [CombinedRaidWithEncounters], for character: CharacterInProfile, farmingOrder: FarmCollectionsOrder) {
         let helper = RaidDataHelper()
@@ -145,5 +145,14 @@ struct RaidDataFilledAndSorted {
         )
         
         raidsCollection = raidsToSave.sorted()
+    }
+    
+    mutating func prepareForSummary() {
+        self.raidsCollection.removeAll { (namedCollection) -> Bool in
+            namedCollection.name == "Ignored"
+        }
+        self.raidsCollection.removeAll { (namedCollection) -> Bool in
+            namedCollection.name == "Completed"
+        }
     }
 }

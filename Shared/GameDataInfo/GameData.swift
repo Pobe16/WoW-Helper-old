@@ -255,17 +255,17 @@ class GameData: ObservableObject {
             if expansions.count > 0 {
                 print("finished loading expansions")
                 print("loaded \(expansions.count) expansions")
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { [self] in
                     withAnimation {
-                        self.expansions.sort()
-                        self.actualItemsToDownload += self.raidsStubs.count
+                        expansions.sort()
+                        actualItemsToDownload += raidsStubs.count
                         if self.loadDungeonsToo {
-                            self.actualItemsToDownload += self.dungeonsStubs.count
+                            actualItemsToDownload += dungeonsStubs.count
                         }
                     }
+                    loadRaidsInfo()
                 }
                 
-                loadRaidsInfo()
                 return
             }
             timeRetries += 1
@@ -333,21 +333,21 @@ class GameData: ObservableObject {
                 JSONCoreDataManager.shared.saveJSON(data, withURL: url)
             }
                 
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [self] in
                 
                 withAnimation {
-                    self.expansions.append(dataResponse)
-                    self.downloadedItems += 1
+                    expansions.append(dataResponse)
+                    downloadedItems += 1
                 }
                 
-                self.raidsStubs.append(contentsOf: dataResponse.raids ?? [])
-                self.dungeonsStubs.append(contentsOf: dataResponse.dungeons ?? [])
+                raidsStubs.append(contentsOf: dataResponse.raids ?? [])
+                dungeonsStubs.append(contentsOf: dataResponse.dungeons ?? [])
                 
-                if self.expansionsStubs.count > 0 {
-                    self.expansionsStubs.removeFirst()
+                if expansionsStubs.count > 0 {
+                    expansionsStubs.removeFirst()
                 }
                 
-                self.loadExpansionJournal()
+                loadExpansionJournal()
             }
             
             
@@ -490,14 +490,14 @@ class GameData: ObservableObject {
                 // here I am removing duplicates, and sorting it
                 let noDuplicates = Array(Set(dungeons))
 
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { [self] in
                     withAnimation {
-                        self.dungeons = noDuplicates.sorted()
-                        self.loadingAllowed = true
+                        dungeons = noDuplicates.sorted()
+                        loadingAllowed = true
                     }
-                    self.reloadFromCDAllowed = true
+                    reloadFromCDAllowed = true
+                    print("loaded \(dungeons.count) dungeons")
                 }
-                print("loaded \(dungeons.count) dungeons")
                 return
             }
             timeRetries += 1
@@ -741,24 +741,23 @@ class GameData: ObservableObject {
                 print("finished loading character raid encounters")
                 print("loaded \(characterRaidEncounters.count) character raid encounters")
                 
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { [self] in
                     withAnimation {
-                        self.loadingAllowed = true
+                        loadingAllowed = true
                     }
-                    self.reloadFromCDAllowed = true
+                    reloadFromCDAllowed = true
+                    
+                    if loadDungeonsToo {
+                        loadDungeonsInfo()
+                    } else {
+                        print("loading dungeons postponed")
+                    }
                 }
-                
-                if loadDungeonsToo {
-                    loadDungeonsInfo()
-                } else {
-                    print("loading dungeons postponed")
-                }
-                
                 return
             }
             timeRetries += 1
+            print("data saving problem with character encounters - retrying in 1s")
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                print("data saving problem - retrying in 1s")
                 self.loadCharacterRaidEncounters()
             }
             return
@@ -804,18 +803,20 @@ class GameData: ObservableObject {
         }
         let req = authorization.oauth2.request(forURL: fullRequestURL)
         
-        let task = authorization.oauth2.session.dataTask(with: req) { data, response, error in
+        let task = authorization.oauth2.session.dataTask(with: req) { [self] data, response, error in
             if let data = data {
 //                print(data)
-                self.decodeCharacterRaidEncountersData(data, fromURL: fullRequestURL)
+                timeRetries = 0
+                connectionRetries = 0
+                decodeCharacterRaidEncountersData(data, fromURL: fullRequestURL)
             }
             if let error = error {
                 // something went wrong, check the error
                 print("error, retrying in 1 second")
                 print(error.localizedDescription)
-                self.connectionRetries += 1
+                connectionRetries += 1
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    self.loadCharacterRaidEncounters()
+                    loadCharacterRaidEncounters()
                 }
             }
         }
@@ -839,12 +840,13 @@ class GameData: ObservableObject {
                     characterRaidEncounters.append(dataResponse)
                     downloadedItems += 1
                 }
+                if charactersForRaidEncounters.count > 0 {
+                    charactersForRaidEncounters.removeFirst()
+                }
+                loadCharacterRaidEncounters()
             }
             
-            if charactersForRaidEncounters.count > 0 {
-                charactersForRaidEncounters.removeFirst()
-            }
-            loadCharacterRaidEncounters()
+            
 
         } catch {
             print(error)

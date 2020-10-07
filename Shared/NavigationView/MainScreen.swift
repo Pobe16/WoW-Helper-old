@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MainScreen: View {
+    @Environment (\.colorScheme) var colorScheme: ColorScheme
     @EnvironmentObject var gameData: GameData
     @EnvironmentObject var authorization: Authentication
     @State var selection: String? = ""
@@ -120,7 +121,7 @@ struct MainScreen: View {
                 ToolbarItem(placement: .principal){
                     Text("WoWWidget")
                         .fontWeight(.black)
-                        .shadow(color: .white, radius: 1, x: 0, y: 0)
+                        .shadow(color: .white, radius: colorScheme == .dark ? 0 : 1, x: 0, y: 0)
                 }
                 
                 ToolbarItem(placement: .primaryAction) {
