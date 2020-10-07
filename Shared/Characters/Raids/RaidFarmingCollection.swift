@@ -191,7 +191,6 @@ struct RaidFarmingCollection: View {
                     }
                 }
                 
-                
                 combineCharacterEncountersWithData()
             }
 

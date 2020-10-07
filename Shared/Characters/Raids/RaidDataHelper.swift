@@ -347,22 +347,25 @@ struct RaidDataHelper {
     }
     
     public func isLegacyModeCleared(for raidMode: RaidEncountersForCharacter) -> Bool {
-        let lastReset = dateOfLastWeeklyReset()
-        guard let encounter = raidMode.progress.encounters.last,
-              let timestamp = encounter.lastKillTimestamp else { return false }
-        return timestamp > lastReset
-        
+        guard let encounter = raidMode.progress.encounters.last else { return false }
+        return isEncounterCleared(encounter)
     }
     
     public func isModeCleared(for raidMode: RaidEncountersForCharacter) -> Bool {
-        let lastReset = dateOfLastWeeklyReset()
-        
         for encounter in raidMode.progress.encounters {
-            guard let killTimestamp = encounter.lastKillTimestamp,
-                  killTimestamp > lastReset else {
+            guard isEncounterCleared(encounter) else {
                 return false
             }
-            
+        }
+        return true
+    }
+    
+    public func isEncounterCleared(_ encounter: EncounterPerBossPerCharacter) -> Bool {
+        let lastReset = dateOfLastWeeklyReset()
+        
+        guard let killTimestamp = encounter.lastKillTimestamp,
+              killTimestamp > lastReset else {
+            return false
         }
         return true
     }
