@@ -32,6 +32,7 @@ struct ListBackground: View {
                 Color.black.opacity(0.5)
             }
         }
+        .edgesIgnoringSafeArea(.vertical)
     }
 }
 

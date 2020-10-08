@@ -23,15 +23,18 @@ struct RaidTitleBackgroundBlur: View {
 }
 
 struct InstanceProgressFullWidthBackgroundBlur: View {
+    
+    var blurOpacity: Double = 0.85
+    
     var body: some View {
         #if os(iOS)
-        VisualEffectBlur(blurStyle: .systemUltraThinMaterial).opacity(0.85)
+        VisualEffectBlur(blurStyle: .systemUltraThinMaterial).opacity(blurOpacity)
         #elseif os(macOS)
         VisualEffectBlur(
             material: .contentBackground,
             blendingMode: .withinWindow,
             state: .followsWindowActiveState
-        ).opacity(0.85)
+        ).opacity(blurOpacity)
         #endif
     }
 }
