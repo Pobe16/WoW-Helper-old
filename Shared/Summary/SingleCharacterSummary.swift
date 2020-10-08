@@ -19,17 +19,17 @@ struct SingleCharacterSummary: View {
     @State var message: String = "Loading…"
     
     var body: some View {
-        HStack {
-            VStack(alignment: .leading) {
+        HStack(spacing:0) {
+            VStack(alignment: .leading, spacing: 0) {
                 Text("\(character.name) - \(character.realm.name)")
                     .font(.title2)
                     .lineLimit(1)
                     .minimumScaleFactor(0.25)
                 Text("\(character.level) - \(character.playableRace.name), \(character.playableClass.name)")
             }
+            .padding()
             Spacer()
         }
-        .padding()
         .background(
             CharacterListItemBackground(
                 charClass: character.playableClass,
@@ -37,15 +37,22 @@ struct SingleCharacterSummary: View {
                 selected: false
             )
         )
+        .cornerRadius(5)
+        .padding()
         if notableRaids.count > 0 {
+//            NoFarmingLeft(character: character)
+            HStack {
+                Spacer()
             
-            VStack {
-                
-                CharacterImage(character: character)
-                ForEach(notableRaids, id: \.raidId) { raid in
-                    Text(raid.raidName)
+                VStack {
+                    CharacterImage(character: character)
+                    ForEach(notableRaids, id: \.raidId) { raid in
+                        Text(raid.raidName)
+                    }
                 }
-            }.padding()
+                .padding()
+                Spacer()
+            }
         } else if message == "Loading…" {
             
             Text(message)
@@ -57,6 +64,7 @@ struct SingleCharacterSummary: View {
                 })
         } else {
             NoFarmingLeft(character: character)
+                .padding(.horizontal)
         }
         
     }
