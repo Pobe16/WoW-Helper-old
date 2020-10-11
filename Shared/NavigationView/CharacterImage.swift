@@ -33,7 +33,7 @@ struct CharacterImage: View {
                 .cornerRadius(15, antialiased: true)
                 .overlay(
                     RoundedRectangle(cornerRadius: 15)
-                        .stroke(Color("faction\(character.faction.type.rawValue)"), lineWidth: 2)
+                        .strokeBorder(Color("faction\(character.faction.type.rawValue)"), lineWidth: 2)
                 )
             #else
             Image(nsImage: NSImage(data: characterImageData!)!)
@@ -41,6 +41,10 @@ struct CharacterImage: View {
                 .scaledToFit()
                 .frame(width: frameSize, height: frameSize)
                 .cornerRadius(15, antialiased: true)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 15)
+                        .strokeBorder(Color("faction\(character.faction.type.rawValue)"), lineWidth: 2)
+                )
             #endif
         }
     }

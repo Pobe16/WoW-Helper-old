@@ -115,7 +115,7 @@ struct MainScreen: View {
                 
             }
             .listStyle(listStyle)
-            .background(ListBackground())
+            .background(BackgroundTexture(texture: .wood, wall: true))
             .edgesIgnoringSafeArea(.vertical)
             .toolbar{
                 ToolbarItem(placement: .principal){
