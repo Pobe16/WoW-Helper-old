@@ -10,7 +10,6 @@ import SwiftUI
 
 @main
 struct WoWWidgetApp: App {
-    
     @ObservedObject var auth        = Authentication()
     @ObservedObject var gameData    = GameData()
     @ObservedObject var order       = FarmCollectionsOrder()

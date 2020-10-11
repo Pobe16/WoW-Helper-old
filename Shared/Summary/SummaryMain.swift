@@ -20,7 +20,7 @@ struct SummaryMain: View {
                 }
             }
 //            .edgesIgnoringSafeArea(.all)
-            .background(ListBackground())
+            .background(BackgroundTexture(texture: .flagstone, wall: true))
             .toolbar(content: {
                 ToolbarItem(placement: .principal) {
                     Text("Farming opportunities:")
@@ -29,7 +29,6 @@ struct SummaryMain: View {
             })
         } else {
             DataLoadingInfo()
-                .background(ListBackground())
                 .toolbar(content: {
                     ToolbarItem(placement: .principal) {
                         Text("Loading game data…")

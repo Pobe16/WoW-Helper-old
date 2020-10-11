@@ -17,35 +17,28 @@ struct NoFarmingLeft: View {
             HStack(alignment: .top, spacing: 20) {
                 
                 VStack{
-                    HStack {
+                    HStack(alignment: .top) {
                         CharacterImage(character: character)
                             .padding()
                         Spacer(minLength: 0)
                         Text("\(character.name), \(character.level)")
                             .font(.title2)
                             .fontWeight(.semibold)
+                            .whiteTextWithBlackOutlineStyle()
                             .padding()
                             .minimumScaleFactor(0.5)
-                            .background(
-                                InstanceProgressFullWidthBackgroundBlur(blurOpacity: 0.7)
-                            )
-                            .cornerRadius(15)
-                            .padding()
-//                        Spacer()
                     }
                     Spacer(minLength: 0)
                     HStack {
                         Spacer(minLength: 0)
                         Text("All done!")
-                            .font(.title2)
+                            .font(.title3)
                             .fontWeight(.semibold)
+                            .whiteTextWithBlackOutlineStyle()
                             .minimumScaleFactor(0.9)
                         Spacer(minLength: 0)
                     }
                     .padding()
-                    .background(
-                        InstanceProgressFullWidthBackgroundBlur(blurOpacity: 0.7)
-                    )
                 }
                 .frame(width: 292, height: 311)
                 .background(
@@ -56,35 +49,30 @@ struct NoFarmingLeft: View {
                 .cornerRadius(15)
                                
                 VStack{
-                    HStack {
+                    HStack(alignment: .top) {
                         CharacterImage(character: character)
                             .padding()
                         Spacer(minLength: 0)
                         Text("\(character.name), \(character.level)")
                             .font(.title2)
                             .fontWeight(.semibold)
+                            .whiteTextWithBlackOutlineStyle()
                             .padding()
                             .minimumScaleFactor(0.9)
-                            .background(
-                                InstanceProgressFullWidthBackgroundBlur(blurOpacity: 0.7)
-                            )
-                            .cornerRadius(15)
-                            .padding()
 //                        Spacer()
                     }
                     Spacer(minLength: 0)
                     HStack {
                         Spacer(minLength: 0)
                         Text("All done!")
-                            .font(.title2)
+                            .font(.title3)
                             .fontWeight(.semibold)
+                            .whiteTextWithBlackOutlineStyle()
                             .minimumScaleFactor(0.9)
                         Spacer(minLength: 0)
                     }
-                    .padding()
-                    .background(
-                        InstanceProgressFullWidthBackgroundBlur(blurOpacity: 0.7)
-                    )
+                    .padding(.horizontal)
+                    .padding(.bottom)
                 }
                 .frame(width: 292, height: 141)
                 .background(
@@ -104,15 +92,13 @@ struct NoFarmingLeft: View {
                     HStack {
                         Spacer(minLength: 0)
                         Text("All done!")
-                            .font(.title2)
+                            .font(.title3)
                             .fontWeight(.semibold)
+                            .whiteTextWithBlackOutlineStyle()
                             .padding()
                             .minimumScaleFactor(0.5)
                         Spacer(minLength: 0)
                     }
-                    .background(
-                        InstanceProgressFullWidthBackgroundBlur(blurOpacity: 0.7)
-                    )
                 }
                 .frame(width: 141, height: 141)
                 .background(
@@ -129,6 +115,11 @@ struct NoFarmingLeft: View {
 
 struct NoFarmingLeft_Previews: PreviewProvider {
     static var previews: some View {
+        NoFarmingLeft(character: placeholders.characterInProfile)
+            .preferredColorScheme(.dark)
+            .previewLayout(.fixed(width: 850, height: 350))
+            .environmentObject(Authentication())
+        
         NoFarmingLeft(character: placeholders.characterInProfile)
             .previewLayout(.fixed(width: 850, height: 350))
             .environmentObject(Authentication())
