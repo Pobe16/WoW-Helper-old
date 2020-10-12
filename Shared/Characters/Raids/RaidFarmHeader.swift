@@ -6,10 +6,9 @@
 //
 
 import SwiftUI
-import VisualEffects
 
 struct RaidFarmHeader: View {
-    
+    @Environment (\.colorScheme) var colorScheme: ColorScheme
     let headerText: String
     let faction: Faction
     
@@ -19,20 +18,16 @@ struct RaidFarmHeader: View {
                 .font(.title)
                 .padding()
                 .padding(.leading, 10)
+                .whiteTextWithBlackOutlineStyle()
             Spacer()
         }
         .background(
             ZStack{
-//                VisualEffectBlur(blurStyle: .systemUltraThinMaterial)
-                switch faction.type {
-                case .alliance:
-                    Color.blue.opacity(0.45)
-                case .horde:
-                    Color.red.opacity(0.45)
-                default:
-                    Color.white.opacity(0.45)
-                }
+                Color("faction\(faction.type.rawValue)")
+                Image(additionalTexturesNames.woodDamageV2.rawValue)
+                .resizable(resizingMode: .tile)
             }
+            .brightness(colorScheme == .dark ? 0.0 : 0.125)
         )
     }
 }
@@ -43,5 +38,13 @@ struct RaidFarmHeader_Previews: PreviewProvider {
             Color.green
             RaidFarmHeader(headerText: "Completed raids.", faction: Faction(type: .alliance, name: "Alliance"))
         }
+        .previewLayout(.fixed(width: 500, height: 200))
+        
+        ZStack {
+            Color.green
+            RaidFarmHeader(headerText: "Completed raids.", faction: Faction(type: .alliance, name: "Alliance"))
+        }
+        .preferredColorScheme(.dark)
+        .previewLayout(.fixed(width: 500, height: 200))
     }
 }

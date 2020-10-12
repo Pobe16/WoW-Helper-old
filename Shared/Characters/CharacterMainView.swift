@@ -32,6 +32,9 @@ struct CharacterMainView: View {
             }
             
         }
+        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+//        .edgesIgnoringSafeArea(.vertical)
+        .background(BackgroundTexture(texture: .flagstone, wall: true))
         .toolbar {
             ToolbarItem(placement: .principal){
                 Picker(selection: $viewSelection, label: Text("Character View Selection1"), content: {

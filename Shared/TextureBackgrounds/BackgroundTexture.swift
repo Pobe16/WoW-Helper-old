@@ -8,14 +8,15 @@
 import SwiftUI
 
 enum availableBackgroundTextures: String {
-    case flagstone = "Large_Flagstone"
-    case wood = "Wooden_Flooring"
+    case flagstone  = "Large_Flagstone"
+    case wood       = "Wooden_Flooring"
 }
 
 enum additionalTexturesNames: String {
-    case wallLeading = "wall_leading"
-    case wallTrailing = "wall_trailing"
-    case woodDamageV1 = "Wood_Damage_Overlay_C_01"
+    case wallLeading    = "wall_leading"
+    case wallTrailing   = "wall_trailing"
+    case woodDamageV1   = "Wood_Damage_Overlay_C_01"
+    case woodDamageV2   = "Wood_Damage_Overlay_B_01"
 }
 
 struct BackgroundTexture: View {

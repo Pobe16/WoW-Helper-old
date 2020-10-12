@@ -68,7 +68,6 @@ struct RaidFarmingCollection: View {
                     .progressViewStyle(CircularProgressViewStyle())
             }
         }
-        .background(BackgroundTexture(texture: .flagstone, wall: true))
         .onAppear {
             loadEncounters()
         }
