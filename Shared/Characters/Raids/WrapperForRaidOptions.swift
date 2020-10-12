@@ -49,17 +49,14 @@ struct WrapperForRaidOptions: View {
     }
     
     func loadOptionsSelection() {
-        let UDKey = "raidFilteringOptions"
-        let option = UserDefaults.standard.integer(forKey: UDKey)
+        let option = UserDefaults.standard.integer(forKey: UserDefaultsKeys.raidFilteringOptions)
         raidFarmingOptions = option == 0 ? 1 : option
         
         
     }
     
     func saveOptionsSelection(_ value: Int) {
-        let UDKey = "raidFilteringOptions"
-        
-        UserDefaults.standard.setValue(value, forKey: UDKey)
+        UserDefaults.standard.setValue(value, forKey: UserDefaultsKeys.raidFilteringOptions)
     }
     
 }

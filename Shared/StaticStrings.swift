@@ -15,4 +15,6 @@ struct UserDefaultsKeys {
     static let APIRegionHost            = "APIRegionHost"
     static let localeCode               = "localeCode"
     static let RaidCollectionsOrder     = "RaidCollectionsOrder"
+    static let raidFilteringOptions     = "raidFilteringOptions"
+    static let summaryPreviewSize       = "summaryPreviewSize"
 }

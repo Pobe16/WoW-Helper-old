@@ -7,10 +7,13 @@
 
 import SwiftUI
 
+
+
 struct SingleCharacterSummary: View {
     @EnvironmentObject var farmOrder: FarmCollectionsOrder
     @EnvironmentObject var gameData: GameData
     
+    let summarySize: summaryPreviewSize
     let character: CharacterInProfile
     let characterEncounters: CharacterRaidEncounters
     
@@ -25,7 +28,9 @@ struct SingleCharacterSummary: View {
                     .font(.title2)
                     .lineLimit(1)
                     .minimumScaleFactor(0.25)
+                    .whiteTextWithBlackOutlineStyle()
                 Text("\(character.level) - \(character.playableRace.name), \(character.playableClass.name)")
+                    .whiteTextWithBlackOutlineStyle()
             }
             .padding()
             Spacer()
@@ -63,7 +68,7 @@ struct SingleCharacterSummary: View {
                     }
                 })
         } else {
-            NoFarmingLeft(character: character)
+            NoFarmingLeft(summarySize: summarySize, character: character)
                 .padding(.horizontal)
         }
         
