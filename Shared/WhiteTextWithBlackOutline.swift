@@ -1,6 +1,6 @@
 //
 //  WhiteTextWithBlackOutline.swift
-//  WoWWidget (iOS)
+//  WoWWidget
 //
 //  Created by Mikolaj Lukasik on 11/10/2020.
 //

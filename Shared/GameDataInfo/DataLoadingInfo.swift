@@ -1,6 +1,6 @@
 //
 //  DataLoadingInfo.swift
-//  WoWWidget (iOS)
+//  WoWWidget
 //
 //  Created by Mikolaj Lukasik on 06/10/2020.
 //

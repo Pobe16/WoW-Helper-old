@@ -114,6 +114,13 @@
 		C8E4D71D24F2BDD200EDAC85 /* InstanceMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E4D71B24F2BDD200EDAC85 /* InstanceMedia.swift */; };
 		C8E6D7E2252A8613005F0918 /* SummaryListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E6D7E1252A8613005F0918 /* SummaryListItem.swift */; };
 		C8E6D7E3252A8613005F0918 /* SummaryListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E6D7E1252A8613005F0918 /* SummaryListItem.swift */; };
+		C8EA5407253633AA002D88B6 /* WhiteTextWithBlackOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D5893D25338464008FAA3F /* WhiteTextWithBlackOutline.swift */; };
+		C8EA540C253633AE002D88B6 /* SummaryMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D58900252BB715008FAA3F /* SummaryMain.swift */; };
+		C8EA5411253633B2002D88B6 /* SingleCharacterSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D58910252D286A008FAA3F /* SingleCharacterSummary.swift */; };
+		C8EA5416253633B6002D88B6 /* NoFarmingLeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D58920252E707D008FAA3F /* NoFarmingLeft.swift */; };
+		C8EA541B253633D4002D88B6 /* BackgroundTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D5892F253338E8008FAA3F /* BackgroundTexture.swift */; };
+		C8EA5420253633E1002D88B6 /* CharacterImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D58916252E3406008FAA3F /* CharacterImage.swift */; };
+		C8EA54252536341C002D88B6 /* DataLoadingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D5890A252CF656008FAA3F /* DataLoadingInfo.swift */; };
 		C8F942D924EDAC1600B6222C /* LogOutListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F942D824EDAC1600B6222C /* LogOutListItem.swift */; };
 		C8F942DB24EDB54000B6222C /* LogOutDebugScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F942DA24EDB54000B6222C /* LogOutDebugScreen.swift */; };
 		C8F942DD24EDB65C00B6222C /* DataHealthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F942DC24EDB65C00B6222C /* DataHealthScreen.swift */; };
@@ -735,8 +742,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8EA5407253633AA002D88B6 /* WhiteTextWithBlackOutline.swift in Sources */,
 				C8BB333B25031D08003E105F /* FarmCollectionsOrder.swift in Sources */,
 				C8BB333525030DC8003E105F /* RaidOptions.swift in Sources */,
+				C8EA5420253633E1002D88B6 /* CharacterImage.swift in Sources */,
 				C849963A2517CBBA007D1762 /* RaidDetails.swift in Sources */,
 				C803C5D724FD81ED00A8D2DE /* CombinedRaidWithEncounters.swift in Sources */,
 				C831CC4824E7355500C25F67 /* CharacterMedia.swift in Sources */,
@@ -776,7 +785,11 @@
 				C811E7AC24E0A3690050F6CD /* Authentication.swift in Sources */,
 				C84B82FB24E5FF56006E84FA /* UserProfile.swift in Sources */,
 				C8665E6624F066DF0043A23C /* GameDataLoader.swift in Sources */,
+				C8EA541B253633D4002D88B6 /* BackgroundTexture.swift in Sources */,
+				C8EA54252536341C002D88B6 /* DataLoadingInfo.swift in Sources */,
+				C8EA5411253633B2002D88B6 /* SingleCharacterSummary.swift in Sources */,
 				C803C5E0250070C300A8D2DE /* WrapperForRaidOptions.swift in Sources */,
+				C8EA5416253633B6002D88B6 /* NoFarmingLeft.swift in Sources */,
 				C818B1CF2520D9B000ED06B7 /* LocalizedName.swift in Sources */,
 				C831CC5024E8974100C25F67 /* MyData.xcdatamodeld in Sources */,
 				C818B1DD2521060D00ED06B7 /* NotableItemsInRaid.swift in Sources */,
@@ -789,6 +802,7 @@
 				C88EEA9E24E9E2B800155CBC /* JSONCoreDataManager.swift in Sources */,
 				C806FA532501A7B2006DEF78 /* CharacterRaidTile.swift in Sources */,
 				C887121024E4A01200C0A0ED /* LoginScreen.swift in Sources */,
+				C8EA540C253633AE002D88B6 /* SummaryMain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

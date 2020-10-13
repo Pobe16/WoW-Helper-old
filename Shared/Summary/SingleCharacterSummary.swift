@@ -1,6 +1,6 @@
 //
 //  SingleCharacterSummary.swift
-//  WoWWidget (iOS)
+//  WoWWidget
 //
 //  Created by Mikolaj Lukasik on 06/10/2020.
 //
@@ -45,7 +45,7 @@ struct SingleCharacterSummary: View {
         .cornerRadius(5)
         .padding()
         if notableRaids.count > 0 {
-//            NoFarmingLeft(character: character)
+//            NoFarmingLeft(summarySize: summarySize, character: character)
             HStack {
                 Spacer()
             
