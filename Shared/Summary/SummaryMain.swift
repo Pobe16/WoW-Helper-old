@@ -1,6 +1,6 @@
 //
 //  SummaryMain.swift
-//  WoWWidget (iOS)
+//  WoWWidget
 //
 //  Created by Mikolaj Lukasik on 05/10/2020.
 //

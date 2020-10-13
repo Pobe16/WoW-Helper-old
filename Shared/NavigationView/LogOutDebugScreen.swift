@@ -1,6 +1,6 @@
 //
 //  LogOutDebugScreen.swift
-//  WoWWidget (iOS)
+//  WoWWidget
 //
 //  Created by Mikolaj Lukasik on 19/08/2020.
 //

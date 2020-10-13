@@ -1,6 +1,6 @@
 //
 //  SwiftUIView.swift
-//  WoWWidget (iOS)
+//  WoWWidget
 //
 //  Created by Mikolaj Lukasik on 07/10/2020.
 //
