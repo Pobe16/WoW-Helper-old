@@ -52,7 +52,13 @@ struct CharacterImage: View {
         let shadow =
         """
         {
-            "avatarUrl": "https://render-us.worldofwarcraft.com/shadow/avatar/\(character.playableRace.id)-\(character.gender.type == .male ? 0 : 1).jpg"
+        "assets":
+            [
+                {
+                    "key": "avatar",
+                    "value": "https://render-us.worldofwarcraft.com/shadow/avatar/\(character.playableRace.id)-\(character.gender.type == .male ? 0 : 1).jpg"
+                }
+            ]
         }
         """.data(using: .utf8)!
         
@@ -78,8 +84,9 @@ struct CharacterImage: View {
                                     "&locale=\(requestLocale)" +
                                     "&access_token=\(authorization.oauth2.accessToken ?? "")"
         )!
+        
         let req = authorization.oauth2.request(forURL: fullRequestURL)
-//            print(fullRequestURL)
+        
         let task = authorization.oauth2.session.dataTask(with: req) { data, response, error in
             guard error == nil,
                   let response = response as? HTTPURLResponse,
@@ -92,21 +99,21 @@ struct CharacterImage: View {
             
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
-            
             do {
                 let dataResponse = try decoder.decode(CharacterMedia.self, from: data)
-                
                 characterMedia = dataResponse
                 
                 loadCharacterAvatar()
                 
             } catch {
+                prepareNonExistingMedia()
                 print(error)
             }
                 
                 
             
             if let error = error {
+                prepareNonExistingMedia()
                 // something went wrong, check the error
                 print("error")
                 print(error.localizedDescription)
@@ -115,26 +122,39 @@ struct CharacterImage: View {
         task.resume()
     }
     
+    fileprivate func getShortAvatar() -> String? {
+        if characterMedia?.assets != nil {
+            guard let avatarAsset = characterMedia?.assets?.first(where: { (asset) -> Bool in
+                asset.key == "avatar"
+            }) else { return nil }
+            return avatarAsset.value
+        } else if characterMedia?.avatarUrl != nil {
+            return characterMedia?.avatarUrl!
+        }
+        return nil
+    }
+    
     fileprivate func loadCharacterAvatar() {
-        guard let characterMedia = characterMedia else {
+        guard let shortAvatarAddress = getShortAvatar(),
+              let avatarURL = URL(string: shortAvatarAddress + "?alt=/shadow/avatar/\(character.playableRace.id)-\(character.gender.type == .male ? 0 : 1)")
+              else {
+            prepareNonExistingMedia()
             return
         }
-        guard let avatarURL = URL(string: characterMedia.avatarUrl + "?alt=/shadow/avatar/\(character.playableRace.id)-\(character.gender.type == .male ? 0 : 1)") else {
-            return
-        }
-        
-        guard let storedImage = CoreDataImagesManager.shared.fetchImage(withName: characterMedia.avatarUrl, maximumAgeInDays: 10) else {
+        guard let storedImage = CoreDataImagesManager.shared.fetchImage(withName: shortAvatarAddress, maximumAgeInDays: 10) else {
             
             let dataTask = URLSession.shared.dataTask(with: avatarURL) { data, response, error in
                 guard error == nil,
                       let response = response as? HTTPURLResponse,
                       response.statusCode == 200,
                       let data = data else {
+                    
+                    prepareNonExistingMedia()
                     return
                     
                 }
                 
-                CoreDataImagesManager.shared.updateImage(name: characterMedia.avatarUrl, data: data)
+                CoreDataImagesManager.shared.updateImage(name: shortAvatarAddress, data: data)
                 characterImageData = data
             }
             dataTask.resume()

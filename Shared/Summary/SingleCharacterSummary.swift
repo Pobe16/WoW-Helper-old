@@ -46,18 +46,8 @@ struct SingleCharacterSummary: View {
         .padding()
         if notableRaids.count > 0 {
 //            NoFarmingLeft(summarySize: summarySize, character: character)
-            HStack {
-                Spacer()
+            SummaryOfNotableRaids(summarySize: summarySize, character: character, notableRaids: notableRaids)
             
-                VStack {
-                    CharacterImage(character: character)
-                    ForEach(notableRaids, id: \.raidId) { raid in
-                        Text(raid.raidName)
-                    }
-                }
-                .padding()
-                Spacer()
-            }
         } else if message == "Loading…" {
             
             Text(message)
@@ -144,3 +134,5 @@ struct SingleCharacterSummary: View {
     
     
 }
+
+

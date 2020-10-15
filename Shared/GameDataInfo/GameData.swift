@@ -41,15 +41,16 @@ class GameData: ObservableObject {
     @Published var loadingAllowed: Bool                                 = true
     
     init () {
-        
-        guard let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String  else {
-            return
-        }
+        // THIS NEEDS UPDATED FOR SHADOWLANDS
+//        guard let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String  else {
+//            return
+//        }
         // preload the British English raids and dungeons
-        if requestLocale == EuropeanLocales.BritishEnglish {
-            raids = createRaidsList()
-            dungeons = createDungeonsList()
-        }
+
+//        if requestLocale == EuropeanLocales.BritishEnglish {
+//            raids = createRaidsList()
+//            dungeons = createDungeonsList()
+//        }
         
     }
     
@@ -165,7 +166,14 @@ class GameData: ObservableObject {
         do {
             let dataResponse = try decoder.decode(UserProfile.self, from: data)
             
-            for account in dataResponse.wowAccounts {
+            guard let accounts = dataResponse.wowAccounts else {
+                print("no wow accounts present")
+                loadExpansionIndex()
+                return
+                
+            }
+            
+            for account in accounts {
                 DispatchQueue.main.async { [self] in
                     withAnimation {
                         characters.append(contentsOf: account.characters)

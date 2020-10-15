@@ -121,6 +121,10 @@
 		C8EA541B253633D4002D88B6 /* BackgroundTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D5892F253338E8008FAA3F /* BackgroundTexture.swift */; };
 		C8EA5420253633E1002D88B6 /* CharacterImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D58916252E3406008FAA3F /* CharacterImage.swift */; };
 		C8EA54252536341C002D88B6 /* DataLoadingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D5890A252CF656008FAA3F /* DataLoadingInfo.swift */; };
+		C8EA542F2536E6DC002D88B6 /* SummaryOfNotableRaids.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EA542E2536E6DC002D88B6 /* SummaryOfNotableRaids.swift */; };
+		C8EA54302536E6DC002D88B6 /* SummaryOfNotableRaids.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EA542E2536E6DC002D88B6 /* SummaryOfNotableRaids.swift */; };
+		C8EA543A2537BD56002D88B6 /* SmallNotableRaid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EA54392537BD56002D88B6 /* SmallNotableRaid.swift */; };
+		C8EA543B2537BD56002D88B6 /* SmallNotableRaid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8EA54392537BD56002D88B6 /* SmallNotableRaid.swift */; };
 		C8F942D924EDAC1600B6222C /* LogOutListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F942D824EDAC1600B6222C /* LogOutListItem.swift */; };
 		C8F942DB24EDB54000B6222C /* LogOutDebugScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F942DA24EDB54000B6222C /* LogOutDebugScreen.swift */; };
 		C8F942DD24EDB65C00B6222C /* DataHealthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F942DC24EDB65C00B6222C /* DataHealthScreen.swift */; };
@@ -225,6 +229,8 @@
 		C8E4D71824F2A5A500EDAC85 /* InstanceTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceTile.swift; sourceTree = "<group>"; };
 		C8E4D71B24F2BDD200EDAC85 /* InstanceMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceMedia.swift; sourceTree = "<group>"; };
 		C8E6D7E1252A8613005F0918 /* SummaryListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryListItem.swift; sourceTree = "<group>"; };
+		C8EA542E2536E6DC002D88B6 /* SummaryOfNotableRaids.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryOfNotableRaids.swift; sourceTree = "<group>"; };
+		C8EA54392537BD56002D88B6 /* SmallNotableRaid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallNotableRaid.swift; sourceTree = "<group>"; };
 		C8F942D824EDAC1600B6222C /* LogOutListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutListItem.swift; sourceTree = "<group>"; };
 		C8F942DA24EDB54000B6222C /* LogOutDebugScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutDebugScreen.swift; sourceTree = "<group>"; };
 		C8F942DC24EDB65C00B6222C /* DataHealthScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHealthScreen.swift; sourceTree = "<group>"; };
@@ -457,6 +463,8 @@
 			isa = PBXGroup;
 			children = (
 				C8D58900252BB715008FAA3F /* SummaryMain.swift */,
+				C8EA542E2536E6DC002D88B6 /* SummaryOfNotableRaids.swift */,
+				C8EA54392537BD56002D88B6 /* SmallNotableRaid.swift */,
 				C8D58910252D286A008FAA3F /* SingleCharacterSummary.swift */,
 				C8D58920252E707D008FAA3F /* NoFarmingLeft.swift */,
 			);
@@ -677,6 +685,7 @@
 				C8BB333A25031D08003E105F /* FarmCollectionsOrder.swift in Sources */,
 				C8BB333425030DC8003E105F /* RaidOptions.swift in Sources */,
 				C84996392517CBBA007D1762 /* RaidDetails.swift in Sources */,
+				C8EA542F2536E6DC002D88B6 /* SummaryOfNotableRaids.swift in Sources */,
 				C803C5D624FD81ED00A8D2DE /* CombinedRaidWithEncounters.swift in Sources */,
 				C8F942DF24EDB8DB00B6222C /* ExpansionIndex.swift in Sources */,
 				C8D58921252E707D008FAA3F /* NoFarmingLeft.swift in Sources */,
@@ -724,6 +733,7 @@
 				C803C5DF250070C300A8D2DE /* WrapperForRaidOptions.swift in Sources */,
 				C818B1CE2520D9B000ED06B7 /* LocalizedName.swift in Sources */,
 				C8F942DB24EDB54000B6222C /* LogOutDebugScreen.swift in Sources */,
+				C8EA543A2537BD56002D88B6 /* SmallNotableRaid.swift in Sources */,
 				C818B1DC2521060D00ED06B7 /* NotableItemsInRaid.swift in Sources */,
 				C818B1EF2523ADA400ED06B7 /* RaidsData.swift in Sources */,
 				C803C5D924FEF18C00A8D2DE /* RaidDataHelper.swift in Sources */,
@@ -745,6 +755,7 @@
 				C8EA5407253633AA002D88B6 /* WhiteTextWithBlackOutline.swift in Sources */,
 				C8BB333B25031D08003E105F /* FarmCollectionsOrder.swift in Sources */,
 				C8BB333525030DC8003E105F /* RaidOptions.swift in Sources */,
+				C8EA54302536E6DC002D88B6 /* SummaryOfNotableRaids.swift in Sources */,
 				C8EA5420253633E1002D88B6 /* CharacterImage.swift in Sources */,
 				C849963A2517CBBA007D1762 /* RaidDetails.swift in Sources */,
 				C803C5D724FD81ED00A8D2DE /* CombinedRaidWithEncounters.swift in Sources */,
@@ -792,6 +803,7 @@
 				C8EA5416253633B6002D88B6 /* NoFarmingLeft.swift in Sources */,
 				C818B1CF2520D9B000ED06B7 /* LocalizedName.swift in Sources */,
 				C831CC5024E8974100C25F67 /* MyData.xcdatamodeld in Sources */,
+				C8EA543B2537BD56002D88B6 /* SmallNotableRaid.swift in Sources */,
 				C818B1DD2521060D00ED06B7 /* NotableItemsInRaid.swift in Sources */,
 				C818B1F02523ADA400ED06B7 /* RaidsData.swift in Sources */,
 				C803C5DA24FEF18C00A8D2DE /* RaidDataHelper.swift in Sources */,
