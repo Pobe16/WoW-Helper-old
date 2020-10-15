@@ -9,18 +9,15 @@ import SwiftUI
 
 struct RaidTileBackground: View {
     @EnvironmentObject var authorization: Authentication
+    @EnvironmentObject var gameData: GameData
     
     @State var timeRetries = 0
     @State var connectionRetries = 0
     
-    @State var imageData: Data? = nil
-    
-    let name: String
-    let id: Int
-    let mediaUrl: String
+    @State var raid: CombinedRaidWithEncounters
     
     var body: some View {
-        if imageData == nil {
+        if raid.background == nil {
             Image("raid_placeholder")
                 .resizable()
                 .scaledToFill()
@@ -29,11 +26,11 @@ struct RaidTileBackground: View {
                 })
         } else {
             #if os(iOS)
-            Image(uiImage: UIImage(data: imageData!)!)
+            Image(uiImage: UIImage(data: raid.background!)!)
                 .resizable()
                 .scaledToFill()
             #elseif os(macOS)
-            Image(nsImage: NSImage(data: imageData!)!)
+            Image(nsImage: NSImage(data: raid.background!)!)
                 .resizable()
                 .scaledToFill()
             #endif
@@ -42,9 +39,9 @@ struct RaidTileBackground: View {
     
     func checkForStoredImage() {
         guard timeRetries < 2, connectionRetries < 2 else { return }
-        guard imageData == nil else { return }
-        let instanceNameTransformed = name.lowercased().replacingOccurrences(of: " ", with: "-")
-        let nameForImage = "\(instanceNameTransformed)-\(id)-tile-background"
+        guard raid.background == nil else { return }
+        let instanceNameTransformed = raid.raidName.lowercased().replacingOccurrences(of: " ", with: "-")
+        let nameForImage = "\(instanceNameTransformed)-\(raid.id)-tile-background"
         
         guard let storedImage = CoreDataImagesManager.shared.fetchImage(withName: nameForImage, maximumAgeInDays: 100) else {
             loadMediaData(saveAs: nameForImage)
@@ -52,16 +49,16 @@ struct RaidTileBackground: View {
         }
         DispatchQueue.main.async {
             withAnimation {
-                
-                imageData = storedImage.data
+                raid.background = storedImage.data
             }
+            gameData.updateRaidCombinedBackground(for: raid, with: storedImage.data!)
         }
         
     }
     
     func loadMediaData(saveAs imageName: String) {
         
-        let requestUrlJournalMedia = mediaUrl
+        let requestUrlJournalMedia = raid.media.key.href
         let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? APIRegionHostList.Europe
         
         let fullRequestURL = URL(string:
@@ -131,17 +128,12 @@ struct RaidTileBackground: View {
             
             DispatchQueue.main.async {
                 withAnimation {
-                    imageData = data
+                    raid.background = data
                 }
+                gameData.updateRaidCombinedBackground(for: raid, with: data)
             }
             
         }
         dataTask.resume()
-    }
-}
-
-struct RaidTileBackground_Previews: PreviewProvider {
-    static var previews: some View {
-        RaidTileBackground(name: "mm", id: 1, mediaUrl: "m")
     }
 }

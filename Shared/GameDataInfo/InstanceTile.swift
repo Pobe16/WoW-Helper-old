@@ -9,72 +9,80 @@ import SwiftUI
 
 struct InstanceTile: View {
     @EnvironmentObject var authorization: Authentication
+    @EnvironmentObject var gameData: GameData
     @Environment(\.colorScheme) var colorScheme
-    @State var instance: InstanceJournal? = nil
+    
+    @State var instance: InstanceJournal
+    @State var backgroundData: Data? = nil
     @State var category: String
-    @State var imageData: Data? = nil
     
     @State var timeRetries: Int = 0
     @State var connectionRetries: Int = 0
     
     var body: some View {
         ZStack{
-            if imageData == nil {
+            if instance.background != nil {
+                #if os(iOS)
+                Image(uiImage: UIImage(data: instance.background!)!)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 300, height: 150)
+                #elseif os(macOS)
+                Image(nsImage: NSImage(data: instance!.background!)!)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 300, height: 150)
+                #endif
+            } else if backgroundData != nil {
+                #if os(iOS)
+                Image(uiImage: UIImage(data: backgroundData!)!)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 300, height: 150)
+                #elseif os(macOS)
+                Image(nsImage: NSImage(data: backgroundData!)!)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 300, height: 150)
+                #endif
+            } else {
                 Image("\(category)_placeholder")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 200, height: 150)
                     .cornerRadius(15, antialiased: true)
-            } else {
-                #if os(iOS)
-                Image(uiImage: UIImage(data: imageData!)!)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 300, height: 150)
-                #elseif os(macOS)
-                Image(nsImage: NSImage(data: imageData!)!)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 300, height: 150)
-                #endif
+                    .onAppear(perform: {
+                        checkForStoredImage()
+                    })
             }
             VStack(alignment: .leading){
                 Spacer()
                 Spacer()
                 HStack{
                     Spacer()
-                    Text("Bosses: \(instance?.encounters.count ?? 0)")
+                    Text("Bosses: \(instance.encounters.count)")
                         .padding(.vertical, 4)
                     Spacer()
                     
                 }
                 .background(Color.gray.opacity(colorScheme == .dark ? 0.4 : 0.8))
-//                    .cornerRadius(15)
                 Spacer()
                 HStack{
                     Spacer()
-                    Text(instance?.name ?? "Loading…")
+                    Text(instance.name)
                         .minimumScaleFactor(0.5)
                         .lineLimit(1)
                         .padding(.vertical, 4)
                     Spacer()
                 }
                 .background(Color.gray.opacity(colorScheme == .dark ? 0.4 : 0.8))
-//                ForEach(instance!.modes, id: \.self){ mode in
-//                    Text(mode.mode.type)
-//                }
-                    
                     
                 
             }
-            .frame(width: imageData == nil ? 200 : 300, height: 150)
+            .frame(width: instance.background != nil || backgroundData != nil ? 300 : 200, height: 150)
         }
         .cornerRadius(15, antialiased: true)
-        .onAppear(perform: {
-            
-            checkForStoredImage()
-            
-        })
+        
     }
     
 //    func deleteAllImages() {
@@ -85,27 +93,28 @@ struct InstanceTile: View {
 //    }
     
     func checkForStoredImage() {
-        guard timeRetries < 2, connectionRetries < 2 else { return }
-        guard let instance = instance else { return }
+        guard timeRetries < 2, connectionRetries < 2 else {
+            return
+        }
         let instanceNameTransformed = instance.name.lowercased().replacingOccurrences(of: " ", with: "-")
         let nameForImage = "\(instanceNameTransformed)-\(instance.id)-tile-background"
         
         guard let storedImage = CoreDataImagesManager.shared.fetchImage(withName: nameForImage, maximumAgeInDays: 100) else {
+            
             loadMediaData(saveAs: nameForImage)
             return
         }
         DispatchQueue.main.async {
             withAnimation {
-                
-                imageData = storedImage.data
+                backgroundData = storedImage.data!
             }
+            updateBackground(with: storedImage.data!)
+            
         }
         
     }
     
     func loadMediaData(saveAs imageName: String) {
-        
-        guard let instance = instance else { return }
         
         let requestUrlJournalMedia = instance.media.key.href
         let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? APIRegionHostList.Europe
@@ -177,20 +186,23 @@ struct InstanceTile: View {
             
             DispatchQueue.main.async {
                 withAnimation {
-                    imageData = data
+                    self.backgroundData = data
                 }
+                updateBackground(with: data)
             }
             
         }
         dataTask.resume()
     }
-}
-
-struct InstanceTile_Previews: PreviewProvider {
-    static var previews: some View {
-        InstanceTile(category: "dungeon")
-            .previewLayout(.fixed(width: 250, height: 200))
-            .padding()
-            .previewDisplayName("One Tile")
+    
+    func updateBackground(with data: Data){
+        switch category {
+        case InstanceCategoryType.raid.rawValue.lowercased():
+            gameData.updateRaidInstanceBackground(for: instance, with: data)
+        case InstanceCategoryType.dungeon.rawValue.lowercased():
+            gameData.updateDungeonInstanceBackground(for: instance, with: data)
+        default:
+            return
+        }
     }
 }

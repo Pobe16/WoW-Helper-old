@@ -55,7 +55,7 @@ struct CharacterRaidTile: View {
                     
             }
             .background(
-                RaidTileBackground(name: raid.raidName, id: raid.raidId, mediaUrl: raid.media.key.href)
+                RaidTileBackground(raid: raid)
             )
             .frame(height: 240)
             .cornerRadius(15, antialiased: true)

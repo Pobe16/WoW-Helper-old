@@ -9,14 +9,14 @@ import SwiftUI
 
 struct CharacterImage: View {
     @EnvironmentObject var authorization: Authentication
+    @EnvironmentObject var gameData: GameData
     @State var characterMedia: CharacterMedia?
-    let character: CharacterInProfile
-    @State var characterImageData: Data? = nil
+    @State var character: CharacterInProfile
     
     @State var frameSize: CGFloat = 63
     
     var body: some View {
-        if characterImageData == nil {
+        if character.avatar == nil {
             ProgressView()
                 .progressViewStyle(CircularProgressViewStyle())
                 .frame(width: frameSize, height: frameSize)
@@ -26,7 +26,7 @@ struct CharacterImage: View {
                 })
         } else {
             #if os(iOS)
-            Image(uiImage: UIImage(data: characterImageData!)!)
+            Image(uiImage: UIImage(data: character.avatar!)!)
                 .resizable()
                 .scaledToFit()
                 .frame(width: frameSize, height: frameSize)
@@ -36,7 +36,7 @@ struct CharacterImage: View {
                         .strokeBorder(Color("faction\(character.faction.type.rawValue)"), lineWidth: 2)
                 )
             #else
-            Image(nsImage: NSImage(data: characterImageData!)!)
+            Image(nsImage: NSImage(data: character.avatar!)!)
                 .resizable()
                 .scaledToFit()
                 .frame(width: frameSize, height: frameSize)
@@ -155,13 +155,19 @@ struct CharacterImage: View {
                 }
                 
                 CoreDataImagesManager.shared.updateImage(name: shortAvatarAddress, data: data)
-                characterImageData = data
+                character.avatar = data
+                DispatchQueue.main.async {
+                    gameData.updateCharacterAvatar(for: character, with: data)
+                }
             }
             dataTask.resume()
             return
         }
         
-        characterImageData = storedImage.data
+        character.avatar = storedImage.data!
+        DispatchQueue.main.async {
+            gameData.updateCharacterAvatar(for: character, with: storedImage.data!)
+        }
     }
 }
 

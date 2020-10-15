@@ -84,6 +84,7 @@ struct RaidDataHelper {
                 }
                 currentRaid =
                     CombinedRaidWithEncounters(
+                        background: GDRaid.background,
                         raidId: GDRaid.id,
                         raidName: GDRaid.name,
                         description: GDRaid.description,
@@ -308,6 +309,7 @@ struct RaidDataHelper {
         }
         let currentRaid =
             CombinedRaidWithEncounters(
+                background: instance.background,
                 raidId: instance.id,
                 raidName: instance.name,
                 description: instance.description,

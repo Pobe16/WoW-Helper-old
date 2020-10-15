@@ -22,7 +22,7 @@ struct InstanceJournal: Codable, Hashable, Identifiable, Comparable, Equatable {
             return false
         }
     }
-    
+    var background: Data?
     let id: Int
     let name: String
     let map: InstanceMapIndex

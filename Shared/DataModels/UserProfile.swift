@@ -36,6 +36,7 @@ struct CharacterInProfile: Codable, Hashable, Identifiable {
     let gender: GenderInProfile
     let faction: Faction
     let level: Int
+    var avatar: Data?
 }
 
 struct placeholders{

@@ -28,7 +28,7 @@ struct ExpansionGameDataPreview: View {
                                 .padding()
                         }
                     } else {
-                        InstanceTile(category: InstanceCategoryType.raid.rawValue.lowercased())
+                        InstancePlaceholderTile(category: InstanceCategoryType.raid.rawValue.lowercased())
                             .padding()
                     }
                 }
@@ -44,7 +44,7 @@ struct ExpansionGameDataPreview: View {
                                 .padding()
                         }
                     } else {
-                        InstanceTile(category: InstanceCategoryType.dungeon.rawValue.lowercased())
+                        InstancePlaceholderTile(category: InstanceCategoryType.dungeon.rawValue.lowercased())
                             .padding()
                     }
                     
