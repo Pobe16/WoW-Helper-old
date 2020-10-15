@@ -196,10 +196,12 @@ class GameData: ObservableObject {
     private func loadExpansionIndex() {
         let requestUrlAPIHost = UserDefaults.standard.object(forKey: UserDefaultsKeys.APIRegionHost) as? String ?? APIRegionHostList.Europe
         let requestUrlAPIFragment = "/data/wow/journal-expansion/index"
-        
-        if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: requestUrlAPIHost + requestUrlAPIFragment, maximumAgeInDays: 90) {
-            decodeExpansionIndexData(savedData.data!)
-            return
+            
+        if reloadFromCDAllowed {
+            if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: requestUrlAPIHost + requestUrlAPIFragment, maximumAgeInDays: 90) {
+                decodeExpansionIndexData(savedData.data!)
+                return
+            }
         }
         
         let regionShortCode = APIRegionShort.Code[UserDefaults.standard.integer(forKey: UserDefaultsKeys.loginRegion)]
@@ -859,6 +861,34 @@ class GameData: ObservableObject {
         } catch {
             print(error)
         }
+    }
+    
+    func updateCharacterAvatar(for character: CharacterInProfile, with data: Data) {
+        guard let indexToUpdate = characters.firstIndex(where: { (charProfile) -> Bool in
+            return charProfile.id == character.id && charProfile.realm.id == character.realm.id
+        }) else { return }
+        characters[indexToUpdate].avatar = data
+    }
+    
+    func updateRaidInstanceBackground(for instance: InstanceJournal, with data: Data) {
+        guard let indexToUpdate = raids.firstIndex(where: { (raidInstance) -> Bool in
+            return raidInstance.id == instance.id && raidInstance.expansion.id == instance.expansion.id
+        }) else { return }
+        raids[indexToUpdate].background = data
+    }
+    
+    func updateDungeonInstanceBackground(for instance: InstanceJournal, with data: Data) {
+        guard let indexToUpdate = dungeons.firstIndex(where: { (dungeonsInstance) -> Bool in
+            return dungeonsInstance.id == instance.id && dungeonsInstance.expansion.id == instance.expansion.id
+        }) else { return }
+        dungeons[indexToUpdate].background = data
+    }
+    
+    func updateRaidCombinedBackground(for raid: CombinedRaidWithEncounters, with data: Data) {
+        guard let indexToUpdate = raids.firstIndex(where: { (raidInstance) -> Bool in
+            return raidInstance.id == raid.id && raidInstance.expansion.id == raid.expansion.id
+        }) else { return }
+        raids[indexToUpdate].background = data
     }
     
 }

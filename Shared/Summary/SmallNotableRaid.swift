@@ -19,19 +19,23 @@ struct SmallNotableRaid: View {
                 CharacterImage(character: character, frameSize: 50)
                     .padding()
                     .matchedGeometryEffect(id: "characterImage", in: namespace)
+                    .minimumScaleFactor(0.8)
                 Spacer()
             }
             Spacer(minLength: 0)
-            Text(raid.raidName)
+            Text("\(raid.raidName)")
+                .lineLimit(2)
+                .font(.body)
+                .minimumScaleFactor(0.5)
                 .whiteTextWithBlackOutlineStyle()
-                .minimumScaleFactor(0.8)
-                .padding()
+                .padding(.bottom)
+                .padding(.horizontal)
                 .matchedGeometryEffect(id: "raidName", in: namespace)
             
             
         }
         .background(
-            RaidTileBackground(name: raid.raidName, id: raid.raidId, mediaUrl: raid.media.key.href)
+            RaidTileBackground(raid: raid)
         )
         .frame(width: 141, height: 141)
         .cornerRadius(25)

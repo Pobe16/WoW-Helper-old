@@ -37,7 +37,7 @@ struct SummaryOfNotableRaids: View {
             }
             .background(
                 GeometryReader {geo in
-                    EmptyView()
+                    Spacer()
                         .onAppear(perform: {
                             viewWidth = geo.size.width
                         })
@@ -47,19 +47,16 @@ struct SummaryOfNotableRaids: View {
         case .medium:
             HStack {
                 Spacer()
+                ForEach(0...howManyRaidsToPresent(for: viewWidth), id: \.self) { raidNumber in
                 
-                VStack {
-                    CharacterImage(character: character)
-                        .matchedGeometryEffect(id: "characterImage", in: animationsForFirstWidget)
-                    Text(notableRaids[0].raidName)
-                        .matchedGeometryEffect(id: "raidName", in: animationsForFirstWidget)
-                }
-                .padding()
+                    MediumNotableRaid(namespace: selectNamespace(for: raidNumber) ,character: character, raid: notableRaids[raidNumber])
+                
                 Spacer()
-            }
-            .background(
+                }
+                    
+            }.background(
                 GeometryReader {geo in
-                    EmptyView()
+                    Spacer()
                         .onAppear(perform: {
                             viewWidth = geo.size.width
                         })
@@ -69,12 +66,11 @@ struct SummaryOfNotableRaids: View {
         case .small:
             HStack {
                 Spacer()
+                ForEach(0...howManyRaidsToPresent(for: viewWidth), id: \.self) { raidNumber in
                 
-                    ForEach(0...howManyRaidsToPresent(for: viewWidth), id: \.self) { raidNumber in
-                    
-                        SmallNotableRaid(namespace: selectNamespace(for: raidNumber) ,character: character, raid: notableRaids[raidNumber])
-                    
-                    Spacer()
+                    SmallNotableRaid(namespace: selectNamespace(for: raidNumber) ,character: character, raid: notableRaids[raidNumber])
+                
+                Spacer()
                 }
                     
             }.background(

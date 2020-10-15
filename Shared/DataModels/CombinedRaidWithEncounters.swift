@@ -11,6 +11,7 @@ struct CombinedRaidWithEncounters: Hashable, Identifiable {
     var id: Int {
         return raidId
     }
+    var background: Data?
     let raidId: Int
     let raidName: String
     let description: String?

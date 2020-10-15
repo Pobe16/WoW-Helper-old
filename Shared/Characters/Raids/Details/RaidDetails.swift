@@ -26,7 +26,7 @@ struct RaidDetails: View {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 30) {
                     Section {
-                        RaidTileBackground(name: raid.raidName, id: raid.raidId, mediaUrl: raid.media.key.href)
+                        RaidTileBackground(raid: raid)
                             .frame(minWidth: 0, maxWidth: 500)
                         
                         if raid.description != nil && geometry.size.width > 600 {

@@ -85,6 +85,10 @@
 		C88EEA9D24E9E2B800155CBC /* JSONCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EEA9C24E9E2B800155CBC /* JSONCoreDataManager.swift */; };
 		C88EEA9E24E9E2B800155CBC /* JSONCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EEA9C24E9E2B800155CBC /* JSONCoreDataManager.swift */; };
 		C88EEAA024E9EFDB00155CBC /* CharacterLoadingListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EEA9F24E9EFDB00155CBC /* CharacterLoadingListItem.swift */; };
+		C89295F42538BA0200F1BA30 /* MediumNotableRaid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89295F32538BA0200F1BA30 /* MediumNotableRaid.swift */; };
+		C89295F52538BA0200F1BA30 /* MediumNotableRaid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89295F32538BA0200F1BA30 /* MediumNotableRaid.swift */; };
+		C89296032538CF2800F1BA30 /* InstancePlaceholderTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89296022538CF2800F1BA30 /* InstancePlaceholderTile.swift */; };
+		C89296042538CF2800F1BA30 /* InstancePlaceholderTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89296022538CF2800F1BA30 /* InstancePlaceholderTile.swift */; };
 		C89914C124F8743700DADAB1 /* CharacterMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89914C024F8743600DADAB1 /* CharacterMainView.swift */; };
 		C89914C224F8743700DADAB1 /* CharacterMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89914C024F8743600DADAB1 /* CharacterMainView.swift */; };
 		C89914C424F992B200DADAB1 /* RaidFarmingCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89914C324F992B200DADAB1 /* RaidFarmingCollection.swift */; };
@@ -211,6 +215,8 @@
 		C887120E24E4A01200C0A0ED /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		C88EEA9C24E9E2B800155CBC /* JSONCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONCoreDataManager.swift; sourceTree = "<group>"; };
 		C88EEA9F24E9EFDB00155CBC /* CharacterLoadingListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterLoadingListItem.swift; sourceTree = "<group>"; };
+		C89295F32538BA0200F1BA30 /* MediumNotableRaid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumNotableRaid.swift; sourceTree = "<group>"; };
+		C89296022538CF2800F1BA30 /* InstancePlaceholderTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstancePlaceholderTile.swift; sourceTree = "<group>"; };
 		C89914C024F8743600DADAB1 /* CharacterMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterMainView.swift; sourceTree = "<group>"; };
 		C89914C324F992B200DADAB1 /* RaidFarmingCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidFarmingCollection.swift; sourceTree = "<group>"; };
 		C8B14256251D0656004F982B /* textures.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = textures.xcassets; sourceTree = "<group>"; };
@@ -465,6 +471,7 @@
 				C8D58900252BB715008FAA3F /* SummaryMain.swift */,
 				C8EA542E2536E6DC002D88B6 /* SummaryOfNotableRaids.swift */,
 				C8EA54392537BD56002D88B6 /* SmallNotableRaid.swift */,
+				C89295F32538BA0200F1BA30 /* MediumNotableRaid.swift */,
 				C8D58910252D286A008FAA3F /* SingleCharacterSummary.swift */,
 				C8D58920252E707D008FAA3F /* NoFarmingLeft.swift */,
 			);
@@ -486,6 +493,7 @@
 				C8F942E224EF024600B6222C /* GameData.swift */,
 				C8665E6424F066DF0043A23C /* GameDataLoader.swift */,
 				C8E4D71824F2A5A500EDAC85 /* InstanceTile.swift */,
+				C89296022538CF2800F1BA30 /* InstancePlaceholderTile.swift */,
 				C874D5CD24F2926A0006B210 /* ExpansionGameDataPreview.swift */,
 				C8F942DC24EDB65C00B6222C /* DataHealthScreen.swift */,
 				C8D5890A252CF656008FAA3F /* DataLoadingInfo.swift */,
@@ -706,6 +714,7 @@
 				C818B1E42522A41D00ED06B7 /* FarmingOrder.swift in Sources */,
 				C8E6D7E2252A8613005F0918 /* SummaryListItem.swift in Sources */,
 				C835226F2502379900A5D90D /* BackgroundBlurs.swift in Sources */,
+				C89295F42538BA0200F1BA30 /* MediumNotableRaid.swift in Sources */,
 				C803C5DC24FEF1D700A8D2DE /* RaidDataFilledAndSorted.swift in Sources */,
 				C8D5893E25338464008FAA3F /* WhiteTextWithBlackOutline.swift in Sources */,
 				C89914C124F8743700DADAB1 /* CharacterMainView.swift in Sources */,
@@ -742,6 +751,7 @@
 				C84996272517B837007D1762 /* MountItemList.swift in Sources */,
 				C831CC5324E89A0200C25F67 /* CoreDataImagesManager.swift in Sources */,
 				C88EEA9D24E9E2B800155CBC /* JSONCoreDataManager.swift in Sources */,
+				C89296032538CF2800F1BA30 /* InstancePlaceholderTile.swift in Sources */,
 				C806FA522501A7B2006DEF78 /* CharacterRaidTile.swift in Sources */,
 				C887120F24E4A01200C0A0ED /* LoginScreen.swift in Sources */,
 				C8D58901252BB715008FAA3F /* SummaryMain.swift in Sources */,
@@ -776,6 +786,7 @@
 				C8E6D7E3252A8613005F0918 /* SummaryListItem.swift in Sources */,
 				C803C5D424FC57B800A8D2DE /* CharacterRaidEncounters.swift in Sources */,
 				C83522702502379900A5D90D /* BackgroundBlurs.swift in Sources */,
+				C89295F52538BA0200F1BA30 /* MediumNotableRaid.swift in Sources */,
 				C803C5DD24FEF1D700A8D2DE /* RaidDataFilledAndSorted.swift in Sources */,
 				C89914C224F8743700DADAB1 /* CharacterMainView.swift in Sources */,
 				C8665E6924F1DF980043A23C /* InstanceJournal.swift in Sources */,
@@ -812,6 +823,7 @@
 				C84996282517B837007D1762 /* MountItemList.swift in Sources */,
 				C831CC5424E89A0200C25F67 /* CoreDataImagesManager.swift in Sources */,
 				C88EEA9E24E9E2B800155CBC /* JSONCoreDataManager.swift in Sources */,
+				C89296042538CF2800F1BA30 /* InstancePlaceholderTile.swift in Sources */,
 				C806FA532501A7B2006DEF78 /* CharacterRaidTile.swift in Sources */,
 				C887121024E4A01200C0A0ED /* LoginScreen.swift in Sources */,
 				C8EA540C253633AE002D88B6 /* SummaryMain.swift in Sources */,
