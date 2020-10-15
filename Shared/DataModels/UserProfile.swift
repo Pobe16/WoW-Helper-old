@@ -10,7 +10,7 @@ import Foundation
 struct UserProfile: Codable, Hashable {
     let _links: LinksInProfile
     let id: Int
-    let wowAccounts: [Account]
+    let wowAccounts: [Account]?
     let collections: LinkStub
 }
 

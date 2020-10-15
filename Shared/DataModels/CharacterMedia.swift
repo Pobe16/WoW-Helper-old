@@ -10,11 +10,12 @@ import Foundation
 class CharacterMedia: Codable {
 //    let _links: JustSelfLink
 //    let character: CharacterInfoInCharacterMedia
-    let avatarUrl: String
+    let avatarUrl: String?
     let bustUrl: String?
     let renderUrl: String?
-    
+    let assets: [MediaAssets]?
 }
+
 
 struct JustSelfLink: Codable, Hashable {
     let `self`: LinkStub
