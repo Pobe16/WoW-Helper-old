@@ -39,37 +39,6 @@ struct CharacterInProfile: Codable, Hashable, Identifiable {
     var avatar: Data?
 }
 
-struct placeholders{
-    static let characterInProfile = CharacterInProfile(
-        character: LinkStub(href: ""),
-        protectedCharacter: LinkStub(href: ""),
-        name: "Pobe",
-        id: 105830991,
-        realm: RealmInProfile(
-            key: LinkStub(href: ""),
-            name: "Defias Brotherhood",
-            id: 635,
-            slug: "defias-brotherhood"
-        ),
-        playableClass: ClassInProfile(
-            key: LinkStub(href: ""),
-            name: "Shaman",
-            id: 7
-        ),
-        playableRace: RaceInProfile(
-            key: LinkStub(href: ""),
-            name: "Dwarf",
-            id: 3
-        ), gender: GenderInProfile(
-            type: .male,
-            name: "Male"
-        ), faction: Faction(
-            type: .alliance,
-            name: "Alliance"
-        ),
-        level: 120)
-}
-
 struct RealmInProfile: Codable, Hashable {
     let key: LinkStub
     let name: String

@@ -56,6 +56,12 @@ struct NotableItemsInRaid: View {
                 petsInEncounter.append(wrapper.item)
             }
         }
+//        mountsInEncounter.forEach { (mount) in
+//            print("CollectibleItem(id: \(mount.id), name: \"\(mount.name.value)\"),")
+//        }
+//        petsInEncounter.forEach { (pet) in
+//            print("CollectibleItem(id: \(pet.id), name: \"\(pet.name.value)\"),")
+//        }
         if mountsInEncounter.count > 0 || petsInEncounter.count > 0 {
             DispatchQueue.main.async {
                 withAnimation {

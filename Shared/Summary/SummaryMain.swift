@@ -34,6 +34,7 @@ struct SummaryMain: View {
                         characterEncounters: GDCharacterEncounters
                     )
                 }
+                Spacer(minLength: 80)
             }
 //            .edgesIgnoringSafeArea(.all)
             .background(BackgroundTexture(texture: .flagstone, wall: true))

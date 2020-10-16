@@ -8,6 +8,19 @@
 import SwiftUI
 import VisualEffects
 
+struct DarkOrBrightTransparentBackground: View {
+    
+    @Environment (\.colorScheme) var colorScheme: ColorScheme
+    
+    var body: some View {
+        if colorScheme == .dark {
+            Color.black.opacity(0.5)
+        } else {
+            Color.white.opacity(0.5)
+        }
+    }
+}
+
 struct RaidTitleBackgroundBlur: View {
     var body: some View {
         #if os(iOS)

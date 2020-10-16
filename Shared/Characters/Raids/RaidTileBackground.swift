@@ -98,7 +98,7 @@ struct RaidTileBackground: View {
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         
         do {
-            let dataResponse = try decoder.decode(InstanceMedia.self, from: data)
+            let dataResponse = try decoder.decode(BlizzardMediaFormat.self, from: data)
             
             if let url = url {
                 JSONCoreDataManager.shared.saveJSON(data, withURL: url)

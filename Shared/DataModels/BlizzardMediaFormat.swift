@@ -1,5 +1,5 @@
 //
-//  InstanceMedia.swift
+//  BlizzardMediaFormat.swift
 //  WoWWidget
 //
 //  Created by Mikolaj Lukasik on 23/08/2020.
@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct InstanceMedia: Codable, Hashable {
+struct BlizzardMediaFormat: Codable, Hashable {
     let _links: JustSelfLink?
     let assets: [MediaAssets]
 }

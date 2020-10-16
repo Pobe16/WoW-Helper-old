@@ -16,6 +16,7 @@ struct SummaryOfNotableRaids: View {
     let summarySize: summaryPreviewSize
     let character: CharacterInProfile
     let notableRaids: [CombinedRaidWithEncounters]
+    let loot: [InstanceNotableItems]
     
     @State var viewWidth: CGFloat = 200
     
@@ -25,15 +26,17 @@ struct SummaryOfNotableRaids: View {
         case .large:
             HStack {
                 Spacer()
+                ForEach(0...howManyRaidsToPresent(for: viewWidth), id: \.self) { raidNumber in
                 
-                VStack {
-                    CharacterImage(character: character)
-                        .matchedGeometryEffect(id: "characterImage", in: animationsForFirstWidget)
-                    Text(notableRaids[0].raidName)
-                        .matchedGeometryEffect(id: "raidName", in: animationsForFirstWidget)
+                    LargeNotableRaid(
+                        namespace: selectNamespace(for: raidNumber),
+                        character: character,
+                        raid: notableRaids[raidNumber],
+                        items: getItems(for: notableRaids[raidNumber].id)
+                    )
+                
+                    Spacer()
                 }
-                .padding()
-                Spacer()
             }
             .background(
                 GeometryReader {geo in
@@ -49,9 +52,14 @@ struct SummaryOfNotableRaids: View {
                 Spacer()
                 ForEach(0...howManyRaidsToPresent(for: viewWidth), id: \.self) { raidNumber in
                 
-                    MediumNotableRaid(namespace: selectNamespace(for: raidNumber) ,character: character, raid: notableRaids[raidNumber])
+                    MediumNotableRaid(
+                        namespace: selectNamespace(for: raidNumber),
+                        character: character,
+                        raid: notableRaids[raidNumber],
+                        items: getItems(for: notableRaids[raidNumber].id)
+                    )
                 
-                Spacer()
+                    Spacer()
                 }
                     
             }.background(
@@ -85,6 +93,16 @@ struct SummaryOfNotableRaids: View {
                 
         }
         
+    }
+    
+    func getItems(for raid: Int) -> [QualityItemStub] {
+        guard let raid = loot.first(where: { (loot) -> Bool in
+            loot.id == raid
+        }) else { return [] }
+        var items: [QualityItemStub] = []
+        items.append(contentsOf: raid.mounts)
+        items.append(contentsOf: raid.pets)
+        return items
     }
     
     func howManyRaidsToPresent(for viewSize: CGFloat) -> Int {
