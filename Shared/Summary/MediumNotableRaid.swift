@@ -13,8 +13,7 @@ struct MediumNotableRaid: View {
     let character: CharacterInProfile
     let raid: CombinedRaidWithEncounters
     
-    @State var mounts: [MountItem]  = []
-    @State var pets: [PetItem]      = []
+    let items: [QualityItemStub]
     
     var body: some View {
         HStack(alignment: .top) {
@@ -35,22 +34,20 @@ struct MediumNotableRaid: View {
             }
             Spacer(minLength: 0)
             VStack(alignment: .trailing){
-                RoundedRectangle(cornerRadius: 15)
-                    .frame(width: 40, height: 40)
-                    .padding(.horizontal)
-                    .padding(.top)
-                Spacer(minLength: 0)
-                RoundedRectangle(cornerRadius: 15)
-                    .frame(width: 40, height: 40)
-                    .padding(.horizontal)
-                    .padding(.bottom)
+                if (items.count) == 0 {
+                    EmptyView()
+                } else {
+                    MediumNotableLoot(namespace: namespace, items: items)
+                }
             }
         }
         .background(
             RaidTileBackground(raid: raid)
+                .matchedGeometryEffect(id: "backgroundTile", in: namespace)
         )
         .frame(width: 292, height: 141)
         .cornerRadius(25)
         .clipped()
+        
     }
 }

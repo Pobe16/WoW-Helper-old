@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-
-
 struct SingleCharacterSummary: View {
     @EnvironmentObject var farmOrder: FarmCollectionsOrder
     @EnvironmentObject var gameData: GameData
@@ -17,7 +15,8 @@ struct SingleCharacterSummary: View {
     let character: CharacterInProfile
     let characterEncounters: CharacterRaidEncounters
     
-    @State var notableRaids: [CombinedRaidWithEncounters] = []
+    @State var notableRaids: [CombinedRaidWithEncounters]   = []
+    @State var notableRaidsLoot: [InstanceNotableItems]     = []
     
     @State var message: String = "Loading…"
     
@@ -46,7 +45,7 @@ struct SingleCharacterSummary: View {
         .padding()
         if notableRaids.count > 0 {
 //            NoFarmingLeft(summarySize: summarySize, character: character)
-            SummaryOfNotableRaids(summarySize: summarySize, character: character, notableRaids: notableRaids)
+            SummaryOfNotableRaids(summarySize: summarySize, character: character, notableRaids: notableRaids, loot: notableRaidsLoot)
             
         } else if message == "Loading…" {
             
@@ -106,6 +105,9 @@ struct SingleCharacterSummary: View {
     func isRaidWorthFarming(_ raid: CombinedRaidWithEncounters) -> Bool {
         let raidDataManipulator = RaidDataHelper()
         
+        var mounts: [QualityItemStub] = []
+        var pets: [QualityItemStub] = []
+        
         for encounter in raid.records.first!.progress.encounters {
             if raidDataManipulator.isEncounterCleared(encounter) { break }
             
@@ -119,17 +121,24 @@ struct SingleCharacterSummary: View {
                 if gameData.mountItemsList.contains(where: { (mount) -> Bool in
                     mount.id == wrapper.item.id
                 }) {
-                    return true
-                }
-                if gameData.petItemsList.contains(where: { (pet) -> Bool in
+                    let currentMount = QualityItemStub(name: wrapper.item.name, id: wrapper.item.id, quality: .epic)
+                    mounts.append(currentMount)
+                } else if gameData.petItemsList.contains(where: { (pet) -> Bool in
                     pet.id == wrapper.item.id
                 }) {
-                    return true
+                    let currentPet = QualityItemStub(name: wrapper.item.name, id: wrapper.item.id, quality: .uncommon)
+                    pets.append(currentPet)
                 }
             }
         }
         
-        return false
+        if mounts.count + pets.count > 0 {
+            let lootForRaid = InstanceNotableItems(id: raid.id, mounts: mounts, pets: pets)
+            notableRaidsLoot.append(lootForRaid)
+            return true
+        } else {
+            return false
+        }
     }
     
     

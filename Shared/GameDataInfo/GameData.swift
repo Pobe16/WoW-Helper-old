@@ -14,8 +14,8 @@ class GameData: ObservableObject {
     var connectionRetries                                               = 0
     var reloadFromCDAllowed                                             = true
     var loadDungeonsToo                                                 = false
-    var mountItemsList: [MountItem]                                     = createMountsList()
-    var petItemsList: [PetItem]                                         = createPetsList()
+    var mountItemsList: [CollectibleItem]                                     = createMountsList()
+    var petItemsList: [CollectibleItem]                                         = createPetsList()
     
     @Published var characters: [CharacterInProfile]                     = []
                 

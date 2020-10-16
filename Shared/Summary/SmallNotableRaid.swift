@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SmallNotableRaid: View {
+    @EnvironmentObject var gameData: GameData
     let namespace: Namespace.ID
     
     let character: CharacterInProfile
@@ -36,6 +37,7 @@ struct SmallNotableRaid: View {
         }
         .background(
             RaidTileBackground(raid: raid)
+                .matchedGeometryEffect(id: "backgroundTile", in: namespace)
         )
         .frame(width: 141, height: 141)
         .cornerRadius(25)

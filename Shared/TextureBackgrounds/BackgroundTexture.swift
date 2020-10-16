@@ -10,6 +10,7 @@ import SwiftUI
 enum availableBackgroundTextures: String {
     case flagstone  = "Large_Flagstone"
     case wood       = "Wooden_Flooring"
+    case brick      = "Brick_Floor"
 }
 
 enum additionalTexturesNames: String {
@@ -17,12 +18,15 @@ enum additionalTexturesNames: String {
     case wallTrailing   = "wall_trailing"
     case woodDamageV1   = "Wood_Damage_Overlay_C_01"
     case woodDamageV2   = "Wood_Damage_Overlay_B_01"
+    case wallTop        = "wall_top"
 }
 
 struct BackgroundTexture: View {
     @Environment (\.colorScheme) var colorScheme: ColorScheme
     let texture: availableBackgroundTextures
     let wall: Bool
+    @State var topWall: Bool = false
+    
     
     var body: some View {
         ZStack{
@@ -53,6 +57,16 @@ struct BackgroundTexture: View {
                     Image(additionalTexturesNames.wallTrailing.rawValue)
                         .resizable(resizingMode: .tile)
                         .frame(minWidth: 0, maxWidth: 23)
+                }
+            }
+            
+            if topWall {
+                VStack{
+                    Image(additionalTexturesNames.wallTop.rawValue)
+                        .resizable(resizingMode: .tile)
+                        .frame(minHeight: 0, maxHeight: 15)
+                    Spacer()
+                        .frame(minHeight: 0, maxHeight: .infinity)
                 }
             }
         }
