@@ -62,10 +62,17 @@ struct RaidFarmingCollection: View {
                     Spacer()
                 }.padding(.vertical)
             } else if errorText != nil {
-                Text("\(errorText ?? "Unknown Error")")
+                HStack{
+                    Text("\(errorText ?? "Unknown Error")")
+                        .font(.title)
+                        .padding()
+                    Spacer()
+                }
+                .padding()
             } else {
                 ProgressView{}
                     .progressViewStyle(CircularProgressViewStyle())
+                    .padding()
             }
         }
         .onAppear {
