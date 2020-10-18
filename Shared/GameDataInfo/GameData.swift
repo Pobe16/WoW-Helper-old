@@ -743,6 +743,18 @@ class GameData: ObservableObject {
     func loadCharacterRaidEncounters() {
         if timeRetries > 5 || connectionRetries > 5 {
             print("Failed after \(timeRetries) timer retries, and or \(connectionRetries) connection errors")
+            DispatchQueue.main.async { [self] in
+                withAnimation {
+                    loadingAllowed = true
+                }
+                reloadFromCDAllowed = true
+                
+                if loadDungeonsToo {
+                    loadDungeonsInfo()
+                } else {
+                    print("loading dungeons postponed")
+                }
+            }
             return
         }
         
