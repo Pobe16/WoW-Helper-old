@@ -28,7 +28,25 @@ struct MainScreen: View {
         NavigationView {
             List {
                 Section(header:
-                    NavListSectionHeader(text: gameData.loadingAllowed ? "Characters" : "Loading game data")
+                    NavListSectionHeader(text: "Summary")
+                ) {
+                    NavigationLink(
+                        destination:
+                            SummaryMain(),
+                        tag: "summary",
+                        selection: $selection) {
+                        SummaryListItem()
+                    }
+                    .listRowBackground(
+                        DefaultListItemBackground(
+                            color: Color.green,
+                            selected: selection == "summary"
+                        )
+                    )
+                }
+                
+                Section(header:
+                    NavListSectionHeader(text: "Characters")
                 ){
                     if gameData.characters.count > 0 {
                         ForEach(gameData.characters) { character in
@@ -61,24 +79,6 @@ struct MainScreen: View {
                 }
                 
                 Section(header:
-                    NavListSectionHeader(text: "Summary")
-                ) {
-                    NavigationLink(
-                        destination:
-                            SummaryMain(),
-                        tag: "summary",
-                        selection: $selection) {
-                        SummaryListItem()
-                    }
-                    .listRowBackground(
-                        DefaultListItemBackground(
-                            color: Color.green,
-                            selected: selection == "summary"
-                        )
-                    )
-                }
-                
-                Section(header:
                     NavListSectionHeader(text: "Settings")
                 ){
                     NavigationLink(destination: DataHealthScreen(), tag: "data-health", selection: $selection) {
@@ -101,6 +101,16 @@ struct MainScreen: View {
                         )
                     )
                     
+                    NavigationLink(destination: Credits(), tag: "credits", selection: $selection) {
+                        CreditsListItem()
+                    }
+                    .listRowBackground(
+                        DefaultListItemBackground(
+                            color: Color.purple,
+                            selected: selection == "credits"
+                        )
+                    )
+                    
                     NavigationLink(destination: LogOutDebugScreen(), tag: "log-out", selection: $selection) {
                         LogOutListItem()
                     }
@@ -115,13 +125,15 @@ struct MainScreen: View {
                 
             }
             .listStyle(listStyle)
-            .background(BackgroundTexture(texture: .wood, wall: true))
-            .edgesIgnoringSafeArea(.vertical)
+            .background(
+                BackgroundTexture(texture: .wood, wall: .horizontal)
+                            .edgesIgnoringSafeArea(.vertical)
+            )
             .toolbar{
                 ToolbarItem(placement: .principal){
                     Text("WoWWidget")
                         .fontWeight(.black)
-                        .shadow(color: .white, radius: colorScheme == .dark ? 0 : 1, x: 0, y: 0)
+                        .whiteTextWithBlackOutlineStyle()
                 }
                 
                 ToolbarItem(placement: .primaryAction) {

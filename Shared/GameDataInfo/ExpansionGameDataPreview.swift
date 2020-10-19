@@ -15,11 +15,14 @@ struct ExpansionGameDataPreview: View {
         VStack(alignment: .leading){
             Text(expansion.name)
                 .font(.largeTitle)
-                .padding(.leading)
+                .whiteTextWithBlackOutlineStyle()
+                .padding([.leading, .top])
             
             Text("Raids")
                 .font(.title)
+                .whiteTextWithBlackOutlineStyle()
                 .padding([.leading, .top])
+            
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack{
                     if gameData.raids.filter{$0.expansion.id == expansion.id }.count > 0 {
@@ -30,12 +33,24 @@ struct ExpansionGameDataPreview: View {
                     } else {
                         InstancePlaceholderTile(category: InstanceCategoryType.raid.rawValue.lowercased())
                             .padding()
+                        Spacer()
                     }
                 }
+                .padding()
+                .background(
+                    BackgroundTexture(texture: .moss, wall: .all)
+                        .edgesIgnoringSafeArea(.all)
+                )
             }
+            .background(
+                BackgroundTexture(texture: .wood, wall: .all)
+                    .edgesIgnoringSafeArea(.all)
+            )
             Text("Dungeons")
                 .font(.title)
+                .whiteTextWithBlackOutlineStyle()
                 .padding(.leading)
+            
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack{
                     if gameData.dungeons.filter{$0.expansion.id == expansion.id }.count > 0 {
@@ -46,12 +61,22 @@ struct ExpansionGameDataPreview: View {
                     } else {
                         InstancePlaceholderTile(category: InstanceCategoryType.dungeon.rawValue.lowercased())
                             .padding()
+                        Spacer()
                     }
-                    
                 }
+                .padding()
+                .background(
+                    BackgroundTexture(texture: .moss, wall: .all)
+                        .edgesIgnoringSafeArea(.all)
+                )
             }
+            .background(
+                BackgroundTexture(texture: .wood, wall: .all)
+                    .edgesIgnoringSafeArea(.all)
+            )
             
         }
+        .padding(.bottom)
         .padding(.bottom)
     }
 }

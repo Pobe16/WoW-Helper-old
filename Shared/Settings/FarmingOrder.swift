@@ -23,7 +23,12 @@ struct FarmingOrder: View {
             }
             .onMove(perform: move)
         }
+        .padding(.horizontal)
         .listStyle(listStyle)
+        .background(
+            BackgroundTexture(texture: .ice, wall: .horizontal)
+                .edgesIgnoringSafeArea(.all)
+        )
         .toolbar {
             #if os(iOS)
             ToolbarItem(placement: .automatic){

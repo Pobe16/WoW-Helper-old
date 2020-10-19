@@ -14,8 +14,8 @@ class GameData: ObservableObject {
     var connectionRetries                                               = 0
     var reloadFromCDAllowed                                             = true
     var loadDungeonsToo                                                 = false
-    var mountItemsList: [CollectibleItem]                                     = createMountsList()
-    var petItemsList: [CollectibleItem]                                         = createPetsList()
+    var mountItemsList: [CollectibleItem]                               = createMountsList()
+    var petItemsList: [CollectibleItem]                                 = createPetsList()
     
     @Published var characters: [CharacterInProfile]                     = []
                 
@@ -34,7 +34,7 @@ class GameData: ObservableObject {
     var charactersForRaidEncounters: [CharacterInProfile]               = []
     @Published var characterRaidEncounters: [CharacterRaidEncounters]   = []
     
-    let estimatedItemsToDownload: Int                                   = 200
+    let estimatedItemsToDownload: Int                                   = 150
     @Published var actualItemsToDownload: Int                           = 0
     @Published var downloadedItems: Int                                 = 1
                 
