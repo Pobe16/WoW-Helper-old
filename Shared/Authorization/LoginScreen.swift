@@ -14,71 +14,99 @@ struct LoginScreen: View {
     @State private var locale = 0
     
     var body: some View {
-        VStack{
-            Spacer()
-            Picker(selection: $region, label: Text("Region"), content: /*@START_MENU_TOKEN@*/{
-                Text("America").tag(0)
-                Text("Europe").tag(1)
-                Text("Korea").tag(2)
-                Text("Taiwan").tag(3)
-                Text("China").tag(4)
-            }/*@END_MENU_TOKEN@*/)
-            .pickerStyle(SegmentedPickerStyle())
-            .onChange(of: region, perform: { value in
-                locale = 0
-            })
-            if region == 0 {
-                Picker(selection: $locale, label: Text("Language"), content: /*@START_MENU_TOKEN@*/{
-                    Text("US English").tag(0)
-                    Text("Mexican Spanish").tag(1)
-                    Text("Brazilian Portuguese").tag(2)
-                }/*@END_MENU_TOKEN@*/)
-                .pickerStyle(SegmentedPickerStyle())
-            } else if region == 1 {
-                Picker(selection: $locale, label: Text("Language"), content: {
-                    Text("🏴󠁧󠁢󠁳󠁣󠁴󠁿EN").tag(0).font(.largeTitle)
-                    Text("🇬🇧EN").tag(-1)
-                    Text("🇪🇸ES").tag(1)
-                    Text("🇫🇷FR").tag(2)
-                    Text("🇷🇺RU").tag(3)
-                    Text("🇩🇪DE").tag(4)
-                    Text("🇵🇹PT").tag(5)
-                    Text("🇮🇹IT").tag(6)
-                })
-                .pickerStyle(SegmentedPickerStyle())
-            } else if region == 2 {
-                Picker(selection: $locale, label: Text("Language"), content: {
-                        Text("Korean").tag(0)
-                })
-                .pickerStyle(SegmentedPickerStyle())
-            } else if region == 3 {
-                Picker(selection: $locale, label: Text("Language"), content: {
-                        Text("Taiwanese").tag(0)
-                })
-                .pickerStyle(SegmentedPickerStyle())
-            } else if region == 4 {
-                Picker(selection: $locale, label: Text("Language"), content: {
-                        Text("Chinese").tag(0)
-                })
-                .pickerStyle(SegmentedPickerStyle())
-            }
-            
-            Spacer()
-                .frame(height: 30)
-            
-            Button(action: {
-                authenticate()
-            }, label: {
-                Text("Authorize me")
-            })
-            
-            Spacer()
+        GeometryReader { geo in
+            VStack {
                 
+                Spacer()
+                HStack {
+                    Spacer(minLength: 0)
+                    VStack {
+                        Text("Region:")
+                            .font(.title2)
+                            .padding(.top)
+                            .padding(.bottom, 0)
+                        
+                        Picker(selection: $region, label: Text("Region"), content: {
+                            Text("Americas").tag(0)
+                                .minimumScaleFactor(0.5)
+                            Text("Europe").tag(1)
+                            Text("Korea").tag(2)
+                            Text("Taiwan").tag(3)
+                            Text("China").tag(4)
+                        })
+                        .pickerStyle(SegmentedPickerStyle())
+                        .frame(width: geo.size.width > 325 ? 350 : 290)
+                        .onChange(of: region, perform: { value in
+                            locale = 0
+                        })
+                        
+                        Text("Language:")
+                            .font(.title2)
+                            .padding(.top)
+                            .padding(.bottom, 0)
+                        
+                        Picker(selection: $locale, label: Text("Language"), content: {
+                            if region == 0 {
+                                Text("🇺🇸 US English").tag(0)
+                                Text("🇲🇽 Mexican Spanish").tag(1)
+                                Text("🇧🇷 Brazilian Portuguese").tag(2)
+                            } else if region == 1 {
+                                Text("🏴󠁧󠁢󠁳󠁣󠁴󠁿 Proper English").tag(0)
+                                Text("🇬🇧 British English").tag(-1)
+                                Text("🇪🇸 Spanish").tag(1)
+                                Text("🇫🇷 French").tag(2)
+                                Text("🇷🇺 Russian").tag(3)
+                                Text("🇩🇪 Deutsch").tag(4)
+                                Text("🇵🇹 Portuguese").tag(5)
+                                Text("🇮🇹 Italian").tag(6)
+                            } else if region == 2 {
+                                Text("🇰🇷 Korean").tag(0)
+                            } else if region == 3 {
+                                Text("🇹🇼 Taiwanese").tag(0)
+                            } else if region == 4 {
+                                Text("🇨🇳 Chinese").tag(0)
+                            }
+                        })
+                        .pickerStyle(DefaultPickerStyle())
+                        .frame(width: geo.size.width > 325 ? 350 : 290, height: 150)
+                        
+                    }
+                    .padding()
+                    .background(
+                        BackgroundTexture(texture: .ice, wall: .all)
+                    )
+                    
+                    Spacer(minLength: 0)
+                }
+            
+            
+                Spacer()
+                    .frame(height: 30)
+                
+                Button(action: {
+                    authenticate()
+                }, label: {
+                    Text("Authorize me!")
+                        .font(.title)
+                        .whiteTextWithBlackOutlineStyle()
+                })
+                .padding()
+                .frame(width: geo.size.width > 325 ? 350 : 290)
+                .background(
+                    BackgroundTexture(texture: .wood, wall: .all)
+                )
+                
+                
+                Spacer()
+                    
+            }
+            .onAppear(perform: {
+                determineLocaleState()
+            })
         }
-        .onAppear(perform: {
-            determineLocaleState()
-        })
-        
+        .background(
+            BackgroundTexture(texture: .flagstone, wall: .none)
+        )
     }
     
     func determineLocaleState() {
@@ -185,5 +213,12 @@ struct LoginScreen: View {
                 print("Authorization was canceled or went wrong: \(String(describing: error))")   // error will not be nil
             }
         }
+    }
+}
+
+struct LoginScreen_Previews: PreviewProvider {
+    static var previews: some View {
+        LoginScreen()
+            .environmentObject(Authentication.init())
     }
 }

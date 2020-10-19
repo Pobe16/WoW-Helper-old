@@ -76,6 +76,10 @@
 		C8665E6624F066DF0043A23C /* GameDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8665E6424F066DF0043A23C /* GameDataLoader.swift */; };
 		C8665E6824F1DF980043A23C /* InstanceJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8665E6724F1DF980043A23C /* InstanceJournal.swift */; };
 		C8665E6924F1DF980043A23C /* InstanceJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8665E6724F1DF980043A23C /* InstanceJournal.swift */; };
+		C86A6B87253CD13A00784F6C /* CreditsListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86A6B86253CD13900784F6C /* CreditsListItem.swift */; };
+		C86A6B88253CD13A00784F6C /* CreditsListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86A6B86253CD13900784F6C /* CreditsListItem.swift */; };
+		C86A6B8E253CD1A600784F6C /* Credits.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86A6B8D253CD1A600784F6C /* Credits.swift */; };
+		C86A6B8F253CD1A600784F6C /* Credits.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86A6B8D253CD1A600784F6C /* Credits.swift */; };
 		C874D5CE24F2926A0006B210 /* ExpansionGameDataPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C874D5CD24F2926A0006B210 /* ExpansionGameDataPreview.swift */; };
 		C874D5CF24F2926A0006B210 /* ExpansionGameDataPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C874D5CD24F2926A0006B210 /* ExpansionGameDataPreview.swift */; };
 		C887120F24E4A01200C0A0ED /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C887120E24E4A01200C0A0ED /* LoginScreen.swift */; };
@@ -220,6 +224,8 @@
 		C84B82F924E5FF56006E84FA /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		C8665E6424F066DF0043A23C /* GameDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDataLoader.swift; sourceTree = "<group>"; };
 		C8665E6724F1DF980043A23C /* InstanceJournal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceJournal.swift; sourceTree = "<group>"; };
+		C86A6B86253CD13900784F6C /* CreditsListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsListItem.swift; sourceTree = "<group>"; };
+		C86A6B8D253CD1A600784F6C /* Credits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credits.swift; sourceTree = "<group>"; };
 		C874D5CD24F2926A0006B210 /* ExpansionGameDataPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpansionGameDataPreview.swift; sourceTree = "<group>"; };
 		C887120E24E4A01200C0A0ED /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		C88EEA9C24E9E2B800155CBC /* JSONCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONCoreDataManager.swift; sourceTree = "<group>"; };
@@ -326,6 +332,7 @@
 				C8D5892E253338C2008FAA3F /* TextureBackgrounds */,
 				C849961C25153834007D1762 /* Characters */,
 				C8FFADAA2525533900465313 /* StaticStrings.swift */,
+				C86A6B8D253CD1A600784F6C /* Credits.swift */,
 				C8D5893D25338464008FAA3F /* WhiteTextWithBlackOutline.swift */,
 				C8D588FF252BB6F8008FAA3F /* Summary */,
 			);
@@ -533,6 +540,7 @@
 				C8F942D824EDAC1600B6222C /* LogOutListItem.swift */,
 				C84B82F624E5FD65006E84FA /* MainScreen.swift */,
 				C8BB333625030E07003E105F /* RaidOptionsListItem.swift */,
+				C86A6B86253CD13900784F6C /* CreditsListItem.swift */,
 				C8F942DA24EDB54000B6222C /* LogOutDebugScreen.swift */,
 				C8E6D7E1252A8613005F0918 /* SummaryListItem.swift */,
 			);
@@ -726,6 +734,7 @@
 				C84B82F724E5FD65006E84FA /* MainScreen.swift in Sources */,
 				C818B1FB2523BA4400ED06B7 /* DungeonsData.swift in Sources */,
 				C8D58930253338E8008FAA3F /* BackgroundTexture.swift in Sources */,
+				C86A6B87253CD13A00784F6C /* CreditsListItem.swift in Sources */,
 				C811E7A724E05FBE0050F6CD /* AuthInfo.swift in Sources */,
 				C892962B253A16AB00F1BA30 /* LargeNotableRaid.swift in Sources */,
 				C89296152538E81E00F1BA30 /* ItemIcon.swift in Sources */,
@@ -779,6 +788,7 @@
 				C89296032538CF2800F1BA30 /* InstancePlaceholderTile.swift in Sources */,
 				C806FA522501A7B2006DEF78 /* CharacterRaidTile.swift in Sources */,
 				C887120F24E4A01200C0A0ED /* LoginScreen.swift in Sources */,
+				C86A6B8E253CD1A600784F6C /* Credits.swift in Sources */,
 				C8D58901252BB715008FAA3F /* SummaryMain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -803,6 +813,7 @@
 				C8F942E424EF025600B6222C /* GameData.swift in Sources */,
 				C818B1FC2523BA4400ED06B7 /* DungeonsData.swift in Sources */,
 				C8F942EB24EF028100B6222C /* DataHealthScreen.swift in Sources */,
+				C86A6B88253CD13A00784F6C /* CreditsListItem.swift in Sources */,
 				C84B82F824E5FD65006E84FA /* MainScreen.swift in Sources */,
 				C892962C253A16AB00F1BA30 /* LargeNotableRaid.swift in Sources */,
 				C89296162538E81E00F1BA30 /* ItemIcon.swift in Sources */,
@@ -856,6 +867,7 @@
 				C89296042538CF2800F1BA30 /* InstancePlaceholderTile.swift in Sources */,
 				C806FA532501A7B2006DEF78 /* CharacterRaidTile.swift in Sources */,
 				C887121024E4A01200C0A0ED /* LoginScreen.swift in Sources */,
+				C86A6B8F253CD1A600784F6C /* Credits.swift in Sources */,
 				C8EA540C253633AE002D88B6 /* SummaryMain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

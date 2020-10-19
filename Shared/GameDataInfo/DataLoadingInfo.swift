@@ -30,7 +30,7 @@ struct DataLoadingInfo: View {
             .padding()
             
         }
-        .background(BackgroundTexture(texture: .flagstone, wall: true))
+        .background(BackgroundTexture(texture: .flagstone, wall: .horizontal))
         
     }
 }

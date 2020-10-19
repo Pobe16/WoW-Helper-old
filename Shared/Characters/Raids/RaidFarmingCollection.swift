@@ -188,14 +188,12 @@ struct RaidFarmingCollection: View {
                 JSONCoreDataManager.shared.saveJSON(data, withURL: url)
             }
             DispatchQueue.main.async {
-                withAnimation {
-                    characterEncounters = dataResponse
-                    
-                    if gameData.characterRaidEncounters.filter({ (GDEncounter) -> Bool in
-                        GDEncounter.character.id == dataResponse.character.id
-                    }).count == 0 {
-                        gameData.characterRaidEncounters.append(dataResponse)
-                    }
+                characterEncounters = dataResponse
+                
+                if gameData.characterRaidEncounters.filter({ (GDEncounter) -> Bool in
+                    GDEncounter.character.id == dataResponse.character.id
+                }).count == 0 {
+                    gameData.characterRaidEncounters.append(dataResponse)
                 }
                 
                 combineCharacterEncountersWithData()
@@ -226,9 +224,9 @@ struct RaidFarmingCollection: View {
         let allDataCombined = RaidDataFilledAndSorted(basedOn: combinedRaidInfo, for: character, farmingOrder: farmOrder)
         
         DispatchQueue.main.async {
-            withAnimation {
+//            withAnimation {
                 raidDataFilledAndSorted = allDataCombined
-            }
+//            }
         }
         
         

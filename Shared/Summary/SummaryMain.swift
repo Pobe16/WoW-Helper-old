@@ -27,40 +27,41 @@ struct SummaryMain: View {
     var body: some View {
         if gameData.loadingAllowed {
             ScrollView {
-                if gameData.characterRaidEncounters.count > 0 {
-                    ForEach(gameData.characterRaidEncounters, id: \.character.id) { GDCharacterEncounters in
-                        SingleCharacterSummary(
-                            summarySize: summarySize,
-                            character: getCharacterBasedOn(encounters: GDCharacterEncounters),
-                            characterEncounters: GDCharacterEncounters
-                        )
-                    }
-                } else if gameData.characters.count > 0 {
-                    HStack{
-                        Text("No characters in raiding level.")
-                            .font(.title2)
-                            .padding()
-                        Spacer()
-                    }
-                    ForEach(gameData.characters, id: \.id) { GDCharacter in
+                VStack{
+                    if gameData.characterRaidEncounters.count > 0 {
+                        ForEach(gameData.characterRaidEncounters, id: \.character.id) { GDCharacterEncounters in
+                            SingleCharacterSummary(
+                                summarySize: summarySize,
+                                character: getCharacterBasedOn(encounters: GDCharacterEncounters),
+                                characterEncounters: GDCharacterEncounters
+                            )
+                        }
+                    } else if gameData.characters.count > 0 {
                         HStack{
-                            Text("Level up \(GDCharacter.name) to at least level 30")
-                                .font(.title3)
+                            Text("No characters in raiding level.")
+                                .font(.title2)
                                 .padding()
                             Spacer()
                         }
+                        ForEach(gameData.characters, id: \.id) { GDCharacter in
+                            HStack{
+                                Text("Level up \(GDCharacter.name) to at least level 30")
+                                    .font(.title3)
+                                    .padding()
+                                Spacer()
+                            }
+                        }
+                    } else {
+                        HStack{
+                            Text("No characters found on account.")
+                                .font(.title2)
+                            Spacer()
+                        }
                     }
-                } else {
-                    HStack{
-                        Text("No characters found on account.")
-                            .font(.title2)
-                        Spacer()
-                    }
+                    Spacer(minLength: 80)
                 }
-                Spacer(minLength: 80)
             }
-//            .edgesIgnoringSafeArea(.all)
-            .background(BackgroundTexture(texture: .flagstone, wall: true))
+            .background(BackgroundTexture(texture: .flagstone, wall: .horizontal))
             .toolbar(content: {
                 ToolbarItem(placement: .principal) {
                     Text("Farming opportunities:")

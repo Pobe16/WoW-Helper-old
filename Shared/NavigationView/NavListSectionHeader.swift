@@ -20,15 +20,10 @@ struct NavListSectionHeader: View {
         HStack {
             Text(text)
                 .fontWeight(.heavy)
-                .foregroundColor(.white)
-//                .padding()
+                .whiteTextWithBlackOutlineStyle()
             Spacer()
         }
-//        .background(
-//            Image("Acid_A_03")
-//                .resizable(resizingMode: .tile)
-//        )
-//        .cornerRadius(15)
+        .padding(.horizontal)
     }
 }
 

@@ -14,7 +14,7 @@ struct CharacterRaidTile: View {
     var body: some View {
         
         
-        NavigationLink( destination: RaidDetails(raid: raid, character: character) ) {
+//        NavigationLink( destination: RaidDetails(raid: raid, character: character) ) {
             VStack{
                 HStack() {
                     Spacer()
@@ -61,7 +61,7 @@ struct CharacterRaidTile: View {
             .cornerRadius(15, antialiased: true)
             .padding(.horizontal, 15)
             .foregroundColor(.primary)
-        }
+//        }
     }
     
     

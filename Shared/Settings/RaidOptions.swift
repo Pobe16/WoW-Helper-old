@@ -21,14 +21,14 @@ struct RaidOptions: View {
         
         List(){
             
-            Section(header: Text("Farming order")) {
+            Section(header: Text("Farming order").whiteTextWithBlackOutlineStyle()) {
                 NavigationLink(destination:
                                 FarmingOrder()) {
                     Text("Farming order")
                 }
-            }
+            }.padding(.horizontal)
             
-            Section(header: Text("Difficulty")) {
+            Section(header: Text("Difficulty").whiteTextWithBlackOutlineStyle()) {
                 Picker(selection: $raidFarmingOptions, label: Text("")) {
                     Text("Highest").tag(1)
                     Text("All modes").tag(2)
@@ -39,9 +39,13 @@ struct RaidOptions: View {
                 .onChange(of: raidFarmingOptions) { (value) in
                     saveOptionsSelection(value)
                 }
-            }
+            }.padding(.horizontal)
         }
+        .padding(.horizontal)
         .listStyle(listStyle)
+        .background(
+            BackgroundTexture(texture: .ice, wall: .horizontal)
+        )
         .toolbar {
             ToolbarItem(placement: .principal) {
                 Text("Raid settings")

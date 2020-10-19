@@ -30,6 +30,10 @@ struct DataHealthScreen: View {
             }
             
         }
+        .background(
+            BackgroundTexture(texture: .flagstone, wall: .leading)
+                .edgesIgnoringSafeArea(.all)
+        )
         .onAppear(perform: {
             checkDataCreationDate()
             gameData.continueLoadingDungeons(authorizedBy: authorization)
@@ -39,9 +43,6 @@ struct DataHealthScreen: View {
                 Text("Expansions")
             }
             ToolbarItemGroup(placement: .primaryAction) {
-//                Button("Print Data") {
-//                    print(gameData.raidEncounters.first)
-//                }.padding()
                 if gameData.loadingAllowed {
                     Button {
                         gameData.hardReloadGameData(authorizedBy: authorization)
