@@ -36,17 +36,17 @@ struct Credits: View {
                 Text("This app has been developed during summer / autumn of 2020 in Scotland, in the long wait for Shadowlands, and with a one year old boy desperately trying to press the nice red button on the power supply for my computer. A big thank you to my wife for giving me time to pursue my passions.")
                     .font(.title)
                     .padding(.all)
-                Text("Development (SwiftUI): Mikołaj \"Pobe\" Łukasik")
+                Text("Development (SwiftUI):\nMikołaj \"Pobe\" Łukasik")
                     .font(.title2)
                     .padding([.horizontal,.top])
                 Link("@Pobe",
                       destination: URL(string: "https://twitter.com/Pobe")!)
                     .font(.title2)
                     .padding([.horizontal,.bottom])
-                Text("Consultation (UI help): Sakuya")
+                Text("Consultation (UI help):\nSakuya")
                         .font(.title2)
                         .padding(.all)
-                Text("Textures: Peter \"Stryxin\" Peko and Grace Papadopoulos")
+                Text("Textures:\nThe Forgotten Adventures")
                     .font(.title2)
                     .padding([.horizontal,.top])
                 Link("The Forgotten Adventures",
@@ -73,6 +73,6 @@ struct Credits: View {
 
 struct Credits_Previews: PreviewProvider {
     static var previews: some View {
-        Credits().previewDevice(.init(rawValue: "iPhone SE"))
+        Credits().previewDevice(.init(rawValue: "iPhone 12 Pro Max"))
     }
 }

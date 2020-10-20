@@ -119,12 +119,12 @@ struct SingleCharacterSummary: View {
             
             for wrapper in currentEncounterWithLoot.items {
                 if gameData.mountItemsList.contains(where: { (mount) -> Bool in
-                    mount.id == wrapper.item.id
+                    mount.itemID == wrapper.item.id
                 }) {
                     let currentMount = QualityItemStub(name: wrapper.item.name, id: wrapper.item.id, quality: .epic)
                     mounts.append(currentMount)
                 } else if gameData.petItemsList.contains(where: { (pet) -> Bool in
-                    pet.id == wrapper.item.id
+                    pet.itemID == wrapper.item.id
                 }) {
                     let currentPet = QualityItemStub(name: wrapper.item.name, id: wrapper.item.id, quality: .uncommon)
                     pets.append(currentPet)

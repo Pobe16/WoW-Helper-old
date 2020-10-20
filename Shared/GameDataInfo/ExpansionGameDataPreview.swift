@@ -17,11 +17,13 @@ struct ExpansionGameDataPreview: View {
                 .font(.largeTitle)
                 .whiteTextWithBlackOutlineStyle()
                 .padding([.leading, .top])
+                .padding(.horizontal)
             
             Text("Raids")
                 .font(.title)
                 .whiteTextWithBlackOutlineStyle()
                 .padding([.leading, .top])
+                .padding(.horizontal)
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack{
@@ -50,6 +52,7 @@ struct ExpansionGameDataPreview: View {
                 .font(.title)
                 .whiteTextWithBlackOutlineStyle()
                 .padding(.leading)
+                .padding(.horizontal)
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack{
