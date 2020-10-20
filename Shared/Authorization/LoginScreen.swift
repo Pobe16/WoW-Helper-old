@@ -23,8 +23,6 @@ struct LoginScreen: View {
                     VStack {
                         Text("Region:")
                             .font(.title2)
-                            .padding(.top)
-                            .padding(.bottom, 0)
                         
                         Picker(selection: $region, label: Text("Region"), content: {
                             Text("Americas").tag(0)
@@ -34,16 +32,15 @@ struct LoginScreen: View {
                             Text("Taiwan").tag(3)
                             Text("China").tag(4)
                         })
-                        .pickerStyle(SegmentedPickerStyle())
-                        .frame(width: geo.size.width > 325 ? 350 : 290)
+                        .pickerStyle(DefaultPickerStyle())
+                        .frame(width: geo.size.width > 325 ? 340 : 270, height: 90)
+                        .clipped()
                         .onChange(of: region, perform: { value in
                             locale = 0
                         })
                         
                         Text("Language:")
                             .font(.title2)
-                            .padding(.top)
-                            .padding(.bottom, 0)
                         
                         Picker(selection: $locale, label: Text("Language"), content: {
                             if region == 0 {
@@ -51,7 +48,7 @@ struct LoginScreen: View {
                                 Text("🇲🇽 Mexican Spanish").tag(1)
                                 Text("🇧🇷 Brazilian Portuguese").tag(2)
                             } else if region == 1 {
-                                Text("🏴󠁧󠁢󠁳󠁣󠁴󠁿 Proper English").tag(0)
+                                Text("🏴󠁧󠁢󠁳󠁣󠁴󠁿 \(locale == 0 ? "Better " : "")English").tag(0)
                                 Text("🇬🇧 British English").tag(-1)
                                 Text("🇪🇸 Spanish").tag(1)
                                 Text("🇫🇷 French").tag(2)
@@ -68,13 +65,15 @@ struct LoginScreen: View {
                             }
                         })
                         .pickerStyle(DefaultPickerStyle())
-                        .frame(width: geo.size.width > 325 ? 350 : 290, height: 150)
+                        .frame(width: geo.size.width > 325 ? 340 : 270, height: 90)
+                        .clipped()
                         
                     }
                     .padding()
                     .background(
                         BackgroundTexture(texture: .ice, wall: .all)
                     )
+                    .cornerRadius(15)
                     
                     Spacer(minLength: 0)
                 }
@@ -91,10 +90,11 @@ struct LoginScreen: View {
                         .whiteTextWithBlackOutlineStyle()
                 })
                 .padding()
-                .frame(width: geo.size.width > 325 ? 350 : 290)
+                .frame(width: geo.size.width > 325 ? 340 : 270)
                 .background(
                     BackgroundTexture(texture: .wood, wall: .all)
                 )
+                .cornerRadius(15)
                 
                 
                 Spacer()

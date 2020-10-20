@@ -46,12 +46,12 @@ struct NotableItemsInRaid: View {
         
         loot.forEach { (wrapper) in
             if gameData.mountItemsList.contains(where: { (mount) -> Bool in
-                mount.id == wrapper.item.id
+                mount.itemID == wrapper.item.id
             }) {
                 mountsInEncounter.append(wrapper.item)
             }
             if gameData.petItemsList.contains(where: { (pet) -> Bool in
-                pet.id == wrapper.item.id
+                pet.itemID == wrapper.item.id
             }) {
                 petsInEncounter.append(wrapper.item)
             }
