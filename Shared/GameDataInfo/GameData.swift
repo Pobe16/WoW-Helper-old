@@ -14,8 +14,10 @@ class GameData: ObservableObject {
     var connectionRetries                                               = 0
     var reloadFromCDAllowed                                             = true
     var loadDungeonsToo                                                 = false
-    var mountItemsList: [CollectibleItem]                               = createMountsList()
-    var petItemsList: [CollectibleItem]                                 = createPetsList()
+    let mountItemsList: [CollectibleItem]                               = createMountsList()
+    let petItemsList: [CollectibleItem]                                 = createPetsList()
+    var mountsStillToObtain: [CollectibleItem]                          = []
+    var petsStillToObtain: [CollectibleItem]                            = []
     
     @Published var characters: [CharacterInProfile]                     = []
                 
@@ -119,6 +121,8 @@ class GameData: ObservableObject {
         
         if timeRetries > 5 || connectionRetries > 5 {
             print("Failed after \(timeRetries) timer retries, and or \(connectionRetries) connection errors")
+            timeRetries = 0
+            connectionRetries = 0
             return
         }
         
@@ -154,6 +158,8 @@ class GameData: ObservableObject {
                 // something went wrong, check the error
                 print("error")
                 print(error.localizedDescription)
+                self.connectionRetries += 1
+                self.loadCharacters()
             }
         }
         task.resume()
@@ -185,9 +191,180 @@ class GameData: ObservableObject {
                     actualItemsToDownload += charactersForRaidEncounters.count
                     print("finished loading characters")
                     print("loaded \(characters.count) characters, including \(charactersForRaidEncounters.count) in raiding level")
-                    loadExpansionIndex()
+                    loadAccountMounts()
                 }
             }
+        } catch {
+            print(error)
+        }
+    }
+    
+    func loadAccountMounts() {
+        
+        if timeRetries > 5 || connectionRetries > 5 {
+            print("Failed after \(timeRetries) timer retries, and or \(connectionRetries) connection errors")
+            timeRetries = 0
+            connectionRetries = 0
+            
+            return
+        }
+        
+        let requestUrlAPIHost = UserDefaults.standard.object(forKey: UserDefaultsKeys.APIRegionHost) as? String ?? APIRegionHostList.Europe
+        let requestUrlAPIFragment = "/profile/user/wow/collections/mounts"
+        let regionShortCode = APIRegionShort.Code[UserDefaults.standard.integer(forKey: UserDefaultsKeys.loginRegion)]
+        let requestAPINamespace = "profile-\(regionShortCode)"
+        let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? EuropeanLocales.BritishEnglish
+        
+        let fullRequestURL = URL(string:
+                                    requestUrlAPIHost +
+                                    requestUrlAPIFragment +
+                                    "?namespace=\(requestAPINamespace)" +
+                                    "&locale=\(requestLocale)" +
+                                    "&access_token=\(authorization.oauth2.accessToken ?? "")"
+        )!
+        
+        if reloadFromCDAllowed {
+            let strippedAPIUrl = String(fullRequestURL.absoluteString)
+        
+            if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: strippedAPIUrl, maximumAgeInDays: 0.1) {
+                decodeAccountMounts(savedData.data!)
+                return
+            }
+        }
+        let req = authorization.oauth2.request(forURL: fullRequestURL)
+        
+        let task = authorization.oauth2.session.dataTask(with: req) { data, response, error in
+            if let data = data {
+                self.decodeAccountMounts(data, fromURL: fullRequestURL)
+            }
+            if let error = error {
+                // something went wrong, check the error
+                print("error")
+                print(error.localizedDescription)
+                self.connectionRetries += 1
+                self.loadAccountMounts()
+            }
+        }
+        task.resume()
+    }
+    
+    func decodeAccountMounts(_ data: Data, fromURL url: URL? = nil) {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        do {
+            let dataResponse = try decoder.decode(MountsCollection.self, from: data)
+            
+            guard let mounts = dataResponse.mounts else {
+                print("no account mounts present")
+                loadExpansionIndex()
+                return
+                
+            }
+            
+            if let url = url {
+                JSONCoreDataManager.shared.saveJSON(data, withURL: url)
+            }
+            
+            var mountsNotYetObtained: [CollectibleItem] = []
+            
+            for dropMount in mountItemsList {
+                if !mounts.contains(where: { (collectionMount) -> Bool in
+                    collectionMount.mount.id == dropMount.collectionID
+                }) {
+                    mountsNotYetObtained.append(dropMount)
+                }
+            }
+            
+            mountsStillToObtain.append(contentsOf: mountsNotYetObtained)
+            loadAccountPets()
+            
+            
+        } catch {
+            print(error)
+        }
+    }
+    
+    func loadAccountPets() {
+        
+        if timeRetries > 5 || connectionRetries > 5 {
+            print("Failed after \(timeRetries) timer retries, and or \(connectionRetries) connection errors")
+            timeRetries = 0
+            connectionRetries = 0
+            loadExpansionIndex()
+            return
+        }
+        
+        let requestUrlAPIHost = UserDefaults.standard.object(forKey: UserDefaultsKeys.APIRegionHost) as? String ?? APIRegionHostList.Europe
+        let requestUrlAPIFragment = "/profile/user/wow/collections/pets"
+        let regionShortCode = APIRegionShort.Code[UserDefaults.standard.integer(forKey: UserDefaultsKeys.loginRegion)]
+        let requestAPINamespace = "profile-\(regionShortCode)"
+        let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? EuropeanLocales.BritishEnglish
+        
+        let fullRequestURL = URL(string:
+                                    requestUrlAPIHost +
+                                    requestUrlAPIFragment +
+                                    "?namespace=\(requestAPINamespace)" +
+                                    "&locale=\(requestLocale)" +
+                                    "&access_token=\(authorization.oauth2.accessToken ?? "")"
+        )!
+        
+        if reloadFromCDAllowed {
+            let strippedAPIUrl = String(fullRequestURL.absoluteString)
+        
+            if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: strippedAPIUrl, maximumAgeInDays: 0.1) {
+                decodeAccountMounts(savedData.data!)
+                return
+            }
+        }
+        let req = authorization.oauth2.request(forURL: fullRequestURL)
+        
+        let task = authorization.oauth2.session.dataTask(with: req) { data, response, error in
+            if let data = data {
+                self.decodeAccountPets(data, fromURL: fullRequestURL)
+            }
+            if let error = error {
+                // something went wrong, check the error
+                print("error")
+                print(error.localizedDescription)
+                self.connectionRetries += 1
+                self.loadAccountPets()
+            }
+        }
+        task.resume()
+    }
+    
+    func decodeAccountPets(_ data: Data, fromURL url: URL? = nil) {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        do {
+            let dataResponse = try decoder.decode(PetsCollection.self, from: data)
+            
+            guard let pets = dataResponse.pets else {
+                print("no account pets present")
+                loadExpansionIndex()
+                return
+                
+            }
+            
+            if let url = url {
+                JSONCoreDataManager.shared.saveJSON(data, withURL: url)
+            }
+            
+            var petsNotYetObtained: [CollectibleItem] = []
+            
+            for dropPet in petItemsList {
+                if !pets.contains(where: { (collectionPet) -> Bool in
+                    collectionPet.species.id == dropPet.collectionID
+                }) {
+                    petsNotYetObtained.append(dropPet)
+                }
+            }
+            
+            petsStillToObtain.append(contentsOf: petsNotYetObtained)
+            loadExpansionIndex()
+            
         } catch {
             print(error)
         }
@@ -258,6 +435,8 @@ class GameData: ObservableObject {
         
         if timeRetries > 5 || connectionRetries > 5 {
             print("Failed after \(timeRetries) timer retries, and or \(connectionRetries) connection errors")
+            timeRetries = 0
+            connectionRetries = 0
             return
         }
         
@@ -369,6 +548,8 @@ class GameData: ObservableObject {
     private func loadRaidsInfo(){
         if timeRetries > 5 || connectionRetries > 5 {
             print("Failed after \(timeRetries) timer retries, and or \(connectionRetries) connection errors")
+            timeRetries = 0
+            connectionRetries = 0
             return
         }
         guard let currentRaidToLoad = raidsStubs.first else {
@@ -490,6 +671,8 @@ class GameData: ObservableObject {
     private func loadDungeonsInfo(){
         if timeRetries > 5 || connectionRetries > 5 {
             print("Failed after \(timeRetries) timer retries, and or \(connectionRetries) connection errors")
+            timeRetries = 0
+            connectionRetries = 0
             return
         }
         guard let currentDungeonToLoad = dungeonsStubs.first else {
@@ -619,6 +802,8 @@ class GameData: ObservableObject {
     private func loadRaidEncountersInfo(){
         if timeRetries > 5 || connectionRetries > 5 {
             print("Failed after \(timeRetries) timer retries, and or \(connectionRetries) connection errors")
+            timeRetries = 0
+            connectionRetries = 0
             return
         }
         guard let currentRaidEncountersToLoad = raidEncountersStubs.first else {
@@ -743,6 +928,8 @@ class GameData: ObservableObject {
     func loadCharacterRaidEncounters() {
         if timeRetries > 5 || connectionRetries > 5 {
             print("Failed after \(timeRetries) timer retries, and or \(connectionRetries) connection errors")
+            timeRetries = 0
+            connectionRetries = 0
             DispatchQueue.main.async { [self] in
                 withAnimation {
                     loadingAllowed = true

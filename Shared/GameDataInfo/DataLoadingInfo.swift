@@ -18,6 +18,8 @@ struct DataLoadingInfo: View {
                     Text("Loading data…")
                         .font(.title)
                     Text("\(gameData.characters.count) character\(gameData.characters.count == 1 ? "" : "s")")
+                    Text("\(gameData.mountsStillToObtain.count > 0 ? gameData.mountsStillToObtain.count : gameData.mountItemsList.count) mounts to farm")
+                    Text("\(gameData.petsStillToObtain.count > 0 ? gameData.petsStillToObtain.count : gameData.petItemsList.count) pets to farm")
                     Text("\(gameData.expansions.count) expansions")
                     Text("\(gameData.raids.count) raids")
                     Text("\(gameData.raidEncounters.count) raid encounters")

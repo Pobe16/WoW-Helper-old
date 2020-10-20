@@ -105,6 +105,9 @@ struct SingleCharacterSummary: View {
     func isRaidWorthFarming(_ raid: CombinedRaidWithEncounters) -> Bool {
         let raidDataManipulator = RaidDataHelper()
         
+        let GDMounts    = gameData.mountsStillToObtain.count > 0 ? gameData.mountsStillToObtain : gameData.mountItemsList
+        let GDPets      = gameData.petsStillToObtain.count > 0 ? gameData.petsStillToObtain : gameData.petItemsList
+        
         var mounts: [QualityItemStub] = []
         var pets: [QualityItemStub] = []
         
@@ -118,12 +121,12 @@ struct SingleCharacterSummary: View {
             guard let currentEncounterWithLoot = loot else { return false }
             
             for wrapper in currentEncounterWithLoot.items {
-                if gameData.mountItemsList.contains(where: { (mount) -> Bool in
+                if GDMounts.contains(where: { (mount) -> Bool in
                     mount.itemID == wrapper.item.id
                 }) {
                     let currentMount = QualityItemStub(name: wrapper.item.name, id: wrapper.item.id, quality: .epic)
                     mounts.append(currentMount)
-                } else if gameData.petItemsList.contains(where: { (pet) -> Bool in
+                } else if GDPets.contains(where: { (pet) -> Bool in
                     pet.itemID == wrapper.item.id
                 }) {
                     let currentPet = QualityItemStub(name: wrapper.item.name, id: wrapper.item.id, quality: .uncommon)
