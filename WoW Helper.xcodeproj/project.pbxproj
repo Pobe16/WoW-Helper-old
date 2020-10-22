@@ -194,9 +194,9 @@
 		C811E76024E01B1E0050F6CD /* WoWWidgetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WoWWidgetApp.swift; sourceTree = "<group>"; };
 		C811E76124E01B1E0050F6CD /* AuthCheckingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCheckingScreen.swift; sourceTree = "<group>"; };
 		C811E76224E01B1F0050F6CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		C811E76724E01B1F0050F6CD /* WoWWidget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WoWWidget.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C811E76724E01B1F0050F6CD /* WoW Helper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WoW Helper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C811E76A24E01B1F0050F6CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C811E76F24E01B1F0050F6CD /* WoWWidget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WoWWidget.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C811E76F24E01B1F0050F6CD /* WoW Helper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WoW Helper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C811E77124E01B1F0050F6CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C811E77224E01B1F0050F6CD /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		C811E77724E01B1F0050F6CD /* Tests iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -345,8 +345,8 @@
 		C811E76824E01B1F0050F6CD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C811E76724E01B1F0050F6CD /* WoWWidget.app */,
-				C811E76F24E01B1F0050F6CD /* WoWWidget.app */,
+				C811E76724E01B1F0050F6CD /* WoW Helper.app */,
+				C811E76F24E01B1F0050F6CD /* WoW Helper.app */,
 				C811E77724E01B1F0050F6CD /* Tests iOS.xctest */,
 				C811E78224E01B1F0050F6CD /* Tests macOS.xctest */,
 			);
@@ -554,9 +554,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C811E76624E01B1F0050F6CD /* WoWWidget (iOS) */ = {
+		C811E76624E01B1F0050F6CD /* WoW Helper (iOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C811E79124E01B1F0050F6CD /* Build configuration list for PBXNativeTarget "WoWWidget (iOS)" */;
+			buildConfigurationList = C811E79124E01B1F0050F6CD /* Build configuration list for PBXNativeTarget "WoW Helper (iOS)" */;
 			buildPhases = (
 				C811E76324E01B1F0050F6CD /* Sources */,
 				C811E76424E01B1F0050F6CD /* Frameworks */,
@@ -566,18 +566,18 @@
 			);
 			dependencies = (
 			);
-			name = "WoWWidget (iOS)";
+			name = "WoW Helper (iOS)";
 			packageProductDependencies = (
 				C811E79E24E01B7B0050F6CD /* OAuth2 */,
 				C803C5E82501962800A8D2DE /* VisualEffects */,
 			);
 			productName = "WoWWidget (iOS)";
-			productReference = C811E76724E01B1F0050F6CD /* WoWWidget.app */;
+			productReference = C811E76724E01B1F0050F6CD /* WoW Helper.app */;
 			productType = "com.apple.product-type.application";
 		};
-		C811E76E24E01B1F0050F6CD /* WoWWidget (macOS) */ = {
+		C811E76E24E01B1F0050F6CD /* WoW Helper (macOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C811E79424E01B1F0050F6CD /* Build configuration list for PBXNativeTarget "WoWWidget (macOS)" */;
+			buildConfigurationList = C811E79424E01B1F0050F6CD /* Build configuration list for PBXNativeTarget "WoW Helper (macOS)" */;
 			buildPhases = (
 				C811E76B24E01B1F0050F6CD /* Sources */,
 				C811E76C24E01B1F0050F6CD /* Frameworks */,
@@ -587,13 +587,13 @@
 			);
 			dependencies = (
 			);
-			name = "WoWWidget (macOS)";
+			name = "WoW Helper (macOS)";
 			packageProductDependencies = (
 				C811E7A124E01C850050F6CD /* OAuth2 */,
 				C803C5EA2501964700A8D2DE /* VisualEffects */,
 			);
 			productName = "WoWWidget (macOS)";
-			productReference = C811E76F24E01B1F0050F6CD /* WoWWidget.app */;
+			productReference = C811E76F24E01B1F0050F6CD /* WoW Helper.app */;
 			productType = "com.apple.product-type.application";
 		};
 		C811E77624E01B1F0050F6CD /* Tests iOS */ = {
@@ -657,7 +657,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C811E75E24E01B1E0050F6CD /* Build configuration list for PBXProject "WoWWidget" */;
+			buildConfigurationList = C811E75E24E01B1E0050F6CD /* Build configuration list for PBXProject "WoW Helper" */;
 			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -674,8 +674,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C811E76624E01B1F0050F6CD /* WoWWidget (iOS) */,
-				C811E76E24E01B1F0050F6CD /* WoWWidget (macOS) */,
+				C811E76624E01B1F0050F6CD /* WoW Helper (iOS) */,
+				C811E76E24E01B1F0050F6CD /* WoW Helper (macOS) */,
 				C811E77624E01B1F0050F6CD /* Tests iOS */,
 				C811E78124E01B1F0050F6CD /* Tests macOS */,
 			);
@@ -899,12 +899,12 @@
 /* Begin PBXTargetDependency section */
 		C811E77924E01B1F0050F6CD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C811E76624E01B1F0050F6CD /* WoWWidget (iOS) */;
+			target = C811E76624E01B1F0050F6CD /* WoW Helper (iOS) */;
 			targetProxy = C811E77824E01B1F0050F6CD /* PBXContainerItemProxy */;
 		};
 		C811E78424E01B1F0050F6CD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C811E76E24E01B1F0050F6CD /* WoWWidget (macOS) */;
+			target = C811E76E24E01B1F0050F6CD /* WoW Helper (macOS) */;
 			targetProxy = C811E78324E01B1F0050F6CD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1040,7 +1040,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mlukasik.WoWWidget;
-				PRODUCT_NAME = WoWWidget;
+				PRODUCT_NAME = "WoW Helper";
 				SDKROOT = iphoneos;
 				SWIFT_SUPPRESS_WARNINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -1063,7 +1063,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mlukasik.WoWWidget;
-				PRODUCT_NAME = WoWWidget;
+				PRODUCT_NAME = "WoW Helper";
 				SDKROOT = iphoneos;
 				SWIFT_SUPPRESS_WARNINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -1090,7 +1090,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mlukasik.WoWWidget;
-				PRODUCT_NAME = WoWWidget;
+				PRODUCT_NAME = "WoW Helper";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
 			};
@@ -1114,7 +1114,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mlukasik.WoWWidget;
-				PRODUCT_NAME = WoWWidget;
+				PRODUCT_NAME = "WoW Helper";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
 			};
@@ -1212,7 +1212,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C811E75E24E01B1E0050F6CD /* Build configuration list for PBXProject "WoWWidget" */ = {
+		C811E75E24E01B1E0050F6CD /* Build configuration list for PBXProject "WoW Helper" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C811E78F24E01B1F0050F6CD /* Debug */,
@@ -1221,7 +1221,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C811E79124E01B1F0050F6CD /* Build configuration list for PBXNativeTarget "WoWWidget (iOS)" */ = {
+		C811E79124E01B1F0050F6CD /* Build configuration list for PBXNativeTarget "WoW Helper (iOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C811E79224E01B1F0050F6CD /* Debug */,
@@ -1230,7 +1230,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C811E79424E01B1F0050F6CD /* Build configuration list for PBXNativeTarget "WoWWidget (macOS)" */ = {
+		C811E79424E01B1F0050F6CD /* Build configuration list for PBXNativeTarget "WoW Helper (macOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C811E79524E01B1F0050F6CD /* Debug */,
