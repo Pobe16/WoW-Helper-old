@@ -1,6 +1,6 @@
 //
 //  BackgroundBlurs.swift
-//  WoWWidget
+//  WoWHelper 
 //
 //  Created by Mikolaj Lukasik on 04/09/2020.
 //

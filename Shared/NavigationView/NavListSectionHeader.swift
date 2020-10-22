@@ -1,6 +1,6 @@
 //
 //  NavListSectionHeader.swift
-//  WoWWidget
+//  WoWHelper 
 //
 //  Created by Mikolaj Lukasik on 24/09/2020.
 //

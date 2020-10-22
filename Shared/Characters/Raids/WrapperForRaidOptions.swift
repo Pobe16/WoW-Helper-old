@@ -1,6 +1,6 @@
 //
 //  WrapperForRaidFarming.swift
-//  WoWWidget
+//  WoWHelper 
 //
 //  Created by Mikolaj Lukasik on 03/09/2020.
 //

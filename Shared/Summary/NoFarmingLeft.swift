@@ -1,6 +1,6 @@
 //
 //  NoFarmingLeft.swift
-//  WoWWidget
+//  WoWHelper 
 //
 //  Created by Mikolaj Lukasik on 07/10/2020.
 //
