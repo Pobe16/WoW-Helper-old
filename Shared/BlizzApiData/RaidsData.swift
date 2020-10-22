@@ -1,6 +1,6 @@
 //
 //  RaidsData.swift
-//  WoWWidget
+//  WoWHelper 
 //
 //  Created by Mikolaj Lukasik on 29/09/2020.
 //

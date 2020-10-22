@@ -1,6 +1,6 @@
 //
 //  WhiteTextWithBlackOutline.swift
-//  WoWWidget
+//  WoWHelper 
 //
 //  Created by Mikolaj Lukasik on 11/10/2020.
 //

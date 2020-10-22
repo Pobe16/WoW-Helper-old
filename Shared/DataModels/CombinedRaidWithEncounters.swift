@@ -1,6 +1,6 @@
 //
 //  CombinedRaidWithEncounters.swift
-//  WoWWidget
+//  WoWHelper 
 //
 //  Created by Mikolaj Lukasik on 31/08/2020.
 //

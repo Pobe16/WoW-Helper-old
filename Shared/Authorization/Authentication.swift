@@ -1,6 +1,6 @@
 //
 //  Authentication.swift
-//  WoWWidget
+//  WoWHelper 
 //
 //  Created by Mikolaj Lukasik on 09/08/2020.
 //

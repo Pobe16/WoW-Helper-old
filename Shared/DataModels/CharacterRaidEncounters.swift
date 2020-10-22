@@ -1,6 +1,6 @@
 //
 //  CharacterRaidEncounters.swift
-//  WoWWidget
+//  WoWHelper 
 //
 //  Created by Mikolaj Lukasik on 30/08/2020.
 //

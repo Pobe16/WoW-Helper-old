@@ -1,6 +1,6 @@
 //
 //  LocalizedName.swift
-//  WoWWidget
+//  WoWHelper 
 //
 //  Created by Mikolaj Lukasik on 27/09/2020.
 //

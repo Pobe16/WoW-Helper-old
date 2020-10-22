@@ -1,6 +1,6 @@
 //
 //  CharacterMainView.swift
-//  WoWWidget
+//  WoWHelper 
 //
 //  Created by Mikolaj Lukasik on 28/08/2020.
 //

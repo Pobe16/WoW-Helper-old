@@ -1,6 +1,6 @@
 //
 //  CharacterListItemBackground.swift
-//  WoWWidget
+//  WoWHelper 
 //
 //  Created by Mikolaj Lukasik on 21/09/2020.
 //

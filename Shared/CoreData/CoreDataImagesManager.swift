@@ -1,6 +1,6 @@
 //
 //  CoreDataManager.swift
-//  WoWWidget
+//  WoWHelper 
 //
 //  Created by Mikolaj Lukasik on 15/08/2020.
 //

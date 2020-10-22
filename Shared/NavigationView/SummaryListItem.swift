@@ -1,6 +1,6 @@
 //
 //  SummaryListItem.swift
-//  WoWWidget
+//  WoWHelper 
 //
 //  Created by Mikolaj Lukasik on 04/10/2020.
 //

@@ -1,6 +1,6 @@
 //
 //  Credits.swift
-//  WoWWidget
+//  WoWHelper 
 //
 //  Created by Mikolaj Lukasik on 18/10/2020.
 //

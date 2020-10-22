@@ -1,6 +1,6 @@
 //
 //  ExpansionGameDataPreview.swift
-//  WoWWidget
+//  WoWHelper 
 //
 //  Created by Mikolaj Lukasik on 23/08/2020.
 //

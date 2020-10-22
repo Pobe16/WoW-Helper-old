@@ -1,6 +1,6 @@
 //
 //  CharacterLoadingListItem.swift
-//  WoWWidget
+//  WoWHelper 
 //
 //  Created by Mikolaj Lukasik on 16/08/2020.
 //

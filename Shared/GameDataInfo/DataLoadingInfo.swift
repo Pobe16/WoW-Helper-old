@@ -1,6 +1,6 @@
 //
 //  DataLoadingInfo.swift
-//  WoWWidget
+//  WoWHelper 
 //
 //  Created by Mikolaj Lukasik on 06/10/2020.
 //
