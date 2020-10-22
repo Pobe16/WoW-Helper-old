@@ -1,6 +1,6 @@
 //
 //  MainScreen.swift
-//  WoWWidget
+//  WoWHelper 
 //
 //  Created by Mikolaj Lukasik on 13/08/2020.
 //
@@ -131,7 +131,7 @@ struct MainScreen: View {
             )
             .toolbar{
                 ToolbarItem(placement: .principal){
-                    Text("WoWWidget")
+                    Text("WoWHelper")
                         .fontWeight(.black)
                         .whiteTextWithBlackOutlineStyle()
                 }

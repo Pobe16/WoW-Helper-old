@@ -1,6 +1,6 @@
 //
 //  SummaryOfNotableRaids.swift
-//  WoWWidget
+//  WoWHelper 
 //
 //  Created by Mikolaj Lukasik on 14/10/2020.
 //

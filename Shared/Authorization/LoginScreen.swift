@@ -1,6 +1,6 @@
 //
 //  LoginScreen.swift
-//  WoWWidget
+//  WoWHelper 
 //
 //  Created by Mikolaj Lukasik on 12/08/2020.
 //

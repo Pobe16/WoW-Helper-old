@@ -27,8 +27,8 @@
 		C806FA562501AAE1006DEF78 /* RaidTileBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = C806FA542501AAE1006DEF78 /* RaidTileBackground.swift */; };
 		C811E77C24E01B1F0050F6CD /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E77B24E01B1F0050F6CD /* Tests_iOS.swift */; };
 		C811E78724E01B1F0050F6CD /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E78624E01B1F0050F6CD /* Tests_macOS.swift */; };
-		C811E78924E01B1F0050F6CD /* WoWWidgetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E76024E01B1E0050F6CD /* WoWWidgetApp.swift */; };
-		C811E78A24E01B1F0050F6CD /* WoWWidgetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E76024E01B1E0050F6CD /* WoWWidgetApp.swift */; };
+		C811E78924E01B1F0050F6CD /* WoWHelperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E76024E01B1E0050F6CD /* WoWHelperApp.swift */; };
+		C811E78A24E01B1F0050F6CD /* WoWHelperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E76024E01B1E0050F6CD /* WoWHelperApp.swift */; };
 		C811E78B24E01B1F0050F6CD /* AuthCheckingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E76124E01B1E0050F6CD /* AuthCheckingScreen.swift */; };
 		C811E78C24E01B1F0050F6CD /* AuthCheckingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E76124E01B1E0050F6CD /* AuthCheckingScreen.swift */; };
 		C811E78D24E01B1F0050F6CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C811E76224E01B1F0050F6CD /* Assets.xcassets */; };
@@ -191,7 +191,7 @@
 		C803C5E125007B8800A8D2DE /* RaidFarmHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidFarmHeader.swift; sourceTree = "<group>"; };
 		C806FA512501A7B2006DEF78 /* CharacterRaidTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterRaidTile.swift; sourceTree = "<group>"; };
 		C806FA542501AAE1006DEF78 /* RaidTileBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidTileBackground.swift; sourceTree = "<group>"; };
-		C811E76024E01B1E0050F6CD /* WoWWidgetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WoWWidgetApp.swift; sourceTree = "<group>"; };
+		C811E76024E01B1E0050F6CD /* WoWHelperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WoWHelperApp.swift; sourceTree = "<group>"; };
 		C811E76124E01B1E0050F6CD /* AuthCheckingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCheckingScreen.swift; sourceTree = "<group>"; };
 		C811E76224E01B1F0050F6CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C811E76724E01B1F0050F6CD /* WoW Helper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WoW Helper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -323,7 +323,7 @@
 		C811E75F24E01B1E0050F6CD /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				C811E76024E01B1E0050F6CD /* WoWWidgetApp.swift */,
+				C811E76024E01B1E0050F6CD /* WoWHelperApp.swift */,
 				C818B1F52523AF2C00ED06B7 /* BlizzApiData */,
 				C831CC5124E8994200C25F67 /* CoreData */,
 				C887121424E4B75700C0A0ED /* Authorization */,
@@ -769,7 +769,7 @@
 				C8929624253A123E00F1BA30 /* InstanceNotableItems.swift in Sources */,
 				C8D58911252D286A008FAA3F /* SingleCharacterSummary.swift in Sources */,
 				C8F942E124EDC02900B6222C /* ExpansionJournal.swift in Sources */,
-				C811E78924E01B1F0050F6CD /* WoWWidgetApp.swift in Sources */,
+				C811E78924E01B1F0050F6CD /* WoWHelperApp.swift in Sources */,
 				C892960A2538E05400F1BA30 /* MediumNotableLoot.swift in Sources */,
 				C831CC3A24E7296A00C25F67 /* CharacterListItem.swift in Sources */,
 				C811E7AB24E0A3690050F6CD /* Authentication.swift in Sources */,
@@ -848,7 +848,7 @@
 				C811E78C24E01B1F0050F6CD /* AuthCheckingScreen.swift in Sources */,
 				C8929625253A123E00F1BA30 /* InstanceNotableItems.swift in Sources */,
 				C8F942E824EF027700B6222C /* CharacterLoadingListItem.swift in Sources */,
-				C811E78A24E01B1F0050F6CD /* WoWWidgetApp.swift in Sources */,
+				C811E78A24E01B1F0050F6CD /* WoWHelperApp.swift in Sources */,
 				C818B1D62520EE6800ED06B7 /* JournalEncounterSearch.swift in Sources */,
 				C892960B2538E05400F1BA30 /* MediumNotableLoot.swift in Sources */,
 				C811E7AC24E0A3690050F6CD /* Authentication.swift in Sources */,
@@ -1039,7 +1039,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mlukasik.WoWWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mlukasik.WoW-Helper";
 				PRODUCT_NAME = "WoW Helper";
 				SDKROOT = iphoneos;
 				SWIFT_SUPPRESS_WARNINGS = NO;
@@ -1062,7 +1062,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mlukasik.WoWWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mlukasik.WoW-Helper";
 				PRODUCT_NAME = "WoW Helper";
 				SDKROOT = iphoneos;
 				SWIFT_SUPPRESS_WARNINGS = NO;
@@ -1089,7 +1089,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mlukasik.WoWWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mlukasik.WoW-Helper";
 				PRODUCT_NAME = "WoW Helper";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
@@ -1113,7 +1113,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mlukasik.WoWWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mlukasik.WoW-Helper";
 				PRODUCT_NAME = "WoW Helper";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
@@ -1138,7 +1138,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "WoWWidget (iOS)";
+				TEST_TARGET_NAME = "WoW Helper (iOS)";
 			};
 			name = Debug;
 		};
@@ -1160,7 +1160,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "WoWWidget (iOS)";
+				TEST_TARGET_NAME = "WoW Helper (iOS)";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1183,7 +1183,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = "WoWWidget (macOS)";
+				TEST_TARGET_NAME = "WoW Helper (macOS)";
 			};
 			name = Debug;
 		};
@@ -1205,7 +1205,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = "WoWWidget (macOS)";
+				TEST_TARGET_NAME = "WoW Helper (macOS)";
 			};
 			name = Release;
 		};

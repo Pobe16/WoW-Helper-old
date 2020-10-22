@@ -1,6 +1,6 @@
 //
 //  LargeNotableLoot.swift
-//  WoWWidget
+//  WoWHelper 
 //
 //  Created by Mikolaj Lukasik on 16/10/2020.
 //

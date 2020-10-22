@@ -1,5 +1,5 @@
 //
-//  WoWWidgetApp.swift
+//  WoWHelperApp.swift
 //  Shared
 //
 //  Created by Mikolaj Lukasik on 09/08/2020.
@@ -9,7 +9,7 @@ import OAuth2
 import SwiftUI
 
 @main
-struct WoWWidgetApp: App {
+struct WoWHelperApp: App {
     @ObservedObject var auth        = Authentication()
     @ObservedObject var gameData    = GameData()
     @ObservedObject var order       = FarmCollectionsOrder()

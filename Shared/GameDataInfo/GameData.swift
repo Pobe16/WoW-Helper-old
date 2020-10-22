@@ -1,6 +1,6 @@
 //
 //  GameData.swift
-//  WoWWidget (iOS)
+//  WoWHelper  (iOS)
 //
 //  Created by Mikolaj Lukasik on 20/08/2020.
 //

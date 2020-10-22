@@ -1,6 +1,6 @@
 //
 //  StaticStrings.swift
-//  WoWWidget
+//  WoWHelper 
 //
 //  Created by Mikolaj Lukasik on 01/10/2020.
 //
