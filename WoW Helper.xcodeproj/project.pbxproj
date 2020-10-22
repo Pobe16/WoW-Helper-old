@@ -1138,7 +1138,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "WoWHelper (iOS)";
+				TEST_TARGET_NAME = "WoW Helper (iOS)";
 			};
 			name = Debug;
 		};
@@ -1160,7 +1160,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "WoWHelper (iOS)";
+				TEST_TARGET_NAME = "WoW Helper (iOS)";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1183,7 +1183,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = "WoWHelper (macOS)";
+				TEST_TARGET_NAME = "WoW Helper (macOS)";
 			};
 			name = Debug;
 		};
@@ -1205,7 +1205,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = "WoWHelper (macOS)";
+				TEST_TARGET_NAME = "WoW Helper (macOS)";
 			};
 			name = Release;
 		};
