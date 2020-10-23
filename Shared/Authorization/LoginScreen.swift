@@ -18,6 +18,16 @@ struct LoginScreen: View {
             VStack {
                 
                 Spacer()
+                Text("WoW Helper")
+                    .font(.largeTitle)
+                    .whiteTextWithBlackOutlineStyle()
+                if (geo.size.width > 375) {
+                    Image("phoenix")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: geo.size.height / 4)
+                        .padding()
+                }
                 HStack {
                     Spacer(minLength: 0)
                     VStack {
