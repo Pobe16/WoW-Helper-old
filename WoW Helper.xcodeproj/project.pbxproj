@@ -84,13 +84,6 @@
 		C86A6B8F253CD1A600784F6C /* Credits.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86A6B8D253CD1A600784F6C /* Credits.swift */; };
 		C874D5CE24F2926A0006B210 /* ExpansionGameDataPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C874D5CD24F2926A0006B210 /* ExpansionGameDataPreview.swift */; };
 		C874D5CF24F2926A0006B210 /* ExpansionGameDataPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C874D5CD24F2926A0006B210 /* ExpansionGameDataPreview.swift */; };
-		C87CB40B2542002600B83410 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C87CB40A2542002600B83410 /* WidgetKit.framework */; };
-		C87CB40D2542002600B83410 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C87CB40C2542002600B83410 /* SwiftUI.framework */; };
-		C87CB4102542002600B83410 /* Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87CB40F2542002600B83410 /* Widget.swift */; };
-		C87CB4132542002700B83410 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C87CB4122542002700B83410 /* Assets.xcassets */; };
-		C87CB4152542002700B83410 /* Widget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = C87CB4112542002600B83410 /* Widget.intentdefinition */; };
-		C87CB4162542002700B83410 /* Widget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = C87CB4112542002600B83410 /* Widget.intentdefinition */; };
-		C87CB4192542002700B83410 /* WidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C87CB4092542002600B83410 /* WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		C887120F24E4A01200C0A0ED /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C887120E24E4A01200C0A0ED /* LoginScreen.swift */; };
 		C887121024E4A01200C0A0ED /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C887120E24E4A01200C0A0ED /* LoginScreen.swift */; };
 		C88EEA9D24E9E2B800155CBC /* JSONCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EEA9C24E9E2B800155CBC /* JSONCoreDataManager.swift */; };
@@ -187,28 +180,7 @@
 			remoteGlobalIDString = C811E76E24E01B1F0050F6CD;
 			remoteInfo = "WoWWidget (macOS)";
 		};
-		C87CB4172542002700B83410 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C811E75B24E01B1E0050F6CD /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C87CB4082542002600B83410;
-			remoteInfo = WidgetExtension;
-		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		C87CB41D2542002700B83410 /* Embed App Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				C87CB4192542002700B83410 /* WidgetExtension.appex in Embed App Extensions */,
-			);
-			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		C803C5D224FC57B800A8D2DE /* CharacterRaidEncounters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterRaidEncounters.swift; sourceTree = "<group>"; };
@@ -258,13 +230,6 @@
 		C86A6B86253CD13900784F6C /* CreditsListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsListItem.swift; sourceTree = "<group>"; };
 		C86A6B8D253CD1A600784F6C /* Credits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credits.swift; sourceTree = "<group>"; };
 		C874D5CD24F2926A0006B210 /* ExpansionGameDataPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpansionGameDataPreview.swift; sourceTree = "<group>"; };
-		C87CB4092542002600B83410 /* WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		C87CB40A2542002600B83410 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
-		C87CB40C2542002600B83410 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		C87CB40F2542002600B83410 /* Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Widget.swift; sourceTree = "<group>"; };
-		C87CB4112542002600B83410 /* Widget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Widget.intentdefinition; sourceTree = "<group>"; };
-		C87CB4122542002700B83410 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		C87CB4142542002700B83410 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C887120E24E4A01200C0A0ED /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		C88EEA9C24E9E2B800155CBC /* JSONCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONCoreDataManager.swift; sourceTree = "<group>"; };
 		C88EEA9F24E9EFDB00155CBC /* CharacterLoadingListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterLoadingListItem.swift; sourceTree = "<group>"; };
@@ -339,15 +304,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C87CB4062542002600B83410 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C87CB40D2542002600B83410 /* SwiftUI.framework in Frameworks */,
-				C87CB40B2542002600B83410 /* WidgetKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -359,7 +315,6 @@
 				C811E77024E01B1F0050F6CD /* macOS */,
 				C811E77A24E01B1F0050F6CD /* Tests iOS */,
 				C811E78524E01B1F0050F6CD /* Tests macOS */,
-				C87CB40E2542002600B83410 /* Widget */,
 				C811E76824E01B1F0050F6CD /* Products */,
 				C811E7A024E01C850050F6CD /* Frameworks */,
 			);
@@ -394,7 +349,6 @@
 				C811E76F24E01B1F0050F6CD /* WoW Helper.app */,
 				C811E77724E01B1F0050F6CD /* Tests iOS.xctest */,
 				C811E78224E01B1F0050F6CD /* Tests macOS.xctest */,
-				C87CB4092542002600B83410 /* WidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -437,8 +391,6 @@
 		C811E7A024E01C850050F6CD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C87CB40A2542002600B83410 /* WidgetKit.framework */,
-				C87CB40C2542002600B83410 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -517,17 +469,6 @@
 				C803C5DE250070C300A8D2DE /* WrapperForRaidOptions.swift */,
 			);
 			path = Raids;
-			sourceTree = "<group>";
-		};
-		C87CB40E2542002600B83410 /* Widget */ = {
-			isa = PBXGroup;
-			children = (
-				C87CB40F2542002600B83410 /* Widget.swift */,
-				C87CB4112542002600B83410 /* Widget.intentdefinition */,
-				C87CB4122542002700B83410 /* Assets.xcassets */,
-				C87CB4142542002700B83410 /* Info.plist */,
-			);
-			path = Widget;
 			sourceTree = "<group>";
 		};
 		C887121424E4B75700C0A0ED /* Authorization */ = {
@@ -620,12 +561,10 @@
 				C811E76324E01B1F0050F6CD /* Sources */,
 				C811E76424E01B1F0050F6CD /* Frameworks */,
 				C811E76524E01B1F0050F6CD /* Resources */,
-				C87CB41D2542002700B83410 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				C87CB4182542002700B83410 /* PBXTargetDependency */,
 			);
 			name = "WoW Helper (iOS)";
 			packageProductDependencies = (
@@ -693,30 +632,13 @@
 			productReference = C811E78224E01B1F0050F6CD /* Tests macOS.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		C87CB4082542002600B83410 /* WidgetExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C87CB41A2542002700B83410 /* Build configuration list for PBXNativeTarget "WidgetExtension" */;
-			buildPhases = (
-				C87CB4052542002600B83410 /* Sources */,
-				C87CB4062542002600B83410 /* Frameworks */,
-				C87CB4072542002600B83410 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = WidgetExtension;
-			productName = WidgetExtension;
-			productReference = C87CB4092542002600B83410 /* WidgetExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		C811E75B24E01B1E0050F6CD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1220;
+				LastSwiftUpdateCheck = 1200;
 				LastUpgradeCheck = 1220;
 				TargetAttributes = {
 					C811E76624E01B1F0050F6CD = {
@@ -732,9 +654,6 @@
 					C811E78124E01B1F0050F6CD = {
 						CreatedOnToolsVersion = 12.0;
 						TestTargetID = C811E76E24E01B1F0050F6CD;
-					};
-					C87CB4082542002600B83410 = {
-						CreatedOnToolsVersion = 12.2;
 					};
 				};
 			};
@@ -759,7 +678,6 @@
 				C811E76E24E01B1F0050F6CD /* WoW Helper (macOS) */,
 				C811E77624E01B1F0050F6CD /* Tests iOS */,
 				C811E78124E01B1F0050F6CD /* Tests macOS */,
-				C87CB4082542002600B83410 /* WidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -797,14 +715,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C87CB4072542002600B83410 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C87CB4132542002700B83410 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -826,7 +736,6 @@
 				C831CC4724E7355500C25F67 /* CharacterMedia.swift in Sources */,
 				C806FA552501AAE1006DEF78 /* RaidTileBackground.swift in Sources */,
 				C8BB333725030E07003E105F /* RaidOptionsListItem.swift in Sources */,
-				C87CB4162542002700B83410 /* Widget.intentdefinition in Sources */,
 				C84B82F724E5FD65006E84FA /* MainScreen.swift in Sources */,
 				C818B1FB2523BA4400ED06B7 /* DungeonsData.swift in Sources */,
 				C8D58930253338E8008FAA3F /* BackgroundTexture.swift in Sources */,
@@ -985,15 +894,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C87CB4052542002600B83410 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C87CB4152542002700B83410 /* Widget.intentdefinition in Sources */,
-				C87CB4102542002600B83410 /* Widget.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1006,11 +906,6 @@
 			isa = PBXTargetDependency;
 			target = C811E76E24E01B1F0050F6CD /* WoW Helper (macOS) */;
 			targetProxy = C811E78324E01B1F0050F6CD /* PBXContainerItemProxy */;
-		};
-		C87CB4182542002700B83410 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C87CB4082542002600B83410 /* WidgetExtension */;
-			targetProxy = C87CB4172542002700B83410 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1133,7 +1028,6 @@
 		C811E79224E01B1F0050F6CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -1157,7 +1051,6 @@
 		C811E79324E01B1F0050F6CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -1316,53 +1209,6 @@
 			};
 			name = Release;
 		};
-		C87CB41B2542002700B83410 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8TYF5VAX58;
-				INFOPLIST_FILE = Widget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mlukasik.WoW-Helper.Widget";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		C87CB41C2542002700B83410 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8TYF5VAX58;
-				INFOPLIST_FILE = Widget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mlukasik.WoW-Helper.Widget";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1407,15 +1253,6 @@
 			buildConfigurations = (
 				C811E79B24E01B1F0050F6CD /* Debug */,
 				C811E79C24E01B1F0050F6CD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C87CB41A2542002700B83410 /* Build configuration list for PBXNativeTarget "WidgetExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C87CB41B2542002700B83410 /* Debug */,
-				C87CB41C2542002700B83410 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

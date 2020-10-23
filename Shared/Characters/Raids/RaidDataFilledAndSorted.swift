@@ -82,7 +82,7 @@ struct RaidDataFilledAndSorted {
         
         
         hardFarm = allRaids.filter({ (raid) -> Bool in
-            currentLevel > raid.minimumLevel && currentLevel - raid.minimumLevel < 6
+            currentLevel > raid.minimumLevel && currentLevel - raid.minimumLevel < 11
         }).sorted(by: helper.raidSort)
         
         hardFarm.forEach { (raid) in
