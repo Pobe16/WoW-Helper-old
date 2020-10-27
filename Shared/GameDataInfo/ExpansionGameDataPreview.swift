@@ -48,35 +48,6 @@ struct ExpansionGameDataPreview: View {
                 BackgroundTexture(texture: .wood, wall: .all)
                     .edgesIgnoringSafeArea(.all)
             )
-            Text("Dungeons")
-                .font(.title)
-                .whiteTextWithBlackOutlineStyle()
-                .padding(.leading)
-                .padding(.horizontal)
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack{
-                    if gameData.dungeons.filter{$0.expansion.id == expansion.id }.count > 0 {
-                        ForEach(gameData.dungeons.filter{ $0.expansion.id == expansion.id }){ dungeon in
-                            InstanceTile(instance: dungeon, category: dungeon.category.type.rawValue.lowercased())
-                                .padding()
-                        }
-                    } else {
-                        InstancePlaceholderTile(category: InstanceCategoryType.dungeon.rawValue.lowercased())
-                            .padding()
-                        Spacer()
-                    }
-                }
-                .padding()
-                .background(
-                    BackgroundTexture(texture: .moss, wall: .all)
-                        .edgesIgnoringSafeArea(.all)
-                )
-            }
-            .background(
-                BackgroundTexture(texture: .wood, wall: .all)
-                    .edgesIgnoringSafeArea(.all)
-            )
             
         }
         .padding(.bottom)

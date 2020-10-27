@@ -199,8 +199,6 @@ struct InstanceTile: View {
         switch category {
         case InstanceCategoryType.raid.rawValue.lowercased():
             gameData.updateRaidInstanceBackground(for: instance, with: data)
-        case InstanceCategoryType.dungeon.rawValue.lowercased():
-            gameData.updateDungeonInstanceBackground(for: instance, with: data)
         default:
             return
         }

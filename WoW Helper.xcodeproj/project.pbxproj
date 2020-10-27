@@ -51,8 +51,6 @@
 		C818B1E52522A41D00ED06B7 /* FarmingOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C818B1E32522A41D00ED06B7 /* FarmingOrder.swift */; };
 		C818B1EF2523ADA400ED06B7 /* RaidsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C818B1EE2523ADA400ED06B7 /* RaidsData.swift */; };
 		C818B1F02523ADA400ED06B7 /* RaidsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C818B1EE2523ADA400ED06B7 /* RaidsData.swift */; };
-		C818B1FB2523BA4400ED06B7 /* DungeonsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C818B1FA2523BA4400ED06B7 /* DungeonsData.swift */; };
-		C818B1FC2523BA4400ED06B7 /* DungeonsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C818B1FA2523BA4400ED06B7 /* DungeonsData.swift */; };
 		C831CC3A24E7296A00C25F67 /* CharacterListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C831CC3924E7296A00C25F67 /* CharacterListItem.swift */; };
 		C831CC4724E7355500C25F67 /* CharacterMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = C831CC4624E7355500C25F67 /* CharacterMedia.swift */; };
 		C831CC4824E7355500C25F67 /* CharacterMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = C831CC4624E7355500C25F67 /* CharacterMedia.swift */; };
@@ -213,7 +211,6 @@
 		C818B1DB2521060D00ED06B7 /* NotableItemsInRaid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotableItemsInRaid.swift; sourceTree = "<group>"; };
 		C818B1E32522A41D00ED06B7 /* FarmingOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmingOrder.swift; sourceTree = "<group>"; };
 		C818B1EE2523ADA400ED06B7 /* RaidsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidsData.swift; sourceTree = "<group>"; };
-		C818B1FA2523BA4400ED06B7 /* DungeonsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonsData.swift; sourceTree = "<group>"; };
 		C831CC3924E7296A00C25F67 /* CharacterListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListItem.swift; sourceTree = "<group>"; };
 		C831CC4624E7355500C25F67 /* CharacterMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterMedia.swift; sourceTree = "<group>"; };
 		C831CC4E24E8974100C25F67 /* MyData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyData.xcdatamodel; sourceTree = "<group>"; };
@@ -430,7 +427,6 @@
 			children = (
 				C84996262517B837007D1762 /* CollectibleItems.swift */,
 				C818B1EE2523ADA400ED06B7 /* RaidsData.swift */,
-				C818B1FA2523BA4400ED06B7 /* DungeonsData.swift */,
 			);
 			path = BlizzApiData;
 			sourceTree = "<group>";
@@ -737,7 +733,6 @@
 				C806FA552501AAE1006DEF78 /* RaidTileBackground.swift in Sources */,
 				C8BB333725030E07003E105F /* RaidOptionsListItem.swift in Sources */,
 				C84B82F724E5FD65006E84FA /* MainScreen.swift in Sources */,
-				C818B1FB2523BA4400ED06B7 /* DungeonsData.swift in Sources */,
 				C8D58930253338E8008FAA3F /* BackgroundTexture.swift in Sources */,
 				C86A6B87253CD13A00784F6C /* CreditsListItem.swift in Sources */,
 				C811E7A724E05FBE0050F6CD /* AuthInfo.swift in Sources */,
@@ -817,7 +812,6 @@
 				C806FA562501AAE1006DEF78 /* RaidTileBackground.swift in Sources */,
 				C8BB333825030E07003E105F /* RaidOptionsListItem.swift in Sources */,
 				C8F942E424EF025600B6222C /* GameData.swift in Sources */,
-				C818B1FC2523BA4400ED06B7 /* DungeonsData.swift in Sources */,
 				C8F942EB24EF028100B6222C /* DataHealthScreen.swift in Sources */,
 				C86A6B88253CD13A00784F6C /* CreditsListItem.swift in Sources */,
 				C84B82F824E5FD65006E84FA /* MainScreen.swift in Sources */,
