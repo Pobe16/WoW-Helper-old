@@ -138,7 +138,9 @@ struct MainScreen: View {
                 
                 ToolbarItem(placement: .primaryAction) {
                     if !gameData.loadingAllowed {
-                        ProgressView().progressViewStyle(CircularProgressViewStyle())
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle())
+                            .shadow(color: .black, radius: 3, x: 0, y: 0)
                     }
                 }
                     
