@@ -131,8 +131,6 @@ struct SummaryOfNotableRaids: View {
             return animationsForThirdWidget
         case 1:
             return animationsForSecondWidget
-        case 0:
-            return animationsForFirstWidget
         default:
             return animationsForFirstWidget
         }

@@ -85,12 +85,7 @@ struct InstanceTile: View {
         
     }
     
-//    func deleteAllImages() {
-//        let allImages = CoreDataImagesManager.shared.fetchImages()
-//        allImages?.forEach({ (imageObj) in
-//            CoreDataImagesManager.shared.deleteImage(image: imageObj)
-//        })
-//    }
+
     
     func checkForStoredImage() {
         guard timeRetries < 2, connectionRetries < 2 else {

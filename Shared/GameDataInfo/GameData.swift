@@ -51,13 +51,6 @@ class GameData: ObservableObject {
         
     }
     
-    func deleteAllJSONData() {
-        let allData = JSONCoreDataManager.shared.fetchAllJSONData()
-        allData?.forEach({ item in
-            JSONCoreDataManager.shared.deleteJSONData(data: item)
-        })
-    }
-    
     func hardReloadGameData(authorizedBy auth: Authentication) {
         guard loadingAllowed else { return }
         reloadFromCDAllowed = false

@@ -28,7 +28,7 @@ struct WoWHelperApp: App {
     
     fileprivate func initDebug(){
 //        UserDefaults.resetStandardUserDefaults()
-//        let imagesInCoreData = CoreDataImagesManager.shared.fetchImages()
+//        let imagesInCoreData = CoreDataImagesManager.shared.fetchAllImages()
 //        print(imagesInCoreData?[0].creationDate)
 //        auth.oauth2.logger = OAuth2DebugLogger(.trace)
     }
