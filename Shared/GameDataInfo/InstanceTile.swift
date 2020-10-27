@@ -85,12 +85,7 @@ struct InstanceTile: View {
         
     }
     
-//    func deleteAllImages() {
-//        let allImages = CoreDataImagesManager.shared.fetchImages()
-//        allImages?.forEach({ (imageObj) in
-//            CoreDataImagesManager.shared.deleteImage(image: imageObj)
-//        })
-//    }
+
     
     func checkForStoredImage() {
         guard timeRetries < 2, connectionRetries < 2 else {
@@ -199,8 +194,6 @@ struct InstanceTile: View {
         switch category {
         case InstanceCategoryType.raid.rawValue.lowercased():
             gameData.updateRaidInstanceBackground(for: instance, with: data)
-        case InstanceCategoryType.dungeon.rawValue.lowercased():
-            gameData.updateDungeonInstanceBackground(for: instance, with: data)
         default:
             return
         }

@@ -13,7 +13,6 @@ class GameData: ObservableObject {
     var timeRetries                                                     = 0
     var connectionRetries                                               = 0
     var reloadFromCDAllowed                                             = true
-    var loadDungeonsToo                                                 = false
     let mountItemsList: [CollectibleItem]                               = createMountsList()
     let petItemsList: [CollectibleItem]                                 = createPetsList()
     var mountsStillToObtain: [CollectibleItem]                          = []
@@ -26,9 +25,6 @@ class GameData: ObservableObject {
                 
     var raidsStubs: [InstanceIndex]                                     = []
     @Published var raids: [InstanceJournal]                             = []
-                
-    var dungeonsStubs: [InstanceIndex]                                  = []
-    @Published var dungeons: [InstanceJournal]                          = []
                 
     var raidEncountersStubs: [Int]                                      = []
     @Published var raidEncounters: [JournalEncounter]                   = []
@@ -47,30 +43,12 @@ class GameData: ObservableObject {
 //        guard let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String  else {
 //            return
 //        }
-        // preload the British English raids and dungeons
+        // preload the British English
 
 //        if requestLocale == EuropeanLocales.BritishEnglish {
 //            raids = createRaidsList()
-//            dungeons = createDungeonsList()
 //        }
         
-    }
-    
-    func deleteAllJSONData() {
-        let allData = JSONCoreDataManager.shared.fetchAllJSONData()
-        allData?.forEach({ item in
-            JSONCoreDataManager.shared.deleteJSONData(data: item)
-        })
-    }
-    
-    func continueLoadingDungeons(authorizedBy auth: Authentication) {
-        if !dungeonsStubs.isEmpty {
-            loadDungeonsToo = true
-            guard loadingAllowed else { return }
-            actualItemsToDownload += dungeonsStubs.count
-            loadingAllowed = false
-            loadDungeonsInfo()
-        }
     }
     
     func hardReloadGameData(authorizedBy auth: Authentication) {
@@ -84,7 +62,6 @@ class GameData: ObservableObject {
         DispatchQueue.main.async {
             self.expansionsStubs.removeAll()
             self.raidsStubs.removeAll()
-            self.dungeonsStubs.removeAll()
             self.raidEncountersStubs.removeAll()
             self.raidEncounters.removeAll()
             self.charactersForRaidEncounters.removeAll()
@@ -96,7 +73,6 @@ class GameData: ObservableObject {
                 self.characters.removeAll()
                 self.expansions.removeAll()
                 self.raids.removeAll()
-                self.dungeons.removeAll()
                 self.characterRaidEncounters.removeAll()
             }
             self.loadCharacters()
@@ -448,9 +424,6 @@ class GameData: ObservableObject {
                     withAnimation {
                         expansions.sort()
                         actualItemsToDownload += raidsStubs.count
-                        if self.loadDungeonsToo {
-                            actualItemsToDownload += dungeonsStubs.count
-                        }
                     }
                     loadRaidsInfo()
                 }
@@ -530,7 +503,6 @@ class GameData: ObservableObject {
                 }
                 
                 raidsStubs.append(contentsOf: dataResponse.raids ?? [])
-                dungeonsStubs.append(contentsOf: dataResponse.dungeons ?? [])
                 
                 if expansionsStubs.count > 0 {
                     expansionsStubs.removeFirst()
@@ -661,124 +633,6 @@ class GameData: ObservableObject {
                     self.raidsStubs.removeFirst()
                 }
                 self.loadRaidsInfo()
-            }
-            
-        } catch {
-            print(error)
-        }
-    }
-    
-    private func loadDungeonsInfo(){
-        if timeRetries > 5 || connectionRetries > 5 {
-            print("Failed after \(timeRetries) timer retries, and or \(connectionRetries) connection errors")
-            timeRetries = 0
-            connectionRetries = 0
-            return
-        }
-        guard let currentDungeonToLoad = dungeonsStubs.first else {
-            if dungeons.count > 0 {
-                print("finished loading dungeons")
-                // some dungeons are doubled, as they were "refreshed" in newer expansions,
-                // but it does not reflect in their "expansion id", just in the expansion journal
-                // here I am removing duplicates, and sorting it
-                let noDuplicates = Array(Set(dungeons))
-
-                DispatchQueue.main.async { [self] in
-                    withAnimation {
-                        dungeons = noDuplicates.sorted()
-                        loadingAllowed = true
-                    }
-                    reloadFromCDAllowed = true
-                    print("loaded \(dungeons.count) dungeons")
-                }
-                return
-            }
-            timeRetries += 1
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.loadRaidsInfo()
-            }
-            return
-        }
-        
-        guard !dungeons.contains(where: { (dungeon) -> Bool in
-            currentDungeonToLoad.id == dungeon.id
-        }) else {
-            if dungeonsStubs.count > 0 {
-                dungeonsStubs.removeFirst()
-            }
-            loadDungeonsInfo()
-            return
-        }
-        
-        let requestUrlAPIHost = "\(currentDungeonToLoad.key.href)"
-        if reloadFromCDAllowed {
-            let strippedAPIUrl = String(requestUrlAPIHost.split(separator: "?")[0])
-            
-            if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: strippedAPIUrl, maximumAgeInDays: 90) {
-                    
-                decodeDungeonData(savedData.data!)
-                return
-            }
-        }
-        
-        let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? EuropeanLocales.BritishEnglish
-        let accessToken = authorization.oauth2.accessToken ?? ""
-        
-        let fullRequestURL = URL(string:
-                                    requestUrlAPIHost +
-                                    "&locale=\(requestLocale)" +
-                                    "&access_token=\(accessToken)"
-        )!
-        
-        
-        let req = authorization.oauth2.request(forURL: fullRequestURL)
-        
-        let task = authorization.oauth2.session.dataTask(with: req) { data, response, error in
-            if let data = data {
-                self.timeRetries = 0
-                self.connectionRetries = 0
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    self.decodeDungeonData(data, fromURL: fullRequestURL)
-                }
-                
-            }
-            if let error = error {
-                // something went wrong, check the error
-                print("error, retrying in 1 second")
-                print(error.localizedDescription)
-                self.connectionRetries += 1
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    self.loadRaidsInfo()
-                }
-            }
-        }
-        task.resume()
-        
-    }
-    
-    private func decodeDungeonData(_ data: Data, fromURL url: URL? = nil) {
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        
-        do {
-            let dataResponse = try decoder.decode(InstanceJournal.self, from: data)
-            
-            if let url = url {
-                JSONCoreDataManager.shared.saveJSON(data, withURL: url)
-            }
-                
-            DispatchQueue.main.async {
-                
-                withAnimation {
-                    self.dungeons.append(dataResponse)
-                    self.downloadedItems += 1
-                }
-                
-                if self.dungeonsStubs.count > 0 {
-                    self.dungeonsStubs.removeFirst()
-                }
-                self.loadDungeonsInfo()
             }
             
         } catch {
@@ -935,12 +789,6 @@ class GameData: ObservableObject {
                     loadingAllowed = true
                 }
                 reloadFromCDAllowed = true
-                
-                if loadDungeonsToo {
-                    loadDungeonsInfo()
-                } else {
-                    print("loading dungeons postponed")
-                }
             }
             return
         }
@@ -955,12 +803,6 @@ class GameData: ObservableObject {
                         loadingAllowed = true
                     }
                     reloadFromCDAllowed = true
-                    
-                    if loadDungeonsToo {
-                        loadDungeonsInfo()
-                    } else {
-                        print("loading dungeons postponed")
-                    }
                 }
                 return
             }
@@ -1076,12 +918,12 @@ class GameData: ObservableObject {
         raids[indexToUpdate].background = data
     }
     
-    func updateDungeonInstanceBackground(for instance: InstanceJournal, with data: Data) {
-        guard let indexToUpdate = dungeons.firstIndex(where: { (dungeonsInstance) -> Bool in
-            return dungeonsInstance.id == instance.id && dungeonsInstance.expansion.id == instance.expansion.id
-        }) else { return }
-        dungeons[indexToUpdate].background = data
-    }
+//    func updateDungeonInstanceBackground(for instance: InstanceJournal, with data: Data) {
+//        guard let indexToUpdate = dungeons.firstIndex(where: { (dungeonsInstance) -> Bool in
+//            return dungeonsInstance.id == instance.id && dungeonsInstance.expansion.id == instance.expansion.id
+//        }) else { return }
+//        dungeons[indexToUpdate].background = data
+//    }
     
     func updateRaidCombinedBackground(for raid: CombinedRaidWithEncounters, with data: Data) {
         guard let indexToUpdate = raids.firstIndex(where: { (raidInstance) -> Bool in

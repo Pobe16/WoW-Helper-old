@@ -43,7 +43,7 @@ struct CoreDataImagesManager {
         return nil
     }
     
-    func fetchImages() -> [CDImage]? {
+    func fetchAllImages() -> [CDImage]? {
         let context = persistentContainer.viewContext
         
         let fetchRequest = NSFetchRequest<CDImage>(entityName: "CDImage")

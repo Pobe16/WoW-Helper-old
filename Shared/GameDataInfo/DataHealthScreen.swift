@@ -31,12 +31,11 @@ struct DataHealthScreen: View {
             
         }
         .background(
-            BackgroundTexture(texture: .flagstone, wall: .leading)
+            BackgroundTexture(texture: .flagstone, wall: .horizontal)
                 .edgesIgnoringSafeArea(.all)
         )
         .onAppear(perform: {
             checkDataCreationDate()
-            gameData.continueLoadingDungeons(authorizedBy: authorization)
         })
         .toolbar{
             ToolbarItem(placement: .principal) {

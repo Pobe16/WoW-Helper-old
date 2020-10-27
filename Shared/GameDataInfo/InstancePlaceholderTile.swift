@@ -53,6 +53,6 @@ struct InstancePlaceholderTile: View {
 
 struct InstancePlaceholderTile_Previews: PreviewProvider {
     static var previews: some View {
-        InstancePlaceholderTile(category: "dungeon")
+        InstancePlaceholderTile(category: "raid")
     }
 }
