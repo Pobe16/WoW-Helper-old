@@ -66,7 +66,8 @@ struct MainScreen: View {
                                 )
                             )
                         }
-//                        .onDelete(perform: delete)
+                        .onMove(perform: gameData.changeCharactersOrder)
+                        .onDelete(perform: gameData.ignoreCharacter)
                     } else {
                         CharacterLoadingListItem()
                             .listRowBackground(
@@ -143,6 +144,15 @@ struct MainScreen: View {
                             .shadow(color: .black, radius: 3, x: 0, y: 0)
                     }
                 }
+
+//                #if os(iOS)
+//                ToolbarItem(placement: .primaryAction) {
+//                    if gameData.loadingAllowed {
+//                        EditButton()
+//                    }
+//                }
+//                #endif
+                
                     
             }
             SummaryMain()

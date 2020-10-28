@@ -30,11 +30,13 @@ struct SummaryMain: View {
                 VStack{
                     if gameData.characterRaidEncounters.count > 0 {
                         ForEach(gameData.characterRaidEncounters, id: \.character.id) { GDCharacterEncounters in
-                            SingleCharacterSummary(
-                                summarySize: summarySize,
-                                character: getCharacterBasedOn(encounters: GDCharacterEncounters),
-                                characterEncounters: GDCharacterEncounters
-                            )
+                            if getCharacterBasedOn(encounters: GDCharacterEncounters) != nil {
+                                SingleCharacterSummary(
+                                    summarySize: summarySize,
+                                    character: getCharacterBasedOn(encounters: GDCharacterEncounters)!,
+                                    characterEncounters: GDCharacterEncounters
+                                )
+                            }
                         }
                     } else if gameData.characters.count > 0 {
                         HStack{
@@ -97,11 +99,11 @@ struct SummaryMain: View {
         
     }
     
-    func getCharacterBasedOn(encounters: CharacterRaidEncounters) -> CharacterInProfile {
-        let character = gameData.characters.first { (GDCharacter) -> Bool in
+    func getCharacterBasedOn(encounters: CharacterRaidEncounters) -> CharacterInProfile? {
+        guard let character = gameData.characters.first(where: { (GDCharacter) -> Bool in
             GDCharacter.name == encounters.character.name && GDCharacter.realm.name == encounters.character.realm.name
-        }
-        return character!
+         }) else { return nil }
+        return character
     }
     
     func loadOptionsSelection() {

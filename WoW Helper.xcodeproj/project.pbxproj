@@ -62,6 +62,8 @@
 		C83522702502379900A5D90D /* BackgroundBlurs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C835226E2502379900A5D90D /* BackgroundBlurs.swift */; };
 		C83AF6D2253F95260027AF80 /* Collections.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83AF6D1253F95260027AF80 /* Collections.swift */; };
 		C83AF6D3253F95260027AF80 /* Collections.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83AF6D1253F95260027AF80 /* Collections.swift */; };
+		C8490D9E2548E03D0029F492 /* IgnoredCharactersRestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8490D9D2548E03D0029F492 /* IgnoredCharactersRestore.swift */; };
+		C8490D9F2548E03D0029F492 /* IgnoredCharactersRestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8490D9D2548E03D0029F492 /* IgnoredCharactersRestore.swift */; };
 		C84996272517B837007D1762 /* CollectibleItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84996262517B837007D1762 /* CollectibleItems.swift */; };
 		C84996282517B837007D1762 /* CollectibleItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84996262517B837007D1762 /* CollectibleItems.swift */; };
 		C84996392517CBBA007D1762 /* RaidDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84996382517CBBA007D1762 /* RaidDetails.swift */; };
@@ -217,6 +219,7 @@
 		C831CC5224E89A0200C25F67 /* CoreDataImagesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataImagesManager.swift; sourceTree = "<group>"; };
 		C835226E2502379900A5D90D /* BackgroundBlurs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundBlurs.swift; sourceTree = "<group>"; };
 		C83AF6D1253F95260027AF80 /* Collections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collections.swift; sourceTree = "<group>"; };
+		C8490D9D2548E03D0029F492 /* IgnoredCharactersRestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IgnoredCharactersRestore.swift; sourceTree = "<group>"; };
 		C84996262517B837007D1762 /* CollectibleItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectibleItems.swift; sourceTree = "<group>"; };
 		C84996382517CBBA007D1762 /* RaidDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidDetails.swift; sourceTree = "<group>"; };
 		C849968625191ED7007D1762 /* CharacterListItemBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListItemBackground.swift; sourceTree = "<group>"; };
@@ -418,6 +421,7 @@
 			children = (
 				C8BB333325030DC8003E105F /* RaidOptions.swift */,
 				C818B1E32522A41D00ED06B7 /* FarmingOrder.swift */,
+				C8490D9D2548E03D0029F492 /* IgnoredCharactersRestore.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -762,6 +766,7 @@
 				C8B14265251D5653004F982B /* NavListSectionHeader.swift in Sources */,
 				C8E4D71924F2A5A500EDAC85 /* InstanceTile.swift in Sources */,
 				C8929624253A123E00F1BA30 /* InstanceNotableItems.swift in Sources */,
+				C8490D9E2548E03D0029F492 /* IgnoredCharactersRestore.swift in Sources */,
 				C8D58911252D286A008FAA3F /* SingleCharacterSummary.swift in Sources */,
 				C8F942E124EDC02900B6222C /* ExpansionJournal.swift in Sources */,
 				C811E78924E01B1F0050F6CD /* WoWHelperApp.swift in Sources */,
@@ -841,6 +846,7 @@
 				C811E7A524E01DC30050F6CD /* APIAccessInfo.swift in Sources */,
 				C811E78C24E01B1F0050F6CD /* AuthCheckingScreen.swift in Sources */,
 				C8929625253A123E00F1BA30 /* InstanceNotableItems.swift in Sources */,
+				C8490D9F2548E03D0029F492 /* IgnoredCharactersRestore.swift in Sources */,
 				C8F942E824EF027700B6222C /* CharacterLoadingListItem.swift in Sources */,
 				C811E78A24E01B1F0050F6CD /* WoWHelperApp.swift in Sources */,
 				C818B1D62520EE6800ED06B7 /* JournalEncounterSearch.swift in Sources */,
