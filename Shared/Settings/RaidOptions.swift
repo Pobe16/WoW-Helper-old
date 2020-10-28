@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct RaidOptions: View {
+    @EnvironmentObject var gameData: GameData
+    
     @State var raidFarmingOptions: Int              = 1
     
     @State var imagesDeleted: Bool                  = false
@@ -30,8 +32,7 @@ struct RaidOptions: View {
         List(){
             
             Section(header: Text("Farming order").whiteTextWithBlackOutlineStyle()) {
-                NavigationLink(destination:
-                                FarmingOrder()) {
+                NavigationLink(destination: FarmingOrder()) {
                     Text("Farming order")
                 }
             }.padding(.horizontal)
@@ -52,6 +53,14 @@ struct RaidOptions: View {
                 }
             }
             
+            if gameData.ignoredCharacters.count > 0 {
+                Section(header: Text("Ignored Characters").whiteTextWithBlackOutlineStyle()) {
+                    NavigationLink(destination: IgnoredCharactersRestore()) {
+                        Text("Ignored Characters")
+                    }
+                }.padding(.horizontal)
+            }
+            
             Section(header:
                         Text("Game data storage")
                         .whiteTextWithBlackOutlineStyle()
@@ -68,6 +77,7 @@ struct RaidOptions: View {
                         Spacer()
                         Text("\(existingJSONDataNodes)")
                     }
+                    .padding(.horizontal)
                     
                 })
                 .disabled(existingJSONDataNodes == 0)
@@ -94,6 +104,7 @@ struct RaidOptions: View {
                         Spacer()
                         Text("\(existingImages)")
                     }
+                    .padding(.horizontal)
                     
                 })
                 .disabled(existingImages == 0)

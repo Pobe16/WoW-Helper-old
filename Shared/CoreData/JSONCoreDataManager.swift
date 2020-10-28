@@ -59,11 +59,14 @@ struct JSONCoreDataManager {
     }
     
     func fetchJSONData(withName name: String, maximumAgeInDays age: Double = 30) -> JSONData? {
+        
+        let identifiableName = getIdentifiableString(from: name)
+        
         let context = persistentContainer.viewContext
         
         let fetchRequest = NSFetchRequest<JSONData>(entityName: "JSONData")
         fetchRequest.fetchLimit = 1
-        fetchRequest.predicate = NSPredicate(format: "name == %@", name)
+        fetchRequest.predicate = NSPredicate(format: "name == %@", identifiableName)
         
         do {
             let dataArray = try context.fetch(fetchRequest)
@@ -132,6 +135,27 @@ struct JSONCoreDataManager {
         }
 //        print("saving data for " + String(stringFromURL))
         updateJSONData(name: identifiableString, data: data)
+    }
+    
+    func getIdentifiableString(from url: URL) -> String {
+        let stringFromURL = url.absoluteString
+        var identifiableString = ""
+        if stringFromURL.contains("search") {
+            identifiableString = String(stringFromURL.split(separator: "&")[0])
+        } else {
+            identifiableString = String(stringFromURL.split(separator: "?")[0])
+        }
+        return identifiableString
+    }
+    
+    func getIdentifiableString(from str: String) -> String {
+        var identifiableString = ""
+        if str.contains("search") {
+            identifiableString = String(str.split(separator: "&")[0])
+        } else {
+            identifiableString = String(str.split(separator: "?")[0])
+        }
+        return identifiableString
     }
     
 }

@@ -17,4 +17,5 @@ struct UserDefaultsKeys {
     static let RaidCollectionsOrder     = "RaidCollectionsOrder"
     static let raidFilteringOptions     = "raidFilteringOptions"
     static let summaryPreviewSize       = "summaryPreviewSize"
+    static let characterOrder           = "characterOrder"
 }

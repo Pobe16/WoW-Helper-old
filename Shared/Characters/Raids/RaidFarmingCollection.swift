@@ -53,7 +53,7 @@ struct RaidFarmingCollection: View {
                     VStack {
                         Text("Last refreshed: \(dataCreationDate)")
                         Button {
-                            loadEncounters(refresh: true)
+                            updateEncounters()
                         } label: {
                             Label("Refresh", systemImage: "arrow.counterclockwise")
                         }
@@ -92,6 +92,15 @@ struct RaidFarmingCollection: View {
         dataCreationDate = dateString
     }
     
+    func updateEncounters() {
+        gameData.reloadCharacterRaidEncounters(for: character)
+        characterEncounters = nil
+        raidDataFilledAndSorted = nil
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            loadEncounters()
+        }
+    }
+    
     func loadEncounters(refresh: Bool = false) {
         let levelRequiredForRaiding = 30
         guard character.level >= levelRequiredForRaiding else {
@@ -110,7 +119,23 @@ struct RaidFarmingCollection: View {
             withAnimation {
                 characterEncounters = GDCharacterEncounters
             }
+            checkDataCreationDate(for: GDCharacterEncounters)
             combineCharacterEncountersWithData()
+        }
+    }
+    
+    func checkDataCreationDate(for encounters: CharacterRaidEncounters) {
+        guard let link = encounters._links else {
+            print("no link")
+            return
+        }
+        let urlString = link.`self`.href
+        if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: urlString, maximumAgeInDays: 99999) {
+            setDataCreationDate(to: savedData.creationDate!)
+        } else {
+            print("no date")
+            return
+            
         }
     }
     

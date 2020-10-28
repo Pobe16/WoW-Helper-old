@@ -37,6 +37,7 @@ struct CharacterInProfile: Codable, Hashable, Identifiable {
     let faction: Faction
     let level: Int
     var avatar: Data?
+    var order: Int?
 }
 
 struct RealmInProfile: Codable, Hashable {

@@ -16,6 +16,7 @@ struct RaidDataHelper {
         }
     }
     
+    
     public func createFullRaidData(using characterEncounters: CharacterRaidEncounters?, with gameData: GameData, filter options: RaidFarmingOptions, filterForFaction faction: Faction) -> [CombinedRaidWithEncounters] {
         
         var strippedRaids: [RaidInstancesInCharacterEncounters] = []
