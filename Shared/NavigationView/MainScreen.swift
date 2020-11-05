@@ -142,16 +142,12 @@ struct MainScreen: View {
                         ProgressView()
                             .progressViewStyle(CircularProgressViewStyle())
                             .shadow(color: .black, radius: 3, x: 0, y: 0)
+                    } else {
+                        #if os(iOS)
+                        EditButton()
+                        #endif
                     }
                 }
-
-//                #if os(iOS)
-//                ToolbarItem(placement: .primaryAction) {
-//                    if gameData.loadingAllowed {
-//                        EditButton()
-//                    }
-//                }
-//                #endif
                 
                     
             }
