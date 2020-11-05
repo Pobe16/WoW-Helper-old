@@ -28,7 +28,7 @@ struct InstanceTile: View {
                     .scaledToFill()
                     .frame(width: 300, height: 150)
                 #elseif os(macOS)
-                Image(nsImage: NSImage(data: instance!.background!)!)
+                Image(nsImage: NSImage(data: instance.background!)!)
                     .resizable()
                     .scaledToFill()
                     .frame(width: 300, height: 150)

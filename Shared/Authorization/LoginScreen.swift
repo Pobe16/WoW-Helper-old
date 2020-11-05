@@ -196,18 +196,17 @@ struct LoginScreen: View {
         if let accessToken = authorization.oauth2.accessToken {
             print(accessToken)
         }
-//        authorization.oauth2?.logger = OAuth2DebugLogger(.trace)
+        authorization.oauth2.logger = OAuth2DebugLogger(.trace)
         setLocaleForAuthorization()
         
         authorization.refreshSettings()
-        
-        
         
         #if os(iOS)
         authorization.oauth2.authConfig.authorizeEmbedded = true
         authorization.oauth2.authConfig.authorizeContext = UIApplication.shared.windows[0].rootViewController
 //        #elseif os(macOS)
-//        authorization.oauth2.authConfig.authorizeContext = NSWindow
+//        authorization.oauth2.authConfig.authorizeEmbedded = true
+//        authorization.oauth2.authConfig.authorizeContext = NSApp.windows[0]
         #endif
         
 //        print(authorization.settings)

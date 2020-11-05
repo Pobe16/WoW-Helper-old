@@ -55,9 +55,13 @@ struct AuthCheckingScreen: View {
         
         guard authObject.accessToken != nil else {
             authorization.loggedIn = false
+            authorization.oauth2.logger = OAuth2DebugLogger(.trace)
             #if os(iOS)
             authorization.oauth2.authConfig.authorizeEmbedded = true
             authorization.oauth2.authConfig.authorizeContext = UIApplication.shared.windows[0].rootViewController
+//            #elseif os(macOS)
+//            authorization.oauth2.authConfig.authorizeEmbedded = true
+//            authorization.oauth2.authConfig.authorizeContext = NSApp.windows[0]
             #endif
             authorization.oauth2.authorize() { authParameters, error in
                 if authParameters != nil {
