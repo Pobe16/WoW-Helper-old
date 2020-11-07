@@ -38,7 +38,7 @@ struct WrapperForRaidOptions: View {
                 }
                 label: {
                     Label("Raid Settings", systemImage: "gear")
-                        .font(.title3)
+                        .font(Font.title3.bold())
                 }
                 
             }

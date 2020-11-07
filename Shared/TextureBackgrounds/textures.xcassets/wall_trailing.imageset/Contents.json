@@ -1,10 +1,12 @@
 {
   "images" : [
     {
+      "filename" : "wall_trailing-1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "wall_trailing.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

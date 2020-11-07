@@ -16,7 +16,7 @@ struct SummaryListItem: View {
                 .frame(width: 63, height: 63)
                 .cornerRadius(15, antialiased: true)
                 .foregroundColor(.accentColor)
-            Text("Summary")
+            Text("Raid Farming")
             
         }
     }

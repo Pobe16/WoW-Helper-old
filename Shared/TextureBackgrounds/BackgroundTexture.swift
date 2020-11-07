@@ -42,7 +42,6 @@ struct BackgroundTexture: View {
     let texture: availableBackgroundTextures
     let wall: wallPosition
     
-    
     var body: some View {
         ZStack{
             Image(texture.rawValue)
@@ -169,10 +168,10 @@ struct BackgroundWall: View {
 struct BackgroundTexture_Previews: PreviewProvider {
     static var previews: some View {
         ZStack{
-            BackgroundTexture(texture: .flagstone, wall: .vertical)
+            BackgroundTexture(texture: .flagstone, wall: .horizontal)
             Text("Hello World!")
         }
-            .previewLayout(.fixed(width: 800, height: 800))
+            .previewLayout(.fixed(width: 400, height: 400))
     }
 }
 

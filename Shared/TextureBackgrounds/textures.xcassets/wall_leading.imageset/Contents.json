@@ -1,10 +1,12 @@
 {
   "images" : [
     {
+      "filename" : "wall_leading-1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "wall_leading.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

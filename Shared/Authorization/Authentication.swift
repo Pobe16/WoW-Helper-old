@@ -18,7 +18,17 @@ class Authentication: ObservableObject {
     
     
     public func refreshSettings() {
-        self.oauth2             = OAuth2CodeGrant(settings: self.settings)
+        let refreshedSettings = [
+            "client_id"         :       AuthInfo.ClientID,
+            "client_secret"     :       AuthInfo.ClientSecret,
+            "authorize_uri"     :       AuthInfo.AuthorizeUri,
+            "token_uri"         :       AuthInfo.TokenUri,
+            "redirect_uris"     :       AuthInfo.RedirectUris,
+            "scope"             :       AuthInfo.Scope,
+            "keychain"          :       AuthInfo.Keychain
+        ] as OAuth2JSON
+        
+        self.oauth2             = OAuth2CodeGrant(settings: refreshedSettings)
     }
     
     init() {
