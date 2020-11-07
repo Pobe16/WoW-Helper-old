@@ -16,10 +16,10 @@ struct LargeNotableLoot: View {
         VStack{
             HStack() {
                 Text("\(items[0].name.value)")
+                    .fontWeight(.semibold)
                     .lineLimit(1)
                     .font(.body)
                     .minimumScaleFactor(0.5)
-                    .whiteTextWithBlackOutlineStyle()
                 Spacer()
                 ItemIcon(item: items[0])
                     .frame(width: 32, height: 32)
@@ -33,10 +33,10 @@ struct LargeNotableLoot: View {
             if items.count > 1 {
                 HStack(alignment: .center) {
                     Text("\(items[1].name.value)")
+                        .fontWeight(.semibold)
                         .lineLimit(1)
                         .font(.body)
                         .minimumScaleFactor(0.5)
-                        .whiteTextWithBlackOutlineStyle()
                     Spacer(minLength: 0)
                     ItemIcon(item: items[1])
                         .frame(width: 32, height: 32)
@@ -51,10 +51,10 @@ struct LargeNotableLoot: View {
             if items.count > 2 {
                 HStack() {
                     Text("\(items[2].name.value)")
+                        .fontWeight(.semibold)
                         .lineLimit(1)
                         .font(.body)
                         .minimumScaleFactor(0.5)
-                        .whiteTextWithBlackOutlineStyle()
                     Spacer()
                     ItemIcon(item: items[2])
                         .frame(width: 32, height: 32)

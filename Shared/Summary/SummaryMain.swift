@@ -79,7 +79,7 @@ struct SummaryMain: View {
                     }
                     label: {
                         Label("Preview Size", systemImage: "gear")
-                            .font(.title3)
+                            .font(Font.title3.bold())
                     }
                 }
             })

@@ -11,7 +11,7 @@ struct WhiteTextWithBlackOutline: ViewModifier {
     func body(content: Content) -> some View {
         content
             .foregroundColor(.white)
-            .shadow(color: .black, radius: 3)
+//            .shadow(color: .black, radius: 3)
             .shadow(color: .black, radius: 2)
             .shadow(color: .black, radius: 1)
     }

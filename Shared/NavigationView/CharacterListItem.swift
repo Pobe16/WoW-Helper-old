@@ -23,9 +23,10 @@ struct CharacterListItem: View {
             
             // only show text shadow in dark mode
             if colorScheme == .light {
-                Text("\(character.name) lvl: \(character.level)")
+                // \u{00a0} is a non-breaking space
+                Text("\(character.name) lvl:\u{00a0}\(character.level)")
             } else {
-                Text("\(character.name) lvl: \(character.level)")
+                Text("\(character.name) lvl:\u{00a0}\(character.level)")
                     .shadow(color: .black, radius: 1, x: 1, y: 1)
             }
             

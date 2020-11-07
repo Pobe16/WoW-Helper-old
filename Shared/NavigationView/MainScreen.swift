@@ -128,7 +128,6 @@ struct MainScreen: View {
             .listStyle(listStyle)
             .background(
                 BackgroundTexture(texture: .wood, wall: .horizontal)
-                            .edgesIgnoringSafeArea(.vertical)
             )
             .toolbar{
                 ToolbarItem(placement: .principal){
@@ -141,10 +140,11 @@ struct MainScreen: View {
                     if !gameData.loadingAllowed {
                         ProgressView()
                             .progressViewStyle(CircularProgressViewStyle())
-                            .shadow(color: .black, radius: 3, x: 0, y: 0)
+                            .font(Font.title3.bold())
                     } else {
                         #if os(iOS)
                         EditButton()
+                            .font(Font.title3.bold())
                         #endif
                     }
                 }

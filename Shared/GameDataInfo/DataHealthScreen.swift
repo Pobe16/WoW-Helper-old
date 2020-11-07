@@ -48,6 +48,7 @@ struct DataHealthScreen: View {
                     } label: {
                         Label("Refresh!", systemImage: "arrow.counterclockwise")
                     }
+                    .font(Font.title3.bold())
                 } else {
                     ProgressView(
                         value: Double(gameData.downloadedItems),
