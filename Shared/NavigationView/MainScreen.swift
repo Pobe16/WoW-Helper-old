@@ -26,10 +26,34 @@ struct MainScreen: View {
     
     var body: some View {
         NavigationView {
+            
             List {
+                
+                if !gameData.loadingAllowed &&
+                    (gameData.downloadedItems + 2) < max(
+                        gameData.estimatedItemsToDownload,
+                        gameData.actualItemsToDownload
+                    ) {
+                    VStack{
+                        Text("Loading…")
+                        ProgressView(
+                            value:  Double(gameData.downloadedItems),
+                            total: Double(max(gameData.estimatedItemsToDownload, gameData.actualItemsToDownload))
+                        )
+                    }
+                    .listRowBackground(
+                        DefaultListItemBackground(
+                            color: Color.yellow,
+                            selected: selection == "summary"
+                        )
+                    )
+                }
+                
+                
                 Section(header:
                     NavListSectionHeader(text: "Summary")
                 ) {
+                    
                     NavigationLink(
                         destination:
                             SummaryMain(),

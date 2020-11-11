@@ -51,7 +51,7 @@ struct AuthCheckingScreen: View {
         authorization.loginAllowed = false
         let authObject = authorization.oauth2
         
-        print(authObject)
+//        print(authObject)
         
         guard authObject.accessToken != nil else {
             authorization.loggedIn = false
