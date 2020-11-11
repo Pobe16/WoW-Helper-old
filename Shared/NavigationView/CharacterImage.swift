@@ -69,9 +69,10 @@ struct CharacterImage: View {
     
     fileprivate func loadMediaData() {
         let requestUrlAPIHost = UserDefaults.standard.object(forKey: UserDefaultsKeys.APIRegionHost) as? String ?? APIRegionHostList.Europe
+        let encodedName = character.name.lowercased().addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         let requestUrlAPIFragment = "/profile/wow/character" +
                                     "/\(character.realm.slug)" +
-                                    "/\(character.name.lowercased())" +
+                                    "/\(encodedName ?? character.name.lowercased())" +
                                     "/character-media"
         let regionShortCode = APIRegionShort.Code[UserDefaults.standard.integer(forKey: UserDefaultsKeys.loginRegion)]
         let requestAPINamespace = "profile-\(regionShortCode)"

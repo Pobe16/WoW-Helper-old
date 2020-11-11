@@ -686,7 +686,8 @@ class GameData: ObservableObject {
             if let data = data {
                 self.timeRetries = 0
                 self.connectionRetries = 0
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                DispatchQueue.main.async {
                     self.decodeRaidData(data, fromURL: fullRequestURL)
                 }
                 
@@ -830,7 +831,8 @@ class GameData: ObservableObject {
                 self.timeRetries = 0
                 self.connectionRetries = 0
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                DispatchQueue.main.async {
                     self.decodeRaidEncountersData(data, fromURL: URLIdentifier)
                 }
                 
@@ -946,11 +948,13 @@ class GameData: ObservableObject {
         
         let requestUrlAPIHost = UserDefaults.standard.object(forKey: UserDefaultsKeys.APIRegionHost) as? String ?? APIRegionHostList.Europe
         
+        let encodedName = character.name.lowercased().addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        
         let requestUrlAPIFragment =
-            "/profile/wow/character"    + "/" +
-            character.realm.slug        + "/" +
-            character.name.lowercased() + "/" +
-            "encounters/raids"
+            "/profile/wow/character" +
+            "/\(character.realm.slug)" +
+            "/\(encodedName ?? character.name.lowercased())" +
+            "/encounters/raids"
         let strippedAPIUrl = requestUrlAPIHost + requestUrlAPIFragment
         
         let daysNeededForRefresh: Double = reloadFromCDAllowed ? 0.01 : 0.0

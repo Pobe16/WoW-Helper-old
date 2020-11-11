@@ -142,11 +142,14 @@ struct RaidFarmingCollection: View {
     func downloadRaidEncounters(refresh: Bool = false) {
         
         let requestUrlAPIHost = UserDefaults.standard.object(forKey: UserDefaultsKeys.APIRegionHost) as? String ?? APIRegionHostList.Europe
+        
+        let encodedName = character.name.lowercased().addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        
         let requestUrlAPIFragment =
-            "/profile/wow/character"    + "/" +
-            character.realm.slug        + "/" +
-            character.name.lowercased() + "/" +
-            "encounters/raids"
+            "/profile/wow/character" +
+            "/\(character.realm.slug)" +
+            "/\(encodedName ?? character.name.lowercased())" +
+            "/encounters/raids"
             
         let strippedAPIUrl = requestUrlAPIHost + requestUrlAPIFragment
         
