@@ -22,6 +22,8 @@ struct RaidFarmingCollection: View {
     
     @State var errorText: String?
     
+    @State var retries: Int = 0
+    
     @State var characterEncounters: CharacterRaidEncounters? = nil
     
     @State var raidDataFilledAndSorted: RaidDataFilledAndSorted? = nil
@@ -36,7 +38,15 @@ struct RaidFarmingCollection: View {
     
     var body: some View {
         ScrollView {
-            if raidDataFilledAndSorted != nil {
+            if character.level < 30 {
+                HStack{
+                    Text("Character level too low. You need at least level 30 to try and conquer the raids.")
+                        .font(.title)
+                        .padding()
+                    Spacer()
+                }
+                .padding()
+            } else if raidDataFilledAndSorted != nil {
                 LazyVGrid(columns: columns, spacing: 30) {
                     ForEach(raidDataFilledAndSorted!.raidsCollection, id: \.id){ collection in
                         if collection.raids.count > 0 {
@@ -48,22 +58,10 @@ struct RaidFarmingCollection: View {
                         }
                     }
                 }.padding()
-                HStack {
-                    Spacer()
-                    VStack {
-                        Text("Last refreshed: \(dataCreationDate)")
-                        Button {
-                            updateEncounters()
-                        } label: {
-                            Label("Refresh", systemImage: "arrow.counterclockwise")
-                        }
-                        .padding(.top)
-                    }
-                    Spacer()
-                }.padding(.vertical)
+                
             } else if errorText != nil {
                 HStack{
-                    Text("\(errorText ?? "Unknown Error")")
+                    Text("\(errorText ?? "Unknown error")")
                         .font(.title)
                         .padding()
                     Spacer()
@@ -73,10 +71,28 @@ struct RaidFarmingCollection: View {
                 ProgressView{}
                     .progressViewStyle(CircularProgressViewStyle())
                     .padding()
+                    .onAppear {
+                        loadEncounters()
+                    }
             }
-        }
-        .onAppear {
-            loadEncounters()
+            if (raidDataFilledAndSorted != nil || errorText != nil) && character.level >= 30 {
+                HStack {
+                    Spacer()
+                    VStack {
+                        if raidDataFilledAndSorted != nil {
+                            Text("Last refreshed: \(dataCreationDate)")
+                        }
+                        Button {
+                            retries = 0
+                            updateEncounters()
+                        } label: {
+                            Label("Refresh", systemImage: "arrow.counterclockwise")
+                        }
+                        .padding(.top)
+                    }
+                    Spacer()
+                }.padding(.vertical)
+            }
         }
         .onChange(of: raidFarmingOptions) { (value) in
             loadEncounters()
@@ -94,24 +110,29 @@ struct RaidFarmingCollection: View {
     
     func updateEncounters() {
         gameData.reloadCharacterRaidEncounters(for: character)
-        characterEncounters = nil
-        raidDataFilledAndSorted = nil
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.async {
+            withAnimation {
+                errorText = nil
+                characterEncounters = nil
+                raidDataFilledAndSorted = nil
+            }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             loadEncounters()
         }
     }
     
     func loadEncounters(refresh: Bool = false) {
-        let levelRequiredForRaiding = 30
-        guard character.level >= levelRequiredForRaiding else {
-            errorText = "Character level too low. You need at least level \(levelRequiredForRaiding) to try and conquer the raids."
-            return
-        }
         
         guard let GDCharacterEncounters = gameData.characterRaidEncounters.first(where: { (encounters) -> Bool in
             encounters.character.id == character.id
         }) else {
-            downloadRaidEncounters(refresh: refresh)
+            if retries < 2 {
+                retries += 1
+                updateEncounters()
+            } else {
+                errorText = "Problem loading character encounter data. You may try manually reloading with a button below. For characters you have not used in a long time, you might need to log in and out in game to refresh their data on Blizzard's servers."
+            }
             return
         }
         
@@ -139,99 +160,6 @@ struct RaidFarmingCollection: View {
         }
     }
     
-    func downloadRaidEncounters(refresh: Bool = false) {
-        
-        let requestUrlAPIHost = UserDefaults.standard.object(forKey: UserDefaultsKeys.APIRegionHost) as? String ?? APIRegionHostList.Europe
-        
-        let encodedName = character.name.lowercased().addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-        
-        let requestUrlAPIFragment =
-            "/profile/wow/character" +
-            "/\(character.realm.slug)" +
-            "/\(encodedName ?? character.name.lowercased())" +
-            "/encounters/raids"
-            
-        let strippedAPIUrl = requestUrlAPIHost + requestUrlAPIFragment
-        
-        let daysNeededForRefresh: Double = refresh ? 0.0 : 0.0416
-        
-        if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: strippedAPIUrl, maximumAgeInDays: daysNeededForRefresh) {
-            
-            setDataCreationDate(to: savedData.creationDate!)
-            
-            decodeEncountersData(savedData.data!)
-            
-            return
-        }
-        
-        let regionShortCode = APIRegionShort.Code[UserDefaults.standard.integer(forKey: UserDefaultsKeys.loginRegion)]
-        let requestAPINamespace = "profile-\(regionShortCode)"
-        let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? EuropeanLocales.BritishEnglish
-        
-        let fullRequestURL = URL(string:
-                                    requestUrlAPIHost +
-                                    requestUrlAPIFragment +
-                                    "?namespace=\(requestAPINamespace)" +
-                                    "&locale=\(requestLocale)" +
-                                    "&access_token=\(authorization.oauth2.accessToken ?? "")"
-        )!
-//        print(fullRequestURL)
-        
-        let req = authorization.oauth2.request(forURL: fullRequestURL)
-        
-        let task = authorization.oauth2.session.dataTask(with: req) { data, response, error in
-            if let response = response as? HTTPURLResponse,
-               response.statusCode == 200,
-               let data = data {
-                
-//                print(data)
-                setDataCreationDate(to: Date())
-                
-                decodeEncountersData(data, fromURL: fullRequestURL)
-
-            } else {
-                if let error = error {
-                    // something went wrong, check the error
-                    print("error")
-                    print(error.localizedDescription)
-                }
-                if let response = response as? HTTPURLResponse {
-                    
-                    print(response.statusString)
-                }
-            }
-        }
-        task.resume()
-    }
-    
-    func decodeEncountersData(_ data: Data, fromURL url: URL? = nil) {
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        decoder.dateDecodingStrategy = .millisecondsSince1970
-        
-        do {
-            let dataResponse = try decoder.decode(CharacterRaidEncounters.self, from: data)
-            
-            if let url = url {
-                JSONCoreDataManager.shared.saveJSON(data, withURL: url)
-            }
-            DispatchQueue.main.async {
-                characterEncounters = dataResponse
-                
-                if gameData.characterRaidEncounters.filter({ (GDEncounter) -> Bool in
-                    GDEncounter.character.id == dataResponse.character.id
-                }).count == 0 {
-                    gameData.characterRaidEncounters.append(dataResponse)
-                }
-                
-                combineCharacterEncountersWithData()
-            }
-
-        } catch {
-            print(error)
-        }
-    }
-    
     func combineCharacterEncountersWithData() {
         var options: RaidFarmingOptions
         switch raidFarmingOptions {
@@ -252,9 +180,7 @@ struct RaidFarmingCollection: View {
         let allDataCombined = RaidDataFilledAndSorted(basedOn: combinedRaidInfo, for: character, farmingOrder: farmOrder)
         
         DispatchQueue.main.async {
-//            withAnimation {
-                raidDataFilledAndSorted = allDataCombined
-//            }
+            raidDataFilledAndSorted = allDataCombined
         }
         
         
