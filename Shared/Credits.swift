@@ -58,6 +58,7 @@ struct Credits: View {
                         .padding(.all)
                 Spacer()
             }
+            .padding(.horizontal)
             Image("phoenix")
                 .resizable()
                 .scaledToFit()

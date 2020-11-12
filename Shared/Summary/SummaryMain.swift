@@ -101,7 +101,7 @@ struct SummaryMain: View {
     
     func getCharacterBasedOn(encounters: CharacterRaidEncounters) -> CharacterInProfile? {
         guard let character = gameData.characters.first(where: { (GDCharacter) -> Bool in
-            GDCharacter.name == encounters.character.name && GDCharacter.realm.name == encounters.character.realm.name
+            GDCharacter.name == encounters.character.name && GDCharacter.realm.slug == encounters.character.realm.slug
          }) else { return nil }
         return character
     }

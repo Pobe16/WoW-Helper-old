@@ -34,7 +34,7 @@ class GameData: ObservableObject {
     var charactersForRaidEncounters: [CharacterInProfile]               = []
     @Published var characterRaidEncounters: [CharacterRaidEncounters]   = []
     
-    let estimatedItemsToDownload: Int                                   = 150
+    let estimatedItemsToDownload: Int                                   = 100
     @Published var actualItemsToDownload: Int                           = 0
     @Published var downloadedItems: Int                                 = 1
                 
@@ -97,7 +97,7 @@ class GameData: ObservableObject {
             loadingAllowed = false
         }
         
-        if timeRetries > 5 || connectionRetries > 5 {
+        if timeRetries > 3 || connectionRetries > 3 {
             print("Failed after \(timeRetries) timer retries, and or \(connectionRetries) connection errors")
             timeRetries = 0
             connectionRetries = 0
@@ -128,17 +128,23 @@ class GameData: ObservableObject {
         }
         let req = authorization.oauth2.request(forURL: fullRequestURL)
         
-        let task = authorization.oauth2.session.dataTask(with: req) { data, response, error in
-            if let data = data {
-                self.decodeCharactersData(data, fromURL: fullRequestURL)
-            }
-            if let error = error {
+        let task = authorization.oauth2.session.dataTask(with: req) { [self] data, response, error in
+            guard error == nil,
+                  let response = response as? HTTPURLResponse,
+                  response.statusCode == 200,
+                  let data = data else {
+                
                 // something went wrong, check the error
-                print("error")
-                print(error.localizedDescription)
-                self.connectionRetries += 1
-                self.loadCharacters()
+                print(error?.localizedDescription ?? "error")
+                connectionRetries += 1
+                loadCharacters()
+                
+                return
             }
+            
+            connectionRetries = 0
+            decodeCharactersData(data, fromURL: fullRequestURL)
+            
         }
         task.resume()
     }
@@ -208,12 +214,11 @@ class GameData: ObservableObject {
             }
             
             ignoredCharacters = accountIgnoredCharacters
-        }
-        
-        DispatchQueue.main.async { [self] in
+            
             charactersForRaidEncounters.append(contentsOf: accountCharacters.filter({ (character) -> Bool in
                 character.level >= 30
             }))
+            
             actualItemsToDownload += charactersForRaidEncounters.count
             print("finished loading characters")
             print("loaded \(characters.count) characters, including \(charactersForRaidEncounters.count) in raiding level")
@@ -262,12 +267,13 @@ class GameData: ObservableObject {
     }
     
     func unIgnoreCharacter(_ character: CharacterInProfile) {
-        let index = ignoredCharacters.firstIndex(of: character)
-        var characterToPutBack = ignoredCharacters.remove(at: index ?? 0)
+        let index = ignoredCharacters.firstIndex(of: character) ?? 0
+        var characterToPutBack = ignoredCharacters[index]
         characterToPutBack.order! -= 1000
         
         DispatchQueue.main.async { [self] in
             withAnimation {
+                ignoredCharacters.remove(at: index)
                 characters.append(characterToPutBack)
             }
             rewriteOrders()
@@ -282,7 +288,7 @@ class GameData: ObservableObject {
     
     func loadAccountMounts() {
         
-        if timeRetries > 5 || connectionRetries > 5 {
+        if timeRetries > 3 || connectionRetries > 3 {
             print("Failed after \(timeRetries) timer retries, and or \(connectionRetries) connection errors")
             timeRetries = 0
             connectionRetries = 0
@@ -314,17 +320,23 @@ class GameData: ObservableObject {
         }
         let req = authorization.oauth2.request(forURL: fullRequestURL)
         
-        let task = authorization.oauth2.session.dataTask(with: req) { data, response, error in
-            if let data = data {
-                self.decodeAccountMounts(data, fromURL: fullRequestURL)
-            }
-            if let error = error {
+        let task = authorization.oauth2.session.dataTask(with: req) { [self] data, response, error in
+            guard error == nil,
+                  let response = response as? HTTPURLResponse,
+                  response.statusCode == 200,
+                  let data = data else {
+                
                 // something went wrong, check the error
-                print("error")
-                print(error.localizedDescription)
-                self.connectionRetries += 1
-                self.loadAccountMounts()
+                print(error?.localizedDescription ?? "error")
+                connectionRetries += 1
+                loadAccountMounts()
+                
+                return
             }
+            
+            connectionRetries = 0
+            decodeAccountMounts(data, fromURL: fullRequestURL)
+            
         }
         task.resume()
     }
@@ -362,13 +374,15 @@ class GameData: ObservableObject {
             
             
         } catch {
+            print("Error while decoding mounts")
             print(error)
+            loadAccountPets()
         }
     }
     
     func loadAccountPets() {
         
-        if timeRetries > 5 || connectionRetries > 5 {
+        if timeRetries > 3 || connectionRetries > 3 {
             print("Failed after \(timeRetries) timer retries, and or \(connectionRetries) connection errors")
             timeRetries = 0
             connectionRetries = 0
@@ -400,17 +414,20 @@ class GameData: ObservableObject {
         }
         let req = authorization.oauth2.request(forURL: fullRequestURL)
         
-        let task = authorization.oauth2.session.dataTask(with: req) { data, response, error in
-            if let data = data {
-                self.decodeAccountPets(data, fromURL: fullRequestURL)
-            }
-            if let error = error {
+        let task = authorization.oauth2.session.dataTask(with: req) { [self] data, response, error in
+            guard error == nil,
+                  let response = response as? HTTPURLResponse,
+                  response.statusCode == 200,
+                  let data = data else {
                 // something went wrong, check the error
-                print("error")
-                print(error.localizedDescription)
-                self.connectionRetries += 1
-                self.loadAccountPets()
+                print(error?.localizedDescription ?? "error")
+                connectionRetries += 1
+                loadAccountPets()
+                return
             }
+            
+            decodeAccountPets(data, fromURL: fullRequestURL)
+            
         }
         task.resume()
     }
@@ -447,7 +464,9 @@ class GameData: ObservableObject {
             loadExpansionIndex()
             
         } catch {
+            print("Error while decoding pets")
             print(error)
+            loadExpansionIndex()
         }
     }
     
@@ -478,14 +497,16 @@ class GameData: ObservableObject {
         let req = authorization.oauth2.request(forURL: fullRequestURL)
         
         let task = authorization.oauth2.session.dataTask(with: req) { data, response, error in
-            if let data = data {
-                self.decodeExpansionIndexData(data, fromURL: fullRequestURL)
+            guard error == nil,
+                  let response = response as? HTTPURLResponse,
+                  response.statusCode == 200,
+                  let data = data else {
+                print(error?.localizedDescription ?? "error")
+                return
             }
-            if let error = error {
-                // something went wrong, check the error
-                print("error")
-                print(error.localizedDescription)
-            }
+            
+            self.decodeExpansionIndexData(data, fromURL: fullRequestURL)
+            
         }
         task.resume()
     }
@@ -508,16 +529,24 @@ class GameData: ObservableObject {
             
             
         } catch {
+            print("Error while decoding expansion Index Data")
             print(error)
         }
     }
     
     private func loadExpansionJournal() {
         
-        if timeRetries > 5 || connectionRetries > 5 {
+        if timeRetries > 3 || connectionRetries > 3 {
             print("Failed after \(timeRetries) timer retries, and or \(connectionRetries) connection errors")
+            
             timeRetries = 0
             connectionRetries = 0
+            
+            if expansionsStubs.count > 0 {
+                expansionsStubs.removeFirst()
+            }
+            
+            loadExpansionJournal()
             return
         }
         
@@ -566,23 +595,24 @@ class GameData: ObservableObject {
         
         let req = authorization.oauth2.request(forURL: fullRequestURL)
         
-        let task = authorization.oauth2.session.dataTask(with: req) { data, response, error in
-            if let data = data {
-                self.timeRetries = 0
-                self.connectionRetries = 0
+        let task = authorization.oauth2.session.dataTask(with: req) { [self] data, response, error in
+            guard error == nil,
+                  let response = response as? HTTPURLResponse,
+                  response.statusCode == 200,
+                  let data = data else {
                 
-                self.decodeExpansionJournalData(data, fromURL: fullRequestURL)
-                
-            }
-            if let error = error {
-                // something went wrong, check the error
-                print("error")
-                print(error.localizedDescription)
-                self.connectionRetries += 1
+                print(error?.localizedDescription ?? "error")
+                connectionRetries += 1
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    self.loadExpansionJournal()
+                    loadExpansionJournal()
                 }
+                return
             }
+            
+            timeRetries = 0
+            connectionRetries = 0
+            
+            decodeExpansionJournalData(data, fromURL: fullRequestURL)
         }
         task.resume()
         
@@ -623,10 +653,16 @@ class GameData: ObservableObject {
     }
     
     private func loadRaidsInfo(){
-        if timeRetries > 5 || connectionRetries > 5 {
+        if timeRetries > 3 || connectionRetries > 3 {
             print("Failed after \(timeRetries) timer retries, and or \(connectionRetries) connection errors")
             timeRetries = 0
             connectionRetries = 0
+            
+            if self.raidsStubs.count > 0 {
+                self.raidsStubs.removeFirst()
+            }
+            self.loadRaidsInfo()
+            
             return
         }
         guard let currentRaidToLoad = raidsStubs.first else {
@@ -682,24 +718,24 @@ class GameData: ObservableObject {
         
         let req = authorization.oauth2.request(forURL: fullRequestURL)
         
-        let task = authorization.oauth2.session.dataTask(with: req) { data, response, error in
-            if let data = data {
-                self.timeRetries = 0
-                self.connectionRetries = 0
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                DispatchQueue.main.async {
-                    self.decodeRaidData(data, fromURL: fullRequestURL)
-                }
-                
-            }
-            if let error = error {
-                // something went wrong, check the error
+        let task = authorization.oauth2.session.dataTask(with: req) { [self] data, response, error in
+            
+            guard error == nil,
+                  let response = response as? HTTPURLResponse,
+                  response.statusCode == 200,
+                  let data = data else {
                 print("error, retrying in 1 second")
-                print(error.localizedDescription)
+                print(error?.localizedDescription ?? "error")
                 self.connectionRetries += 1
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    self.loadRaidsInfo()
+                    loadRaidsInfo()
                 }
+                return
+            }
+            
+            connectionRetries = 0
+            DispatchQueue.main.async {
+                decodeRaidData(data, fromURL: fullRequestURL)
             }
         }
         task.resume()
@@ -725,6 +761,9 @@ class GameData: ObservableObject {
             if let url = url {
                 JSONCoreDataManager.shared.saveJSON(data, withURL: url)
             }
+            
+            
+            timeRetries = 0
                 
             DispatchQueue.main.async {
                 withAnimation {
@@ -742,7 +781,9 @@ class GameData: ObservableObject {
             }
             
         } catch {
+            timeRetries += 1
             print(error)
+            loadRaidsInfo()
         }
     }
     
@@ -760,10 +801,16 @@ class GameData: ObservableObject {
     }
     
     private func loadRaidEncountersInfo(){
-        if timeRetries > 5 || connectionRetries > 5 {
+        if timeRetries > 3 || connectionRetries > 3 {
             print("Failed after \(timeRetries) timer retries, and or \(connectionRetries) connection errors")
             timeRetries = 0
             connectionRetries = 0
+            
+            if raidEncounters.count > 0 {
+                raidEncounters.removeFirst()
+            }
+            loadRaidEncountersInfo()
+            
             return
         }
         guard let currentRaidEncountersToLoad = raidEncountersStubs.first else {
@@ -826,25 +873,24 @@ class GameData: ObservableObject {
         
         let req = authorization.oauth2.request(forURL: fullRequestURL)
         
-        let task = authorization.oauth2.session.dataTask(with: req) { data, response, error in
-            if let data = data {
-                self.timeRetries = 0
-                self.connectionRetries = 0
-                
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                DispatchQueue.main.async {
-                    self.decodeRaidEncountersData(data, fromURL: URLIdentifier)
-                }
-                
-            }
-            if let error = error {
+        let task = authorization.oauth2.session.dataTask(with: req) { [self] data, response, error in
+            guard error == nil,
+                  let response = response as? HTTPURLResponse,
+                  response.statusCode == 200,
+                  let data = data else {
                 // something went wrong, check the error
                 print("error, retrying in 1 second")
-                print(error.localizedDescription)
-                self.connectionRetries += 1
+                print(error?.localizedDescription ?? "error")
+                connectionRetries += 1
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    self.loadRaidEncountersInfo()
+                    loadRaidEncountersInfo()
                 }
+                return
+            }
+            self.connectionRetries = 0
+            
+            DispatchQueue.main.async {
+                self.decodeRaidEncountersData(data, fromURL: URLIdentifier)
             }
         }
         task.resume()
@@ -867,6 +913,8 @@ class GameData: ObservableObject {
             if let url = url {
                 JSONCoreDataManager.shared.saveJSON(data, withURL: url)
             }
+            
+            timeRetries = 0
                 
             DispatchQueue.main.async {
                 
@@ -882,7 +930,9 @@ class GameData: ObservableObject {
             }
             
         } catch {
+            timeRetries += 1
             print(error)
+            loadRaidEncountersInfo()
         }
     }
     
@@ -911,10 +961,18 @@ class GameData: ObservableObject {
     }
     
     func loadCharacterRaidEncounters() {
-        if timeRetries > 5 || connectionRetries > 5 {
+        if timeRetries > 3 || connectionRetries > 3 {
             print("Failed after \(timeRetries) timer retries, and or \(connectionRetries) connection errors")
             timeRetries = 0
             connectionRetries = 0
+            
+            if charactersForRaidEncounters.count > 0 {
+                charactersForRaidEncounters.removeFirst()
+            }
+            if charactersForRaidEncounters.count > 0 {
+                loadCharacterRaidEncounters()
+            }
+            
             DispatchQueue.main.async { [self] in
                 withAnimation {
                     loadingAllowed = true
@@ -989,21 +1047,23 @@ class GameData: ObservableObject {
         let req = authorization.oauth2.request(forURL: fullRequestURL)
         
         let task = authorization.oauth2.session.dataTask(with: req) { [self] data, response, error in
-            if let data = data {
-//                print(data)
-                timeRetries = 0
-                connectionRetries = 0
-                decodeCharacterRaidEncountersData(data, fromURL: fullRequestURL)
-            }
-            if let error = error {
+            guard error == nil,
+                  let response = response as? HTTPURLResponse,
+                  response.statusCode == 200,
+                  let data = data else {
                 // something went wrong, check the error
                 print("error, retrying in 1 second")
-                print(error.localizedDescription)
+                print(error?.localizedDescription ?? "error")
                 connectionRetries += 1
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     loadCharacterRaidEncounters()
                 }
+                return
             }
+            
+            connectionRetries = 0
+            decodeCharacterRaidEncountersData(data, fromURL: fullRequestURL)
+            
         }
         task.resume()
     }
@@ -1020,6 +1080,10 @@ class GameData: ObservableObject {
             if let url = url {
                 JSONCoreDataManager.shared.saveJSON(data, withURL: url)
             }
+            
+            
+            timeRetries = 0
+            
             DispatchQueue.main.async { [self] in
                 withAnimation {
                     characterRaidEncounters.append(dataResponse)
@@ -1034,7 +1098,9 @@ class GameData: ObservableObject {
             
 
         } catch {
+            timeRetries += 1
             print(error)
+            loadCharacterRaidEncounters()
         }
     }
     
