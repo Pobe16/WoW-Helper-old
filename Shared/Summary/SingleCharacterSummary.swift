@@ -86,7 +86,12 @@ struct SingleCharacterSummary: View {
         var raidsWorthFarming: [CombinedRaidWithEncounters] = []
         
         for raid in allRaids {
-            if raidsWorthFarming.count < 4 {
+            #if os(iOS)
+                let maxNumberOfRaidsToShow = 4
+            #elseif os(macOS)
+                let maxNumberOfRaidsToShow = 6
+            #endif
+            if raidsWorthFarming.count < maxNumberOfRaidsToShow {
                 if isRaidWorthFarming(raid) {
                     raidsWorthFarming.append(raid)
                 }
