@@ -96,6 +96,8 @@
 		C85059E4256093910083FEEA /* SavingAvatars.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85059E2256093910083FEEA /* SavingAvatars.swift */; };
 		C85059EA256093CA0083FEEA /* SavingRaidsBackgrounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85059E9256093CA0083FEEA /* SavingRaidsBackgrounds.swift */; };
 		C85059EB256093CA0083FEEA /* SavingRaidsBackgrounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85059E9256093CA0083FEEA /* SavingRaidsBackgrounds.swift */; };
+		C85059F5256153680083FEEA /* RaidSuggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85059F4256153680083FEEA /* RaidSuggestion.swift */; };
+		C85059F6256153680083FEEA /* RaidSuggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85059F4256153680083FEEA /* RaidSuggestion.swift */; };
 		C8665E6524F066DF0043A23C /* GameDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8665E6424F066DF0043A23C /* GameDataLoader.swift */; };
 		C8665E6624F066DF0043A23C /* GameDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8665E6424F066DF0043A23C /* GameDataLoader.swift */; };
 		C8665E6824F1DF980043A23C /* InstanceJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8665E6724F1DF980043A23C /* InstanceJournal.swift */; };
@@ -106,6 +108,8 @@
 		C86A6B8F253CD1A600784F6C /* Credits.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86A6B8D253CD1A600784F6C /* Credits.swift */; };
 		C874D5CE24F2926A0006B210 /* ExpansionGameDataPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C874D5CD24F2926A0006B210 /* ExpansionGameDataPreview.swift */; };
 		C874D5CF24F2926A0006B210 /* ExpansionGameDataPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C874D5CD24F2926A0006B210 /* ExpansionGameDataPreview.swift */; };
+		C8770B1825633ACE00CE4BAC /* PreparingRaidSuggestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8770B1725633ACE00CE4BAC /* PreparingRaidSuggestions.swift */; };
+		C8770B1925633ACE00CE4BAC /* PreparingRaidSuggestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8770B1725633ACE00CE4BAC /* PreparingRaidSuggestions.swift */; };
 		C887120F24E4A01200C0A0ED /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C887120E24E4A01200C0A0ED /* LoginScreen.swift */; };
 		C887121024E4A01200C0A0ED /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C887120E24E4A01200C0A0ED /* LoginScreen.swift */; };
 		C88EEA9D24E9E2B800155CBC /* JSONCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EEA9C24E9E2B800155CBC /* JSONCoreDataManager.swift */; };
@@ -258,11 +262,13 @@
 		C85059DB256092AB0083FEEA /* CharacterEncountersReloading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterEncountersReloading.swift; sourceTree = "<group>"; };
 		C85059E2256093910083FEEA /* SavingAvatars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingAvatars.swift; sourceTree = "<group>"; };
 		C85059E9256093CA0083FEEA /* SavingRaidsBackgrounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingRaidsBackgrounds.swift; sourceTree = "<group>"; };
+		C85059F4256153680083FEEA /* RaidSuggestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidSuggestion.swift; sourceTree = "<group>"; };
 		C8665E6424F066DF0043A23C /* GameDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDataLoader.swift; sourceTree = "<group>"; };
 		C8665E6724F1DF980043A23C /* InstanceJournal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceJournal.swift; sourceTree = "<group>"; };
 		C86A6B86253CD13900784F6C /* CreditsListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsListItem.swift; sourceTree = "<group>"; };
 		C86A6B8D253CD1A600784F6C /* Credits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credits.swift; sourceTree = "<group>"; };
 		C874D5CD24F2926A0006B210 /* ExpansionGameDataPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpansionGameDataPreview.swift; sourceTree = "<group>"; };
+		C8770B1725633ACE00CE4BAC /* PreparingRaidSuggestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreparingRaidSuggestions.swift; sourceTree = "<group>"; };
 		C887120E24E4A01200C0A0ED /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		C88EEA9C24E9E2B800155CBC /* JSONCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONCoreDataManager.swift; sourceTree = "<group>"; };
 		C88EEA9F24E9EFDB00155CBC /* CharacterLoadingListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterLoadingListItem.swift; sourceTree = "<group>"; };
@@ -445,6 +451,7 @@
 				C8929623253A123E00F1BA30 /* InstanceNotableItems.swift */,
 				C8929638253A1D1300F1BA30 /* PlaceHolders.swift */,
 				C83AF6D1253F95260027AF80 /* Collections.swift */,
+				C85059F4256153680083FEEA /* RaidSuggestion.swift */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -516,6 +523,7 @@
 				C85059C6256090310083FEEA /* LoadingRaids.swift */,
 				C85059CD2560915B0083FEEA /* LoadingRaidEncounters.swift */,
 				C85059D4256092430083FEEA /* LoadingCharacterEncounters.swift */,
+				C8770B1725633ACE00CE4BAC /* PreparingRaidSuggestions.swift */,
 				C85059DB256092AB0083FEEA /* CharacterEncountersReloading.swift */,
 				C85059E2256093910083FEEA /* SavingAvatars.swift */,
 				C85059E9256093CA0083FEEA /* SavingRaidsBackgrounds.swift */,
@@ -794,6 +802,7 @@
 				C85059E3256093910083FEEA /* SavingAvatars.swift in Sources */,
 				C86A6B87253CD13A00784F6C /* CreditsListItem.swift in Sources */,
 				C85059AB25608ACC0083FEEA /* LoadingCharacters.swift in Sources */,
+				C85059F5256153680083FEEA /* RaidSuggestion.swift in Sources */,
 				C85059DC256092AB0083FEEA /* CharacterEncountersReloading.swift in Sources */,
 				C811E7A724E05FBE0050F6CD /* AuthInfo.swift in Sources */,
 				C892962B253A16AB00F1BA30 /* LargeNotableRaid.swift in Sources */,
@@ -815,6 +824,7 @@
 				C8665E6824F1DF980043A23C /* InstanceJournal.swift in Sources */,
 				C89914C424F992B200DADAB1 /* RaidFarmingCollection.swift in Sources */,
 				C8F942F424EF1D2500B6222C /* SecretOAuth.swift in Sources */,
+				C8770B1825633ACE00CE4BAC /* PreparingRaidSuggestions.swift in Sources */,
 				C803C5E225007B8800A8D2DE /* RaidFarmHeader.swift in Sources */,
 				C8929639253A1D1300F1BA30 /* PlaceHolders.swift in Sources */,
 				C811E78B24E01B1F0050F6CD /* AuthCheckingScreen.swift in Sources */,
@@ -885,6 +895,7 @@
 				C85059E4256093910083FEEA /* SavingAvatars.swift in Sources */,
 				C86A6B88253CD13A00784F6C /* CreditsListItem.swift in Sources */,
 				C85059AC25608ACC0083FEEA /* LoadingCharacters.swift in Sources */,
+				C85059F6256153680083FEEA /* RaidSuggestion.swift in Sources */,
 				C85059DD256092AB0083FEEA /* CharacterEncountersReloading.swift in Sources */,
 				C84B82F824E5FD65006E84FA /* MainScreen.swift in Sources */,
 				C892962C253A16AB00F1BA30 /* LargeNotableRaid.swift in Sources */,
@@ -906,6 +917,7 @@
 				C8F942F524EF1D2500B6222C /* SecretOAuth.swift in Sources */,
 				C803C5E325007B8800A8D2DE /* RaidFarmHeader.swift in Sources */,
 				C811E7A824E05FBE0050F6CD /* AuthInfo.swift in Sources */,
+				C8770B1925633ACE00CE4BAC /* PreparingRaidSuggestions.swift in Sources */,
 				C8B1426D251D61CB004F982B /* DefaultListItemBackground.swift in Sources */,
 				C892963A253A1D1300F1BA30 /* PlaceHolders.swift in Sources */,
 				C8F942EA24EF027C00B6222C /* LogOutDebugScreen.swift in Sources */,

@@ -21,7 +21,7 @@ struct ItemIcon: View {
             ProgressView()
                 .progressViewStyle(CircularProgressViewStyle())
                 .onAppear {
-                    loadMediaData()
+                    loadItemMediaData()
                 }
             
         } else {
@@ -37,7 +37,7 @@ struct ItemIcon: View {
         }
     }
     
-    fileprivate func loadMediaData() {
+    fileprivate func loadItemMediaData() {
         retries += 1
         guard retries < 6 else { return }
         let requestUrlAPIHost = UserDefaults.standard.object(forKey: UserDefaultsKeys.APIRegionHost) as? String ?? APIRegionHostList.Europe
@@ -64,7 +64,7 @@ struct ItemIcon: View {
                   response.statusCode == 200,
                   let data = data else {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    loadMediaData()
+                    loadItemMediaData()
                 }
                 return
             }
@@ -76,7 +76,7 @@ struct ItemIcon: View {
                 guard let iconMedia = dataResponse.assets.first(where: { (asset) -> Bool in
                     asset.key == "icon"
                 }) else {
-                    loadMediaData()
+                    loadItemMediaData()
                     return
                 }
                 
@@ -85,7 +85,7 @@ struct ItemIcon: View {
             } catch {
                 print(error)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    loadMediaData()
+                    loadItemMediaData()
                 }
             }
             
@@ -94,7 +94,7 @@ struct ItemIcon: View {
                 // something went wrong, check the error
                 print("error")
                 print(error.localizedDescription)
-                loadMediaData()
+                loadItemMediaData()
             }
         }
         task.resume()
@@ -110,7 +110,7 @@ struct ItemIcon: View {
                       response.statusCode == 200,
                       let data = data else {
                     
-                    loadMediaData()
+                    loadItemMediaData()
                     return
                     
                 }

@@ -92,11 +92,11 @@ struct InstanceTile: View {
             return
         }
         let instanceNameTransformed = instance.name.lowercased().replacingOccurrences(of: " ", with: "-")
-        let nameForImage = "\(instanceNameTransformed)-\(instance.id)-tile-background"
+        let nameForImage = "\(instanceNameTransformed)-\(instance.id)-\(CoreDataIDFragments.instanceBackground)"
         
         guard let storedImage = CoreDataImagesManager.shared.fetchImage(withName: nameForImage, maximumAgeInDays: 100) else {
             
-            loadMediaData(saveAs: nameForImage)
+            loadInstanceMediaData(saveAs: nameForImage)
             return
         }
         DispatchQueue.main.async {
@@ -109,7 +109,7 @@ struct InstanceTile: View {
         
     }
     
-    func loadMediaData(saveAs imageName: String) {
+    func loadInstanceMediaData(saveAs imageName: String) {
         
         let requestUrlJournalMedia = instance.media.key.href
         let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? APIRegionHostList.Europe
@@ -129,7 +129,7 @@ struct InstanceTile: View {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     timeRetries += 1
                     print("retrying in 1s")
-                    loadMediaData(saveAs: imageName)
+                    loadInstanceMediaData(saveAs: imageName)
                 }
                 return
             }

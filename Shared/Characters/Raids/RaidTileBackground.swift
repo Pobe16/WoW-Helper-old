@@ -41,10 +41,10 @@ struct RaidTileBackground: View {
         guard timeRetries < 2, connectionRetries < 2 else { return }
         guard raid.background == nil else { return }
         let instanceNameTransformed = raid.raidName.lowercased().replacingOccurrences(of: " ", with: "-")
-        let nameForImage = "\(instanceNameTransformed)-\(raid.id)-tile-background"
+        let nameForImage = "\(instanceNameTransformed)-\(raid.id)-\(CoreDataIDFragments.instanceBackground)"
         
         guard let storedImage = CoreDataImagesManager.shared.fetchImage(withName: nameForImage, maximumAgeInDays: 100) else {
-            loadMediaData(saveAs: nameForImage)
+            loadRaidMediaData(saveAs: nameForImage)
             return
         }
         DispatchQueue.main.async {
@@ -56,7 +56,7 @@ struct RaidTileBackground: View {
         
     }
     
-    func loadMediaData(saveAs imageName: String) {
+    func loadRaidMediaData(saveAs imageName: String) {
         
         let requestUrlJournalMedia = raid.media.key.href
         let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? APIRegionHostList.Europe
@@ -76,7 +76,7 @@ struct RaidTileBackground: View {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     timeRetries += 1
                     print("retrying in 1s")
-                    loadMediaData(saveAs: imageName)
+                    loadRaidMediaData(saveAs: imageName)
                 }
                 return
             }

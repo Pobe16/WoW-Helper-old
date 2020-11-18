@@ -12,8 +12,10 @@ struct SummaryOfNotableRaids: View {
     @Namespace var animationsForSecondWidget
     @Namespace var animationsForThirdWidget
     @Namespace var animationsForFourthWidget
+    #if os(macOS)
     @Namespace var animationsForFifthWidget
     @Namespace var animationsForSixthWidget
+    #endif
     
     let summarySize: summaryPreviewSize
     let character: CharacterInProfile
@@ -127,10 +129,12 @@ struct SummaryOfNotableRaids: View {
     
     func selectNamespace(for widgetNumber: Int) -> Namespace.ID {
         switch widgetNumber {
+        #if os(macOS)
         case 5:
             return animationsForSixthWidget
         case 4:
             return animationsForFifthWidget
+        #endif
         case 3:
             return animationsForFourthWidget
         case 2:

@@ -52,9 +52,10 @@ struct IgnoredCharactersRestore: View {
     }
     func shouldWeGoBack() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            if self.gameData.ignoredCharacters.count < 1 {
+            if self.gameData.ignoredCharacters.isEmpty {
                 self.presentationMode.wrappedValue.dismiss()
             }
+            
         }
     }
 }

@@ -10,10 +10,7 @@ import SwiftUI
 struct CharacterListItem: View {
     @Environment (\.colorScheme) var colorScheme: ColorScheme
     
-    @EnvironmentObject var authorization: Authentication
-    @State var characterMedia: CharacterMedia?
-    let character: CharacterInProfile
-    @State var characterImageData: Data? = nil
+    @State var character: CharacterInProfile
     
     
     var body: some View {

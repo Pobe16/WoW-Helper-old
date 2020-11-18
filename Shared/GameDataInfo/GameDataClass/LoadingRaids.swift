@@ -33,6 +33,7 @@ extension GameData {
                         self.raids.sort()
                     }
                     self.prepareRaidEncounters()
+                    self.prepareRaidBackgrounds()
                 }
                 return
             }

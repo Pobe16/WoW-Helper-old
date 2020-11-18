@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum itemQualityName: String {
+enum itemQualityName: String, Codable {
     case poor       = "poor"
     case common     = "common"
     case uncommon   = "uncommon"
@@ -25,7 +25,16 @@ struct InstanceNotableItems: Hashable, Equatable {
     let pets: [QualityItemStub]
 }
 
-struct QualityItemStub: Hashable{
+struct CharacterInstanceNotableItems: Hashable, Codable {
+    let characterID: Int
+    let characterName: String
+    let characterRealmSlug: String
+    let raidID: Int
+    let mounts: [QualityItemStub]
+    let pets: [QualityItemStub]
+}
+
+struct QualityItemStub: Hashable, Codable, Equatable {
     static func == (lhs: QualityItemStub, rhs: QualityItemStub) -> Bool {
         lhs.id == lhs.id
     }
@@ -33,4 +42,15 @@ struct QualityItemStub: Hashable{
     let name: LocalizedName
     let id: Int
     let quality: itemQualityName
+}
+
+struct QualityItemStubWithIconAddress: Hashable, Codable, Equatable {
+    static func == (lhs: QualityItemStubWithIconAddress, rhs: QualityItemStubWithIconAddress) -> Bool {
+        lhs.id == lhs.id
+    }
+    
+    let name: LocalizedName
+    let id: Int
+    let quality: itemQualityName
+    let iconURI: String
 }

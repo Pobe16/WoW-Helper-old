@@ -18,4 +18,9 @@ struct UserDefaultsKeys {
     static let raidFilteringOptions     = "raidFilteringOptions"
     static let summaryPreviewSize       = "summaryPreviewSize"
     static let characterOrder           = "characterOrder"
+    static let identifiableImageName    = "characterAvatar"
+}
+
+struct CoreDataIDFragments {
+    static let instanceBackground       = "tile-background"
 }

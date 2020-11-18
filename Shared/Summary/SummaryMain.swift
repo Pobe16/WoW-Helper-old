@@ -28,15 +28,14 @@ struct SummaryMain: View {
         if gameData.loadingAllowed {
             ScrollView {
                 VStack{
-                    if gameData.characterRaidEncounters.count > 0 {
-                        ForEach(gameData.characterRaidEncounters, id: \.character.id) { GDCharacterEncounters in
-                            if getCharacterBasedOn(encounters: GDCharacterEncounters) != nil {
-                                SingleCharacterSummary(
-                                    summarySize: summarySize,
-                                    character: getCharacterBasedOn(encounters: GDCharacterEncounters)!,
-                                    characterEncounters: GDCharacterEncounters
-                                )
-                            }
+                    if getRaidingCharacters().count > 0 {
+                        ForEach(getRaidingCharacters(), id: \.id) { character in
+                            
+                            SingleCharacterSummary(
+                                summarySize: summarySize,
+                                character: character
+                            )
+                            
                         }
                     } else if gameData.characters.count > 0 {
                         HStack{
@@ -97,6 +96,12 @@ struct SummaryMain: View {
                 })
         }
         
+    }
+    
+    func getRaidingCharacters() -> [CharacterInProfile] {
+        return gameData.characters.filter { (character) -> Bool in
+            return character.level >= 30
+        }
     }
     
     func getCharacterBasedOn(encounters: CharacterRaidEncounters) -> CharacterInProfile? {

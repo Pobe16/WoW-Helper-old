@@ -40,6 +40,12 @@ class GameData: ObservableObject {
                 
     @Published var loadingAllowed: Bool                                 = true
     
+    var incompleteNotableRaids: [RaidsSuggestedForCharacter]            = []
+    var incompleteLootInRaids: [CharacterInstanceNotableItems]          = []
+    var lootToDownload: [QualityItemStub]                               = []
+    var downloadedLoot: [QualityItemStubWithIconAddress]                = []
+    @Published var raidSuggestions: [RaidsSuggestedForCharacter]        = []
+    
     init() {
         
     }
