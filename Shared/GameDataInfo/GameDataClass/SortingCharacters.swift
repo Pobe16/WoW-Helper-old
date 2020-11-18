@@ -55,6 +55,7 @@ extension GameData {
             actualItemsToDownload += charactersForRaidEncounters.count
             print("finished loading characters")
             print("loaded \(characters.count) characters, including \(charactersForRaidEncounters.count) in raiding level")
+            prepareForAvatarSaving()
             loadAccountMounts()
         }
     }
@@ -83,7 +84,8 @@ extension GameData {
     
     func ignoreCharacter(at offsets: IndexSet) {
         var characterToIgnore = characters.remove(at: offsets.first!)
-        characterToIgnore.order! += 1000
+        characterToIgnore.order! += 1050
+        
         ignoredCharacters.append(characterToIgnore)
         
         UserDefaults.standard.setValue(characterToIgnore.order!, forKey: "\(UserDefaultsKeys.characterOrder)\(characterToIgnore.name)\(characterToIgnore.id)\(characterToIgnore.realm.slug)")

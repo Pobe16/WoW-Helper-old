@@ -26,6 +26,14 @@ struct Account: Codable, Hashable {
 }
 
 struct CharacterInProfile: Codable, Hashable, Identifiable {
+    static func == (lhs: CharacterInProfile, rhs: CharacterInProfile) -> Bool {
+        if  lhs.name == rhs.name &&
+            lhs.realm.id == rhs.realm.id &&
+            lhs.id == rhs.id &&
+            lhs.avatar == rhs.avatar {
+            return true
+        } else { return false }
+    }
     let character: LinkStub
     let protectedCharacter: LinkStub
     let name: String

@@ -18,7 +18,7 @@ struct CollectibleItem: Hashable, Comparable, Equatable {
     
     let itemID: Int
     let name: String
-    var icon: Data?
+//    var icon: Data?
     let collectionID: Int
 }
 

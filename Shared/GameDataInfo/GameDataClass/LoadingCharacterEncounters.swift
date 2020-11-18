@@ -20,6 +20,7 @@ extension GameData {
             }
             if charactersForRaidEncounters.count > 0 {
                 loadCharacterRaidEncounters()
+                return
             }
             
             DispatchQueue.main.async { [self] in
@@ -28,12 +29,19 @@ extension GameData {
                 }
                 reloadFromCDAllowed = true
             }
+            if !characterRaidEncounters.isEmpty {
+                DispatchQueue.main.async {
+                    self.prepareSuggestedRaids()
+                }
+            }
             return
         }
         
         guard let character = charactersForRaidEncounters.first else {
             if characterRaidEncounters.count > 0 {
                 print("finished loading character raid encounters")
+                
+                print(self.characterRaidEncounters.count)
                 print("loaded \(characterRaidEncounters.count) character raid encounters")
                 
                 DispatchQueue.main.async { [self] in
@@ -43,6 +51,7 @@ extension GameData {
                     }
                     reloadFromCDAllowed = true
                 }
+                prepareSuggestedRaids()
                 return
             }
             timeRetries += 1

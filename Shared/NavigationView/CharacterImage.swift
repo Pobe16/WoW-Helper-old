@@ -10,7 +10,6 @@ import SwiftUI
 struct CharacterImage: View {
     @EnvironmentObject var authorization: Authentication
     @EnvironmentObject var gameData: GameData
-    @State var characterMedia: CharacterMedia?
     @State var character: CharacterInProfile
     
     @State var frameSize: CGFloat = 63
@@ -22,7 +21,7 @@ struct CharacterImage: View {
                 .frame(width: frameSize, height: frameSize)
                 .cornerRadius(15, antialiased: true)
                 .onAppear(perform: {
-                    loadMediaData()
+                    loadCharacterMediaData()
                 })
         } else {
             #if os(iOS)
@@ -62,12 +61,12 @@ struct CharacterImage: View {
         }
         """.data(using: .utf8)!
         
-        characterMedia = try! JSONDecoder().decode(CharacterMedia.self, from: shadow)
+        let shadowMedia = try! JSONDecoder().decode(CharacterMedia.self, from: shadow)
         
-        loadCharacterAvatar()
+        loadCharacterAvatar(from: shadowMedia)
     }
     
-    fileprivate func loadMediaData() {
+    fileprivate func loadCharacterMediaData() {
         let requestUrlAPIHost = UserDefaults.standard.object(forKey: UserDefaultsKeys.APIRegionHost) as? String ?? APIRegionHostList.Europe
         let encodedName = character.name.lowercased().addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         let requestUrlAPIFragment = "/profile/wow/character" +
@@ -78,13 +77,16 @@ struct CharacterImage: View {
         let requestAPINamespace = "profile-\(regionShortCode)"
         let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? APIRegionHostList.Europe
         
-        let fullRequestURL = URL(string:
+        guard let fullRequestURL = URL(string:
                                     requestUrlAPIHost +
                                     requestUrlAPIFragment +
                                     "?namespace=\(requestAPINamespace)" +
                                     "&locale=\(requestLocale)" +
                                     "&access_token=\(authorization.oauth2.accessToken ?? "")"
-        )!
+        ) else {
+            prepareNonExistingMedia()
+            return
+        }
         
         let req = authorization.oauth2.request(forURL: fullRequestURL)
         
@@ -94,6 +96,8 @@ struct CharacterImage: View {
                   response.statusCode == 200,
                   let data = data else {
             
+                // something went wrong, check the error
+//                print(error?.localizedDescription ?? "Unknown error")
                 prepareNonExistingMedia()
                 return
             }
@@ -102,47 +106,42 @@ struct CharacterImage: View {
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             do {
                 let dataResponse = try decoder.decode(CharacterMedia.self, from: data)
-                characterMedia = dataResponse
                 
-                loadCharacterAvatar()
+                loadCharacterAvatar(from: dataResponse)
                 
             } catch {
                 prepareNonExistingMedia()
-                print(error)
-            }
-                
-                
-            
-            if let error = error {
-                prepareNonExistingMedia()
-                // something went wrong, check the error
-                print("error")
                 print(error.localizedDescription)
             }
         }
         task.resume()
     }
     
-    fileprivate func getShortAvatar() -> String? {
-        if characterMedia?.assets != nil {
-            guard let avatarAsset = characterMedia?.assets?.first(where: { (asset) -> Bool in
+    fileprivate func getShortAvatar(from media: CharacterMedia) -> String? {
+        if media.assets != nil {
+            guard let avatarAsset = media.assets?.first(where: { (asset) -> Bool in
                 asset.key == "avatar"
             }) else { return nil }
             return avatarAsset.value
-        } else if characterMedia?.avatarUrl != nil {
-            return characterMedia?.avatarUrl!
+        } else if media.avatarUrl != nil {
+            return media.avatarUrl!
         }
         return nil
     }
     
-    fileprivate func loadCharacterAvatar() {
-        guard let shortAvatarAddress = getShortAvatar(),
+    fileprivate func loadCharacterAvatar(from media: CharacterMedia) {
+        guard let shortAvatarAddress = getShortAvatar(from: media),
               let avatarURL = URL(string: shortAvatarAddress + "?alt=/shadow/avatar/\(character.playableRace.id)-\(character.gender.type == .male ? 0 : 1)")
               else {
             prepareNonExistingMedia()
             return
         }
-        guard let storedImage = CoreDataImagesManager.shared.fetchImage(withName: shortAvatarAddress, maximumAgeInDays: 10) else {
+        
+        let encodedName = character.name.lowercased().addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        
+        let identifiableImageName = "\(UserDefaultsKeys.identifiableImageName)-\(encodedName ?? character.name.lowercased())-\(character.realm.slug)"
+        
+        guard let storedImage = CoreDataImagesManager.shared.fetchImage(withName: identifiableImageName, maximumAgeInDays: 10) else {
             
             let dataTask = URLSession.shared.dataTask(with: avatarURL) { data, response, error in
                 guard error == nil,
@@ -155,7 +154,7 @@ struct CharacterImage: View {
                     
                 }
                 
-                CoreDataImagesManager.shared.updateImage(name: shortAvatarAddress, data: data)
+                CoreDataImagesManager.shared.updateImage(name: identifiableImageName, data: data)
                 character.avatar = data
                 DispatchQueue.main.async {
                     gameData.updateCharacterAvatar(for: character, with: data)

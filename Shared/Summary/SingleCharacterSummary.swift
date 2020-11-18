@@ -13,7 +13,6 @@ struct SingleCharacterSummary: View {
     
     let summarySize: summaryPreviewSize
     let character: CharacterInProfile
-    let characterEncounters: CharacterRaidEncounters
     
     @State var notableRaids: [CombinedRaidWithEncounters]   = []
     @State var notableRaidsLoot: [InstanceNotableItems]     = []
@@ -66,6 +65,11 @@ struct SingleCharacterSummary: View {
     func combineCharacterEncountersWithData() {
         guard gameData.raids.count > 0 else { return }
         let raidDataManipulator = RaidDataHelper()
+        guard let characterEncounters = gameData.characterRaidEncounters.first(where: { (encounters) -> Bool in
+            return (encounters.character.name == character.name && encounters.character.realm.id == character.realm.id)
+        }) else {
+            return
+        }
         let combinedRaidInfo = raidDataManipulator.createFullRaidData(using: characterEncounters, with: gameData, filter: .highest, filterForFaction: character.faction)
         
         var allDataCombined = RaidDataFilledAndSorted(basedOn: combinedRaidInfo, for: character, farmingOrder: farmOrder)

@@ -12,12 +12,16 @@ extension GameData {
     func reloadCharacterRaidEncounters(for character: CharacterInProfile) {
         reloadFromCDAllowed = false
         
+        guard let indexToDelete = characterRaidEncounters.firstIndex(where: { (encountersCharacter) -> Bool in
+            encountersCharacter.character.id == character.id &&
+            encountersCharacter.character.name == character.name &&
+            encountersCharacter.character.realm.slug == character.realm.slug
+        }) else {
+            return
+        }
+        
         DispatchQueue.main.async {
-            self.characterRaidEncounters.removeAll { (encountersCharacter) -> Bool in
-                encountersCharacter.character.id == character.id &&
-                encountersCharacter.character.name == character.name &&
-                encountersCharacter.character.realm.slug == character.realm.slug
-            }
+            self.characterRaidEncounters.remove(at: indexToDelete)
             self.charactersForRaidEncounters.append(character)
             self.loadCharacterRaidEncounters()
         }

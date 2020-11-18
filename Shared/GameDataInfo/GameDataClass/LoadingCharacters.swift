@@ -85,7 +85,6 @@ extension GameData {
             for account in accounts {
                 accountCharacters.append(contentsOf: account.characters)
             }
-            
             addOrderToCharacters(accountCharacters)
             
         } catch {
