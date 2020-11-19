@@ -11,8 +11,10 @@ struct RaidsSuggestedForCharacter: Codable, Hashable, Identifiable {
     var id = UUID()
     let characterID: Int
     let characterName: String
+    let characterLevel: Int
     let characterRealmSlug: String
     let characterAvatarURI: String
+    let characterFaction: FactionType
     let raids: [RaidSuggestion]
 }
 

@@ -139,7 +139,7 @@ struct CharacterImage: View {
         
         let encodedName = character.name.lowercased().addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         
-        let identifiableImageName = "\(UserDefaultsKeys.identifiableImageName)-\(encodedName ?? character.name.lowercased())-\(character.realm.slug)"
+        let identifiableImageName = "\(UserDefaultsKeys.characterAvatar)-\(encodedName ?? character.name.lowercased())-\(character.realm.slug)"
         
         guard let storedImage = CoreDataImagesManager.shared.fetchImage(withName: identifiableImageName, maximumAgeInDays: 10) else {
             

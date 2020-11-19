@@ -82,7 +82,7 @@ struct Faction: Codable, Hashable {
     let name: String
 }
 
-enum FactionType: String, Codable {
+enum FactionType: String, Codable, Hashable {
     case alliance   = "ALLIANCE"
     case horde      = "HORDE"
     case neutral    = "NEUTRAL"

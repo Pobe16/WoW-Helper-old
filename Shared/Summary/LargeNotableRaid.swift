@@ -11,21 +11,20 @@ struct LargeNotableRaid: View {
     @Environment (\.colorScheme) var colorScheme: ColorScheme
     let namespace: Namespace.ID
     
-    let character: CharacterInProfile
-    let raid: CombinedRaidWithEncounters
+    let character: RaidsSuggestedForCharacter
     
-    let items: [QualityItemStub]
+    let raid: RaidSuggestion
     
     var body: some View {
         VStack(spacing: 0) {
             VStack(alignment: .leading) {
                 HStack(alignment: .top) {
-                    CharacterImage(character: character)
+                    StoredCharacterImage(avatarData: CoreDataImagesManager.shared.getImage(using: character.characterAvatarURI), faction: character.characterFaction)
                         .padding()
                         .matchedGeometryEffect(id: "characterImage", in: namespace)
                         .minimumScaleFactor(0.8)
                     Spacer(minLength: 0)
-                    Text("\(character.name)")
+                    Text("\(character.characterName)")
                         .font(.title2)
                         .fontWeight(.semibold)
                         .whiteTextWithBlackOutlineStyle()
@@ -44,15 +43,15 @@ struct LargeNotableRaid: View {
                     .matchedGeometryEffect(id: "raidName", in: namespace)
             }
             
-            if items.count > 0 {
-                LargeNotableLoot(namespace: namespace, items: items)
+            if raid.items.count > 0 {
+                LargeNotableLoot(namespace: namespace, items: raid.items)
                     .background(
                         DarkOrBrightTransparentBackground()
                     )
             }
             
         }.background(
-            RaidTileBackground(raid: raid)
+            StoredRaidTileBackground(imageData: CoreDataImagesManager.shared.getImage(using:raid.raidImageURI))
                 .matchedGeometryEffect(id: "backgroundTile", in: namespace)
         )
         .frame(width: 292, height: 311)
@@ -60,4 +59,5 @@ struct LargeNotableRaid: View {
         .clipped()
         
     }
+    
 }

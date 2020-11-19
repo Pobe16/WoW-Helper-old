@@ -10,11 +10,11 @@ import SwiftUI
 struct MediumNotableLoot: View {
     let namespace: Namespace.ID
     
-    let items: [QualityItemStub]
+    let items: [RaidSuggestionItem]
     
     var body: some View {
         VStack{
-            ItemIcon(item: items[0])
+            StoredItemIcon(icon: CoreDataImagesManager.shared.getImage(using: items[0].iconURI))
                 .frame(width: 45, height: 45)
                 .cornerRadius(10)
                 .overlay(
@@ -25,7 +25,7 @@ struct MediumNotableLoot: View {
             Spacer(minLength: 0)
             
             if items.count > 1 {
-                ItemIcon(item: items[1])
+                StoredItemIcon(icon: CoreDataImagesManager.shared.getImage(using: items[1].iconURI))
                     .frame(width: 45, height: 45)
                     .cornerRadius(10)
                     .overlay(

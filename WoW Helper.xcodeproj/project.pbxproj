@@ -110,6 +110,12 @@
 		C874D5CF24F2926A0006B210 /* ExpansionGameDataPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C874D5CD24F2926A0006B210 /* ExpansionGameDataPreview.swift */; };
 		C8770B1825633ACE00CE4BAC /* PreparingRaidSuggestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8770B1725633ACE00CE4BAC /* PreparingRaidSuggestions.swift */; };
 		C8770B1925633ACE00CE4BAC /* PreparingRaidSuggestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8770B1725633ACE00CE4BAC /* PreparingRaidSuggestions.swift */; };
+		C8770B1F2565BC8300CE4BAC /* StoredCharacterImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8770B1E2565BC8300CE4BAC /* StoredCharacterImage.swift */; };
+		C8770B202565BC8300CE4BAC /* StoredCharacterImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8770B1E2565BC8300CE4BAC /* StoredCharacterImage.swift */; };
+		C8770B2A2565CB0F00CE4BAC /* StoredRaidTileBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8770B292565CB0F00CE4BAC /* StoredRaidTileBackground.swift */; };
+		C8770B2B2565CB0F00CE4BAC /* StoredRaidTileBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8770B292565CB0F00CE4BAC /* StoredRaidTileBackground.swift */; };
+		C8770B312565CF8F00CE4BAC /* StoredItemIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8770B302565CF8F00CE4BAC /* StoredItemIcon.swift */; };
+		C8770B322565CF8F00CE4BAC /* StoredItemIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8770B302565CF8F00CE4BAC /* StoredItemIcon.swift */; };
 		C887120F24E4A01200C0A0ED /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C887120E24E4A01200C0A0ED /* LoginScreen.swift */; };
 		C887121024E4A01200C0A0ED /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C887120E24E4A01200C0A0ED /* LoginScreen.swift */; };
 		C88EEA9D24E9E2B800155CBC /* JSONCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EEA9C24E9E2B800155CBC /* JSONCoreDataManager.swift */; };
@@ -269,6 +275,9 @@
 		C86A6B8D253CD1A600784F6C /* Credits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credits.swift; sourceTree = "<group>"; };
 		C874D5CD24F2926A0006B210 /* ExpansionGameDataPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpansionGameDataPreview.swift; sourceTree = "<group>"; };
 		C8770B1725633ACE00CE4BAC /* PreparingRaidSuggestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreparingRaidSuggestions.swift; sourceTree = "<group>"; };
+		C8770B1E2565BC8300CE4BAC /* StoredCharacterImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredCharacterImage.swift; sourceTree = "<group>"; };
+		C8770B292565CB0F00CE4BAC /* StoredRaidTileBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredRaidTileBackground.swift; sourceTree = "<group>"; };
+		C8770B302565CF8F00CE4BAC /* StoredItemIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredItemIcon.swift; sourceTree = "<group>"; };
 		C887120E24E4A01200C0A0ED /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		C88EEA9C24E9E2B800155CBC /* JSONCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONCoreDataManager.swift; sourceTree = "<group>"; };
 		C88EEA9F24E9EFDB00155CBC /* CharacterLoadingListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterLoadingListItem.swift; sourceTree = "<group>"; };
@@ -488,6 +497,8 @@
 		C849961C25153834007D1762 /* Characters */ = {
 			isa = PBXGroup;
 			children = (
+				C8D58916252E3406008FAA3F /* CharacterImage.swift */,
+				C8770B1E2565BC8300CE4BAC /* StoredCharacterImage.swift */,
 				C89914C024F8743600DADAB1 /* CharacterMainView.swift */,
 				C849961D25153876007D1762 /* Raids */,
 			);
@@ -565,6 +576,8 @@
 				C8D58910252D286A008FAA3F /* SingleCharacterSummary.swift */,
 				C8D58920252E707D008FAA3F /* NoFarmingLeft.swift */,
 				C89296142538E81E00F1BA30 /* ItemIcon.swift */,
+				C8770B302565CF8F00CE4BAC /* StoredItemIcon.swift */,
+				C8770B292565CB0F00CE4BAC /* StoredRaidTileBackground.swift */,
 			);
 			path = Summary;
 			sourceTree = "<group>";
@@ -596,7 +609,6 @@
 			isa = PBXGroup;
 			children = (
 				C831CC3924E7296A00C25F67 /* CharacterListItem.swift */,
-				C8D58916252E3406008FAA3F /* CharacterImage.swift */,
 				C8B14264251D5653004F982B /* NavListSectionHeader.swift */,
 				C849968625191ED7007D1762 /* CharacterListItemBackground.swift */,
 				C8B1426B251D61CB004F982B /* DefaultListItemBackground.swift */,
@@ -795,6 +807,7 @@
 				C874D5CE24F2926A0006B210 /* ExpansionGameDataPreview.swift in Sources */,
 				C831CC4724E7355500C25F67 /* CharacterMedia.swift in Sources */,
 				C806FA552501AAE1006DEF78 /* RaidTileBackground.swift in Sources */,
+				C8770B312565CF8F00CE4BAC /* StoredItemIcon.swift in Sources */,
 				C85059D5256092430083FEEA /* LoadingCharacterEncounters.swift in Sources */,
 				C8BB333725030E07003E105F /* RaidOptionsListItem.swift in Sources */,
 				C84B82F724E5FD65006E84FA /* MainScreen.swift in Sources */,
@@ -815,6 +828,7 @@
 				C8E6D7E2252A8613005F0918 /* SummaryListItem.swift in Sources */,
 				C835226F2502379900A5D90D /* BackgroundBlurs.swift in Sources */,
 				C89295F42538BA0200F1BA30 /* MediumNotableRaid.swift in Sources */,
+				C8770B1F2565BC8300CE4BAC /* StoredCharacterImage.swift in Sources */,
 				C803C5DC24FEF1D700A8D2DE /* RaidDataFilledAndSorted.swift in Sources */,
 				C8D5893E25338464008FAA3F /* WhiteTextWithBlackOutline.swift in Sources */,
 				C89914C124F8743700DADAB1 /* CharacterMainView.swift in Sources */,
@@ -853,6 +867,7 @@
 				C818B1CE2520D9B000ED06B7 /* LocalizedName.swift in Sources */,
 				C85059A02560888E0083FEEA /* InitialControls.swift in Sources */,
 				C8F942DB24EDB54000B6222C /* LogOutDebugScreen.swift in Sources */,
+				C8770B2A2565CB0F00CE4BAC /* StoredRaidTileBackground.swift in Sources */,
 				C8EA543A2537BD56002D88B6 /* SmallNotableRaid.swift in Sources */,
 				C818B1DC2521060D00ED06B7 /* NotableItemsInRaid.swift in Sources */,
 				C818B1EF2523ADA400ED06B7 /* RaidsData.swift in Sources */,
@@ -888,6 +903,7 @@
 				C874D5CF24F2926A0006B210 /* ExpansionGameDataPreview.swift in Sources */,
 				C8F942E524EF025600B6222C /* ExpansionJournal.swift in Sources */,
 				C806FA562501AAE1006DEF78 /* RaidTileBackground.swift in Sources */,
+				C8770B322565CF8F00CE4BAC /* StoredItemIcon.swift in Sources */,
 				C85059D6256092430083FEEA /* LoadingCharacterEncounters.swift in Sources */,
 				C8BB333825030E07003E105F /* RaidOptionsListItem.swift in Sources */,
 				C8F942E424EF025600B6222C /* GameData.swift in Sources */,
@@ -908,6 +924,7 @@
 				C803C5D424FC57B800A8D2DE /* CharacterRaidEncounters.swift in Sources */,
 				C83522702502379900A5D90D /* BackgroundBlurs.swift in Sources */,
 				C89295F52538BA0200F1BA30 /* MediumNotableRaid.swift in Sources */,
+				C8770B202565BC8300CE4BAC /* StoredCharacterImage.swift in Sources */,
 				C803C5DD24FEF1D700A8D2DE /* RaidDataFilledAndSorted.swift in Sources */,
 				C89914C224F8743700DADAB1 /* CharacterMainView.swift in Sources */,
 				C8665E6924F1DF980043A23C /* InstanceJournal.swift in Sources */,
@@ -946,6 +963,7 @@
 				C818B1CF2520D9B000ED06B7 /* LocalizedName.swift in Sources */,
 				C85059A12560888E0083FEEA /* InitialControls.swift in Sources */,
 				C831CC5024E8974100C25F67 /* MyData.xcdatamodeld in Sources */,
+				C8770B2B2565CB0F00CE4BAC /* StoredRaidTileBackground.swift in Sources */,
 				C8EA543B2537BD56002D88B6 /* SmallNotableRaid.swift in Sources */,
 				C818B1DD2521060D00ED06B7 /* NotableItemsInRaid.swift in Sources */,
 				C818B1F02523ADA400ED06B7 /* RaidsData.swift in Sources */,

@@ -10,18 +10,18 @@ import SwiftUI
 struct LargeNotableLoot: View {
     let namespace: Namespace.ID
     
-    let items: [QualityItemStub]
+    let items: [RaidSuggestionItem]
     
     var body: some View {
         VStack{
             HStack() {
-                Text("\(items[0].name.value)")
+                Text("\(items[0].name)")
                     .fontWeight(.semibold)
                     .lineLimit(1)
                     .font(.body)
                     .minimumScaleFactor(0.5)
                 Spacer()
-                ItemIcon(item: items[0])
+                StoredItemIcon(icon: CoreDataImagesManager.shared.getImage(using: items[0].iconURI))
                     .frame(width: 32, height: 32)
                     .cornerRadius(8)
                     .overlay(
@@ -32,13 +32,13 @@ struct LargeNotableLoot: View {
             }
             if items.count > 1 {
                 HStack(alignment: .center) {
-                    Text("\(items[1].name.value)")
+                    Text("\(items[1].name)")
                         .fontWeight(.semibold)
                         .lineLimit(1)
                         .font(.body)
                         .minimumScaleFactor(0.5)
                     Spacer(minLength: 0)
-                    ItemIcon(item: items[1])
+                    StoredItemIcon(icon: CoreDataImagesManager.shared.getImage(using: items[1].iconURI))
                         .frame(width: 32, height: 32)
                         .cornerRadius(8)
                         .overlay(
@@ -50,13 +50,13 @@ struct LargeNotableLoot: View {
             }
             if items.count > 2 {
                 HStack() {
-                    Text("\(items[2].name.value)")
+                    Text("\(items[2].name)")
                         .fontWeight(.semibold)
                         .lineLimit(1)
                         .font(.body)
                         .minimumScaleFactor(0.5)
                     Spacer()
-                    ItemIcon(item: items[2])
+                    StoredItemIcon(icon: CoreDataImagesManager.shared.getImage(using: items[2].iconURI))
                         .frame(width: 32, height: 32)
                         .cornerRadius(8)
                         .overlay(

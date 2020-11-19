@@ -33,7 +33,8 @@ struct SummaryMain: View {
                             
                             SingleCharacterSummary(
                                 summarySize: summarySize,
-                                character: character
+                                character: character,
+                                raidSuggestions: getRaidSuggestions(for: character)
                             )
                             
                         }
@@ -104,11 +105,18 @@ struct SummaryMain: View {
         }
     }
     
-    func getCharacterBasedOn(encounters: CharacterRaidEncounters) -> CharacterInProfile? {
-        guard let character = gameData.characters.first(where: { (GDCharacter) -> Bool in
-            GDCharacter.name == encounters.character.name && GDCharacter.realm.slug == encounters.character.realm.slug
-         }) else { return nil }
-        return character
+    func getRaidSuggestions(for character: CharacterInProfile) -> RaidsSuggestedForCharacter? {
+        if gameData.raidSuggestions.isEmpty {
+            return nil
+        }
+        
+        guard let suggestions = gameData.raidSuggestions.first(where: { (storedSuggestions) -> Bool in
+            return storedSuggestions.characterID == character.id &&
+                storedSuggestions.characterName == character.name &&
+                storedSuggestions.characterRealmSlug == character.realm.slug
+        }) else { return nil }
+        
+        return suggestions
     }
     
     func loadOptionsSelection() {

@@ -12,7 +12,7 @@ struct NoFarmingLeft: View {
     
     let summarySize: summaryPreviewSize
     
-    let character: CharacterInProfile
+    let suggestion: RaidsSuggestedForCharacter
     
     var body: some View {
         
@@ -20,11 +20,11 @@ struct NoFarmingLeft: View {
         case .large:
             VStack{
                 HStack(alignment: .top) {
-                    CharacterImage(character: character)
+                    StoredCharacterImage(avatarData: CoreDataImagesManager.shared.getImage(using:suggestion.characterAvatarURI), faction: suggestion.characterFaction)
                         .padding()
                         .matchedGeometryEffect(id: "characterImage", in: noFarmingLeft)
                     Spacer(minLength: 0)
-                    Text("\(character.name), \(character.level)")
+                    Text("\(suggestion.characterName), \(suggestion.characterLevel)")
                         .font(.title2)
                         .fontWeight(.semibold)
                         .whiteTextWithBlackOutlineStyle()
@@ -57,11 +57,11 @@ struct NoFarmingLeft: View {
         case .medium:
             VStack{
                 HStack(alignment: .top) {
-                    CharacterImage(character: character)
+                    StoredCharacterImage(avatarData: CoreDataImagesManager.shared.getImage(using:suggestion.characterAvatarURI), faction: suggestion.characterFaction)
                         .padding()
                         .matchedGeometryEffect(id: "characterImage", in: noFarmingLeft)
                     Spacer(minLength: 0)
-                    Text("\(character.name), \(character.level)")
+                    Text("\(suggestion.characterName), \(suggestion.characterLevel)")
                         .font(.title2)
                         .fontWeight(.semibold)
                         .whiteTextWithBlackOutlineStyle()
@@ -95,7 +95,7 @@ struct NoFarmingLeft: View {
         case .small:
             VStack{
                 HStack {
-                    CharacterImage(character: character, frameSize: 50)
+                    StoredCharacterImage(avatarData: CoreDataImagesManager.shared.getImage(using: suggestion.characterAvatarURI), faction: suggestion.characterFaction, frameSize: 50)
                         .padding()
                         .matchedGeometryEffect(id: "characterImage", in: noFarmingLeft)
                     Spacer()
@@ -127,13 +127,11 @@ struct NoFarmingLeft: View {
 
 struct NoFarmingLeft_Previews: PreviewProvider {
     static var previews: some View {
-        NoFarmingLeft(summarySize: .large, character: placeholders.characterInProfile)
+        NoFarmingLeft(summarySize: .large, suggestion: placeholders.characterWithNoRaidSuggestions)
             .preferredColorScheme(.dark)
             .previewLayout(.fixed(width: 850, height: 350))
-            .environmentObject(Authentication())
         
-        NoFarmingLeft(summarySize: .large, character: placeholders.characterInProfile)
+        NoFarmingLeft(summarySize: .large, suggestion: placeholders.characterWithNoRaidSuggestions)
             .previewLayout(.fixed(width: 850, height: 350))
-            .environmentObject(Authentication())
     }
 }

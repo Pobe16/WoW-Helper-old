@@ -12,15 +12,14 @@ struct SummaryOfNotableRaids: View {
     @Namespace var animationsForSecondWidget
     @Namespace var animationsForThirdWidget
     @Namespace var animationsForFourthWidget
-    #if os(macOS)
     @Namespace var animationsForFifthWidget
     @Namespace var animationsForSixthWidget
-    #endif
     
     let summarySize: summaryPreviewSize
-    let character: CharacterInProfile
-    let notableRaids: [CombinedRaidWithEncounters]
-    let loot: [InstanceNotableItems]
+//    let character: CharacterInProfile
+//    let notableRaids: [CombinedRaidWithEncounters]
+//    let loot: [InstanceNotableItems]
+    let suggestions: RaidsSuggestedForCharacter
     
     @State var viewWidth: CGFloat = 200
     
@@ -34,9 +33,8 @@ struct SummaryOfNotableRaids: View {
                 
                     LargeNotableRaid(
                         namespace: selectNamespace(for: raidNumber),
-                        character: character,
-                        raid: notableRaids[raidNumber],
-                        items: getItems(for: notableRaids[raidNumber].id)
+                        character: suggestions,
+                        raid: suggestions.raids[raidNumber]
                     )
                 
                     Spacer()
@@ -58,9 +56,8 @@ struct SummaryOfNotableRaids: View {
                 
                     MediumNotableRaid(
                         namespace: selectNamespace(for: raidNumber),
-                        character: character,
-                        raid: notableRaids[raidNumber],
-                        items: getItems(for: notableRaids[raidNumber].id)
+                        character: suggestions,
+                        raid: suggestions.raids[raidNumber]
                     )
                 
                     Spacer()
@@ -80,7 +77,10 @@ struct SummaryOfNotableRaids: View {
                 Spacer()
                 ForEach(0...howManyRaidsToPresent(for: viewWidth), id: \.self) { raidNumber in
                 
-                    SmallNotableRaid(namespace: selectNamespace(for: raidNumber) ,character: character, raid: notableRaids[raidNumber])
+                    SmallNotableRaid(
+                        namespace: selectNamespace(for: raidNumber),
+                        character: suggestions,
+                        raid: suggestions.raids[raidNumber])
                 
                 Spacer()
                 }
@@ -99,18 +99,20 @@ struct SummaryOfNotableRaids: View {
         
     }
     
-    func getItems(for raid: Int) -> [QualityItemStub] {
-        guard let raid = loot.first(where: { (loot) -> Bool in
-            loot.id == raid
-        }) else { return [] }
-        var items: [QualityItemStub] = []
-        items.append(contentsOf: raid.mounts)
-        items.append(contentsOf: raid.pets)
-        return items
-    }
+//    func getItems(for raid: Int) -> [QualityItemStub] {
+//        guard let raid = loot.first(where: { (loot) -> Bool in
+//            loot.id == raid
+//        }) else { return [] }
+//        var items: [QualityItemStub] = []
+//        items.append(contentsOf: raid.mounts)
+//        items.append(contentsOf: raid.pets)
+//        return items
+//    }
     
     func howManyRaidsToPresent(for viewSize: CGFloat) -> Int {
-        let raidsCount = notableRaids.count
+        let maxNumberOfRaidsToShow = 5
+        
+        let raidsCount = suggestions.raids.count
         if raidsCount == 1 {
             return 0
         } else {
@@ -123,18 +125,16 @@ struct SummaryOfNotableRaids: View {
             if raidsThatCanFit < 0 { raidsThatCanFit = 0 }
             
             
-            return min(raidsCount - 1, raidsThatCanFit)
+            return min(raidsCount - 1, raidsThatCanFit, maxNumberOfRaidsToShow)
         }
     }
     
     func selectNamespace(for widgetNumber: Int) -> Namespace.ID {
         switch widgetNumber {
-        #if os(macOS)
         case 5:
             return animationsForSixthWidget
         case 4:
             return animationsForFifthWidget
-        #endif
         case 3:
             return animationsForFourthWidget
         case 2:
