@@ -86,7 +86,11 @@ extension GameData {
             return
         }
         
-        guard let storedImage = CoreDataImagesManager.shared.fetchImage(withName: shortAvatarAddress, maximumAgeInDays: 10) else {
+        let encodedName = character.name.lowercased().addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        
+        let identifiableImageName = "\(UserDefaultsKeys.characterAvatar)-\(encodedName ?? character.name.lowercased())-\(character.realm.slug)"
+        
+        guard let storedImage = CoreDataImagesManager.shared.fetchImage(withName: identifiableImageName, maximumAgeInDays: 10) else {
             
             let dataTask = URLSession.shared.dataTask(with: avatarURL) { data, response, error in
                 guard error == nil,
@@ -99,7 +103,7 @@ extension GameData {
                     
                 }
                 
-                CoreDataImagesManager.shared.updateImage(name: shortAvatarAddress, data: data)
+                CoreDataImagesManager.shared.updateImage(name: identifiableImageName, data: data)
                 
                 DispatchQueue.main.async {
                     self.updateCharacterAvatar(for: character, with: data)

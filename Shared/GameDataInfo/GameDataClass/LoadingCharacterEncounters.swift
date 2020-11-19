@@ -30,9 +30,9 @@ extension GameData {
                 reloadFromCDAllowed = true
             }
             if !characterRaidEncounters.isEmpty {
-                DispatchQueue.main.async {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
                     self.prepareSuggestedRaids()
-                }
+                })
             }
             return
         }
@@ -150,6 +150,7 @@ extension GameData {
                 if charactersForRaidEncounters.count > 0 {
                     charactersForRaidEncounters.removeFirst()
                 }
+                
                 loadCharacterRaidEncounters()
             }
             

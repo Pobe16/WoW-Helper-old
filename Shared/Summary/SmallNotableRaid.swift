@@ -11,13 +11,14 @@ struct SmallNotableRaid: View {
     @EnvironmentObject var gameData: GameData
     let namespace: Namespace.ID
     
-    let character: CharacterInProfile
-    let raid: CombinedRaidWithEncounters
+    let character: RaidsSuggestedForCharacter
+    
+    let raid: RaidSuggestion
     
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                CharacterImage(character: character, frameSize: 50)
+                StoredCharacterImage(avatarData: CoreDataImagesManager.shared.getImage(using: character.characterAvatarURI), faction: character.characterFaction, frameSize: 50)
                     .padding()
                     .matchedGeometryEffect(id: "characterImage", in: namespace)
                     .minimumScaleFactor(0.8)
@@ -36,7 +37,7 @@ struct SmallNotableRaid: View {
             
         }
         .background(
-            RaidTileBackground(raid: raid)
+            StoredRaidTileBackground(imageData: CoreDataImagesManager.shared.getImage(using:raid.raidImageURI))
                 .matchedGeometryEffect(id: "backgroundTile", in: namespace)
         )
         .frame(width: 141, height: 141)

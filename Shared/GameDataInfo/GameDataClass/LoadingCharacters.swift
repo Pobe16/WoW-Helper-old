@@ -10,10 +10,11 @@ import SwiftUI
 
 extension GameData {
     func loadCharacters() {
-        withAnimation {
-            loadingAllowed = false
+        DispatchQueue.main.async {
+            withAnimation {
+                self.loadingAllowed = false
+            }
         }
-        
         if timeRetries > 3 || connectionRetries > 3 {
             print("Failed after \(timeRetries) timer retries, and or \(connectionRetries) connection errors")
             timeRetries = 0

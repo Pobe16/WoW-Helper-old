@@ -16,8 +16,7 @@ extension GameData {
         }
         
         lootToDownload = Array(Set(lootToDownload))
-        
-        print(incompleteNotableRaids.count, incompleteLootInRaids.count, lootToDownload.count, Date().timeIntervalSince1970)
+        print("loot to download: \(lootToDownload.count)")
         
         loadLootMedia()
     }
@@ -31,7 +30,7 @@ extension GameData {
         
         let encodedName = character.name.lowercased().addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         
-        let identifiableImageName = "\(UserDefaultsKeys.identifiableImageName)-\(encodedName ?? character.name.lowercased())-\(character.realm.slug)"
+        let identifiableImageName = "\(UserDefaultsKeys.characterAvatar)-\(encodedName ?? character.name.lowercased())-\(character.realm.slug)"
         
         let combinedRaidInfo = raidDataManipulator.createFullRaidData(using: characterEncounters, with: self, filter: .highest, filterForFaction: character.faction)
         
@@ -48,20 +47,24 @@ extension GameData {
         var raidsWorthFarming: [RaidSuggestion] = []
 
         for raid in allRaids {
-            if isRaidWorthFarming(raid, for: character) {
-                let instanceNameTransformed = raid.raidName.lowercased().replacingOccurrences(of: " ", with: "-")
-                let nameForImage = "\(instanceNameTransformed)-\(raid.raidId)-\(CoreDataIDFragments.instanceBackground)"
-                
-                let incompleteRaidToSuggest = RaidSuggestion(raidID: raid.raidId, raidName: raid.raidName, raidImageURI: nameForImage, items: [])
-                raidsWorthFarming.append(incompleteRaidToSuggest)
+            if raidsWorthFarming.count < 6 {
+                if isRaidWorthFarming(raid, for: character) {
+                    let instanceNameTransformed = raid.raidName.lowercased().replacingOccurrences(of: " ", with: "-")
+                    let nameForImage = "\(instanceNameTransformed)-\(raid.raidId)-\(CoreDataIDFragments.instanceBackground)"
+                    
+                    let incompleteRaidToSuggest = RaidSuggestion(raidID: raid.raidId, raidName: raid.raidName, raidImageURI: nameForImage, items: [])
+                    raidsWorthFarming.append(incompleteRaidToSuggest)
+                }
             }
         }
         
         let characterRaidsWithNoIcons = RaidsSuggestedForCharacter(
             characterID: character.id,
             characterName: character.name,
+            characterLevel: character.level,
             characterRealmSlug: character.realm.slug,
             characterAvatarURI: identifiableImageName,
+            characterFaction: character.faction.type,
             raids: raidsWorthFarming
         )
         
@@ -128,7 +131,7 @@ extension GameData {
             connectionRetries = 0
             
             if lootToDownload.count > 0 {
-                print("removing because error:", lootToDownload.first)
+                print("removing because error:", lootToDownload.first ?? "unknown error")
                 lootToDownload.removeFirst()
             }
             if lootToDownload.count > 0 {
@@ -228,7 +231,7 @@ extension GameData {
             
         } catch {
             timeRetries += 1
-            print(error)
+            print("error decoding media format", error)
             loadLootMedia()
         }
     }
@@ -238,6 +241,7 @@ extension GameData {
             asset.key == "icon"
         }) else {
             connectionRetries += 1
+            print("error finding icon in media", media)
             loadLootMedia()
             return
         }
@@ -252,6 +256,7 @@ extension GameData {
                       response.statusCode == 200,
                       let data = data else {
                     connectionRetries += 1
+                    print("error downloadingIcon")
                     loadLootMedia()
                     return
                     
@@ -283,10 +288,13 @@ extension GameData {
         
         connectionRetries = 0
         timeRetries = 0
+        
         loadLootMedia()
     }
     
     func combineNotableRaidsWithLoot() {
+        
+        print("loot downloaded \(downloadedLoot.count)")
         guard incompleteNotableRaids.count > 0 else {
             return
         }
@@ -310,19 +318,25 @@ extension GameData {
                 var pets: [RaidSuggestionItem]      = []
                 
                 for mount in currentLoot!.mounts {
+                    
                     let downloaded = downloadedLoot.first { (item) -> Bool in
                         item.id == mount.id
                     }
+                    
                     let mountToAdd = RaidSuggestionItem(id: mount.id, name: mount.name.value, quality: mount.quality, iconURI: downloaded?.iconURI ?? "")
                     mounts.append(mountToAdd)
+                    
                 }
                 
                 for pet in currentLoot!.pets {
+                    
                     let downloaded = downloadedLoot.first { (item) -> Bool in
                         item.id == pet.id
                     }
+                    
                     let petToAdd = RaidSuggestionItem(id: pet.id, name: pet.name.value, quality: pet.quality, iconURI: downloaded?.iconURI ?? "")
                     pets.append(petToAdd)
+                    
                 }
                 
                 
@@ -332,13 +346,21 @@ extension GameData {
                 raids.append(raidToAdd)
             }
             
-            let characterSuggestions = RaidsSuggestedForCharacter(characterID: character.characterID, characterName: character.characterName, characterRealmSlug: character.characterRealmSlug, characterAvatarURI: character.characterAvatarURI, raids: raids)
+            let characterSuggestions =
+                RaidsSuggestedForCharacter(
+                    characterID: character.characterID,
+                    characterName: character.characterName,
+                    characterLevel: character.characterLevel,
+                    characterRealmSlug: character.characterRealmSlug,
+                    characterAvatarURI: character.characterAvatarURI,
+                    characterFaction: character.characterFaction,
+                    raids: raids
+                )
             
             DispatchQueue.main.async {
                 withAnimation {
                     self.raidSuggestions.append(characterSuggestions)
                 }
-                print(self.raidSuggestions)
             }
             
         }
