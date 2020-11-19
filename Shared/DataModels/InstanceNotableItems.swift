@@ -35,8 +35,11 @@ struct CharacterInstanceNotableItems: Hashable, Codable {
 }
 
 struct QualityItemStub: Hashable, Codable, Equatable {
-    static func == (lhs: QualityItemStub, rhs: QualityItemStub) -> Bool {
-        lhs.id == lhs.id
+    static func == (
+        lhs: QualityItemStub,
+        rhs: QualityItemStub
+    ) -> Bool {
+        lhs.id == rhs.id
     }
     
     let name: LocalizedName
@@ -46,7 +49,7 @@ struct QualityItemStub: Hashable, Codable, Equatable {
 
 struct QualityItemStubWithIconAddress: Hashable, Codable, Equatable {
     static func == (lhs: QualityItemStubWithIconAddress, rhs: QualityItemStubWithIconAddress) -> Bool {
-        lhs.id == lhs.id
+        lhs.id == rhs.id
     }
     
     let name: LocalizedName

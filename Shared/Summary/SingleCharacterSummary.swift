@@ -13,11 +13,10 @@ struct SingleCharacterSummary: View {
     
     let summarySize: summaryPreviewSize
     let character: CharacterInProfile
+    let raidSuggestions: RaidsSuggestedForCharacter?
     
-    @State var notableRaids: [CombinedRaidWithEncounters]   = []
-    @State var notableRaidsLoot: [InstanceNotableItems]     = []
     
-    @State var message: String = "Loading…"
+    let message: String = "Loading…"
     
     var body: some View {
         HStack(spacing:0) {
@@ -42,118 +41,26 @@ struct SingleCharacterSummary: View {
         )
         .cornerRadius(5)
         .padding()
-        if notableRaids.count > 0 {
-//            NoFarmingLeft(summarySize: summarySize, character: character)
-            SummaryOfNotableRaids(summarySize: summarySize, character: character, notableRaids: notableRaids, loot: notableRaidsLoot)
+        if raidSuggestions != nil {
             
-        } else if message == "Loading…" {
+            if raidSuggestions!.raids.isEmpty {
+                
+                NoFarmingLeft(summarySize: summarySize, suggestion: raidSuggestions!)
+                   .padding(.horizontal)
+                
+            } else {
+                
+                SummaryOfNotableRaids(summarySize: summarySize, suggestions: raidSuggestions!)
+                
+            }
+            
+        } else {
             
             Text(message)
                 .padding()
-                .onAppear(perform: {
-                    DispatchQueue.main.async {
-                        combineCharacterEncountersWithData()
-                    }
-                })
-        } else {
-            NoFarmingLeft(summarySize: summarySize, character: character)
-                .padding(.horizontal)
         }
         
     }
-    
-    func combineCharacterEncountersWithData() {
-        guard gameData.raids.count > 0 else { return }
-        let raidDataManipulator = RaidDataHelper()
-        guard let characterEncounters = gameData.characterRaidEncounters.first(where: { (encounters) -> Bool in
-            return (encounters.character.name == character.name && encounters.character.realm.id == character.realm.id)
-        }) else {
-            return
-        }
-        let combinedRaidInfo = raidDataManipulator.createFullRaidData(using: characterEncounters, with: gameData, filter: .highest, filterForFaction: character.faction)
-        
-        var allDataCombined = RaidDataFilledAndSorted(basedOn: combinedRaidInfo, for: character, farmingOrder: farmOrder)
-        
-        allDataCombined.prepareForSummary()
-        
-        var allRaids: [CombinedRaidWithEncounters] = []
-        
-        allDataCombined.raidsCollection.forEach { (raidCollection) in
-            allRaids.append(contentsOf: raidCollection.raids)
-        }
-        
-        if allRaids.count == 0 {
-            message = "No notable raids with loot left for \(character.name)"
-            return
-        }
-        
-        var raidsWorthFarming: [CombinedRaidWithEncounters] = []
-        
-        for raid in allRaids {
-            #if os(iOS)
-                let maxNumberOfRaidsToShow = 4
-            #elseif os(macOS)
-                let maxNumberOfRaidsToShow = 6
-            #endif
-            if raidsWorthFarming.count < maxNumberOfRaidsToShow {
-                if isRaidWorthFarming(raid) {
-                    raidsWorthFarming.append(raid)
-                }
-            } else {
-                break
-            }
-        }
-        withAnimation {
-            notableRaids.append(contentsOf: raidsWorthFarming)
-        }
-    }
-    
-    /// Checks if the raid is worth raiding, by looking through it's encounters, and seeing if the loot from it is a mount or pet
-    /// - Parameter raid: CombinedRaidWithEncounters <- raid info from the Player
-    /// - Returns: True or False - just for decision
-    func isRaidWorthFarming(_ raid: CombinedRaidWithEncounters) -> Bool {
-        let raidDataManipulator = RaidDataHelper()
-        
-        let GDMounts    = gameData.mountsStillToObtain.count > 0 ? gameData.mountsStillToObtain : gameData.mountItemsList
-        let GDPets      = gameData.petsStillToObtain.count > 0 ? gameData.petsStillToObtain : gameData.petItemsList
-        
-        var mounts: [QualityItemStub] = []
-        var pets: [QualityItemStub] = []
-        
-        for encounter in raid.records.first!.progress.encounters {
-            if raidDataManipulator.isEncounterCleared(encounter) { break }
-            
-            let loot = gameData.raidEncounters.first { (journalEncounter) -> Bool in
-                journalEncounter.id == encounter.encounter.id
-            }
-            
-            guard let currentEncounterWithLoot = loot else { return false }
-            
-            for wrapper in currentEncounterWithLoot.items {
-                if GDMounts.contains(where: { (mount) -> Bool in
-                    mount.itemID == wrapper.item.id
-                }) {
-                    let currentMount = QualityItemStub(name: wrapper.item.name, id: wrapper.item.id, quality: .epic)
-                    mounts.append(currentMount)
-                } else if GDPets.contains(where: { (pet) -> Bool in
-                    pet.itemID == wrapper.item.id
-                }) {
-                    let currentPet = QualityItemStub(name: wrapper.item.name, id: wrapper.item.id, quality: .uncommon)
-                    pets.append(currentPet)
-                }
-            }
-        }
-        
-        if mounts.count + pets.count > 0 {
-            let lootForRaid = InstanceNotableItems(id: raid.id, mounts: mounts, pets: pets)
-            notableRaidsLoot.append(lootForRaid)
-            return true
-        } else {
-            return false
-        }
-    }
-    
-    
 }
 
 

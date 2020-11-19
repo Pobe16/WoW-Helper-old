@@ -8,6 +8,16 @@
 import Foundation
 
 struct placeholders{
+    static let characterWithNoRaidSuggestions = RaidsSuggestedForCharacter(
+        characterID: 0,
+        characterName: "Pobe",
+        characterLevel: 69,
+        characterRealmSlug: "defias-brotherhood",
+        characterAvatarURI: "",
+        characterFaction: FactionType.alliance,
+        raids: []
+    )
+    
     static let characterInProfile = CharacterInProfile(
         character: LinkStub(href: ""),
         protectedCharacter: LinkStub(href: ""),

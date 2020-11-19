@@ -59,6 +59,7 @@ struct CoreDataImagesManager {
     }
     
     func fetchImage(withName name: String, maximumAgeInDays age: Int = 7) -> CDImage? {
+        
         let context = persistentContainer.viewContext
         
         let fetchRequest = NSFetchRequest<CDImage>(entityName: "CDImage")
@@ -66,11 +67,14 @@ struct CoreDataImagesManager {
         fetchRequest.predicate = NSPredicate(format: "name == %@", name)
         
         do {
+            
             let pic = try context.fetch(fetchRequest)
             let picture = pic.first
             let interval = Double(age * 24 * 60 * 60 * -1)
             guard let finalPicture = picture,
-                  let creationDate = finalPicture.creationDate else { return nil }
+                  let creationDate = finalPicture.creationDate else {
+                return nil
+            }
             
             if creationDate.timeIntervalSinceNow < interval {
                 return nil
@@ -83,6 +87,20 @@ struct CoreDataImagesManager {
         }
         
         return nil
+    }
+    
+    func getImage(using name: String) -> Data? {
+        guard let storedImage = fetchImage(withName: name, maximumAgeInDays: 9999) else {
+            print("fail loading \(name) image object from CD")
+            return nil
+        }
+        
+        guard let imageData = storedImage.data else {
+            print("fail loding \(name) image data")
+            return nil
+        }
+        
+        return imageData
     }
     
     func updateImage(name: String, data: Data) {
