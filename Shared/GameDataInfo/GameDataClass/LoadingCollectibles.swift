@@ -25,19 +25,28 @@ extension GameData {
         let requestAPINamespace = "profile-\(regionShortCode)"
         let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? EuropeanLocales.BritishEnglish
         
-        let fullRequestURL = URL(string:
+        guard let fullRequestURL = URL(string:
                                     requestUrlAPIHost +
                                     requestUrlAPIFragment +
                                     "?namespace=\(requestAPINamespace)" +
                                     "&locale=\(requestLocale)" +
                                     "&access_token=\(authorization.oauth2.accessToken ?? "")"
-        )!
+        ) else {
+            timeRetries += 1
+            loadAccountMounts()
+            return
+        }
         
         if reloadFromCDAllowed {
             let strippedAPIUrl = String(fullRequestURL.absoluteString)
         
             if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: strippedAPIUrl, maximumAgeInDays: 0.1) {
-                decodeAccountMounts(savedData.data!)
+                guard let savedMountsData = savedData.data else {
+                    timeRetries += 1
+                    loadAccountMounts()
+                    return
+                }
+                decodeAccountMounts(savedMountsData)
                 return
             }
         }
@@ -119,19 +128,28 @@ extension GameData {
         let requestAPINamespace = "profile-\(regionShortCode)"
         let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? EuropeanLocales.BritishEnglish
         
-        let fullRequestURL = URL(string:
+        guard let fullRequestURL = URL(string:
                                     requestUrlAPIHost +
                                     requestUrlAPIFragment +
                                     "?namespace=\(requestAPINamespace)" +
                                     "&locale=\(requestLocale)" +
                                     "&access_token=\(authorization.oauth2.accessToken ?? "")"
-        )!
+        ) else {
+            timeRetries += 1
+            loadAccountPets()
+            return
+        }
         
         if reloadFromCDAllowed {
             let strippedAPIUrl = String(fullRequestURL.absoluteString)
         
             if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: strippedAPIUrl, maximumAgeInDays: 0.1) {
-                decodeAccountMounts(savedData.data!)
+                guard let savedMountsData = savedData.data else {
+                    timeRetries += 1
+                    loadAccountPets()
+                    return
+                }
+                decodeAccountMounts(savedMountsData)
                 return
             }
         }

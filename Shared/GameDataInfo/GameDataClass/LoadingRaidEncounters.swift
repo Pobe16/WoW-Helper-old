@@ -72,11 +72,20 @@ extension GameData {
         let requestUrlAPIFragment = "/data/wow/search/journal-encounter"
         let requestUrlSearchElement = "?instance.id=\(currentRaidEncountersToLoad)"
         let requestUrlIdentifiablePart = requestUrlAPIHost + requestUrlAPIFragment + requestUrlSearchElement
-        let URLIdentifier = URL(string: requestUrlIdentifiablePart)!
+        guard let URLIdentifier = URL(string: requestUrlIdentifiablePart.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? requestUrlIdentifiablePart) else {
+            timeRetries += 1
+            loadRaidEncountersInfo()
+            return
+        }
         
         if reloadFromCDAllowed {
             if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: requestUrlIdentifiablePart, maximumAgeInDays: 90) {
-                decodeRaidEncountersData(savedData.data!)
+                guard let savedRaidEncountersData = savedData.data else {
+                    timeRetries += 1
+                    loadRaidEncountersInfo()
+                    return
+                }
+                decodeRaidEncountersData(savedRaidEncountersData)
                 return
             }
         }
@@ -85,12 +94,16 @@ extension GameData {
         let requestAPINamespace = "static-\(regionShortCode)"
         let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? EuropeanLocales.BritishEnglish
         
-        let fullRequestURL = URL(string:
+        guard let fullRequestURL = URL(string:
                                     requestUrlIdentifiablePart +
                                     "&namespace=\(requestAPINamespace)" +
                                     "&locale=\(requestLocale)" +
                                     "&access_token=\(authorization.oauth2.accessToken ?? "")"
-        )!
+        ) else {
+            timeRetries += 1
+            loadRaidEncountersInfo()
+            return
+        }
         
         
         let req = authorization.oauth2.request(forURL: fullRequestURL)

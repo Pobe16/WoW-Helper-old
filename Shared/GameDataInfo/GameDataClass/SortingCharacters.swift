@@ -16,7 +16,7 @@ extension GameData {
         for var character in downloadedCharacters {
             let currentCharacterOrder = UserDefaults.standard.integer(forKey: "\(UserDefaultsKeys.characterOrder)\(character.name)\(character.id)\(character.realm.slug)")
             character.order = currentCharacterOrder
-            if character.order! > 999 {
+            if currentCharacterOrder > 999 {
                 accountIgnoredCharacters.append(character)
             } else {
                 accountCharacters.append(character)
@@ -24,7 +24,9 @@ extension GameData {
         }
         
         accountCharacters.sort { (lhs, rhs) -> Bool in
-            lhs.order! < rhs.order!
+            guard let lhsOrder = lhs.order else { return false }
+            guard let rhsOrder = rhs.order else { return true }
+            return lhsOrder < rhsOrder
         }
         
         accountIgnoredCharacters.sort { (lhs, rhs) -> Bool in
@@ -74,21 +76,25 @@ extension GameData {
     
     func rewriteOrders(){
         characters.forEach { (item) in
-            let newOrder = characters.firstIndex(of: item)
-            if newOrder != nil {
-                characters[newOrder!].order = newOrder!
-            }
-            UserDefaults.standard.setValue(newOrder!, forKey: "\(UserDefaultsKeys.characterOrder)\(item.name)\(item.id)\(item.realm.slug)")
+            guard let newOrder = characters.firstIndex(of: item) else { return }
+        
+            characters[newOrder].order = newOrder
+            
+            UserDefaults.standard.setValue(newOrder, forKey: "\(UserDefaultsKeys.characterOrder)\(item.name)\(item.id)\(item.realm.slug)")
         }
     }
     
     func ignoreCharacter(at offsets: IndexSet) {
-        var characterToIgnore = characters.remove(at: offsets.first!)
-        characterToIgnore.order! += 1050
+        guard let offset = offsets.first else { return }
+        var characterToIgnore = characters.remove(at: offset)
+        
+        
+        
+        characterToIgnore.order = (characterToIgnore.order ?? 49) + 1050
         
         ignoredCharacters.append(characterToIgnore)
         
-        UserDefaults.standard.setValue(characterToIgnore.order!, forKey: "\(UserDefaultsKeys.characterOrder)\(characterToIgnore.name)\(characterToIgnore.id)\(characterToIgnore.realm.slug)")
+        UserDefaults.standard.setValue(characterToIgnore.order, forKey: "\(UserDefaultsKeys.characterOrder)\(characterToIgnore.name)\(characterToIgnore.id)\(characterToIgnore.realm.slug)")
         DispatchQueue.main.async { [self] in
             withAnimation {
                 characterRaidEncounters.removeAll { (characterEncounters) -> Bool in
@@ -104,7 +110,7 @@ extension GameData {
     func unIgnoreCharacter(_ character: CharacterInProfile) {
         let index = ignoredCharacters.firstIndex(of: character) ?? 0
         var characterToPutBack = ignoredCharacters[index]
-        characterToPutBack.order! -= 1000
+        characterToPutBack.order = (characterToPutBack.order ?? 1100) - 1000
         
         DispatchQueue.main.async { [self] in
             withAnimation {
@@ -112,7 +118,7 @@ extension GameData {
                 characters.append(characterToPutBack)
             }
             rewriteOrders()
-            UserDefaults.standard.setValue(characterToPutBack.order!, forKey: "\(UserDefaultsKeys.characterOrder)\(characterToPutBack.name)\(characterToPutBack.id)\(characterToPutBack.realm.slug)")
+            UserDefaults.standard.setValue(characterToPutBack.order, forKey: "\(UserDefaultsKeys.characterOrder)\(characterToPutBack.name)\(characterToPutBack.id)\(characterToPutBack.realm.slug)")
             if characterToPutBack.level >= 30 {
                 reloadCharacterRaidEncounters(for: characterToPutBack)
             }
