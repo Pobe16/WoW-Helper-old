@@ -22,12 +22,12 @@ struct JournalEncounterSearchWrapper: Codable, Hashable {
 
 struct JournalEncounter: Codable, Hashable, Comparable {
     static func == (lhs: JournalEncounter, rhs: JournalEncounter) -> Bool {
-        return lhs.id == lhs.id && lhs.instance.id == rhs.instance.id
+        return lhs.id == rhs.id && lhs.instance.id == rhs.instance.id
     }
     
     static func < (lhs: JournalEncounter, rhs: JournalEncounter) -> Bool {
         if lhs.instance.id == rhs.instance.id {
-            return lhs.id < lhs.id
+            return lhs.id < rhs.id
         } else {
             return lhs.instance.id < rhs.instance.id
         }
@@ -56,7 +56,7 @@ struct ItemWrapper: Codable, Hashable {
 
 struct ItemStub: Codable, Hashable {
     static func == (lhs: ItemStub, rhs: ItemStub) -> Bool {
-        lhs.id == lhs.id
+        lhs.id == rhs.id
     }
     
     let name: LocalizedName
