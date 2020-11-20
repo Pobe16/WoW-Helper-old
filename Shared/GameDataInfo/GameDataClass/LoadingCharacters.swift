@@ -28,19 +28,28 @@ extension GameData {
         let requestAPINamespace = "profile-\(regionShortCode)"
         let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? EuropeanLocales.BritishEnglish
         
-        let fullRequestURL = URL(string:
+        guard let fullRequestURL = URL(string:
                                     requestUrlAPIHost +
                                     requestUrlAPIFragment +
                                     "?namespace=\(requestAPINamespace)" +
                                     "&locale=\(requestLocale)" +
                                     "&access_token=\(authorization.oauth2.accessToken ?? "")"
-        )!
+        ) else {
+            timeRetries += 1
+            loadCharacters()
+            return
+        }
         
         if reloadFromCDAllowed {
             let strippedAPIUrl = String(fullRequestURL.absoluteString)
         
             if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: strippedAPIUrl, maximumAgeInDays: 0.04) {
-                decodeCharactersData(savedData.data!)
+                guard let gamedata = savedData.data else {
+                    timeRetries += 1
+                    loadCharacters()
+                    return
+                }
+                decodeCharactersData(gamedata)
                 return
             }
         }

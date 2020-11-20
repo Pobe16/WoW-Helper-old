@@ -60,7 +60,12 @@ extension GameData {
             let strippedAPIUrl = String(requestUrlAPIHost.split(separator: "?")[0])
             
             if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: strippedAPIUrl, maximumAgeInDays: 90) {
-                decodeRaidData(savedData.data!)
+                guard let raidInfoData = savedData.data else {
+                    timeRetries += 1
+                    loadRaidsInfo()
+                    return
+                }
+                decodeRaidData(raidInfoData)
                 return
             }
         }
@@ -68,11 +73,15 @@ extension GameData {
         let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? EuropeanLocales.BritishEnglish
         let accessToken = authorization.oauth2.accessToken ?? ""
         
-        let fullRequestURL = URL(string:
+        guard let fullRequestURL = URL(string:
                                     requestUrlAPIHost +
                                     "&locale=\(requestLocale)" +
                                     "&access_token=\(accessToken)"
-        )!
+        ) else {
+            timeRetries += 1
+            loadRaidsInfo()
+            return
+        }
         
         
         let req = authorization.oauth2.request(forURL: fullRequestURL)

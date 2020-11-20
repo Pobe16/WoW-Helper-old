@@ -15,7 +15,13 @@ extension GameData {
             
         if reloadFromCDAllowed {
             if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: requestUrlAPIHost + requestUrlAPIFragment, maximumAgeInDays: 90) {
-                decodeExpansionIndexData(savedData.data!)
+                guard let expansionIndexData = savedData.data else {
+                    JSONCoreDataManager.shared.deleteJSONData(data: savedData)
+                    loadExpansionIndex()
+                    print("data corruption")
+                    return
+                }
+                decodeExpansionIndexData(expansionIndexData)
                 return
             }
         }
@@ -24,13 +30,16 @@ extension GameData {
         let requestAPINamespace = "static-\(regionShortCode)"
         let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? EuropeanLocales.BritishEnglish
         
-        let fullRequestURL = URL(string:
+        guard let fullRequestURL = URL(string:
                                     requestUrlAPIHost +
                                     requestUrlAPIFragment +
                                     "?namespace=\(requestAPINamespace)" +
                                     "&locale=\(requestLocale)" +
                                     "&access_token=\(authorization.oauth2.accessToken ?? "")"
-        )!
+        ) else {
+            loadExpansionIndex()
+            return
+        }
         
         
         let req = authorization.oauth2.request(forURL: fullRequestURL)
@@ -120,16 +129,25 @@ extension GameData {
             let strippedAPIUrl = String(requestUrlAPIHost.split(separator: "?")[0])
         
             if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: strippedAPIUrl, maximumAgeInDays: 90) {
-                decodeExpansionJournalData(savedData.data!)
+                guard let expansionJournalData = savedData.data else {
+                    timeRetries += 1
+                    loadExpansionJournal()
+                    return
+                }
+                decodeExpansionJournalData(expansionJournalData)
                 return
             }
         }
         
-        let fullRequestURL = URL(string:
+        guard let fullRequestURL = URL(string:
                                     requestUrlAPIHost +
                                     "&locale=\(requestLocale)" +
                                     "&access_token=\(accessToken)"
-        )!
+        ) else {
+            timeRetries += 1
+            loadExpansionJournal()
+            return
+        }
         
         
         let req = authorization.oauth2.request(forURL: fullRequestURL)

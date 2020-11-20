@@ -48,7 +48,7 @@ struct CharacterImage: View {
         }
     }
     fileprivate func prepareNonExistingMedia() {
-        let shadow =
+        guard let shadow =
         """
         {
         "assets":
@@ -59,7 +59,7 @@ struct CharacterImage: View {
                 }
             ]
         }
-        """.data(using: .utf8)!
+        """.data(using: .utf8) else { return }
         
         let shadowMedia = try! JSONDecoder().decode(CharacterMedia.self, from: shadow)
         
@@ -118,15 +118,16 @@ struct CharacterImage: View {
     }
     
     fileprivate func getShortAvatar(from media: CharacterMedia) -> String? {
-        if media.assets != nil {
-            guard let avatarAsset = media.assets?.first(where: { (asset) -> Bool in
-                asset.key == "avatar"
-            }) else { return nil }
-            return avatarAsset.value
-        } else if media.avatarUrl != nil {
-            return media.avatarUrl!
+        guard let mediaAssets = characterMedia.assets else {
+            guard let avatarUrl = characterMedia.avatarUrl else {
+                return nil
+            }
+            return avatarUrl
         }
-        return nil
+        guard let avatarUrl = mediaAssets.first(where: { (asset) -> Bool in
+            asset.key == "avatar"
+        }) else { return nil}
+        return avatarUrl.key
     }
     
     fileprivate func loadCharacterAvatar(from media: CharacterMedia) {
@@ -141,7 +142,8 @@ struct CharacterImage: View {
         
         let identifiableImageName = "\(UserDefaultsKeys.characterAvatar)-\(encodedName ?? character.name.lowercased())-\(character.realm.slug)"
         
-        guard let storedImage = CoreDataImagesManager.shared.fetchImage(withName: identifiableImageName, maximumAgeInDays: 10) else {
+        guard let storedImage = CoreDataImagesManager.shared.fetchImage(withName: identifiableImageName, maximumAgeInDays: 10),
+              let avatarData = storedImage.data else {
             
             let dataTask = URLSession.shared.dataTask(with: avatarURL) { data, response, error in
                 guard error == nil,
@@ -164,9 +166,9 @@ struct CharacterImage: View {
             return
         }
         
-        character.avatar = storedImage.data!
+        character.avatar = avatarData
         DispatchQueue.main.async {
-            gameData.updateCharacterAvatar(for: character, with: storedImage.data!)
+            gameData.updateCharacterAvatar(for: character, with: avatarData)
         }
     }
 }

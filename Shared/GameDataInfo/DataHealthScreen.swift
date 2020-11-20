@@ -71,7 +71,11 @@ struct DataHealthScreen: View {
             dateFormatter.dateStyle = .short
             dateFormatter.timeStyle = .none
             dateFormatter.locale = Locale.current
-            let dateString = dateFormatter.string(from: savedData.creationDate!)
+            guard let dataCreationDate = savedData.creationDate else {
+                gameDataCreationDate = "Corrupted data"
+                return
+            }
+            let dateString = dateFormatter.string(from: dataCreationDate)
             gameDataCreationDate = dateString
         } else {
             gameDataCreationDate = "Nothing saved"

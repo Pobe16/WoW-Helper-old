@@ -28,13 +28,13 @@ extension GameData {
     }
     
     func characterRaidEncountersSorting(lhs: CharacterRaidEncounters, rhs: CharacterRaidEncounters) -> Bool {
-        let lhsCharacter = characters.first { (baseCharacter) -> Bool in
+        guard let lhsCharacter = characters.first(where: { (baseCharacter) -> Bool in
             lhs.character.id == baseCharacter.id
-        }
-        let rhsCharacter = characters.first { (baseCharacter) -> Bool in
+        }), let lhsOrder = lhsCharacter.order else { return false }
+        guard let rhsCharacter = characters.first(where: { (baseCharacter) -> Bool in
             rhs.character.id == baseCharacter.id
-        }
-        return lhsCharacter!.order! < rhsCharacter!.order!
+        }), let rhsOrder = rhsCharacter.order else { return true }
+        return lhsOrder < rhsOrder
     }
     
 }

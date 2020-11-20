@@ -37,10 +37,10 @@ extension GameData {
     
     func combineCharacterEncountersWithData(_ characterEncounters: CharacterRaidEncounters) {
         let raidDataManipulator = RaidDataHelper()
-        let character = characters.first { (character) -> Bool in
-            return  character.id == characterEncounters.character.id &&
-                character.realm.slug == characterEncounters.character.realm.slug
-        }!
+        guard let character = characters.first (where: { (char) -> Bool in
+            return  char.id == characterEncounters.character.id &&
+                char.realm.slug == characterEncounters.character.realm.slug
+        }) else { return }
         
         let encodedName = character.name.lowercased().addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         
@@ -103,7 +103,9 @@ extension GameData {
         var mounts: [QualityItemStub] = []
         var pets: [QualityItemStub] = []
         
-        for encounter in raid.records.first!.progress.encounters {
+        guard let highestDifficultyRaid = raid.records.first else { return false }
+        
+        for encounter in highestDifficultyRaid.progress.encounters {
             if raidDataManipulator.isEncounterCleared(encounter) { break }
             
             let loot = raidEncounters.first { (journalEncounter) -> Bool in
@@ -187,13 +189,17 @@ extension GameData {
         let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? APIRegionHostList.Europe
         
         
-        let fullRequestURL = URL(string:
+        guard let fullRequestURL = URL(string:
                                     requestUrlAPIHost +
                                     requestUrlAPIFragment +
                                     "?namespace=\(requestAPINamespace)" +
                                     "&locale=\(requestLocale)" +
                                     "&access_token=\(authorization.oauth2.accessToken ?? "")"
-        )!
+        ) else {
+            timeRetries += 1
+            loadLootMedia()
+            return
+        }
         
         let req = authorization.oauth2.request(forURL: fullRequestURL)
         
@@ -202,8 +208,12 @@ extension GameData {
         let daysNeededForRefresh: Double = reloadFromCDAllowed ? 90 : 0.0
         
         if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: strippedAPIUrl, maximumAgeInDays: daysNeededForRefresh) {
-            
-            decodeItemMedia(item: currentItem, media: savedData.data!)
+            guard let savedMediaData = savedData.data else {
+                timeRetries += 1
+                loadLootMedia()
+                return
+            }
+            decodeItemMedia(item: currentItem, media: savedMediaData)
             
             return
         }
@@ -260,7 +270,12 @@ extension GameData {
             return
         }
         let iconAddress = iconMedia.value
-        let iconURL = URL(string: iconMedia.value)!
+        
+        guard let iconURL = URL(string: iconAddress) else {
+            timeRetries += 1
+            loadLootMedia()
+            return
+        }
         
         guard CoreDataImagesManager.shared.fetchImage(withName: iconAddress, maximumAgeInDays: 90) != nil else {
             
