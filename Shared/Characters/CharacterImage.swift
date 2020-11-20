@@ -118,8 +118,8 @@ struct CharacterImage: View {
     }
     
     fileprivate func getShortAvatar(from media: CharacterMedia) -> String? {
-        guard let mediaAssets = characterMedia.assets else {
-            guard let avatarUrl = characterMedia.avatarUrl else {
+        guard let mediaAssets = media.assets else {
+            guard let avatarUrl = media.avatarUrl else {
                 return nil
             }
             return avatarUrl
