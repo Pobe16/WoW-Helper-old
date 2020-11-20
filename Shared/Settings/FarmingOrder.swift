@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct FarmingOrder: View {
+    @EnvironmentObject var gameData: GameData
     @EnvironmentObject var farmOrder: FarmCollectionsOrder
     
     #if os(iOS)
@@ -52,6 +53,9 @@ struct FarmingOrder: View {
         let encoder = JSONEncoder()
         if let encoded = try? encoder.encode(farmOrder.options) {
             UserDefaults.standard.set(encoded, forKey: UserDefaultsKeys.RaidCollectionsOrder)
+        }
+        DispatchQueue.main.async {
+            gameData.prepareSuggestedRaids()
         }
     }
 }

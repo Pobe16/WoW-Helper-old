@@ -11,6 +11,8 @@ import SwiftUI
 extension GameData {
     
     func prepareSuggestedRaids() {
+        clearBeforeLoading()
+        
         for characterEncounters in characterRaidEncounters {
             combineCharacterEncountersWithData(characterEncounters)
         }
@@ -19,6 +21,18 @@ extension GameData {
         print("loot to download: \(lootToDownload.count)")
         
         loadLootMedia()
+    }
+    
+    func clearBeforeLoading() {
+        incompleteNotableRaids.removeAll()
+        incompleteLootInRaids.removeAll()
+        lootToDownload.removeAll()
+        downloadedLoot.removeAll()
+        DispatchQueue.main.async {
+            withAnimation {
+                self.raidSuggestions.removeAll()
+            }
+        }
     }
     
     func combineCharacterEncountersWithData(_ characterEncounters: CharacterRaidEncounters) {
