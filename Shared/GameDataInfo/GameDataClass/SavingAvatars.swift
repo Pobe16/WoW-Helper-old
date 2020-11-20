@@ -20,8 +20,10 @@ extension GameData {
     }
     
     private func loadCharacterMediaData(for character: CharacterInProfile) {
+        
         let requestUrlAPIHost = UserDefaults.standard.object(forKey: UserDefaultsKeys.APIRegionHost) as? String ?? APIRegionHostList.Europe
         let encodedName = character.name.lowercased().addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        
         let requestUrlAPIFragment = "/profile/wow/character" +
                                     "/\(character.realm.slug)" +
                                     "/\(encodedName ?? character.name.lowercased())" +
@@ -30,13 +32,16 @@ extension GameData {
         let requestAPINamespace = "profile-\(regionShortCode)"
         let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? APIRegionHostList.Europe
         
-        let fullRequestURL = URL(string:
+        guard let fullRequestURL = URL(string:
                                     requestUrlAPIHost +
                                     requestUrlAPIFragment +
                                     "?namespace=\(requestAPINamespace)" +
                                     "&locale=\(requestLocale)" +
                                     "&access_token=\(authorization.oauth2.accessToken ?? "")"
-        )!
+        ) else {
+            prepareNonExistingMedia(for: character)
+            return
+        }
         
         let req = authorization.oauth2.request(forURL: fullRequestURL)
         
@@ -67,15 +72,16 @@ extension GameData {
     }
     
     private func getShortAvatar(from characterMedia: CharacterMedia) -> String? {
-        if characterMedia.assets != nil {
-            guard let avatarAsset = characterMedia.assets?.first(where: { (asset) -> Bool in
-                asset.key == "avatar"
-            }) else { return nil }
-            return avatarAsset.value
-        } else if characterMedia.avatarUrl != nil {
-            return characterMedia.avatarUrl!
+        guard let mediaAssets = characterMedia.assets else {
+            guard let avatarUrl = characterMedia.avatarUrl else {
+                return nil
+            }
+            return avatarUrl
         }
-        return nil
+        guard let avatarUrl = mediaAssets.first(where: { (asset) -> Bool in
+            asset.key == "avatar"
+        }) else { return nil}
+        return avatarUrl.key
     }
     
     func getAvatarFromMedia(_ media: CharacterMedia, for character: CharacterInProfile) {
@@ -113,13 +119,15 @@ extension GameData {
             return
         }
         
+        guard let characterData = storedImage.data else { return }
+        
         DispatchQueue.main.async {
-            self.updateCharacterAvatar(for: character, with: storedImage.data!)
+            self.updateCharacterAvatar(for: character, with: characterData)
         }
     }
     
     private func prepareNonExistingMedia(for character: CharacterInProfile) {
-        let shadow =
+        guard let shadow =
         """
         {
         "assets":
@@ -130,7 +138,7 @@ extension GameData {
                 }
             ]
         }
-        """.data(using: .utf8)!
+        """.data(using: .utf8) else { return }
         
         let characterMedia = try! JSONDecoder().decode(CharacterMedia.self, from: shadow)
         

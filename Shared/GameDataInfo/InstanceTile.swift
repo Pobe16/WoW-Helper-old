@@ -94,16 +94,17 @@ struct InstanceTile: View {
         let instanceNameTransformed = instance.name.lowercased().replacingOccurrences(of: " ", with: "-")
         let nameForImage = "\(instanceNameTransformed)-\(instance.id)-\(CoreDataIDFragments.instanceBackground)"
         
-        guard let storedImage = CoreDataImagesManager.shared.fetchImage(withName: nameForImage, maximumAgeInDays: 100) else {
+        guard let storedImage = CoreDataImagesManager.shared.fetchImage(withName: nameForImage, maximumAgeInDays: 100),
+              let imageData = storedImage.data else {
             
             loadInstanceMediaData(saveAs: nameForImage)
             return
         }
         DispatchQueue.main.async {
             withAnimation {
-                backgroundData = storedImage.data!
+                backgroundData = imageData
             }
-            updateBackground(with: storedImage.data!)
+            updateBackground(with: imageData)
             
         }
         
@@ -114,11 +115,13 @@ struct InstanceTile: View {
         let requestUrlJournalMedia = instance.media.key.href
         let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? APIRegionHostList.Europe
         
-        let fullRequestURL = URL(string:
+        guard let fullRequestURL = URL(string:
                                     requestUrlJournalMedia +
                                     "&locale=\(requestLocale)" +
                                     "&access_token=\(authorization.oauth2.accessToken ?? "")"
-        )!
+        ) else {
+            return
+        }
         let req = authorization.oauth2.request(forURL: fullRequestURL)
         
         let task = authorization.oauth2.session.dataTask(with: req) { data, response, error in

@@ -75,33 +75,35 @@ extension GameData {
         
         let daysNeededForRefresh: Double = reloadFromCDAllowed ? 0.01 : 0.0
         
-        if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: strippedAPIUrl, maximumAgeInDays: daysNeededForRefresh) {
-            
-            decodeCharacterRaidEncountersData(savedData.data!)
-            
-            return
+        if reloadFromCDAllowed {
+            if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: strippedAPIUrl, maximumAgeInDays: daysNeededForRefresh) {
+                guard let characterEncountersData = savedData.data else {
+                    timeRetries += 1
+                    loadCharacterRaidEncounters()
+                    return
+                }
+                decodeCharacterRaidEncountersData(characterEncountersData)
+                
+                return
+            }
         }
         
         let regionShortCode = APIRegionShort.Code[UserDefaults.standard.integer(forKey: UserDefaultsKeys.loginRegion)]
         let requestAPINamespace = "profile-\(regionShortCode)"
         let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? EuropeanLocales.BritishEnglish
         
-        let fullRequestURL = URL(string:
+        guard let fullRequestURL = URL(string:
                                     requestUrlAPIHost +
                                     requestUrlAPIFragment +
                                     "?namespace=\(requestAPINamespace)" +
                                     "&locale=\(requestLocale)" +
                                     "&access_token=\(authorization.oauth2.accessToken ?? "")"
-        )!
-        
-        if reloadFromCDAllowed {
-            let strippedAPIUrl = String(fullRequestURL.absoluteString)
-        
-            if let savedData = JSONCoreDataManager.shared.fetchJSONData(withName: strippedAPIUrl, maximumAgeInDays: 0.01) {
-                decodeCharacterRaidEncountersData(savedData.data!)
-                return
-            }
+        ) else {
+            timeRetries += 1
+            loadCharacterRaidEncounters()
+            return
         }
+        
         let req = authorization.oauth2.request(forURL: fullRequestURL)
         
         let task = authorization.oauth2.session.dataTask(with: req) { [self] data, response, error in
