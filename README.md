@@ -1,6 +1,6 @@
 # WoW Helper
-## Utilities, Productivity, and Games
 ### Written in SwiftUI: iOS / iPadOS 14 required 
+Utilities, Productivity, and Games
 WoW Helper analyse your WoW profile to show you which raids to farm to get new mounts and pets. Additionally, it shows current week's progress in raiding for characters you select.  
 
 **To use this app, you need to have a World of Warcraft account.**  
@@ -16,7 +16,7 @@ Current features:
 * Hiding older / not often used alts
 * App works on iPhones and iPads
 
-![Dark Mode](readme_images/iphonex2.png) ![Light Mode](readme_images/iphonex1.png) ![Dark mode](readme_images/iphonex0.png) 
+[![Dark Mode](readme_images/iphonex2.png)](readme_images/iphonex2.png) [![Light Mode](readme_images/iphonex1.png)](readme_images/iphonex1.png) [![Dark mode](readme_images/iphonex0.png)](readme_images/iphonex0.png)
 
 Roadmap:
 * Homescreen Widget to show suggested raid (loaded from app)
