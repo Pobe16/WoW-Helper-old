@@ -8,7 +8,7 @@
 import Foundation
 
 struct RaidsSuggestedForCharacter: Codable, Hashable, Identifiable {
-    var id = UUID()
+    var id: String { characterName + characterRealmSlug }
     let characterID: Int
     let characterName: String
     let characterLevel: Int
@@ -19,7 +19,7 @@ struct RaidsSuggestedForCharacter: Codable, Hashable, Identifiable {
 }
 
 struct RaidSuggestion: Codable, Hashable, Identifiable {
-    var id = UUID()
+    var id: Int { raidID }
     let raidID: Int
     let raidName: String
     let raidImageURI: String
