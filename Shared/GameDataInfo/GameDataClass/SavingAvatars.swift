@@ -81,7 +81,7 @@ extension GameData {
         guard let avatarUrl = mediaAssets.first(where: { (asset) -> Bool in
             asset.key == "avatar"
         }) else { return nil}
-        return avatarUrl.key
+        return avatarUrl.value
     }
     
     func getAvatarFromMedia(_ media: CharacterMedia, for character: CharacterInProfile) {

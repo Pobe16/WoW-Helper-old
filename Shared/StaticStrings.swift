@@ -19,6 +19,8 @@ struct UserDefaultsKeys {
     static let summaryPreviewSize       = "summaryPreviewSize"
     static let characterOrder           = "characterOrder"
     static let characterAvatar          = "characterAvatar"
+    static let raidSuggestions          = "raidSuggestions"
+    static let appUserGroup             = "group.com.mlukasik.WoW-Helper"
 }
 
 struct CoreDataIDFragments {

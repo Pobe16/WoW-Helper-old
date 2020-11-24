@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SmallNotableRaid: View {
-    @EnvironmentObject var gameData: GameData
     let namespace: Namespace.ID
     
     let character: RaidsSuggestedForCharacter

@@ -12,8 +12,13 @@ struct CoreDataImagesManager {
     static let shared = CoreDataImagesManager()
     
     let persistentContainer: NSPersistentContainer = {
+        let containerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: UserDefaultsKeys.appUserGroup)!
+        let storeURL = containerURL.appendingPathComponent("MyData.sqlite")
+        let description = NSPersistentStoreDescription(url: storeURL)
         
         let container = NSPersistentContainer(name: "MyData")
+        container.persistentStoreDescriptions = [description]
+        
         container.loadPersistentStores { (storeDesctiption, error) in
             if let error = error {
                 fatalError("Loading of store failed \(error)")

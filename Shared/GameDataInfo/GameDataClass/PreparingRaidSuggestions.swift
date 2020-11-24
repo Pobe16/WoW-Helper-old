@@ -393,5 +393,25 @@ extension GameData {
             }
             
         }
+        DispatchQueue.main.async {
+            self.saveRaidSuggestionsToUserDefaults()
+        }
+    }
+    func saveRaidSuggestionsToUserDefaults() {
+        if timeRetries > 5 { return }
+        
+        if self.raidSuggestions.count == incompleteNotableRaids.count {
+            
+            timeRetries = 0
+            guard let suggestionsData = try? JSONEncoder().encode(raidSuggestions) else { return }
+            raidSuggestionsData = suggestionsData
+            
+        }
+        else {
+            timeRetries += 1
+            DispatchQueue.main.asyncAfter(deadline: .now() + Double(timeRetries)) {
+                self.saveRaidSuggestionsToUserDefaults()
+            }
+        }
     }
 }
