@@ -85,6 +85,7 @@ struct CharacterImage: View {
                                     "&access_token=\(authorization.oauth2.accessToken ?? "")"
         ) else {
             prepareNonExistingMedia()
+            print("wrong url")
             return
         }
         
@@ -97,7 +98,9 @@ struct CharacterImage: View {
                   let data = data else {
             
                 // something went wrong, check the error
-//                print(error?.localizedDescription ?? "Unknown error")
+                print(error?.localizedDescription ?? "Unknown error")
+                
+                
                 prepareNonExistingMedia()
                 return
             }
@@ -106,6 +109,7 @@ struct CharacterImage: View {
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             do {
                 let dataResponse = try decoder.decode(CharacterMedia.self, from: data)
+                
                 
                 loadCharacterAvatar(from: dataResponse)
                 
@@ -126,8 +130,8 @@ struct CharacterImage: View {
         }
         guard let avatarUrl = mediaAssets.first(where: { (asset) -> Bool in
             asset.key == "avatar"
-        }) else { return nil}
-        return avatarUrl.key
+        }) else { return nil }
+        return avatarUrl.value
     }
     
     fileprivate func loadCharacterAvatar(from media: CharacterMedia) {
@@ -162,6 +166,7 @@ struct CharacterImage: View {
                     gameData.updateCharacterAvatar(for: character, with: data)
                 }
             }
+            
             dataTask.resume()
             return
         }
