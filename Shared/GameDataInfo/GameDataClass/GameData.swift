@@ -11,6 +11,8 @@ import SwiftUI
 class GameData: ObservableObject {
     @AppStorage(UserDefaultsKeys.raidSuggestions, store: UserDefaults(suiteName: UserDefaultsKeys.appUserGroup))
     var raidSuggestionsData: Data                                       = Data()
+    @AppStorage(UserDefaultsKeys.characterSuggestions, store: UserDefaults(suiteName: UserDefaultsKeys.appUserGroup))
+    var characterSuggestionsData: Data                                  = Data()
     
     var authorization: Authentication                                   = Authentication()
     var timeRetries                                                     = 0

@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import WidgetKit
 
 extension GameData {
     
@@ -405,6 +406,8 @@ extension GameData {
             timeRetries = 0
             guard let suggestionsData = try? JSONEncoder().encode(raidSuggestions) else { return }
             raidSuggestionsData = suggestionsData
+            WidgetCenter.shared.reloadTimelines(ofKind: "com.mlukasik.WoW-Helper.widgetKind.RandomRaidWidget")
+            WidgetCenter.shared.reloadTimelines(ofKind: "com.mlukasik.WoW-Helper.widgetKind.CharacterRaidWidget")
             
         }
         else {

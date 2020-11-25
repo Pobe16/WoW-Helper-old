@@ -74,6 +74,22 @@
 		C84B82F824E5FD65006E84FA /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84B82F624E5FD65006E84FA /* MainScreen.swift */; };
 		C84B82FA24E5FF56006E84FA /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84B82F924E5FF56006E84FA /* UserProfile.swift */; };
 		C84B82FB24E5FF56006E84FA /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84B82F924E5FF56006E84FA /* UserProfile.swift */; };
+		C84CC0F0256ECE840000E46D /* WidgetLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E20793256C825700777C80 /* WidgetLogic.swift */; };
+		C84CC0F8256ECE900000E46D /* NoRaidsLeftWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E2083D256D808500777C80 /* NoRaidsLeftWidget.swift */; };
+		C84CC0F9256ECE900000E46D /* LargeNotableRaidWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E2081E256D7C3B00777C80 /* LargeNotableRaidWidget.swift */; };
+		C84CC0FA256ECE900000E46D /* LargeNotableLootWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E2082B256D7D5200777C80 /* LargeNotableLootWidget.swift */; };
+		C84CC0FB256ECE900000E46D /* MediumNotableRaidWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E207DD256C9FDD00777C80 /* MediumNotableRaidWidget.swift */; };
+		C84CC0FC256ECE900000E46D /* SmallNotableRaidWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E207BA256C861800777C80 /* SmallNotableRaidWidget.swift */; };
+		C84CC0FD256ECE900000E46D /* StoredCharacterImageWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E20807256D768800777C80 /* StoredCharacterImageWidget.swift */; };
+		C84CC0FE256ECE900000E46D /* MediumNotableLootWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E207E4256CA0A600777C80 /* MediumNotableLootWidget.swift */; };
+		C84CC106256ED0180000E46D /* CoreDataImagesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C831CC5224E89A0200C25F67 /* CoreDataImagesManager.swift */; };
+		C84CC10E256ED02F0000E46D /* StoredItemIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8770B302565CF8F00CE4BAC /* StoredItemIcon.swift */; };
+		C84CC116256ED03D0000E46D /* StoredRaidTileBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8770B292565CB0F00CE4BAC /* StoredRaidTileBackground.swift */; };
+		C84CC11E256ED0490000E46D /* WhiteTextWithBlackOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D5893D25338464008FAA3F /* WhiteTextWithBlackOutline.swift */; };
+		C84CC126256ED2E00000E46D /* MyData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C831CC4D24E8974100C25F67 /* MyData.xcdatamodeld */; };
+		C84CC12E256ED2E50000E46D /* JSONCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EEA9C24E9E2B800155CBC /* JSONCoreDataManager.swift */; };
+		C84CC136256ED2F40000E46D /* BackgroundBlurs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C835226E2502379900A5D90D /* BackgroundBlurs.swift */; };
+		C84CC13F256ED30A0000E46D /* VisualEffects in Frameworks */ = {isa = PBXBuildFile; productRef = C84CC13E256ED30A0000E46D /* VisualEffects */; };
 		C85059A02560888E0083FEEA /* InitialControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = C850599F2560888E0083FEEA /* InitialControls.swift */; };
 		C85059A12560888E0083FEEA /* InitialControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = C850599F2560888E0083FEEA /* InitialControls.swift */; };
 		C85059AB25608ACC0083FEEA /* LoadingCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85059AA25608ACC0083FEEA /* LoadingCharacters.swift */; };
@@ -162,7 +178,7 @@
 		C8D5893E25338464008FAA3F /* WhiteTextWithBlackOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D5893D25338464008FAA3F /* WhiteTextWithBlackOutline.swift */; };
 		C8E2072D256C76CC00777C80 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8E2072C256C76CC00777C80 /* WidgetKit.framework */; };
 		C8E2072F256C76CC00777C80 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8E2072E256C76CC00777C80 /* SwiftUI.framework */; };
-		C8E20732256C76CC00777C80 /* Random_Raid_Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E20731256C76CC00777C80 /* Random_Raid_Widget.swift */; };
+		C8E20732256C76CC00777C80 /* RandomRaidWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E20731256C76CC00777C80 /* RandomRaidWidget.swift */; };
 		C8E20735256C76CE00777C80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8E20734256C76CE00777C80 /* Assets.xcassets */; };
 		C8E2073B256C76CE00777C80 /* Random Raid WidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C8E2072B256C76CC00777C80 /* Random Raid WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		C8E20745256C77C100777C80 /* RaidSuggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85059F4256153680083FEEA /* RaidSuggestion.swift */; };
@@ -188,6 +204,48 @@
 		C8E20825256D7C4100777C80 /* LargeNotableRaidWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E2081E256D7C3B00777C80 /* LargeNotableRaidWidget.swift */; };
 		C8E20837256D7DDB00777C80 /* LargeNotableLootWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E2082B256D7D5200777C80 /* LargeNotableLootWidget.swift */; };
 		C8E20844256D80CB00777C80 /* NoRaidsLeftWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E2083D256D808500777C80 /* NoRaidsLeftWidget.swift */; };
+		C8E20863256DA40400777C80 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8E2072C256C76CC00777C80 /* WidgetKit.framework */; };
+		C8E20864256DA40400777C80 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8E2072E256C76CC00777C80 /* SwiftUI.framework */; };
+		C8E20867256DA40400777C80 /* CharacterRaidWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E20866256DA40400777C80 /* CharacterRaidWidget.swift */; };
+		C8E2086A256DA40700777C80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8E20869256DA40700777C80 /* Assets.xcassets */; };
+		C8E20870256DA40700777C80 /* CharacterRaidWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C8E20862256DA40400777C80 /* CharacterRaidWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C8E20880256DA47200777C80 /* WidgetLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E20793256C825700777C80 /* WidgetLogic.swift */; };
+		C8E20881256DA47200777C80 /* StoredCharacterImageWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E20807256D768800777C80 /* StoredCharacterImageWidget.swift */; };
+		C8E20882256DA47200777C80 /* SmallNotableRaidWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E207BA256C861800777C80 /* SmallNotableRaidWidget.swift */; };
+		C8E20883256DA47200777C80 /* MediumNotableRaidWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E207DD256C9FDD00777C80 /* MediumNotableRaidWidget.swift */; };
+		C8E20884256DA47200777C80 /* NoRaidsLeftWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E2083D256D808500777C80 /* NoRaidsLeftWidget.swift */; };
+		C8E20885256DA47200777C80 /* LargeNotableLootWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E2082B256D7D5200777C80 /* LargeNotableLootWidget.swift */; };
+		C8E20886256DA47200777C80 /* LargeNotableRaidWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E2081E256D7C3B00777C80 /* LargeNotableRaidWidget.swift */; };
+		C8E20887256DA47200777C80 /* MediumNotableLootWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E207E4256CA0A600777C80 /* MediumNotableLootWidget.swift */; };
+		C8E2088E256DA48900777C80 /* RaidSuggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85059F4256153680083FEEA /* RaidSuggestion.swift */; };
+		C8E20895256DA49D00777C80 /* MyData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C831CC4D24E8974100C25F67 /* MyData.xcdatamodeld */; };
+		C8E2089C256DA4A000777C80 /* CoreDataImagesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C831CC5224E89A0200C25F67 /* CoreDataImagesManager.swift */; };
+		C8E208A3256DA4A600777C80 /* JSONCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EEA9C24E9E2B800155CBC /* JSONCoreDataManager.swift */; };
+		C8E208AA256DA4AF00777C80 /* APIAccessInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E7A324E01DC30050F6CD /* APIAccessInfo.swift */; };
+		C8E208B1256DA4B900777C80 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84B82F924E5FF56006E84FA /* UserProfile.swift */; };
+		C8E208B8256DA4C300777C80 /* LocalizedName.swift in Sources */ = {isa = PBXBuildFile; fileRef = C818B1CD2520D9B000ED06B7 /* LocalizedName.swift */; };
+		C8E208BF256DA4C700777C80 /* InstanceNotableItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8929623253A123E00F1BA30 /* InstanceNotableItems.swift */; };
+		C8E208C6256DA4F600777C80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C811E76224E01B1F0050F6CD /* Assets.xcassets */; };
+		C8E208CD256DA50700777C80 /* StaticStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FFADAA2525533900465313 /* StaticStrings.swift */; };
+		C8E208D4256DA50E00777C80 /* WhiteTextWithBlackOutline.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D5893D25338464008FAA3F /* WhiteTextWithBlackOutline.swift */; };
+		C8E208DB256DA51D00777C80 /* StoredItemIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8770B302565CF8F00CE4BAC /* StoredItemIcon.swift */; };
+		C8E208E2256DA52200777C80 /* StoredRaidTileBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8770B292565CB0F00CE4BAC /* StoredRaidTileBackground.swift */; };
+		C8E208EA256DA53900777C80 /* VisualEffects in Frameworks */ = {isa = PBXBuildFile; productRef = C8E208E9256DA53900777C80 /* VisualEffects */; };
+		C8E208F2256DA56600777C80 /* BackgroundBlurs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C835226E2502379900A5D90D /* BackgroundBlurs.swift */; };
+		C8E209C5256DE1B600777C80 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E209C4256DE1B600777C80 /* IntentHandler.swift */; };
+		C8E209C9256DE1B600777C80 /* CharacterRaidIntent.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C8E209C2256DE1B600777C80 /* CharacterRaidIntent.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C8E209DB256DE20900777C80 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E209C4256DE1B600777C80 /* IntentHandler.swift */; };
+		C8E20A01256DE3C200777C80 /* StaticStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FFADAA2525533900465313 /* StaticStrings.swift */; };
+		C8E20A09256DE4E200777C80 /* RaidSuggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85059F4256153680083FEEA /* RaidSuggestion.swift */; };
+		C8E20A11256DE77C00777C80 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84B82F924E5FF56006E84FA /* UserProfile.swift */; };
+		C8E20A19256DE78A00777C80 /* InstanceNotableItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8929623253A123E00F1BA30 /* InstanceNotableItems.swift */; };
+		C8E20A21256DE79C00777C80 /* LocalizedName.swift in Sources */ = {isa = PBXBuildFile; fileRef = C818B1CD2520D9B000ED06B7 /* LocalizedName.swift */; };
+		C8E20A29256DE7B100777C80 /* APIAccessInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E7A324E01DC30050F6CD /* APIAccessInfo.swift */; };
+		C8E20A31256DFD7C00777C80 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E209C4256DE1B600777C80 /* IntentHandler.swift */; };
+		C8E20A39256DFE4B00777C80 /* CharacterRaidWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E20866256DA40400777C80 /* CharacterRaidWidget.swift */; };
+		C8E4A42E256F139F008F2FD9 /* CharacterRaidWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = C8E4A432256F139F008F2FD9 /* CharacterRaidWidget.intentdefinition */; };
+		C8E4A42F256F139F008F2FD9 /* CharacterRaidWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = C8E4A432256F139F008F2FD9 /* CharacterRaidWidget.intentdefinition */; };
+		C8E4A430256F139F008F2FD9 /* CharacterRaidWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = C8E4A432256F139F008F2FD9 /* CharacterRaidWidget.intentdefinition */; };
 		C8E4D71924F2A5A500EDAC85 /* InstanceTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E4D71824F2A5A500EDAC85 /* InstanceTile.swift */; };
 		C8E4D71A24F2A5A500EDAC85 /* InstanceTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E4D71824F2A5A500EDAC85 /* InstanceTile.swift */; };
 		C8E4D71C24F2BDD200EDAC85 /* BlizzardMediaFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E4D71B24F2BDD200EDAC85 /* BlizzardMediaFormat.swift */; };
@@ -247,6 +305,20 @@
 			remoteGlobalIDString = C8E2072A256C76CC00777C80;
 			remoteInfo = "Random Raid WidgetExtension";
 		};
+		C8E2086E256DA40700777C80 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C811E75B24E01B1E0050F6CD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C8E20861256DA40400777C80;
+			remoteInfo = CharacterRaidWidgetExtension;
+		};
+		C8E209C7256DE1B600777C80 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C811E75B24E01B1E0050F6CD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C8E209C1256DE1B600777C80;
+			remoteInfo = CharacterRaidIntent;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -256,7 +328,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				C8E20870256DA40700777C80 /* CharacterRaidWidgetExtension.appex in Embed App Extensions */,
 				C8E2073B256C76CE00777C80 /* Random Raid WidgetExtension.appex in Embed App Extensions */,
+				C8E209C9256DE1B600777C80 /* CharacterRaidIntent.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -357,7 +431,7 @@
 		C8E2072B256C76CC00777C80 /* Random Raid WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Random Raid WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8E2072C256C76CC00777C80 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		C8E2072E256C76CC00777C80 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		C8E20731256C76CC00777C80 /* Random_Raid_Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Random_Raid_Widget.swift; sourceTree = "<group>"; };
+		C8E20731256C76CC00777C80 /* RandomRaidWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomRaidWidget.swift; sourceTree = "<group>"; };
 		C8E20734256C76CE00777C80 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C8E20736256C76CE00777C80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C8E20769256C78A900777C80 /* Random Raid WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Random Raid WidgetExtension.entitlements"; sourceTree = "<group>"; };
@@ -369,6 +443,18 @@
 		C8E2081E256D7C3B00777C80 /* LargeNotableRaidWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeNotableRaidWidget.swift; sourceTree = "<group>"; };
 		C8E2082B256D7D5200777C80 /* LargeNotableLootWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeNotableLootWidget.swift; sourceTree = "<group>"; };
 		C8E2083D256D808500777C80 /* NoRaidsLeftWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoRaidsLeftWidget.swift; sourceTree = "<group>"; };
+		C8E20862256DA40400777C80 /* CharacterRaidWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CharacterRaidWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		C8E20866256DA40400777C80 /* CharacterRaidWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterRaidWidget.swift; sourceTree = "<group>"; };
+		C8E20869256DA40700777C80 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C8E2086B256DA40700777C80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C8E208EB256DA54400777C80 /* CharacterRaidWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CharacterRaidWidgetExtension.entitlements; sourceTree = "<group>"; };
+		C8E20949256DDD4C00777C80 /* IntentsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IntentsUI.framework; path = Library/Frameworks/IntentsUI.framework; sourceTree = DEVELOPER_DIR; };
+		C8E209C2256DE1B600777C80 /* CharacterRaidIntent.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CharacterRaidIntent.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		C8E209C4256DE1B600777C80 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
+		C8E209C6256DE1B600777C80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C8E209F9256DE30500777C80 /* CharacterRaidIntent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CharacterRaidIntent.entitlements; sourceTree = "<group>"; };
+		C8E4A431256F139F008F2FD9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = Base; path = Base.lproj/CharacterRaidWidget.intentdefinition; sourceTree = "<group>"; };
+		C8E4A43B256F13A2008F2FD9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CharacterRaidWidget.strings; sourceTree = "<group>"; };
 		C8E4D71824F2A5A500EDAC85 /* InstanceTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceTile.swift; sourceTree = "<group>"; };
 		C8E4D71B24F2BDD200EDAC85 /* BlizzardMediaFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlizzardMediaFormat.swift; sourceTree = "<group>"; };
 		C8E6D7E1252A8613005F0918 /* SummaryListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryListItem.swift; sourceTree = "<group>"; };
@@ -427,12 +513,31 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C8E2085F256DA40400777C80 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C8E20864256DA40400777C80 /* SwiftUI.framework in Frameworks */,
+				C8E20863256DA40400777C80 /* WidgetKit.framework in Frameworks */,
+				C8E208EA256DA53900777C80 /* VisualEffects in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C8E209BF256DE1B600777C80 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C84CC13F256ED30A0000E46D /* VisualEffects in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		C811E75A24E01B1E0050F6CD = {
 			isa = PBXGroup;
 			children = (
+				C8E208EB256DA54400777C80 /* CharacterRaidWidgetExtension.entitlements */,
 				C8E20769256C78A900777C80 /* Random Raid WidgetExtension.entitlements */,
 				C8E20722256C687B00777C80 /* WoW Helper.entitlements */,
 				C811E75F24E01B1E0050F6CD /* Shared */,
@@ -442,6 +547,8 @@
 				C811E78524E01B1F0050F6CD /* Tests macOS */,
 				C8E2078C256C810100777C80 /* SharedWidgets */,
 				C8E20730256C76CC00777C80 /* Random Raid Widget */,
+				C8E20865256DA40400777C80 /* CharacterRaidWidget */,
+				C8E209C3256DE1B600777C80 /* CharacterRaidIntent */,
 				C811E76824E01B1F0050F6CD /* Products */,
 				C811E7A024E01C850050F6CD /* Frameworks */,
 			);
@@ -477,6 +584,8 @@
 				C811E77724E01B1F0050F6CD /* Tests iOS.xctest */,
 				C811E78224E01B1F0050F6CD /* Tests macOS.xctest */,
 				C8E2072B256C76CC00777C80 /* Random Raid WidgetExtension.appex */,
+				C8E20862256DA40400777C80 /* CharacterRaidWidgetExtension.appex */,
+				C8E209C2256DE1B600777C80 /* CharacterRaidIntent.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -521,6 +630,7 @@
 			children = (
 				C8E2072C256C76CC00777C80 /* WidgetKit.framework */,
 				C8E2072E256C76CC00777C80 /* SwiftUI.framework */,
+				C8E20949256DDD4C00777C80 /* IntentsUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -676,7 +786,7 @@
 		C8E20730256C76CC00777C80 /* Random Raid Widget */ = {
 			isa = PBXGroup;
 			children = (
-				C8E20731256C76CC00777C80 /* Random_Raid_Widget.swift */,
+				C8E20731256C76CC00777C80 /* RandomRaidWidget.swift */,
 				C8E20734256C76CE00777C80 /* Assets.xcassets */,
 				C8E20736256C76CE00777C80 /* Info.plist */,
 			);
@@ -696,6 +806,27 @@
 				C8E2083D256D808500777C80 /* NoRaidsLeftWidget.swift */,
 			);
 			path = SharedWidgets;
+			sourceTree = "<group>";
+		};
+		C8E20865256DA40400777C80 /* CharacterRaidWidget */ = {
+			isa = PBXGroup;
+			children = (
+				C8E20866256DA40400777C80 /* CharacterRaidWidget.swift */,
+				C8E4A432256F139F008F2FD9 /* CharacterRaidWidget.intentdefinition */,
+				C8E20869256DA40700777C80 /* Assets.xcassets */,
+				C8E2086B256DA40700777C80 /* Info.plist */,
+			);
+			path = CharacterRaidWidget;
+			sourceTree = "<group>";
+		};
+		C8E209C3256DE1B600777C80 /* CharacterRaidIntent */ = {
+			isa = PBXGroup;
+			children = (
+				C8E209F9256DE30500777C80 /* CharacterRaidIntent.entitlements */,
+				C8E209C4256DE1B600777C80 /* IntentHandler.swift */,
+				C8E209C6256DE1B600777C80 /* Info.plist */,
+			);
+			path = CharacterRaidIntent;
 			sourceTree = "<group>";
 		};
 		C8E4D71E24F31DFA00EDAC85 /* GameDataInfo */ = {
@@ -746,6 +877,8 @@
 			);
 			dependencies = (
 				C8E2073A256C76CE00777C80 /* PBXTargetDependency */,
+				C8E2086F256DA40700777C80 /* PBXTargetDependency */,
+				C8E209C8256DE1B600777C80 /* PBXTargetDependency */,
 			);
 			name = "WoW Helper (iOS)";
 			packageProductDependencies = (
@@ -833,6 +966,46 @@
 			productReference = C8E2072B256C76CC00777C80 /* Random Raid WidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		C8E20861256DA40400777C80 /* CharacterRaidWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C8E20871256DA40700777C80 /* Build configuration list for PBXNativeTarget "CharacterRaidWidgetExtension" */;
+			buildPhases = (
+				C8E2085E256DA40400777C80 /* Sources */,
+				C8E2085F256DA40400777C80 /* Frameworks */,
+				C8E20860256DA40400777C80 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CharacterRaidWidgetExtension;
+			packageProductDependencies = (
+				C8E208E9256DA53900777C80 /* VisualEffects */,
+			);
+			productName = CharacterRaidWidgetExtension;
+			productReference = C8E20862256DA40400777C80 /* CharacterRaidWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		C8E209C1256DE1B600777C80 /* CharacterRaidIntent */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C8E209CA256DE1B600777C80 /* Build configuration list for PBXNativeTarget "CharacterRaidIntent" */;
+			buildPhases = (
+				C8E209BE256DE1B600777C80 /* Sources */,
+				C8E209BF256DE1B600777C80 /* Frameworks */,
+				C8E209C0256DE1B600777C80 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CharacterRaidIntent;
+			packageProductDependencies = (
+				C84CC13E256ED30A0000E46D /* VisualEffects */,
+			);
+			productName = CharacterRaidIntent;
+			productReference = C8E209C2256DE1B600777C80 /* CharacterRaidIntent.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -859,6 +1032,12 @@
 					C8E2072A256C76CC00777C80 = {
 						CreatedOnToolsVersion = 12.2;
 					};
+					C8E20861256DA40400777C80 = {
+						CreatedOnToolsVersion = 12.2;
+					};
+					C8E209C1256DE1B600777C80 = {
+						CreatedOnToolsVersion = 12.2;
+					};
 				};
 			};
 			buildConfigurationList = C811E75E24E01B1E0050F6CD /* Build configuration list for PBXProject "WoW Helper" */;
@@ -883,6 +1062,8 @@
 				C811E77624E01B1F0050F6CD /* Tests iOS */,
 				C811E78124E01B1F0050F6CD /* Tests macOS */,
 				C8E2072A256C76CC00777C80 /* Random Raid WidgetExtension */,
+				C8E20861256DA40400777C80 /* CharacterRaidWidgetExtension */,
+				C8E209C1256DE1B600777C80 /* CharacterRaidIntent */,
 			);
 		};
 /* End PBXProject section */
@@ -929,6 +1110,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C8E20860256DA40400777C80 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C8E208C6256DA4F600777C80 /* Assets.xcassets in Resources */,
+				C8E2086A256DA40700777C80 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C8E209C0256DE1B600777C80 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -960,6 +1157,7 @@
 				C85059F5256153680083FEEA /* RaidSuggestion.swift in Sources */,
 				C85059DC256092AB0083FEEA /* CharacterEncountersReloading.swift in Sources */,
 				C811E7A724E05FBE0050F6CD /* AuthInfo.swift in Sources */,
+				C8E4A42E256F139F008F2FD9 /* CharacterRaidWidget.intentdefinition in Sources */,
 				C892962B253A16AB00F1BA30 /* LargeNotableRaid.swift in Sources */,
 				C85059C025608F840083FEEA /* LoadingExpansions.swift in Sources */,
 				C89296152538E81E00F1BA30 /* ItemIcon.swift in Sources */,
@@ -967,6 +1165,7 @@
 				C8FFADAB2525533900465313 /* StaticStrings.swift in Sources */,
 				C803C5D324FC57B800A8D2DE /* CharacterRaidEncounters.swift in Sources */,
 				C818B1E42522A41D00ED06B7 /* FarmingOrder.swift in Sources */,
+				C8E209DB256DE20900777C80 /* IntentHandler.swift in Sources */,
 				C8E6D7E2252A8613005F0918 /* SummaryListItem.swift in Sources */,
 				C835226F2502379900A5D90D /* BackgroundBlurs.swift in Sources */,
 				C89295F42538BA0200F1BA30 /* MediumNotableRaid.swift in Sources */,
@@ -1150,7 +1349,7 @@
 				C8E2077A256C803600777C80 /* InstanceNotableItems.swift in Sources */,
 				C8E207B4256C854D00777C80 /* WidgetLogic.swift in Sources */,
 				C8E207EB256CA10500777C80 /* MediumNotableRaidWidget.swift in Sources */,
-				C8E20732256C76CC00777C80 /* Random_Raid_Widget.swift in Sources */,
+				C8E20732256C76CC00777C80 /* RandomRaidWidget.swift in Sources */,
 				C8E2079A256C83E200777C80 /* BackgroundBlurs.swift in Sources */,
 				C8E20745256C77C100777C80 /* RaidSuggestion.swift in Sources */,
 				C8E20844256D80CB00777C80 /* NoRaidsLeftWidget.swift in Sources */,
@@ -1166,6 +1365,68 @@
 				C8E20763256C788200777C80 /* StaticStrings.swift in Sources */,
 				C8E20786256C809B00777C80 /* APIAccessInfo.swift in Sources */,
 				C8E2074B256C780000777C80 /* MyData.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C8E2085E256DA40400777C80 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C8E20881256DA47200777C80 /* StoredCharacterImageWidget.swift in Sources */,
+				C8E208F2256DA56600777C80 /* BackgroundBlurs.swift in Sources */,
+				C8E20885256DA47200777C80 /* LargeNotableLootWidget.swift in Sources */,
+				C8E20887256DA47200777C80 /* MediumNotableLootWidget.swift in Sources */,
+				C8E20895256DA49D00777C80 /* MyData.xcdatamodeld in Sources */,
+				C8E2089C256DA4A000777C80 /* CoreDataImagesManager.swift in Sources */,
+				C8E208D4256DA50E00777C80 /* WhiteTextWithBlackOutline.swift in Sources */,
+				C8E208E2256DA52200777C80 /* StoredRaidTileBackground.swift in Sources */,
+				C8E2088E256DA48900777C80 /* RaidSuggestion.swift in Sources */,
+				C8E20886256DA47200777C80 /* LargeNotableRaidWidget.swift in Sources */,
+				C8E208BF256DA4C700777C80 /* InstanceNotableItems.swift in Sources */,
+				C8E20884256DA47200777C80 /* NoRaidsLeftWidget.swift in Sources */,
+				C8E20882256DA47200777C80 /* SmallNotableRaidWidget.swift in Sources */,
+				C8E20880256DA47200777C80 /* WidgetLogic.swift in Sources */,
+				C8E208B8256DA4C300777C80 /* LocalizedName.swift in Sources */,
+				C8E208A3256DA4A600777C80 /* JSONCoreDataManager.swift in Sources */,
+				C8E208DB256DA51D00777C80 /* StoredItemIcon.swift in Sources */,
+				C8E4A42F256F139F008F2FD9 /* CharacterRaidWidget.intentdefinition in Sources */,
+				C8E208B1256DA4B900777C80 /* UserProfile.swift in Sources */,
+				C8E20883256DA47200777C80 /* MediumNotableRaidWidget.swift in Sources */,
+				C8E208AA256DA4AF00777C80 /* APIAccessInfo.swift in Sources */,
+				C8E208CD256DA50700777C80 /* StaticStrings.swift in Sources */,
+				C8E20A31256DFD7C00777C80 /* IntentHandler.swift in Sources */,
+				C8E20867256DA40400777C80 /* CharacterRaidWidget.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C8E209BE256DE1B600777C80 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C84CC0FD256ECE900000E46D /* StoredCharacterImageWidget.swift in Sources */,
+				C8E20A21256DE79C00777C80 /* LocalizedName.swift in Sources */,
+				C8E4A430256F139F008F2FD9 /* CharacterRaidWidget.intentdefinition in Sources */,
+				C8E20A19256DE78A00777C80 /* InstanceNotableItems.swift in Sources */,
+				C8E20A01256DE3C200777C80 /* StaticStrings.swift in Sources */,
+				C8E20A11256DE77C00777C80 /* UserProfile.swift in Sources */,
+				C84CC11E256ED0490000E46D /* WhiteTextWithBlackOutline.swift in Sources */,
+				C8E209C5256DE1B600777C80 /* IntentHandler.swift in Sources */,
+				C84CC0FC256ECE900000E46D /* SmallNotableRaidWidget.swift in Sources */,
+				C84CC116256ED03D0000E46D /* StoredRaidTileBackground.swift in Sources */,
+				C84CC0FB256ECE900000E46D /* MediumNotableRaidWidget.swift in Sources */,
+				C84CC0FA256ECE900000E46D /* LargeNotableLootWidget.swift in Sources */,
+				C8E20A29256DE7B100777C80 /* APIAccessInfo.swift in Sources */,
+				C8E20A39256DFE4B00777C80 /* CharacterRaidWidget.swift in Sources */,
+				C84CC106256ED0180000E46D /* CoreDataImagesManager.swift in Sources */,
+				C84CC0FE256ECE900000E46D /* MediumNotableLootWidget.swift in Sources */,
+				C84CC136256ED2F40000E46D /* BackgroundBlurs.swift in Sources */,
+				C84CC12E256ED2E50000E46D /* JSONCoreDataManager.swift in Sources */,
+				C84CC0F0256ECE840000E46D /* WidgetLogic.swift in Sources */,
+				C84CC126256ED2E00000E46D /* MyData.xcdatamodeld in Sources */,
+				C84CC10E256ED02F0000E46D /* StoredItemIcon.swift in Sources */,
+				C84CC0F8256ECE900000E46D /* NoRaidsLeftWidget.swift in Sources */,
+				C8E20A09256DE4E200777C80 /* RaidSuggestion.swift in Sources */,
+				C84CC0F9256ECE900000E46D /* LargeNotableRaidWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1187,7 +1448,29 @@
 			target = C8E2072A256C76CC00777C80 /* Random Raid WidgetExtension */;
 			targetProxy = C8E20739256C76CE00777C80 /* PBXContainerItemProxy */;
 		};
+		C8E2086F256DA40700777C80 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C8E20861256DA40400777C80 /* CharacterRaidWidgetExtension */;
+			targetProxy = C8E2086E256DA40700777C80 /* PBXContainerItemProxy */;
+		};
+		C8E209C8256DE1B600777C80 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C8E209C1256DE1B600777C80 /* CharacterRaidIntent */;
+			targetProxy = C8E209C7256DE1B600777C80 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C8E4A432256F139F008F2FD9 /* CharacterRaidWidget.intentdefinition */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C8E4A431256F139F008F2FD9 /* Base */,
+				C8E4A43B256F13A2008F2FD9 /* en */,
+			);
+			name = CharacterRaidWidget.intentdefinition;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		C811E78F24E01B1F0050F6CD /* Debug */ = {
@@ -1313,7 +1596,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "WoW Helper.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 8TYF5VAX58;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
@@ -1339,7 +1622,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "WoW Helper.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 8TYF5VAX58;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
@@ -1366,6 +1649,7 @@
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 8TYF5VAX58;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1390,6 +1674,7 @@
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 8TYF5VAX58;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1502,7 +1787,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "Random Raid WidgetExtension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 8TYF5VAX58;
 				INFOPLIST_FILE = "Random Raid Widget/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
@@ -1527,7 +1812,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "Random Raid WidgetExtension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 8TYF5VAX58;
 				INFOPLIST_FILE = "Random Raid Widget/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
@@ -1537,6 +1822,104 @@
 					"@executable_path/../../Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mlukasik.WoW-Helper.Random-Raid-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C8E20872256DA40700777C80 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = CharacterRaidWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 10;
+				DEVELOPMENT_TEAM = 8TYF5VAX58;
+				INFOPLIST_FILE = CharacterRaidWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mlukasik.WoW-Helper.CharacterRaidWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C8E20873256DA40700777C80 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = CharacterRaidWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 10;
+				DEVELOPMENT_TEAM = 8TYF5VAX58;
+				INFOPLIST_FILE = CharacterRaidWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mlukasik.WoW-Helper.CharacterRaidWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C8E209CB256DE1B600777C80 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = CharacterRaidIntent/CharacterRaidIntent.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 10;
+				DEVELOPMENT_TEAM = 8TYF5VAX58;
+				INFOPLIST_FILE = CharacterRaidIntent/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mlukasik.WoW-Helper.CharacterRaidIntent";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C8E209CC256DE1B600777C80 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = CharacterRaidIntent/CharacterRaidIntent.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 10;
+				DEVELOPMENT_TEAM = 8TYF5VAX58;
+				INFOPLIST_FILE = CharacterRaidIntent/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mlukasik.WoW-Helper.CharacterRaidIntent";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1603,6 +1986,24 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		C8E20871256DA40700777C80 /* Build configuration list for PBXNativeTarget "CharacterRaidWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C8E20872256DA40700777C80 /* Debug */,
+				C8E20873256DA40700777C80 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C8E209CA256DE1B600777C80 /* Build configuration list for PBXNativeTarget "CharacterRaidIntent" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C8E209CB256DE1B600777C80 /* Debug */,
+				C8E209CC256DE1B600777C80 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -1645,7 +2046,17 @@
 			package = C811E79D24E01B7B0050F6CD /* XCRemoteSwiftPackageReference "OAuth2" */;
 			productName = OAuth2;
 		};
+		C84CC13E256ED30A0000E46D /* VisualEffects */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C803C5E72501962800A8D2DE /* XCRemoteSwiftPackageReference "VisualEffects" */;
+			productName = VisualEffects;
+		};
 		C8E207A0256C841200777C80 /* VisualEffects */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C803C5E72501962800A8D2DE /* XCRemoteSwiftPackageReference "VisualEffects" */;
+			productName = VisualEffects;
+		};
+		C8E208E9256DA53900777C80 /* VisualEffects */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C803C5E72501962800A8D2DE /* XCRemoteSwiftPackageReference "VisualEffects" */;
 			productName = VisualEffects;
