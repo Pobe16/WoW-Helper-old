@@ -20,7 +20,8 @@ struct UserDefaultsKeys {
     static let characterOrder           = "characterOrder"
     static let characterAvatar          = "characterAvatar"
     static let raidSuggestions          = "raidSuggestions"
-    static let appUserGroup             = "group.com.mlukasik.WoW-Helper"
+    static let characterSuggestions     = "characterSuggestions"
+    static let appUserGroup             = "group.8TYF5VAX58.com.mlukasik.WoW-Helper"
 }
 
 struct CoreDataIDFragments {
