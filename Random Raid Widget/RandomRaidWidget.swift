@@ -1,5 +1,5 @@
 //
-//  Random_Raid_Widget.swift
+//  RandomRaidWidget.swift
 //  Random Raid Widget
 //
 //  Created by Mikolaj Lukasik on 23/11/2020.
@@ -59,22 +59,36 @@ struct Provider: TimelineProvider {
     func getTimeline(in context: Context, completion: @escaping (Timeline<RaidEntry>) -> Void) {
         guard let allSuggestions = try? JSONDecoder().decode([RaidsSuggestedForCharacter].self, from: raidSuggestionsData) else { return }
         
-        guard let suggestedCharacter = allSuggestions.randomElement() else { return }
         
-        let raidToDo = suggestedCharacter.raids.isEmpty ? [] : [suggestedCharacter.raids.randomElement()!]
+        var allRaids: [RaidsSuggestedForCharacter] = []
         
-        let finalSuggestion = RaidsSuggestedForCharacter(
-            characterID: suggestedCharacter.characterID,
-            characterName: suggestedCharacter.characterName,
-            characterLevel: suggestedCharacter.characterLevel,
-            characterRealmSlug: suggestedCharacter.characterRealmSlug,
-            characterAvatarURI: suggestedCharacter.characterAvatarURI,
-            characterFaction: suggestedCharacter.characterFaction,
-            raids: raidToDo
-        )
+        for character in allSuggestions {
+            for raid in character.raids {
+                let currentSuggestion = RaidsSuggestedForCharacter(
+                    characterID: character.characterID,
+                    characterName: character.characterName,
+                    characterLevel: character.characterLevel,
+                    characterRealmSlug: character.characterRealmSlug,
+                    characterAvatarURI: character.characterAvatarURI,
+                    characterFaction: character.characterFaction,
+                    raids: [raid]
+                )
+                allRaids.append(currentSuggestion)
+            }
+        }
         
-        let entry = RaidEntry(date: Date(), raid: finalSuggestion)
-        let timeline = Timeline(entries: [entry], policy: .atEnd)
+        allRaids.shuffle()
+        
+        var allEntries: [RaidEntry] = []
+        
+        
+        let currentDate = Date()
+        for hourOffset in 0 ..< (allRaids.count - 1) {
+            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
+            let entry = RaidEntry(date: entryDate, raid: allRaids[hourOffset])
+            allEntries.append(entry)
+        }
+        let timeline = Timeline(entries: allEntries, policy: .atEnd)
         
         completion(timeline)
     }
@@ -92,8 +106,8 @@ struct Random_Raid_WidgetEntryView : View {
 }
 
 @main
-struct Random_Raid_Widget: Widget {
-    let kind: String = "Random_Raid_Widget"
+struct RandomRaidWidget: Widget {
+    let kind: String = "com.mlukasik.WoW-Helper.widgetKind.RandomRaidWidget"
 
     var body: some WidgetConfiguration {
         StaticConfiguration(

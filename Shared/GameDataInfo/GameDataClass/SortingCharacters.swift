@@ -59,7 +59,53 @@ extension GameData {
             print("loaded \(characters.count) characters, including \(charactersForRaidEncounters.count) in raiding level")
             prepareForAvatarSaving()
             loadAccountMounts()
+            
+            saveCharacterForIntent()
         }
+    }
+    
+    func saveCharacterForIntent() {
+        print("starting saving in ud")
+        var charactersForIntent: [CharacterForIntent] = []
+        for character in characters {
+            let encodedName = character.name.lowercased().addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+            
+            let identifiableImageName = "\(UserDefaultsKeys.characterAvatar)-\(encodedName ?? character.name.lowercased())-\(character.realm.slug)"
+            
+            let newCharacterForIntent = CharacterForIntent(
+                characterID: character.id,
+                characterName: character.name,
+                characterLevel: character.level,
+                characterRealmSlug: character.realm.slug,
+                characterRealmName: character.realm.name,
+                characterAvatarURI: identifiableImageName,
+                characterFaction: character.faction.type
+            )
+            charactersForIntent.append(newCharacterForIntent)
+        }
+        for character in ignoredCharacters {
+            let encodedName = character.name.lowercased().addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+            
+            let identifiableImageName = "\(UserDefaultsKeys.characterAvatar)-\(encodedName ?? character.name.lowercased())-\(character.realm.slug)"
+            
+            let newCharacterForIntent = CharacterForIntent(
+                characterID: character.id,
+                characterName: character.name,
+                characterLevel: character.level,
+                characterRealmSlug: character.realm.slug,
+                characterRealmName: character.realm.name,
+                characterAvatarURI: identifiableImageName,
+                characterFaction: character.faction.type
+            )
+            charactersForIntent.append(newCharacterForIntent)
+        }
+        
+        guard let suggestionsData = try? JSONEncoder().encode(charactersForIntent) else {
+            print("encode fail")
+            return
+            
+        }
+        characterSuggestionsData = suggestionsData
     }
     
     func changeCharactersOrder(from source: IndexSet, to destination: Int) {

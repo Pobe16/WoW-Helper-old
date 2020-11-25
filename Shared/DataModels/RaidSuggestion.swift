@@ -18,6 +18,17 @@ struct RaidsSuggestedForCharacter: Codable, Hashable, Identifiable {
     let raids: [RaidSuggestion]
 }
 
+struct CharacterForIntent: Codable, Hashable, Identifiable {
+    var id: String { characterName + characterRealmSlug }
+    let characterID: Int
+    let characterName: String
+    let characterLevel: Int
+    let characterRealmSlug: String
+    let characterRealmName: String
+    let characterAvatarURI: String
+    let characterFaction: FactionType
+}
+
 struct RaidSuggestion: Codable, Hashable, Identifiable {
     var id: Int { raidID }
     let raidID: Int

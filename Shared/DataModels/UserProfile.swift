@@ -86,6 +86,15 @@ enum FactionType: String, Codable, Hashable {
     case alliance   = "ALLIANCE"
     case horde      = "HORDE"
     case neutral    = "NEUTRAL"
+    
+    init?(_ value: String) {
+        switch value.lowercased() {
+        case "ALLIANCE": self = .alliance
+        case "HORDE": self = .horde
+        case "NEUTRAL": self = .neutral
+        default: self = .neutral
+        }
+    }
 }
 
 
