@@ -369,6 +369,11 @@ extension GameData {
                     
                 }
                 
+                // some mounts / pets can be obtained from different bosses, so here we check for duplicates
+                // notable for G.M.O.D in Battle of Dazar'alor
+                
+                mounts = Array(Set(mounts))
+                pets = Array(Set(pets))
                 
                 
                 let raidToAdd = RaidSuggestion(raidID: raid.raidID, raidName: raid.raidName, raidImageURI: raid.raidImageURI, items: mounts + pets)
