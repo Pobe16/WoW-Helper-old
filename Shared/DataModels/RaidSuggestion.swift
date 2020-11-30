@@ -38,6 +38,12 @@ struct RaidSuggestion: Codable, Hashable, Identifiable {
 }
 
 struct RaidSuggestionItem: Codable, Hashable, Identifiable {
+    // I am comparing it on the name, because of cases where mount is obtainable from two bosses:
+    // one is G.M.O.D which has the same id for both Jaina and High Tinker, but the other is
+    // mammoth from WotLK PVP raid, which has the same name, but different IDs.
+    static func == (lhs: RaidSuggestionItem, rhs: RaidSuggestionItem) -> Bool {
+        return lhs.name == rhs.name
+    }
     let id: Int
     let name: String
     let quality: itemQualityName
