@@ -65,12 +65,24 @@ struct InstanceProgressBackground: View {
                     width:
                         geometry.size.width /
                         CGFloat(allBosses) *
-                        CGFloat(killedBosses)
+                        CGFloat(killedBosses) + geometry.size.height
                 )
                 .opacity(0.5)
+                .overlay(
+                    RoundedRectangle(cornerRadius: geometry.size.height/2)
+                        .stroke(
+                            Color("faction\(faction.type.rawValue)"),
+                            lineWidth: 1
+                        )
+                        .opacity(0.75)
+                )
+                .clipShape(Capsule())
+                .offset(x: -geometry.size.height / (0 < killedBosses ? 2 : 1))
+                
             Spacer()
         }
     }
+    
 }
 
 
@@ -78,10 +90,10 @@ struct InstanceProgressBackground: View {
 struct BackgroundBlurs_Previews: PreviewProvider {
     static var previews: some View {
         RaidTitleBackgroundBlur()
-            .previewLayout(.fixed(width: 300, height: 100))
+            .previewLayout(.fixed(width: 300, height: 30))
         InstanceProgressFullWidthBackgroundBlur()
-            .previewLayout(.fixed(width: 300, height: 100))
-        InstanceProgressBackground(killedBosses: 3, allBosses: 5, faction: Faction(type: .alliance, name: "Alliance"))
-            .previewLayout(.fixed(width: 300, height: 100))
+            .previewLayout(.fixed(width: 300, height: 30))
+        InstanceProgressBackground(killedBosses: 3, allBosses: 10, faction: Faction(type: .alliance, name: "Alliance"))
+            .previewLayout(.fixed(width: 300, height: 30))
     }
 }

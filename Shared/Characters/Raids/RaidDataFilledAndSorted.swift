@@ -82,7 +82,17 @@ struct RaidDataFilledAndSorted {
         
         
         hardFarm = allRaids.filter({ (raid) -> Bool in
-            currentLevel > raid.minimumLevel && currentLevel - raid.minimumLevel < 6
+            // in Shadowlands the difference between
+            // BFA and Shadowlands raid is 10 levels,
+            // in previous the difference between expansion
+            // raids minimum levels is 5
+            if currentLevel == 60 {
+                return (currentLevel > raid.minimumLevel &&
+                currentLevel - raid.minimumLevel < 11)
+            } else {
+                return (currentLevel > raid.minimumLevel &&
+                currentLevel - raid.minimumLevel < 6)
+            }
         }).sorted(by: helper.raidSort)
         
         hardFarm.forEach { (raid) in
