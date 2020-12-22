@@ -30,15 +30,15 @@ struct CharacterRaidTile: View {
                 )
                 
                 Spacer()
-                VStack() {
+                VStack(spacing: 0) {
                     ForEach(filterModesForLegacyCompletion(in: raid), id: \.difficulty.name){ record in
                         HStack {
                             Text("\(record.difficulty.name)")
                             Spacer()
                             Text(getSumUp(for: record))
                         }
-                        .padding(.vertical, 1)
                         .padding(.horizontal, 10)
+                        .padding(.vertical, 2)
                         .background(
                             InstanceProgressBackground(
                                 killedBosses: getNumberOfKilledBosses(for: record),
