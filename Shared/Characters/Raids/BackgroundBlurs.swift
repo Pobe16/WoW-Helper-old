@@ -58,28 +58,30 @@ struct InstanceProgressBackground: View {
     let faction: Faction
     
     var body: some View {
-        GeometryReader { geometry in
+        if killedBosses > 0 {
+            GeometryReader { geometry in
 
-            Color("faction\(faction.type.rawValue)")
-                .frame(
-                    width:
-                        geometry.size.width /
-                        CGFloat(allBosses) *
-                        CGFloat(killedBosses) + geometry.size.height
-                )
-                .opacity(0.5)
-                .overlay(
-                    RoundedRectangle(cornerRadius: geometry.size.height/2)
-                        .stroke(
-                            Color("faction\(faction.type.rawValue)"),
-                            lineWidth: 1
-                        )
-                        .opacity(0.75)
-                )
-                .clipShape(Capsule())
-                .offset(x: -geometry.size.height / (0 < killedBosses ? 2 : 1))
-                
-            Spacer()
+                Color("faction\(faction.type.rawValue)")
+                    .frame(
+                        width:
+                            geometry.size.width /
+                            CGFloat(allBosses) *
+                            CGFloat(killedBosses) + geometry.size.height
+                    )
+                    .opacity(0.5)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: geometry.size.height/2)
+                            .strokeBorder(
+                                Color("faction\(faction.type.rawValue)").opacity(0.6),
+                                lineWidth: 0.5
+                            )
+                            
+                    )
+                    .clipShape(Capsule())
+                    .offset(x: -geometry.size.height / (0 < killedBosses ? 2 : 1))
+                    
+                Spacer()
+            }
         }
     }
     
