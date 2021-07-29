@@ -32,6 +32,7 @@ struct AuthCheckingScreen: View {
             determineLoginState()
         })
         .onOpenURL(perform: { url in
+            print("Checking the url:",url);
             processURLAuthentication(url)
         })
         

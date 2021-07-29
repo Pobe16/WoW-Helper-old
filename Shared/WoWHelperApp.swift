@@ -23,7 +23,11 @@ struct WoWHelperApp: App {
                 .onAppear(perform: {
                     initDebug()
                 })
+                .handlesExternalEvents(preferring: Set(arrayLiteral: "authenticated"), allowing: Set(arrayLiteral: "*"))
         }
+        .handlesExternalEvents(
+            matching: Set(arrayLiteral: "*")
+        )
     }
     
     fileprivate func initDebug(){

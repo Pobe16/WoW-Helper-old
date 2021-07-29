@@ -16,7 +16,7 @@ Current features:
 * Hiding older / not often used alts
 * App works on iPhones and iPads
 
-[![Dark Mode](readme_images/iphonex2.png)](readme_images/iphonex2.png) [![Light Mode](readme_images/iphonex1.png)](readme_images/iphonex1.png) [![Dark mode](readme_images/iphonex0.png)](readme_images/iphonex0.png)
+[![Dark Mode](readme_images/iphonex2.png)](readme_images/iphonex2.png) [![Light Mode](readme_images/iphonex1.png)](readme_images/iphonex1.png) [![Dark mode](readme_images/iphonex0.png)](readme_images/ipad.jpeg)
 
 Roadmap:
 * Homescreen Widget to show suggested raid (loaded from app)
