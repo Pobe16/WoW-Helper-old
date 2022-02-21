@@ -16,10 +16,7 @@ struct WoWHelperApp: App {
     
     var body: some Scene {
         WindowGroup {
-            AuthCheckingScreen()
-                .environmentObject(auth)
-                .environmentObject(gameData)
-                .environmentObject(order)
+            systemStartingScreen
                 .onAppear(perform: {
                     initDebug()
                 })
@@ -28,6 +25,24 @@ struct WoWHelperApp: App {
         .handlesExternalEvents(
             matching: Set(arrayLiteral: "*")
         )
+    }
+    
+    #if os(iOS)
+    var systemStartingScreen: some View {
+        startingScreen
+    }
+    #elseif os(macOS)
+    var systemStartingScreen: some View {
+        startingScreen
+            .frame(minWidth: 600, idealWidth: 800, maxWidth: .infinity, minHeight: 600, idealHeight: 800, maxHeight: .infinity, alignment: .center)
+    }
+    #endif
+    
+    var startingScreen: some View {
+        AuthCheckingScreen()
+            .environmentObject(auth)
+            .environmentObject(gameData)
+            .environmentObject(order)
     }
     
     fileprivate func initDebug(){
