@@ -10,15 +10,15 @@ import SwiftUI
 struct FarmingOrder: View {
     @EnvironmentObject var gameData: GameData
     @EnvironmentObject var farmOrder: FarmCollectionsOrder
-    
+
     #if os(iOS)
     var listStyle = InsetGroupedListStyle()
     #elseif os(macOS)
     var listStyle =  DefaultListStyle()
     #endif
-    
+
     var body: some View {
-        List(){
+        List {
             ForEach(farmOrder.options) { collection in
                 Text("\(collection.order+1). \(collection.name)")
             }
@@ -32,7 +32,7 @@ struct FarmingOrder: View {
         )
         .toolbar {
             #if os(iOS)
-            ToolbarItem(placement: .automatic){
+            ToolbarItem(placement: .automatic) {
                 EditButton()
             }
             #endif
@@ -41,7 +41,6 @@ struct FarmingOrder: View {
             }
         }
     }
-    
     func move(from source: IndexSet, to destination: Int) {
         farmOrder.options.move(fromOffsets: source, toOffset: destination)
         farmOrder.options.forEach { (item) in

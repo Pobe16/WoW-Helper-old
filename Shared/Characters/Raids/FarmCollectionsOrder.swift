@@ -11,22 +11,18 @@ struct RaidCollectionsNames: Hashable, Identifiable, Comparable, Codable {
     static func < (lhs: RaidCollectionsNames, rhs: RaidCollectionsNames) -> Bool {
         lhs.order < rhs.order
     }
-    
     var id: UUID = UUID()
     var order: Int
     var name: String
 }
 
 class FarmCollectionsOrder: ObservableObject {
-    
     @Published var options: [RaidCollectionsNames]
-    
     init() {
         let decoder = JSONDecoder()
         guard let savedData = UserDefaults.standard.object(forKey: "RaidCollectionsOrder") as? Data,
               let loadedData = try? decoder.decode([RaidCollectionsNames].self, from: savedData)
         else {
-            
             var collection: [RaidCollectionsNames] = []
             collection.append(
                 RaidCollectionsNames(
@@ -58,7 +54,6 @@ class FarmCollectionsOrder: ObservableObject {
                     name: "Ignored"
                 )
             )
-            
             options = collection
             return
         }

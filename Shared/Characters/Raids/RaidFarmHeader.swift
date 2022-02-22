@@ -24,7 +24,7 @@ struct RaidFarmHeader: View {
         .background(
             ZStack{
                 Color("faction\(faction.type.rawValue)")
-                Image(additionalTexturesNames.woodDamageV2.rawValue)
+                Image(AdditionalTexturesNames.woodDamageV2.rawValue)
                 .resizable(resizingMode: .tile)
             }
             .brightness(colorScheme == .dark ? 0.0 : 0.125)

@@ -180,6 +180,6 @@ struct CharacterImage: View {
 
 struct CharacterImage_Previews: PreviewProvider {
     static var previews: some View {
-        CharacterImage(character: placeholders.characterInProfile)
+        CharacterImage(character: PreviewPlaceholdersCollection.characterInProfile)
     }
 }

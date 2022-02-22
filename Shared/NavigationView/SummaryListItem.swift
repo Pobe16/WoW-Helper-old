@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SummaryListItem: View {
     var body: some View {
-        HStack{
+        HStack {
             Image(systemName: "person.2.square.stack")
                 .resizable()
                 .scaledToFit()
@@ -17,7 +17,6 @@ struct SummaryListItem: View {
                 .cornerRadius(15, antialiased: true)
                 .foregroundColor(.accentColor)
             Text("Raid Farming")
-            
         }
     }
 }

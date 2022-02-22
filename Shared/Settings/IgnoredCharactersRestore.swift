@@ -9,33 +9,37 @@ import SwiftUI
 
 struct IgnoredCharactersRestore: View {
     @EnvironmentObject var gameData: GameData
-    
+
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
+
     #if os(iOS)
     var listStyle = InsetGroupedListStyle()
     #elseif os(macOS)
     var listStyle =  DefaultListStyle()
     #endif
-    
+
     var body: some View {
-        List(){
+        List {
             ForEach(gameData.ignoredCharacters) { character in
-                HStack{
+                HStack {
                     CharacterImage(character: character)
                     Text("\(character.name), lvl \(character.level), \(character.realm.name)")
                     Spacer()
                     Button {
                         gameData.unIgnoreCharacter(character)
                         shouldWeGoBack()
-                        
                     } label: {
                         Image(systemName: "goforward.plus")
                     }
-
                 }
                 .padding()
-                .listRowBackground(CharacterListItemBackground(charClass: character.playableClass, faction: character.faction, selected: false))
+                .listRowBackground(
+                    CharacterListItemBackground(
+                        charClass: character.playableClass,
+                        faction: character.faction,
+                        selected: false
+                    )
+                )
             }
         }
         .padding(.horizontal)
@@ -55,7 +59,7 @@ struct IgnoredCharactersRestore: View {
             if self.gameData.ignoredCharacters.isEmpty {
                 self.presentationMode.wrappedValue.dismiss()
             }
-            
+
         }
     }
 }

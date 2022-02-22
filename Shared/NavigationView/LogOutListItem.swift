@@ -13,7 +13,7 @@ struct LogOutListItem: View {
         Button(action: {
             logOut()
         }, label: {
-            HStack{
+            HStack {
                 Image("logout")
                     .resizable()
                     .scaledToFit()
@@ -27,7 +27,7 @@ struct LogOutListItem: View {
             }
         })
     }
-    
+
     fileprivate func logOut() {
         authorization.oauth2.forgetTokens()
         authorization.loggedIn = false

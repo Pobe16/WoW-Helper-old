@@ -127,11 +127,11 @@ struct NoFarmingLeft: View {
 
 struct NoFarmingLeft_Previews: PreviewProvider {
     static var previews: some View {
-        NoFarmingLeft(summarySize: .large, suggestion: placeholders.characterWithNoRaidSuggestions)
+        NoFarmingLeft(summarySize: .large, suggestion: PreviewPlaceholdersCollection.characterWithNoRaidSuggestions)
             .preferredColorScheme(.dark)
             .previewLayout(.fixed(width: 850, height: 350))
         
-        NoFarmingLeft(summarySize: .large, suggestion: placeholders.characterWithNoRaidSuggestions)
+        NoFarmingLeft(summarySize: .large, suggestion: PreviewPlaceholdersCollection.characterWithNoRaidSuggestions)
             .previewLayout(.fixed(width: 850, height: 350))
     }
 }

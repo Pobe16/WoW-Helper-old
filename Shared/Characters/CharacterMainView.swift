@@ -69,6 +69,6 @@ struct CharacterMainView: View {
 
 struct CharacterMainView_Previews: PreviewProvider {
     static var previews: some View {
-        CharacterMainView(character: placeholders.characterInProfile)
+        CharacterMainView(character: PreviewPlaceholdersCollection.characterInProfile)
     }
 }

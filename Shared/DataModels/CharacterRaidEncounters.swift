@@ -8,6 +8,7 @@
 import Foundation
 
 struct CharacterRaidEncounters: Codable, Hashable {
+    // swiftlint:disable:next identifier_name
     let _links: JustSelfLink?
     let character: CharacterStubInEncounters
     let expansions: [EncounterInExpansion]?
@@ -51,6 +52,4 @@ struct EncounterPerBossPerCharacter: Codable, Hashable {
     let completedCount: Int
     let encounter: EncounterIndex
     let lastKillTimestamp: Date?
-    
 }
-

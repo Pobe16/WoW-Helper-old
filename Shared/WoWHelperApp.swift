@@ -13,7 +13,11 @@ struct WoWHelperApp: App {
     @ObservedObject var auth        = Authentication()
     @ObservedObject var gameData    = GameData()
     @ObservedObject var order       = FarmCollectionsOrder()
-    
+
+    let matchingSet: Set = ["*"]
+    let allowingSet: Set = ["*"]
+    let preferringSet: Set = ["authenticated"]
+
     var body: some Scene {
         WindowGroup {
             AuthCheckingScreen()
@@ -23,18 +27,17 @@ struct WoWHelperApp: App {
                 .onAppear(perform: {
                     initDebug()
                 })
-                .handlesExternalEvents(preferring: Set(arrayLiteral: "authenticated"), allowing: Set(arrayLiteral: "*"))
+                .handlesExternalEvents(preferring: preferringSet, allowing: allowingSet)
         }
         .handlesExternalEvents(
-            matching: Set(arrayLiteral: "*")
+            matching: matchingSet
         )
     }
-    
-    fileprivate func initDebug(){
+
+    fileprivate func initDebug() {
 //        UserDefaults.resetStandardUserDefaults()
 //        let imagesInCoreData = CoreDataImagesManager.shared.fetchAllImages()
 //        print(imagesInCoreData?[0].creationDate)
 //        auth.oauth2.logger = OAuth2DebugLogger(.trace)
     }
-    
 }

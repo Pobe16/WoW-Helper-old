@@ -9,13 +9,12 @@ import SwiftUI
 
 struct NavListSectionHeader: View {
     let text: String
-    
+
     #if os(iOS)
     let backgroundColor = UIColor.secondarySystemBackground
     #elseif os(macOS)
     let backgroundColor = NSColor.windowBackgroundColor
     #endif
-    
     var body: some View {
         HStack {
             Text(text)

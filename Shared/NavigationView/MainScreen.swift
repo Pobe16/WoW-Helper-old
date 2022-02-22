@@ -12,10 +12,8 @@ struct MainScreen: View {
     @EnvironmentObject var gameData: GameData
     @EnvironmentObject var authorization: Authentication
     @State var selection: String? = ""
-    
     #if os(iOS)
     var listStyle = InsetGroupedListStyle()
-    
     init() {
         UITableViewCell.appearance().selectionStyle = .none
         UITableView.appearance().backgroundColor = .clear
@@ -23,21 +21,20 @@ struct MainScreen: View {
     #elseif os(macOS)
     var listStyle =  DefaultListStyle()
     #endif
-    
+
     var body: some View {
         NavigationView {
-            
+
             List {
-                
                 if !gameData.loadingAllowed &&
                     (gameData.downloadedItems + 2) < max(
                         gameData.estimatedItemsToDownload,
                         gameData.actualItemsToDownload
                     ) {
-                    VStack{
+                    VStack {
                         Text("Loading…")
                         ProgressView(
-                            value:  Double(gameData.downloadedItems),
+                            value: Double(gameData.downloadedItems),
                             total: Double(max(gameData.estimatedItemsToDownload, gameData.actualItemsToDownload))
                         )
                     }
@@ -48,12 +45,11 @@ struct MainScreen: View {
                         )
                     )
                 }
-                
-                
+
                 Section(header:
                     NavListSectionHeader(text: "Summary")
                 ) {
-                    
+
                     NavigationLink(
                         destination:
                             SummaryMain(),
@@ -68,10 +64,10 @@ struct MainScreen: View {
                         )
                     )
                 }
-                
+
                 Section(header:
                     NavListSectionHeader(text: "Characters")
-                ){
+                ) {
                     if gameData.characters.count > 0 {
                         ForEach(gameData.characters) { character in
                             NavigationLink(
@@ -102,10 +98,10 @@ struct MainScreen: View {
                         )
                     }
                 }
-                
+
                 Section(header:
                     NavListSectionHeader(text: "Settings")
-                ){
+                ) {
                     NavigationLink(destination: DataHealthScreen(), tag: "data-health", selection: $selection) {
                         GameDataLoader()
                     }
@@ -115,7 +111,7 @@ struct MainScreen: View {
                             selected: selection == "data-health"
                         )
                     )
-                    
+
                     NavigationLink(destination: RaidOptions(), tag: "raid-settings", selection: $selection) {
                         RaidOptionsListItem()
                     }
@@ -125,7 +121,7 @@ struct MainScreen: View {
                             selected: selection == "raid-settings"
                         )
                     )
-                    
+
                     NavigationLink(destination: Credits(), tag: "credits", selection: $selection) {
                         CreditsListItem()
                     }
@@ -135,7 +131,7 @@ struct MainScreen: View {
                             selected: selection == "credits"
                         )
                     )
-                    
+
                     NavigationLink(destination: LogOutDebugScreen(), tag: "log-out", selection: $selection) {
                         LogOutListItem()
                     }
@@ -145,21 +141,18 @@ struct MainScreen: View {
                             selected: selection == "log-out"
                         )
                     )
-                    
                 }
-                
             }
             .listStyle(listStyle)
             .background(
                 BackgroundTexture(texture: .wood, wall: .horizontal)
             )
-            .toolbar{
-                ToolbarItem(placement: .principal){
+            .toolbar {
+                ToolbarItem(placement: .principal) {
                     Text("WoWHelper")
                         .fontWeight(.black)
                         .whiteTextWithBlackOutlineStyle()
                 }
-                
                 ToolbarItem(placement: .primaryAction) {
                     if !gameData.loadingAllowed {
                         ProgressView()
@@ -172,8 +165,6 @@ struct MainScreen: View {
                         #endif
                     }
                 }
-                
-                    
             }
             SummaryMain()
         }
@@ -181,12 +172,7 @@ struct MainScreen: View {
         .onAppear {
             gameData.loadGameData(authorizedBy: authorization)
         }
-        
     }
-    
-//    func delete(at offsets: IndexSet ) {
-//        print(offsets)
-//    }
 }
 
 struct MainScreen_Previews: PreviewProvider {

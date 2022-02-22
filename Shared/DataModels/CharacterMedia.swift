@@ -8,22 +8,12 @@
 import Foundation
 
 class CharacterMedia: Codable {
-//    let _links: JustSelfLink
-//    let character: CharacterInfoInCharacterMedia
     let avatarUrl: String?
     let bustUrl: String?
     let renderUrl: String?
     let assets: [MediaAssets]?
 }
 
-
 struct JustSelfLink: Codable, Hashable {
     let `self`: LinkStub
 }
-
-//struct CharacterInfoInCharacterMedia: Codable {
-//    let key: LinkStub
-//    let name: String
-//    let id: Int
-//    let realm: RealmInProfile
-//}

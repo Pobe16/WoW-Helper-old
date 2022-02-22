@@ -11,16 +11,19 @@ struct CollectibleItem: Hashable, Comparable, Equatable {
     static func == (lhs: CollectibleItem, rhs: CollectibleItem) -> Bool {
         lhs.itemID == rhs.itemID
     }
-    
+
     static func < (lhs: CollectibleItem, rhs: CollectibleItem) -> Bool {
         lhs.itemID < rhs.itemID
     }
-    
+
     let itemID: Int
     let name: String
 //    var icon: Data?
     let collectionID: Int
 }
+
+// swiftlint:disable function_body_length
+// swiftlint:disable line_length
 
 func createMountsList() -> [CollectibleItem] {
     let list = [
@@ -76,9 +79,8 @@ func createMountsList() -> [CollectibleItem] {
         CollectibleItem(itemID: 159921, name: "Mummified Raptor Skull", collectionID: 1040), /* Tomb Stalker */
         CollectibleItem(itemID: 166518, name: "G.M.O.D.", collectionID: 1217),
         CollectibleItem(itemID: 166705, name: "Glacial Tidestorm", collectionID: 1219),
-        CollectibleItem(itemID: 174872, name: "Ny'alotha Allseer", collectionID: 1293),
+        CollectibleItem(itemID: 174872, name: "Ny'alotha Allseer", collectionID: 1293)
         // End of Vanilla To Battle For Azeroth
-        
     ]
     return list
 }
@@ -171,8 +173,11 @@ func createPetsList() -> [CollectibleItem] {
         CollectibleItem(itemID: 93036, name: "Unscathed Egg", collectionID: 1151), /* Untamed Hatchling */
         CollectibleItem(itemID: 93033, name: "Mark of Flame", collectionID: 1147), /* Harbinger of Flame */
         CollectibleItem(itemID: 93034, name: "Blazing Rune", collectionID: 1149), /* Corefire Imp */
-        CollectibleItem(itemID: 93035, name: "Core of Hardened Ash", collectionID: 1150), /* Ashstone Core */
+        CollectibleItem(itemID: 93035, name: "Core of Hardened Ash", collectionID: 1150) /* Ashstone Core */
         // MARK: End of Raids Vanilla - Battle For Azeroth
     ]
     return list
 }
+
+// swiftlint:enable function_body_length
+// swiftlint:enable line_length

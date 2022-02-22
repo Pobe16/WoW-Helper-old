@@ -9,16 +9,19 @@ import Foundation
 
 struct RaidDataHelper {
     public let raidSort = { (lhs: CombinedRaidWithEncounters, rhs: CombinedRaidWithEncounters) -> Bool in
-        if (lhs.expansion.id == rhs.expansion.id) {
+        if lhs.expansion.id == rhs.expansion.id {
             return lhs.raidId > rhs.raidId
         } else {
             return lhs.expansion.id > rhs.expansion.id
         }
     }
-    
-    
-    public func createFullRaidData(using characterEncounters: CharacterRaidEncounters?, with gameData: GameData, filter options: RaidFarmingOptions, filterForFaction faction: Faction) -> [CombinedRaidWithEncounters] {
-        
+
+    public func createFullRaidData(
+        using characterEncounters: CharacterRaidEncounters?,
+        with gameData: GameData,
+        filter options: RaidFarmingOptions,
+        filterForFaction faction: Faction
+    ) -> [CombinedRaidWithEncounters] {
         var strippedRaids: [RaidInstancesInCharacterEncounters] = []
         if characterEncounters != nil {
             characterEncounters?.expansions?.forEach({ (expansion) in
@@ -30,27 +33,25 @@ struct RaidDataHelper {
         
         gameData.raids.forEach { GDRaid in
             var currentRaid: CombinedRaidWithEncounters
-            
             if let playerRaid = strippedRaids.first(where: { (playerInstance) -> Bool in
                 return playerInstance.instance.id == GDRaid.id
             }) {
                 var allRaidModes: [RaidEncountersForCharacter] = []
-                
                 let filteredModes: [InstanceMode] = filterRaidModes(forModes: GDRaid.modes, by: options)
-                
                 filteredModes.forEach { (mode) in
-                    
                     if let playerRaidMode = playerRaid.modes.first(where: { (encounter) -> Bool in
                         encounter.difficulty.type == mode.mode.type
                     }) {
                         var instanceEncounters: [EncounterPerBossPerCharacter] = []
                         
-                        let raidEncountersFilteredByFaction = filterEncounters(from: GDRaid.encounters, in: GDRaid.id, by: faction)
-                        
+                        let raidEncountersFilteredByFaction = filterEncounters(
+                            from: GDRaid.encounters,
+                            in: GDRaid.id,
+                            by: faction
+                        )
+
                         raidEncountersFilteredByFaction.forEach { (GDEncounter) in
-                            
                             var encounterToAdd: EncounterPerBossPerCharacter
-                            
                             if let playerEncounter = playerRaidMode.progress.encounters.first(where: { (boss) -> Bool in
                                 boss.encounter.id == GDEncounter.id
                             }) {
@@ -58,11 +59,8 @@ struct RaidDataHelper {
                             } else {
                                 encounterToAdd = createEmptyBoss(for: GDEncounter)
                             }
-                            
                             instanceEncounters.append(encounterToAdd)
-                                                        
                         }
-                        
                         let currentRaidMode =
                             RaidEncountersForCharacter(
                                 difficulty: mode.mode,
@@ -74,14 +72,15 @@ struct RaidDataHelper {
                                         encounters: instanceEncounters
                                     )
                             )
-                        
                         allRaidModes.append(currentRaidMode)
-                            
                     } else {
-                        let currentRaidMode = createEmptyInstanceMode(for: GDRaid, withMode: mode.mode, faction: faction)
+                        let currentRaidMode = createEmptyInstanceMode(
+                            for: GDRaid,
+                            withMode: mode.mode,
+                            faction: faction
+                        )
                         allRaidModes.append(currentRaidMode)
                     }
-                    
                 }
                 currentRaid =
                     CombinedRaidWithEncounters(
@@ -98,13 +97,12 @@ struct RaidDataHelper {
             } else {
                 currentRaid = createNewEmptyRaid(for: GDRaid, filteredBy: options, faction: faction)
             }
-            
             allFilledRaids.append(currentRaid)
                 
         }
         return allFilledRaids
     }
-    
+
     private func filterEncounters(from encounters: [EncounterIndex], in raidID: Int, by faction: Faction) -> [EncounterIndex] {
         switch raidID {
         // Trial of the Crusader
@@ -136,8 +134,8 @@ struct RaidDataHelper {
             default:
                 return encounters
             }
-            
-        //Siege of Orgrimmar
+
+        // Siege of Orgrimmar
         case 369:
             switch faction.type {
             case .alliance:
@@ -170,7 +168,7 @@ struct RaidDataHelper {
             return encounters
         }
     }
-    
+
     private func removeEncounters(list: [Int], fromRaid: [EncounterIndex]) -> [EncounterIndex] {
         var workingEncounters = fromRaid
         list.forEach { (IDtoDelete) in
@@ -180,12 +178,11 @@ struct RaidDataHelper {
         }
         return workingEncounters
     }
-    
+
     private func filterRaidModes(forModes modes: [InstanceMode], by options: RaidFarmingOptions) -> [InstanceMode] {
         guard modes.count > 1 else {
             return modes
         }
-        
         switch options {
         case .all:
             return modes
@@ -198,65 +195,50 @@ struct RaidDataHelper {
             
             highestMode.append(contentsOf: modes.filter { (mode) -> Bool in
                 return mode.mode.type == .mythic
-            } )
-            
+            })
             guard highestMode.count == 0 else {
                 return highestMode
             }
-            
             highestMode.append(contentsOf: modes.filter { (mode) -> Bool in
                 return mode.mode.type == .legacy25Hero
-            } )
-            
+            })
             guard highestMode.count == 0 else {
                 return highestMode
             }
-            
             highestMode.append(contentsOf: modes.filter { (mode) -> Bool in
                 return mode.mode.type == .legacy10Hero
-            } )
-            
+            })
             guard highestMode.count == 0 else {
                 return highestMode
             }
-            
             highestMode.append(contentsOf: modes.filter { (mode) -> Bool in
                 return mode.mode.type == .legacy25
-            } )
-            
+            })
             guard highestMode.count == 0 else {
                 return highestMode
             }
-            
             highestMode.append(contentsOf: modes.filter { (mode) -> Bool in
                 return mode.mode.type == .legacy10
-            } )
-            
+            })
             guard highestMode.count == 0 else {
                 return highestMode
             }
-            
             highestMode.append(contentsOf: modes.filter { (mode) -> Bool in
                 return mode.mode.type == .heroic
-            } )
-            
+            })
             guard highestMode.count == 0 else {
                 return highestMode
             }
-            
             highestMode.append(contentsOf: modes.filter { (mode) -> Bool in
                 return mode.mode.type == .normal
-            } )
-            
+            })
             guard highestMode.count == 0 else {
                 return highestMode
             }
-            
             return [modes.last!]
         }
-        
     }
-    
+
     private func createEmptyBoss(for encounter: EncounterIndex) -> EncounterPerBossPerCharacter {
         let emptyEncounter =
             EncounterPerBossPerCharacter(
@@ -271,16 +253,17 @@ struct RaidDataHelper {
             )
         return emptyEncounter
     }
-    
-    private func createEmptyInstanceMode(for instance: InstanceJournal, withMode mode: InstanceModeName, faction: Faction) -> RaidEncountersForCharacter {
+
+    private func createEmptyInstanceMode(
+        for instance: InstanceJournal,
+        withMode mode: InstanceModeName,
+        faction: Faction
+    ) -> RaidEncountersForCharacter {
         var encounters: [EncounterPerBossPerCharacter] = []
-        
         let raidEncountersFilteredByFaction = filterEncounters(from: instance.encounters, in: instance.id, by: faction)
-        
         raidEncountersFilteredByFaction.forEach { (GDEncounter) in
             encounters.append(createEmptyBoss(for: GDEncounter))
         }
-        
         let emptyInstance =
             RaidEncountersForCharacter(
                 difficulty: mode,
@@ -298,12 +281,16 @@ struct RaidDataHelper {
             )
         return emptyInstance
     }
-    
-    private func createNewEmptyRaid(for instance: InstanceJournal, filteredBy options: RaidFarmingOptions, faction: Faction) -> CombinedRaidWithEncounters {
+
+    private func createNewEmptyRaid(
+        for instance: InstanceJournal,
+        filteredBy options: RaidFarmingOptions,
+        faction: Faction
+    ) -> CombinedRaidWithEncounters {
         var allRaids: [RaidEncountersForCharacter] = []
-        
+
         let filteredModes: [InstanceMode] = filterRaidModes(forModes: instance.modes, by: options)
-        
+
         filteredModes.forEach { (mode) in
             let emptyInstanceMode = createEmptyInstanceMode(for: instance, withMode: mode.mode, faction: faction)
             allRaids.append(emptyInstanceMode)
@@ -322,10 +309,9 @@ struct RaidDataHelper {
             )
         return currentRaid
     }
-    
+
     public func dateOfNextWeeklyReset() -> Date {
         let regionShortCode = APIRegionShort.Code[UserDefaults.standard.integer(forKey: UserDefaultsKeys.loginRegion)]
-        
         var components = DateComponents()
         if regionShortCode == "eu" {
             // Wednesdays at 7:00 UTC
@@ -339,21 +325,19 @@ struct RaidDataHelper {
         components.timeZone = TimeZone(abbreviation: "UTC")
 
         let date = Calendar.current.nextDate(after: Date(), matching: components, matchingPolicy: .nextTime)
-        
         return date!
     }
-    
+
     public func dateOfLastWeeklyReset() -> Date {
         let date = Calendar.current.date(byAdding: .day, value: -7, to: dateOfNextWeeklyReset())
-        
         return date!
     }
-    
+
     public func isLegacyModeCleared(for raidMode: RaidEncountersForCharacter) -> Bool {
         guard let encounter = raidMode.progress.encounters.last else { return false }
         return isEncounterCleared(encounter)
     }
-    
+
     public func isModeCleared(for raidMode: RaidEncountersForCharacter) -> Bool {
         for encounter in raidMode.progress.encounters {
             guard isEncounterCleared(encounter) else {
@@ -362,21 +346,19 @@ struct RaidDataHelper {
         }
         return true
     }
-    
+
     public func isEncounterCleared(_ encounter: EncounterPerBossPerCharacter) -> Bool {
         let lastReset = dateOfLastWeeklyReset()
-        
         guard let killTimestamp = encounter.lastKillTimestamp,
               killTimestamp > lastReset else {
             return false
         }
         return true
     }
-    
+
     public func getNumberOfKilledBosses(for raidMode: RaidEncountersForCharacter) -> Int {
         let lastReset = dateOfLastWeeklyReset()
         var killedBosses = 0
-        
         for encounter in raidMode.progress.encounters {
             if encounter.lastKillTimestamp != nil && encounter.lastKillTimestamp! > lastReset {
                 killedBosses += 1
@@ -384,10 +366,11 @@ struct RaidDataHelper {
         }
         return killedBosses
     }
-    
+
     public func isWholeRaidCleared(_ raid: CombinedRaidWithEncounters) -> Bool {
-        
-        // the first two expansions (id 68 and 70) only have last boss in the player encounter, that's why we need a special legacy mode checker
+
+        // the first two expansions (id 68 and 70) only have last boss in the player encounter,
+        // that's why we need a special legacy mode checker
         if raid.expansion.id < 72 {
             for raidMode in raid.records {
                 guard isLegacyModeCleared(for: raidMode) else { return false }

@@ -9,7 +9,6 @@ import SwiftUI
 
 struct Credits: View {
     @Environment (\.colorScheme) var colorScheme: ColorScheme
-    
     let greetings = [
         "Citizens of Dalaran!",
         "Watch yer back!",
@@ -20,11 +19,10 @@ struct Credits: View {
         "Lok'Tar ogar!",
         "Garrosh did nothing wrong…"
     ]
-    
     var body: some View {
         ScrollView(Axis.Set.vertical, showsIndicators: true) {
             VStack(alignment: .leading) {
-                HStack{
+                HStack {
                     Spacer()
                     Text(greetings.randomElement()!)
                         .font(.largeTitle)
@@ -33,26 +31,27 @@ struct Credits: View {
                     Spacer()
                 }
                 .padding(.horizontal)
+                // swiftlint:disable:next line_length
                 Text("This app has been developed during summer / autumn of 2020 in Scotland, in the long wait for Shadowlands, and with a one year old boy desperately trying to press the nice red button on the power supply for my computer. A big thank you to my wife for giving me time to pursue my passions.")
                     .font(.title)
                     .padding(.all)
                 Text("Development (SwiftUI):\nMikołaj \"Pobe\" Łukasik")
                     .font(.title2)
-                    .padding([.horizontal,.top])
+                    .padding([.horizontal, .top])
                 Link("@Pobe",
                       destination: URL(string: "https://twitter.com/Pobe")!)
                     .font(.title2)
-                    .padding([.horizontal,.bottom])
+                    .padding([.horizontal, .bottom])
                 Text("Consultation (UI help):\nSakuya")
                         .font(.title2)
                         .padding(.all)
                 Text("Textures:\nThe Forgotten Adventures")
                     .font(.title2)
-                    .padding([.horizontal,.top])
+                    .padding([.horizontal, .top])
                 Link("The Forgotten Adventures",
                       destination: URL(string: "https://www.forgotten-adventures.net/")!)
                     .font(.title2)
-                    .padding([.horizontal,.bottom])
+                    .padding([.horizontal, .bottom])
                 Text("Using World of Warcraft API from Blizzard")
                         .font(.title2)
                         .padding(.all)

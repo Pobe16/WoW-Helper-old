@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum availableBackgroundTextures: String {
+enum AvailableBackgroundTextures: String {
     case flagstone  = "Large_Flagstone"
     case wood       = "Wooden_Flooring"
     case wood2      = "Wooden_Flooring2"
@@ -17,16 +17,15 @@ enum availableBackgroundTextures: String {
     case arches     = "Cobblestone_Arches"
 }
 
-enum additionalTexturesNames: String {
+enum AdditionalTexturesNames: String {
     case wallLeading    = "wall_leading"
     case wallTrailing   = "wall_trailing"
     case woodDamageV1   = "Wood_Damage_Overlay_C_01"
     case woodDamageV2   = "Wood_Damage_Overlay_B_01"
     case wallTop        = "wall_top"
-    
 }
 
-enum wallPosition {
+enum WallPosition {
     case none
     case all
     case horizontal
@@ -39,19 +38,16 @@ enum wallPosition {
 
 struct BackgroundTexture: View {
     @Environment (\.colorScheme) var colorScheme: ColorScheme
-    let texture: availableBackgroundTextures
-    let wall: wallPosition
-    
+    let texture: AvailableBackgroundTextures
+    let wall: WallPosition
     var body: some View {
-        ZStack{
+        ZStack {
             Image(texture.rawValue)
                 .resizable(resizingMode: .tile)
-            
             if texture == .wood {
-                Image(additionalTexturesNames.woodDamageV1.rawValue)
+                Image(AdditionalTexturesNames.woodDamageV1.rawValue)
                 .resizable(resizingMode: .tile)
             }
-            
             if colorScheme == .dark {
                 Color.black.opacity(0.5)
             } else {
@@ -59,119 +55,106 @@ struct BackgroundTexture: View {
                     Color.white.opacity(0.5)
                 }
             }
-            
             BackgroundWall(wall: wall)
-            
         }
         .edgesIgnoringSafeArea(.vertical)
     }
 }
 
-
 struct BackgroundWall: View {
-    let wall: wallPosition
-    var body: some View{
-        
+    let wall: WallPosition
+    var body: some View {
         switch wall {
         case .none:
             EmptyView()
-            
         case .all:
-            HStack{
-                Image(additionalTexturesNames.wallLeading.rawValue)
+            HStack {
+                Image(AdditionalTexturesNames.wallLeading.rawValue)
                     .resizable(resizingMode: .tile)
                     .frame(minWidth: 0, maxWidth: 23)
                 Spacer()
                     .frame(minWidth: 0, maxWidth: .infinity)
-                Image(additionalTexturesNames.wallTrailing.rawValue)
+                Image(AdditionalTexturesNames.wallTrailing.rawValue)
                     .resizable(resizingMode: .tile)
                     .frame(minWidth: 0, maxWidth: 23)
             }
-            VStack{
-                Image(additionalTexturesNames.wallTop.rawValue)
+            VStack {
+                Image(AdditionalTexturesNames.wallTop.rawValue)
                     .resizable(resizingMode: .tile)
                     .frame(minHeight: 0, maxHeight: 15)
                 Spacer()
                     .frame(minHeight: 0, maxHeight: .infinity)
-                Image(additionalTexturesNames.wallTop.rawValue)
+                Image(AdditionalTexturesNames.wallTop.rawValue)
                     .resizable(resizingMode: .tile)
                     .frame(minHeight: 0, maxHeight: 15)
                     .rotationEffect(Angle(degrees: 180))
             }
         case .horizontal:
-            HStack{
-                Image(additionalTexturesNames.wallLeading.rawValue)
+            HStack {
+                Image(AdditionalTexturesNames.wallLeading.rawValue)
                     .resizable(resizingMode: .tile)
                     .frame(minWidth: 0, maxWidth: 23)
                 Spacer()
                     .frame(minWidth: 0, maxWidth: .infinity)
-                Image(additionalTexturesNames.wallTrailing.rawValue)
+                Image(AdditionalTexturesNames.wallTrailing.rawValue)
                     .resizable(resizingMode: .tile)
                     .frame(minWidth: 0, maxWidth: 23)
             }
-            
         case .vertical:
-            VStack{
-                Image(additionalTexturesNames.wallTop.rawValue)
+            VStack {
+                Image(AdditionalTexturesNames.wallTop.rawValue)
                     .resizable(resizingMode: .tile)
                     .frame(minHeight: 0, maxHeight: 15)
                 Spacer()
                     .frame(minHeight: 0, maxHeight: .infinity)
-                Image(additionalTexturesNames.wallTop.rawValue)
+                Image(AdditionalTexturesNames.wallTop.rawValue)
                     .resizable(resizingMode: .tile)
                     .frame(minHeight: 0, maxHeight: 15)
                     .rotationEffect(Angle(degrees: 180))
             }
-            
         case .leading:
-            HStack{
-                Image(additionalTexturesNames.wallLeading.rawValue)
+            HStack {
+                Image(AdditionalTexturesNames.wallLeading.rawValue)
                     .resizable(resizingMode: .tile)
                     .frame(minWidth: 0, maxWidth: 23)
                 Spacer()
                     .frame(minWidth: 0, maxWidth: .infinity)
             }
-            
         case .trailing:
-            HStack{
+            HStack {
                 Spacer()
                     .frame(minWidth: 0, maxWidth: .infinity)
-                Image(additionalTexturesNames.wallTrailing.rawValue)
+                Image(AdditionalTexturesNames.wallTrailing.rawValue)
                     .resizable(resizingMode: .tile)
                     .frame(minWidth: 0, maxWidth: 23)
             }
-            
         case .top:
-            VStack{
-                Image(additionalTexturesNames.wallTop.rawValue)
+            VStack {
+                Image(AdditionalTexturesNames.wallTop.rawValue)
                     .resizable(resizingMode: .tile)
                     .frame(minHeight: 0, maxHeight: 15)
                 Spacer()
                     .frame(minHeight: 0, maxHeight: .infinity)
             }
-            
         case .bottom:
-            VStack{
+            VStack {
                 Spacer()
                     .frame(minHeight: 0, maxHeight: .infinity)
-                Image(additionalTexturesNames.wallTop.rawValue)
+                Image(AdditionalTexturesNames.wallTop.rawValue)
                     .resizable(resizingMode: .tile)
                     .frame(minHeight: 0, maxHeight: 15)
                     .rotationEffect(Angle(degrees: 180))
             }
-            
         }
     }
 }
 
-
 struct BackgroundTexture_Previews: PreviewProvider {
     static var previews: some View {
-        ZStack{
+        ZStack {
             BackgroundTexture(texture: .flagstone, wall: .horizontal)
             Text("Hello World!")
         }
             .previewLayout(.fixed(width: 400, height: 400))
     }
 }
-

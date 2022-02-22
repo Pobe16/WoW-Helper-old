@@ -24,7 +24,6 @@ struct JournalEncounter: Codable, Hashable, Comparable {
     static func == (lhs: JournalEncounter, rhs: JournalEncounter) -> Bool {
         return lhs.id == rhs.id && lhs.instance.id == rhs.instance.id
     }
-    
     static func < (lhs: JournalEncounter, rhs: JournalEncounter) -> Bool {
         if lhs.instance.id == rhs.instance.id {
             return lhs.id < rhs.id
@@ -32,7 +31,6 @@ struct JournalEncounter: Codable, Hashable, Comparable {
             return lhs.instance.id < rhs.instance.id
         }
     }
-    
     let category: EncounterCategory
     let id: Int
     let instance: EncounterInstance
@@ -58,9 +56,6 @@ struct ItemStub: Codable, Hashable {
     static func == (lhs: ItemStub, rhs: ItemStub) -> Bool {
         lhs.id == rhs.id
     }
-    
     let name: LocalizedName
     let id: Int
 }
-
-

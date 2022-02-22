@@ -9,34 +9,31 @@ import SwiftUI
 
 struct RaidOptions: View {
     @EnvironmentObject var gameData: GameData
-    
+
     @State var raidFarmingOptions: Int              = 1
-    
+
     @State var imagesDeleted: Bool                  = false
     @State var existingImages: Int                  = 0
     @State var numberOfDeletedImages: Int           = 0
-    
+
     @State var JSONDeleted: Bool                    = false
     @State var existingJSONDataNodes: Int           = 0
     @State var numberOfDeletedJSONDataNodes: Int    = 0
-    
+
     #if os(iOS)
     var listStyle = InsetGroupedListStyle()
     #elseif os(macOS)
     var listStyle =  DefaultListStyle()
     #endif
-    
-    
+
     var body: some View {
-        
-        List(){
-            
+        List {
             Section(header: Text("Farming order").whiteTextWithBlackOutlineStyle()) {
                 NavigationLink(destination: FarmingOrder()) {
                     Text("Farming order")
                 }
             }.padding(.horizontal)
-            
+
             Section(header:
                         Text("Difficulty")
                         .whiteTextWithBlackOutlineStyle()
@@ -52,7 +49,7 @@ struct RaidOptions: View {
                     saveOptionsSelection(value)
                 }
             }
-            
+
             if gameData.ignoredCharacters.count > 0 {
                 Section(header: Text("Ignored Characters").whiteTextWithBlackOutlineStyle()) {
                     NavigationLink(destination: IgnoredCharactersRestore()) {
@@ -60,17 +57,17 @@ struct RaidOptions: View {
                     }
                 }.padding(.horizontal)
             }
-            
+
             Section(header:
                         Text("Game data storage")
                         .whiteTextWithBlackOutlineStyle()
                         .padding(.horizontal)
             ) {
-                
+
                 Button(action: {
                     deleteAllJSONData()
                 }, label: {
-                    
+
                     HStack {
                         Text("Delete game data")
                             .foregroundColor(.red)
@@ -78,26 +75,26 @@ struct RaidOptions: View {
                         Text("\(existingJSONDataNodes)")
                     }
                     .padding(.horizontal)
-                    
+
                 })
                 .disabled(existingJSONDataNodes == 0)
-                
+
                 if numberOfDeletedJSONDataNodes > 0 {
                     Text("Deleted \(numberOfDeletedJSONDataNodes) nodes of game data.")
                 }
-                
+
             }
-            
+
             Section(header:
                         Text("Images storage")
                         .whiteTextWithBlackOutlineStyle()
                         .padding(.horizontal)
             ) {
-                
+
                 Button(action: {
                     deleteAllImages()
                 }, label: {
-                    
+
                     HStack {
                         Text("Delete all images")
                             .foregroundColor(.red)
@@ -105,14 +102,14 @@ struct RaidOptions: View {
                         Text("\(existingImages)")
                     }
                     .padding(.horizontal)
-                    
+
                 })
                 .disabled(existingImages == 0)
-                
+
                 if numberOfDeletedImages > 0 {
                     Text("Deleted \(numberOfDeletedImages) images.")
                 }
-                
+
             }
         }
         .padding(.horizontal)
@@ -125,28 +122,28 @@ struct RaidOptions: View {
                 Text("Raid settings")
             }
         }
-        .onAppear{
+        .onAppear {
             loadOptionsSelection()
             loadCoreDataCount()
         }
     }
-    
+
     func loadCoreDataCount() {
         let allImages = CoreDataImagesManager.shared.fetchAllImages()
         existingImages = allImages?.count ?? 0
         let allData = JSONCoreDataManager.shared.fetchAllJSONData()
         existingJSONDataNodes = allData?.count ?? 0
     }
-    
+
     func loadOptionsSelection() {
         let option = UserDefaults.standard.integer(forKey: UserDefaultsKeys.raidFilteringOptions)
         raidFarmingOptions = option == 0 ? 1 : option
     }
-    
+
     func saveOptionsSelection(_ value: Int) {
         UserDefaults.standard.setValue(value, forKey: UserDefaultsKeys.raidFilteringOptions)
     }
-    
+
     func deleteAllImages() {
         let allImages = CoreDataImagesManager.shared.fetchAllImages()
         numberOfDeletedImages = allImages?.count ?? 0
@@ -158,14 +155,13 @@ struct RaidOptions: View {
             imagesDeleted = true
         }
     }
-    
+
     func deleteAllJSONData() {
         let allData = JSONCoreDataManager.shared.fetchAllJSONData()
         numberOfDeletedJSONDataNodes = allData?.count ?? 0
         allData?.forEach({ item in
             JSONCoreDataManager.shared.deleteJSONData(data: item)
         })
-        
         withAnimation {
             existingJSONDataNodes = 0
             JSONDeleted = true

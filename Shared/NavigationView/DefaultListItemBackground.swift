@@ -9,23 +9,21 @@ import SwiftUI
 
 struct DefaultListItemBackground: View {
     @Environment (\.colorScheme) var colorScheme: ColorScheme
-    
     let color: Color
-    
     let selected: Bool
-    
+
     #if os(iOS)
     let backgroundColor = UIColor.secondarySystemBackground
     #elseif os(macOS)
     let backgroundColor = NSColor.windowBackgroundColor
     #endif
-    
+
     var body: some View {
-        
+
         VStack(spacing: 0) {
             Color.clear
                 .frame(height: 0.5)
-            ZStack{
+            ZStack {
                 Color(backgroundColor)
                 LinearGradient(
                     gradient: Gradient(
@@ -66,17 +64,11 @@ struct DefaultListItemBackground_Previews: PreviewProvider {
     static var previews: some View {
         DefaultListItemBackground(color: Color.yellow, selected: true)
             .previewLayout(.fixed(width: 300, height: 80))
-        
-        
         DefaultListItemBackground(color: Color.yellow, selected: false)
             .previewLayout(.fixed(width: 300, height: 80))
-            
-    
         DefaultListItemBackground(color: Color.yellow, selected: true)
             .previewLayout(.fixed(width: 300, height: 80))
             .environment(\.colorScheme, .dark)
-        
-        
         DefaultListItemBackground(color: Color.yellow, selected: false)
             .previewLayout(.fixed(width: 300, height: 80))
             .environment(\.colorScheme, .dark)

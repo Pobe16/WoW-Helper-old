@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CharacterLoadingListItem: View {
     var body: some View {
-        HStack{
+        HStack {
             Image(systemName: "wave.3.right")
                 .resizable()
                 .scaledToFit()
