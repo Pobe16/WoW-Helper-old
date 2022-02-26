@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct placeholders{
+struct PreviewPlaceholdersCollection {
     static let characterWithNoRaidSuggestions = RaidsSuggestedForCharacter(
         characterID: 0,
         characterName: "Pobe",
@@ -17,7 +17,6 @@ struct placeholders{
         characterFaction: FactionType.alliance,
         raids: []
     )
-    
     static let characterInProfile = CharacterInProfile(
         character: LinkStub(href: ""),
         protectedCharacter: LinkStub(href: ""),
@@ -46,6 +45,32 @@ struct placeholders{
             name: "Alliance"
         ),
         level: 120)
-    static let itemStub = ItemStub(name: LocalizedName(en_US: "Invincible's Reins", es_MX: "Riendas de Invencible", pt_BR: "Rédeas do Invencível", de_DE: "Unbesiegbars Zügel", en_GB: "Invincible's Reins", es_ES: "Riendas de Invencible", fr_FR: "Rênes d'Invincible", it_IT: "Redini di Invincibile", ru_RU: "Поводья Непобедимого", ko_KR: "천하무적의 고삐", zh_TW: "無敵的韁繩", zh_CN: "无敌的缰绳"), id: 50818)
-    static let qualityItemStub = QualityItemStub(name: LocalizedName(en_US: "Invincible's Reins", es_MX: "Riendas de Invencible", pt_BR: "Rédeas do Invencível", de_DE: "Unbesiegbars Zügel", en_GB: "Invincible's Reins", es_ES: "Riendas de Invencible", fr_FR: "Rênes d'Invincible", it_IT: "Redini di Invincibile", ru_RU: "Поводья Непобедимого", ko_KR: "천하무적의 고삐", zh_TW: "無敵的韁繩", zh_CN: "无敌的缰绳"), id: 50818, quality: .epic)
+    static let itemStub = ItemStub(name: LocalizedName(
+        en_US: "Invincible's Reins",
+        es_MX: "Riendas de Invencible",
+        pt_BR: "Rédeas do Invencível",
+        de_DE: "Unbesiegbars Zügel",
+        en_GB: "Invincible's Reins",
+        es_ES: "Riendas de Invencible",
+        fr_FR: "Rênes d'Invincible",
+        it_IT: "Redini di Invincibile",
+        ru_RU: "Поводья Непобедимого",
+        ko_KR: "천하무적의 고삐",
+        zh_TW: "無敵的韁繩",
+        zh_CN: "无敌的缰绳"
+    ), id: 50818)
+    static let qualityItemStub = QualityItemStub(name: LocalizedName(
+        en_US: "Invincible's Reins",
+        es_MX: "Riendas de Invencible",
+        pt_BR: "Rédeas do Invencível",
+        de_DE: "Unbesiegbars Zügel",
+        en_GB: "Invincible's Reins",
+        es_ES: "Riendas de Invencible",
+        fr_FR: "Rênes d'Invincible",
+        it_IT: "Redini di Invincibile",
+        ru_RU: "Поводья Непобедимого",
+        ko_KR: "천하무적의 고삐",
+        zh_TW: "無敵的韁繩",
+        zh_CN: "无敌的缰绳"
+    ), id: 50818, quality: .epic)
 }

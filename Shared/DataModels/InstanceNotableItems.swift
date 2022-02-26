@@ -7,19 +7,18 @@
 
 import Foundation
 
-enum itemQualityName: String, Codable {
-    case poor       = "poor"
-    case common     = "common"
-    case uncommon   = "uncommon"
-    case rare       = "rare"
-    case epic       = "epic"
-    case legendary  = "legendary"
-    case heirloom   = "heirloom"
-    case artifact   = "artifact"
+enum ItemQualityName: String, Codable {
+    case poor
+    case common
+    case uncommon
+    case rare
+    case epic
+    case legendary
+    case heirloom
+    case artifact
 }
 
 struct InstanceNotableItems: Hashable, Equatable {
-    
     let id: Int
     let mounts: [QualityItemStub]
     let pets: [QualityItemStub]
@@ -41,10 +40,9 @@ struct QualityItemStub: Hashable, Codable, Equatable {
     ) -> Bool {
         lhs.id == rhs.id
     }
-    
     let name: LocalizedName
     let id: Int
-    let quality: itemQualityName
+    let quality: ItemQualityName
 }
 
 struct QualityItemStubWithIconAddress: Hashable, Codable, Equatable {
@@ -54,9 +52,8 @@ struct QualityItemStubWithIconAddress: Hashable, Codable, Equatable {
     ) -> Bool {
         lhs.id == rhs.id
     }
-    
     let name: LocalizedName
     let id: Int
-    let quality: itemQualityName
+    let quality: ItemQualityName
     let iconURI: String
 }

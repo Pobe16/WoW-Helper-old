@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CreditsListItem: View {
     var body: some View {
-        HStack{
+        HStack {
             Image(systemName: "text.book.closed")
                 .resizable()
                 .foregroundColor(.accentColor)

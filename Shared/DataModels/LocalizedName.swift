@@ -7,7 +7,7 @@
 
 import Foundation
 
-
+// swiftlint:disable identifier_name
 struct LocalizedName: Codable, Hashable {
     let en_US: String
     let es_MX: String
@@ -21,38 +21,38 @@ struct LocalizedName: Codable, Hashable {
     let ko_KR: String
     let zh_TW: String
     let zh_CN: String
-    
     var value: String {
-        get {
-            let requestLocale = UserDefaults.standard.object(forKey: UserDefaultsKeys.localeCode) as? String ?? EuropeanLocales.BritishEnglish
-            switch requestLocale {
-            case "en_US":
-                return en_US
-            case "es_MX":
-                return es_MX
-            case "pt_BR":
-                return pt_BR
-            case "de_DE":
-                return de_DE
-            case "en_GB":
-                return en_GB
-            case "es_ES":
-                return es_ES
-            case "fr_FR":
-                return fr_FR
-            case "it_IT":
-                return it_IT
-            case "ru_RU":
-                return ru_RU
-            case "ko_KR":
-                return ko_KR
-            case "zh_TW":
-                return zh_TW
-            case "zh_CN":
-                return zh_CN
-            default:
-                return en_GB
-            }
+        let requestLocale = UserDefaults.standard.object(
+            forKey: UserDefaultsKeys.localeCode
+        ) as? String ?? EuropeanLocales.BritishEnglish
+        switch requestLocale {
+        case "en_US":
+            return en_US
+        case "es_MX":
+            return es_MX
+        case "pt_BR":
+            return pt_BR
+        case "de_DE":
+            return de_DE
+        case "en_GB":
+            return en_GB
+        case "es_ES":
+            return es_ES
+        case "fr_FR":
+            return fr_FR
+        case "it_IT":
+            return it_IT
+        case "ru_RU":
+            return ru_RU
+        case "ko_KR":
+            return ko_KR
+        case "zh_TW":
+            return zh_TW
+        case "zh_CN":
+            return zh_CN
+        default:
+            return en_GB
         }
     }
 }
+// swiftlint:enable identifier_name

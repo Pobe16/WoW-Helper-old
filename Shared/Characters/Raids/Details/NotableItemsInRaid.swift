@@ -8,11 +8,10 @@
 import SwiftUI
 
 struct NotableItemsInRaid: View {
-    
     @EnvironmentObject var gameData: GameData
-    
+
     let encounter: JournalEncounter
-    
+
     @State var mounts: [ItemStub] = []
     @State var pets: [ItemStub] = []
     
@@ -34,16 +33,16 @@ struct NotableItemsInRaid: View {
             } else {
                 EmptyView()
             }
-        }.onAppear{
+        }.onAppear {
             prepareLoot()
         }
     }
-    
+
     func prepareLoot() {
         let loot = encounter.items
         var mountsInEncounter: [ItemStub] = []
         var petsInEncounter: [ItemStub] = []
-        
+
         loot.forEach { (wrapper) in
             if gameData.mountItemsList.contains(where: { (mount) -> Bool in
                 mount.itemID == wrapper.item.id
@@ -56,12 +55,6 @@ struct NotableItemsInRaid: View {
                 petsInEncounter.append(wrapper.item)
             }
         }
-//        mountsInEncounter.forEach { (mount) in
-//            print("CollectibleItem(id: \(mount.id), name: \"\(mount.name.value)\"),")
-//        }
-//        petsInEncounter.forEach { (pet) in
-//            print("CollectibleItem(id: \(pet.id), name: \"\(pet.name.value)\"),")
-//        }
         if mountsInEncounter.count > 0 || petsInEncounter.count > 0 {
             DispatchQueue.main.async {
                 withAnimation {
@@ -72,9 +65,3 @@ struct NotableItemsInRaid: View {
         }
     }
 }
-
-//struct NotableItemsInRaid_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NotableItemsInRaid()
-//    }
-//}

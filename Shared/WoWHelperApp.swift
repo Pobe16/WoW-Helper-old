@@ -13,43 +13,27 @@ struct WoWHelperApp: App {
     @ObservedObject var auth        = Authentication()
     @ObservedObject var gameData    = GameData()
     @ObservedObject var order       = FarmCollectionsOrder()
-    
+
+    let matchingSet: Set = ["*"]
+    let allowingSet: Set = ["*"]
+    let preferringSet: Set = ["authenticated"]
+
     var body: some Scene {
         WindowGroup {
             systemStartingScreen
                 .onAppear(perform: {
                     initDebug()
                 })
-                .handlesExternalEvents(preferring: Set(arrayLiteral: "authenticated"), allowing: Set(arrayLiteral: "*"))
+                .handlesExternalEvents(preferring: preferringSet, allowing: allowingSet)
         }
         .handlesExternalEvents(
-            matching: Set(arrayLiteral: "*")
+            matching: matchingSet
         )
     }
-    
-    #if os(iOS)
-    var systemStartingScreen: some View {
-        startingScreen
-    }
-    #elseif os(macOS)
-    var systemStartingScreen: some View {
-        startingScreen
-            .frame(minWidth: 600, idealWidth: 800, maxWidth: .infinity, minHeight: 600, idealHeight: 800, maxHeight: .infinity, alignment: .center)
-    }
-    #endif
-    
-    var startingScreen: some View {
-        AuthCheckingScreen()
-            .environmentObject(auth)
-            .environmentObject(gameData)
-            .environmentObject(order)
-    }
-    
-    fileprivate func initDebug(){
+    fileprivate func initDebug() {
 //        UserDefaults.resetStandardUserDefaults()
 //        let imagesInCoreData = CoreDataImagesManager.shared.fetchAllImages()
 //        print(imagesInCoreData?[0].creationDate)
 //        auth.oauth2.logger = OAuth2DebugLogger(.trace)
     }
-    
 }

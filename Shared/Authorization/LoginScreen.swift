@@ -21,7 +21,7 @@ struct LoginScreen: View {
                 Text("WoW Helper")
                     .font(.largeTitle)
                     .whiteTextWithBlackOutlineStyle()
-                if (geo.size.width > 375) {
+                if geo.size.width > 375 {
                     Image("phoenix")
                         .resizable()
                         .scaledToFit()
@@ -33,7 +33,6 @@ struct LoginScreen: View {
                     VStack {
                         Text("Region:")
                             .font(.title2)
-                        
                         Picker(selection: $region, label: Text("Region"), content: {
                             Text("Americas").tag(0)
                                 .minimumScaleFactor(0.5)
@@ -45,13 +44,12 @@ struct LoginScreen: View {
                         .pickerStyle(DefaultPickerStyle())
                         .frame(width: geo.size.width > 325 ? 340 : 270, height: 90)
                         .clipped()
-                        .onChange(of: region, perform: { value in
+                        .onChange(of: region, perform: { _ in
                             locale = 0
                         })
                         
                         Text("Language:")
                             .font(.title2)
-                        
                         Picker(selection: $locale, label: Text("Language"), content: {
                             if region == 0 {
                                 Text("🇺🇸 US English").tag(0)
@@ -77,21 +75,17 @@ struct LoginScreen: View {
                         .pickerStyle(DefaultPickerStyle())
                         .frame(width: geo.size.width > 325 ? 340 : 270, height: 90)
                         .clipped()
-                        
                     }
-                    .padding()
-                    .background(
-                        BackgroundTexture(texture: .ice, wall: .all)
-                    )
-                    .cornerRadius(15)
-                    
+                        .padding()
+                        .background(
+                            BackgroundTexture(texture: .ice, wall: .all)
+                        )
+                        .cornerRadius(15)
                     Spacer(minLength: 0)
                 }
-            
-            
+
                 Spacer()
                     .frame(height: 30)
-                
                 Button(action: {
                     authenticate()
                 }, label: {
@@ -99,16 +93,13 @@ struct LoginScreen: View {
                         .font(.title)
                         .whiteTextWithBlackOutlineStyle()
                 })
-                .padding()
-                .frame(width: geo.size.width > 325 ? 340 : 270)
-                .background(
-                    BackgroundTexture(texture: .wood, wall: .all)
-                )
-                .cornerRadius(15)
-                
-                
+                    .padding()
+                    .frame(width: geo.size.width > 325 ? 340 : 270)
+                    .background(
+                        BackgroundTexture(texture: .wood, wall: .all)
+                    )
+                    .cornerRadius(15)
                 Spacer()
-                    
             }
             .onAppear(perform: {
                 determineLocaleState()
@@ -118,19 +109,19 @@ struct LoginScreen: View {
             BackgroundTexture(texture: .flagstone, wall: .none)
         )
     }
-    
+
     func determineLocaleState() {
         region = UserDefaults.standard.integer(forKey: UserDefaultsKeys.loginRegion)
         locale = UserDefaults.standard.integer(forKey: UserDefaultsKeys.loginLocale)
     }
-    
+
     func setLocaleForAuthorization() {
         var authHost: String
         var APIRegionHost: String
         var localeCode: String
-        
+
 //        print("Region: \(region), locale: \(locale)")
-        
+
         switch region {
         case 0:
             authHost = BattleNetAuthorizationHostList.NorthAmerica
@@ -186,31 +177,31 @@ struct LoginScreen: View {
         UserDefaults.standard.setValue(authHost, forKey: UserDefaultsKeys.authHost)
         UserDefaults.standard.setValue(APIRegionHost, forKey: UserDefaultsKeys.APIRegionHost)
         UserDefaults.standard.setValue(localeCode, forKey: UserDefaultsKeys.localeCode)
-        
+
         UserDefaults.standard.setValue(region, forKey: UserDefaultsKeys.loginRegion)
         UserDefaults.standard.setValue(locale, forKey: UserDefaultsKeys.loginLocale)
-        
+
     }
-    
+
     func authenticate() {
         if let accessToken = authorization.oauth2.accessToken {
             print(accessToken)
         }
         authorization.oauth2.logger = OAuth2DebugLogger(.trace)
         setLocaleForAuthorization()
-        
+
         authorization.refreshSettings()
-        
+
         #if os(iOS)
         authorization.oauth2.authConfig.authorizeEmbedded = true
-        authorization.oauth2.authConfig.authorizeContext = UIApplication.shared.windows[0].rootViewController
+        authorization.oauth2.authConfig.authorizeContext = UIApplication.shared.keyWindow?.rootViewController
 //        #elseif os(macOS)
 //        authorization.oauth2.authConfig.authorizeEmbedded = true
 //        authorization.oauth2.authConfig.authorizeContext = NSApp.windows[0]
         #endif
-        
+
 //        print(authorization.settings)
-        
+
         authorization.oauth2.authorize() { authParameters, error in
             if authParameters != nil {
 //                print("Authorized! Access token is in `oauth2.accessToken`")
@@ -219,7 +210,8 @@ struct LoginScreen: View {
                 UserDefaults.standard.set(true, forKey: UserDefaultsKeys.UserLoggedBefore)
             } else {
                 authorization.loggedIn = false
-                print("Authorization was canceled or went wrong: \(String(describing: error))")   // error will not be nil
+                // error will not be nil
+                print("Authorization was canceled or went wrong: \(String(describing: error))")
             }
         }
     }

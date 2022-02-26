@@ -12,18 +12,18 @@ struct CharacterListItemBackground: View {
     let charClass: ClassInProfile
     let faction: Faction
     let selected: Bool
-    
+
     #if os(iOS)
     let backgroundColor = UIColor.secondarySystemBackground
     #elseif os(macOS)
     let backgroundColor = NSColor.windowBackgroundColor
     #endif
-    
+
     var body: some View {
         VStack(spacing: 0) {
             Color.clear
                 .frame(height: 0.5)
-            ZStack{
+            ZStack {
                 Color(backgroundColor)
                 LinearGradient(
                     gradient: Gradient(
@@ -57,29 +57,44 @@ struct CharacterListItemBackground: View {
             Color.clear
                 .frame(height: 0.5)
         }
-        
+
     }
-    
-    func removeSpaces(_ s: String) -> String {
-        return s.split(separator: " ").joined()
+
+    func removeSpaces(_ string: String) -> String {
+        return string.split(separator: " ").joined()
     }
 }
 
 struct CharacterListItemBackground_Previews: PreviewProvider {
     static var previews: some View {
-        
-        CharacterListItemBackground(charClass: placeholders.characterInProfile.playableClass, faction: placeholders.characterInProfile.faction, selected: false)
+
+        CharacterListItemBackground(
+            charClass: PreviewPlaceholdersCollection.characterInProfile.playableClass,
+            faction: PreviewPlaceholdersCollection.characterInProfile.faction,
+            selected: false
+        )
             .previewLayout(.fixed(width: 300, height: 80))
-        
-        
-        CharacterListItemBackground(charClass: placeholders.characterInProfile.playableClass, faction: placeholders.characterInProfile.faction, selected: true)
+
+        CharacterListItemBackground(
+            charClass: PreviewPlaceholdersCollection.characterInProfile.playableClass,
+            faction: PreviewPlaceholdersCollection.characterInProfile.faction,
+            selected: true
+        )
             .previewLayout(.fixed(width: 300, height: 80))
-        
-        CharacterListItemBackground(charClass: placeholders.characterInProfile.playableClass, faction: Faction(type: .horde, name: "Horde"), selected: false)
+
+        CharacterListItemBackground(
+            charClass: PreviewPlaceholdersCollection.characterInProfile.playableClass,
+            faction: Faction(type: .horde, name: "Horde"),
+            selected: false
+        )
             .previewLayout(.fixed(width: 300, height: 80))
             .environment(\.colorScheme, .dark)
-        
-        CharacterListItemBackground(charClass: placeholders.characterInProfile.playableClass, faction: Faction(type: .horde, name: "Horde"), selected: true)
+
+        CharacterListItemBackground(
+            charClass: PreviewPlaceholdersCollection.characterInProfile.playableClass,
+            faction: Faction(type: .horde, name: "Horde"),
+            selected: true
+        )
             .previewLayout(.fixed(width: 300, height: 80))
             .environment(\.colorScheme, .dark)
     }

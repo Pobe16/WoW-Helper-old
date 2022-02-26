@@ -15,7 +15,6 @@ struct LogOutDebugScreen: View {
                 logOut()
             })
     }
-    
     fileprivate func logOut() {
         authorization.oauth2.forgetTokens()
         authorization.loggedIn = false

@@ -29,7 +29,6 @@ struct InstanceJournal: Codable, Hashable, Identifiable, Comparable, Equatable {
     let description: String?
     let encounters: [EncounterIndex]
     let expansion: ExpansionIndex
-//    let location: LocationIndex?
     let modes: [InstanceMode]
     let media: InstanceMediaStub
     let minimumLevel: Int
@@ -40,11 +39,6 @@ struct InstanceMapIndex: Codable, Hashable, Identifiable {
     let name: String
     let id: Int
 }
-
-//struct LocationIndex: Codable, Hashable, Identifiable {
-//    let name: String
-//    let id: Int
-//}
 
 struct InstanceMode: Codable, Hashable {
     let mode: InstanceModeName
@@ -57,7 +51,7 @@ struct InstanceModeName: Codable, Hashable {
     let name: String
 }
 
-enum InstanceModeType: String, Codable, Hashable {    
+enum InstanceModeType: String, Codable, Hashable {
     case lfr            = "LFR"
     case legacy10       = "LEGACY_10_MAN"
     case legacy25       = "LEGACY_25_MAN"
@@ -67,7 +61,6 @@ enum InstanceModeType: String, Codable, Hashable {
     case heroic         = "HEROIC"
     case mythic         = "MYTHIC"
     case mythicKeystone = "MYTHIC_KEYSTONE"
-    
 }
 
 struct InstanceMediaStub: Codable, Hashable, Identifiable {
@@ -84,4 +77,3 @@ enum InstanceCategoryType: String, Codable {
     case dungeon        = "DUNGEON"
     case event          = "EVENT"
 }
-

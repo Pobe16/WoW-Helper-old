@@ -46,6 +46,6 @@ struct RaidSuggestionItem: Codable, Hashable, Identifiable {
     }
     let id: Int
     let name: String
-    let quality: itemQualityName
+    let quality: ItemQualityName
     let iconURI: String
 }

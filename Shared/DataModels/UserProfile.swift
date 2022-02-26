@@ -8,6 +8,7 @@
 import Foundation
 
 struct UserProfile: Codable, Hashable {
+    // swiftlint:disable:next identifier_name
     let _links: LinksInProfile
     let id: Int
     let wowAccounts: [Account]?
@@ -86,7 +87,6 @@ enum FactionType: String, Codable, Hashable {
     case alliance   = "ALLIANCE"
     case horde      = "HORDE"
     case neutral    = "NEUTRAL"
-    
     init?(_ value: String) {
         switch value.lowercased() {
         case "ALLIANCE": self = .alliance
@@ -96,7 +96,6 @@ enum FactionType: String, Codable, Hashable {
         }
     }
 }
-
 
 struct LinkStub: Codable, Hashable {
     let href: String

@@ -133,6 +133,6 @@ struct ItemIcon: View {
 
 struct ItemIcon_Previews: PreviewProvider {
     static var previews: some View {
-        ItemIcon(item: placeholders.qualityItemStub)
+        ItemIcon(item: PreviewPlaceholdersCollection.qualityItemStub)
     }
 }

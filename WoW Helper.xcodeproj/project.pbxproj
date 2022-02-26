@@ -25,7 +25,7 @@
 		C806FA532501A7B2006DEF78 /* CharacterRaidTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C806FA512501A7B2006DEF78 /* CharacterRaidTile.swift */; };
 		C806FA552501AAE1006DEF78 /* RaidTileBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = C806FA542501AAE1006DEF78 /* RaidTileBackground.swift */; };
 		C806FA562501AAE1006DEF78 /* RaidTileBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = C806FA542501AAE1006DEF78 /* RaidTileBackground.swift */; };
-		C811E77C24E01B1F0050F6CD /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E77B24E01B1F0050F6CD /* Tests_iOS.swift */; };
+		C811E77C24E01B1F0050F6CD /* IOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E77B24E01B1F0050F6CD /* IOSTests.swift */; };
 		C811E78724E01B1F0050F6CD /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E78624E01B1F0050F6CD /* Tests_macOS.swift */; };
 		C811E78924E01B1F0050F6CD /* WoWHelperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E76024E01B1E0050F6CD /* WoWHelperApp.swift */; };
 		C811E78A24E01B1F0050F6CD /* WoWHelperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811E76024E01B1E0050F6CD /* WoWHelperApp.swift */; };
@@ -51,6 +51,7 @@
 		C818B1E52522A41D00ED06B7 /* FarmingOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C818B1E32522A41D00ED06B7 /* FarmingOrder.swift */; };
 		C818B1EF2523ADA400ED06B7 /* RaidsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C818B1EE2523ADA400ED06B7 /* RaidsData.swift */; };
 		C818B1F02523ADA400ED06B7 /* RaidsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C818B1EE2523ADA400ED06B7 /* RaidsData.swift */; };
+		C82CB24627C3DC7B0018D86E /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82CB24527C3DC7B0018D86E /* UIApplication+Extension.swift */; };
 		C831CC3A24E7296A00C25F67 /* CharacterListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C831CC3924E7296A00C25F67 /* CharacterListItem.swift */; };
 		C831CC4724E7355500C25F67 /* CharacterMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = C831CC4624E7355500C25F67 /* CharacterMedia.swift */; };
 		C831CC4824E7355500C25F67 /* CharacterMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = C831CC4624E7355500C25F67 /* CharacterMedia.swift */; };
@@ -355,7 +356,7 @@
 		C811E77124E01B1F0050F6CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C811E77224E01B1F0050F6CD /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		C811E77724E01B1F0050F6CD /* Tests iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C811E77B24E01B1F0050F6CD /* Tests_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_iOS.swift; sourceTree = "<group>"; };
+		C811E77B24E01B1F0050F6CD /* IOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSTests.swift; sourceTree = "<group>"; };
 		C811E77D24E01B1F0050F6CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C811E78224E01B1F0050F6CD /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C811E78624E01B1F0050F6CD /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
@@ -368,6 +369,7 @@
 		C818B1DB2521060D00ED06B7 /* NotableItemsInRaid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotableItemsInRaid.swift; sourceTree = "<group>"; };
 		C818B1E32522A41D00ED06B7 /* FarmingOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmingOrder.swift; sourceTree = "<group>"; };
 		C818B1EE2523ADA400ED06B7 /* RaidsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaidsData.swift; sourceTree = "<group>"; };
+		C82CB24527C3DC7B0018D86E /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		C831CC3924E7296A00C25F67 /* CharacterListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListItem.swift; sourceTree = "<group>"; };
 		C831CC4624E7355500C25F67 /* CharacterMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterMedia.swift; sourceTree = "<group>"; };
 		C831CC4E24E8974100C25F67 /* MyData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyData.xcdatamodel; sourceTree = "<group>"; };
@@ -537,6 +539,7 @@
 		C811E75A24E01B1E0050F6CD = {
 			isa = PBXGroup;
 			children = (
+				C82CB24427C3DC510018D86E /* Extensions */,
 				C8E208EB256DA54400777C80 /* CharacterRaidWidgetExtension.entitlements */,
 				C8E20769256C78A900777C80 /* Random Raid WidgetExtension.entitlements */,
 				C8E20722256C687B00777C80 /* WoW Helper.entitlements */,
@@ -610,7 +613,7 @@
 		C811E77A24E01B1F0050F6CD /* Tests iOS */ = {
 			isa = PBXGroup;
 			children = (
-				C811E77B24E01B1F0050F6CD /* Tests_iOS.swift */,
+				C811E77B24E01B1F0050F6CD /* IOSTests.swift */,
 				C811E77D24E01B1F0050F6CD /* Info.plist */,
 			);
 			path = "Tests iOS";
@@ -674,6 +677,14 @@
 				C818B1EE2523ADA400ED06B7 /* RaidsData.swift */,
 			);
 			path = BlizzApiData;
+			sourceTree = "<group>";
+		};
+		C82CB24427C3DC510018D86E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C82CB24527C3DC7B0018D86E /* UIApplication+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		C831CC5124E8994200C25F67 /* CoreData */ = {
@@ -872,7 +883,7 @@
 				C811E76424E01B1F0050F6CD /* Frameworks */,
 				C811E76524E01B1F0050F6CD /* Resources */,
 				C8E2073C256C76CE00777C80 /* Embed App Extensions */,
-				C82CB24227C3D2500018D86E /* ShellScript */,
+				C82CB24327C3D5280018D86E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1130,7 +1141,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		C82CB24227C3D2500018D86E /* ShellScript */ = {
+		C82CB24327C3D5280018D86E /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1145,7 +1156,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n\nswiftlint\n\nelse\n\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n\nfi\n";
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1228,6 +1239,7 @@
 				C803C5DF250070C300A8D2DE /* WrapperForRaidOptions.swift in Sources */,
 				C818B1CE2520D9B000ED06B7 /* LocalizedName.swift in Sources */,
 				C85059A02560888E0083FEEA /* InitialControls.swift in Sources */,
+				C82CB24627C3DC7B0018D86E /* UIApplication+Extension.swift in Sources */,
 				C8F942DB24EDB54000B6222C /* LogOutDebugScreen.swift in Sources */,
 				C8770B2A2565CB0F00CE4BAC /* StoredRaidTileBackground.swift in Sources */,
 				C8EA543A2537BD56002D88B6 /* SmallNotableRaid.swift in Sources */,
@@ -1348,7 +1360,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C811E77C24E01B1F0050F6CD /* Tests_iOS.swift in Sources */,
+				C811E77C24E01B1F0050F6CD /* IOSTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1621,7 +1633,7 @@
 				DEVELOPMENT_TEAM = 8TYF5VAX58;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1647,7 +1659,7 @@
 				DEVELOPMENT_TEAM = 8TYF5VAX58;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1813,7 +1825,7 @@
 				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = 8TYF5VAX58;
 				INFOPLIST_FILE = "Random Raid Widget/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1838,7 +1850,7 @@
 				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = 8TYF5VAX58;
 				INFOPLIST_FILE = "Random Raid Widget/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1864,7 +1876,7 @@
 				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = 8TYF5VAX58;
 				INFOPLIST_FILE = CharacterRaidWidget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1889,7 +1901,7 @@
 				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = 8TYF5VAX58;
 				INFOPLIST_FILE = CharacterRaidWidget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1913,7 +1925,7 @@
 				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = 8TYF5VAX58;
 				INFOPLIST_FILE = CharacterRaidIntent/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1936,7 +1948,7 @@
 				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = 8TYF5VAX58;
 				INFOPLIST_FILE = CharacterRaidIntent/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

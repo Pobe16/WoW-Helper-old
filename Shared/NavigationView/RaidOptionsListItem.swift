@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RaidOptionsListItem: View {
     var body: some View {
-        HStack{
+        HStack {
             Image(systemName: "gear")
                 .resizable()
                 .foregroundColor(.accentColor)
