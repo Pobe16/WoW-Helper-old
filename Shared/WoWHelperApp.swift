@@ -20,10 +20,7 @@ struct WoWHelperApp: App {
 
     var body: some Scene {
         WindowGroup {
-            AuthCheckingScreen()
-                .environmentObject(auth)
-                .environmentObject(gameData)
-                .environmentObject(order)
+            systemStartingScreen
                 .onAppear(perform: {
                     initDebug()
                 })
@@ -33,7 +30,6 @@ struct WoWHelperApp: App {
             matching: matchingSet
         )
     }
-
     fileprivate func initDebug() {
 //        UserDefaults.resetStandardUserDefaults()
 //        let imagesInCoreData = CoreDataImagesManager.shared.fetchAllImages()
